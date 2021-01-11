@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:41:42 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/11 17:34:58 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/11 19:07:33 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef struct	s_tb{
 	t_tb	*next;
 }				t_tb;
 
-t_tb			*find_tb(t_tb **tb_head, int fd);
 int				get_next_line(int fd, char **line);
+t_tb			*find_tb(t_tb **tb_head, int fd);
 long			find_tb_newline(t_tb *tb_node, long index);
-char			*tb_dynamic_add(t_tb *tb_node, ssize_t readlen);
-int				strcpy_n_alloc(char **line, t_tb tb_node, int from, int to);
-void			move_back_n_cpy(t_tb tb_node, long index);
+int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen);
+int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to);
+void			move_tb_arr_n_cpy(t_tb *tb_node, long index);
 
 #endif
