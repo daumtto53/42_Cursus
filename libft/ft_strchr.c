@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:35:07 by mchun             #+#    #+#             */
-/*   Updated: 2020/12/26 22:45:17 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/07 23:09:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (s[i] == (unsigned char)c)
 		return (char *)(s + i);
-	return (NULL);
+	return ('\0');
 }
