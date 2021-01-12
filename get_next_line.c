@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 22:56:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 23:03:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int					get_next_line(int fd, char **line)
 	long			index;
 	char			read_buff[BUFFER_SIZE];
 
-	free(*line);
+	// free(*line);
 	tb_node =  find_tb(&tb_head, fd);
 	index = -2;
 	//while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)으로, <=을 줄 때는 segerror남.
@@ -35,13 +35,7 @@ int					get_next_line(int fd, char **line)
 		else
 			if (tb_dynamic_add(tb_node, read_buff, readlen) < 0)
 				return (-1);
-	}									//만약, while문에서 NULL을 못찾았는데, EOF를 만났다면?
-	// if (index <= -2 && readlen == 0)	//이 때는 언제인가? while문에서 널을 찾지 못하고 readlen == 0에서 걸려서 break되었을 때
-	// {
-	// 	free(*line);
-	// 	*line = NULL;
-	// 	return (0);
-	// }
+	}
 	if (strcpy_n_alloc(line, tb_node, 0, index) < 0)
 		return (-1);
 	move_tb_arr_n_cpy(tb_node, index);
