@@ -5,7 +5,7 @@
 
 int		main()
 {
-	char	**line;
+	char	*line;
 	int		fd;
 
 	if ((fd = open("test.txt", O_RDWR, 0644)) <= 0)
@@ -13,11 +13,13 @@ int		main()
 		perror("open error\n");
 		return (-1);
 	}
-	if (get_next_line(fd, line) < 0)
+
+	int i;
+	i = 0;
+	while (get_next_line(fd, &line) > 0)
 	{
-		printf("get_next_line_error\n");
-		return (-1);
+		printf("%d th line : %s\n", i++, line);
 	}
-	printf("%s\n", *line);
 	return (0);
 }
+

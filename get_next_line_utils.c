@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 01:26:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 13:54:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_tb			*find_tb(t_tb **tb_head, int fd)
 
 	if ((new_node = (t_tb *)malloc(sizeof(t_tb))) == NULL)
 		return (NULL);
-	if (tb_head == NULL)
+	if (*tb_head == NULL)
 	{
 		curr_node = new_node;
-		tb_head = &curr_node;
+		*tb_head = curr_node;
 	}
 	else
 	{
@@ -106,7 +106,7 @@ int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to)
 	while (++i <= to)
 		temp[i] = (tb_node->tb_arr)[i];
 	temp[i] = '\0';
-	line = &temp;
+	*line = temp;
 	return (to - from + 1);
 }
 
@@ -118,6 +118,18 @@ void			move_tb_arr_n_cpy(t_tb *tb_node, long index)
 	n = tb_node->tb_end - (index + 2) + 1;
 	i = 0;
 	while (i < n)
+	{
 		(tb_node->tb_arr)[i] = (tb_node->tb_arr)[i + index + 2];
+		i++;
+	}
 	tb_node->tb_end = tb_node->tb_end - (index + 2);
+}
+
+//utility
+void print_tbarr(t_tb *tb_node){
+	int		i;
+	i = 0;
+	while(i <= tb_node->tb_end)
+		printf("%c", (tb_node->tb_arr)[i++]);
+	printf("\n");
 }
