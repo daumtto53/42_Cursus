@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 16:05:45 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 21:13:33 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,27 @@ int					get_next_line(int fd, char **line)
 	long			index;
 	char			read_buff[BUFFER_SIZE];
 
+	free(*line);
+	*line = NULL;
 	tb_node =  find_tb(&tb_head, fd);
 	index = -2;
 	//while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)으로, <=을 줄 때는 segerror남.
 	//왜 부등호에 등호를 안붙였는가?
-	while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)
+	while ((index = find_tb_newline(tb_node, index + 2)) + 1 <= 0)
 	{
 		if ((readlen = read(tb_node->fd, read_buff, BUFFER_SIZE)) == 0)
 			break;
 		else if (readlen < 0)
 			return (-1);
 		else
-		{
 			if (tb_dynamic_add(tb_node, read_buff, readlen) < 0)
 				return (-1);
-		}
 	}
-	if(index < 0)
+	if (index <= -2 && readlen == 0)	//이 때는 언제인가? while문에서 널을 찾지 못하고 readlen == 0에서 걸려서 break되었을 때
+	{
+		free(*line);
 		return (0);
-	printf("   index : %ld  \n", index);
+	}
 	if (strcpy_n_alloc(line, tb_node, 0, index) < 0)
 		return (-1);
 	move_tb_arr_n_cpy(tb_node, index);

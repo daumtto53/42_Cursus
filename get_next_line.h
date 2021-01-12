@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:41:42 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 15:53:52 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 19:06:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ long			find_tb_newline(t_tb *tb_node, long index);
 int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen);
 int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to);
 void			move_tb_arr_n_cpy(t_tb *tb_node, long index);
-
-
 
 void print_tbarr(t_tb *tb_node);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 16:11:36 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 21:28:39 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_tb			*find_tb(t_tb **tb_head, int fd)
 t_tb			*return_n_free_tb_node(t_tb *curr_node, t_tb *new_node)
 {
 	free(new_node);
-	new_node = new_node;
+	new_node = NULL;
 	return (curr_node);
 }
 
@@ -74,13 +74,14 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 {
 	char		*temp;
 	int			i;
+
 	if (tb_node->tb_arr == NULL)
 		if ((tb_node->tb_arr = (char *)malloc(sizeof(char) * BUFFER_SIZE)) == NULL)
 			return (-1);
 	if (tb_node->tb_size >= (tb_node->tb_end + readlen))
 	{
 		i = -1;
-		while (++i <= readlen)
+		while (++i < readlen)
 			(tb_node->tb_arr)[i + tb_node->tb_end + 1] = buffer[i];
 	}
 	else
@@ -93,6 +94,7 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 		while (i++ <= readlen + tb_node->tb_end)
 			temp[i - 1] = buffer[i - tb_node->tb_end - 2];
 		free(tb_node->tb_arr);
+		tb_node->tb_arr = NULL;
 		tb_node->tb_arr = temp;
 		tb_node->tb_size *= 2;
 	}
@@ -105,15 +107,15 @@ int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to)
 	int			i;
 	char		*temp;
 
+	if (to <= -2)
+		to = tb_node->tb_end;
 	if ((temp = (char *)malloc(sizeof(char) * (to - from + 1 + 1))) == NULL)
 		return (-1);
+	*line = temp;
 	i = -1;
 	while (++i <= to)
-		temp[i] = (tb_node->tb_arr)[i];
-	temp[i] = '\0';
-	free(*line);
-	*line = NULL;
-	*line = temp;
+		(*line)[i] = (tb_node->tb_arr)[i];
+	(*line)[i] = '\0';
 	return (to - from + 1);
 }
 
@@ -129,7 +131,10 @@ void			move_tb_arr_n_cpy(t_tb *tb_node, long index)
 		(tb_node->tb_arr)[i] = (tb_node->tb_arr)[i + index + 2];
 		i++;
 	}
-	tb_node->tb_end = tb_node->tb_end - (index + 2);
+	if (index <= -2)
+		tb_node->tb_end = 0;
+	else
+		tb_node->tb_end = tb_node->tb_end - (index + 2);
 }
 
 //utility

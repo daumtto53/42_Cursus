@@ -17,9 +17,12 @@ int		main()
 
 	int i;
 	i = 0;
+	line = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
 		printf("%d th line : %s\n", i++, line);
+		free(line);
+		line = NULL;
 	}
 	return (0);
 }
