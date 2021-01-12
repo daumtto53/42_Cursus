@@ -8,6 +8,7 @@ int		main()
 	char	*line;
 	int		fd;
 
+	printf("GNL #########\tBUFFER_SIZE : %d\t##############\n", BUFFER_SIZE);
 	if ((fd = open("test.txt", O_RDWR, 0644)) <= 0)
 	{
 		perror("open error\n");

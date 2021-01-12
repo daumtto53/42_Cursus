@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 13:54:13 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 16:11:36 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,22 @@ t_tb			*find_tb(t_tb **tb_head, int fd)
 		while (curr_node->next != NULL)
 		{
 			if (curr_node->fd == fd)
-				return (curr_node);
+				return (return_n_free_tb_node(curr_node, new_node));
 			curr_node = curr_node->next;
 		}
 		if (curr_node->fd == fd)
-			return (curr_node);
+			return (return_n_free_tb_node(curr_node, new_node));
 		curr_node->next = new_node;
 		curr_node = new_node;
 	}
 	init_new_tb_node(curr_node, fd);
+	return (curr_node);
+}
+
+t_tb			*return_n_free_tb_node(t_tb *curr_node, t_tb *new_node)
+{
+	free(new_node);
+	new_node = new_node;
 	return (curr_node);
 }
 
@@ -67,7 +74,6 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 {
 	char		*temp;
 	int			i;
-
 	if (tb_node->tb_arr == NULL)
 		if ((tb_node->tb_arr = (char *)malloc(sizeof(char) * BUFFER_SIZE)) == NULL)
 			return (-1);
@@ -94,7 +100,6 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 	return (1);
 }
 
-//line에 동적할당한 temp가 안박히는게 원인.
 int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to)
 {
 	int			i;
@@ -106,6 +111,8 @@ int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to)
 	while (++i <= to)
 		temp[i] = (tb_node->tb_arr)[i];
 	temp[i] = '\0';
+	free(*line);
+	*line = NULL;
 	*line = temp;
 	return (to - from + 1);
 }
