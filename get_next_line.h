@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:41:42 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 19:06:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 22:29:52 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 2
+# define BUFFER_SIZE 1
 #endif
 
 # include <unistd.h>

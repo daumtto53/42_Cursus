@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 21:13:33 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 21:36:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int					get_next_line(int fd, char **line)
 	if (index <= -2 && readlen == 0)	//이 때는 언제인가? while문에서 널을 찾지 못하고 readlen == 0에서 걸려서 break되었을 때
 	{
 		free(*line);
+		*line = NULL;
 		return (0);
 	}
 	if (strcpy_n_alloc(line, tb_node, 0, index) < 0)

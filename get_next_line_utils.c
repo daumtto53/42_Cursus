@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/12 21:28:39 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 22:30:55 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 	if (tb_node->tb_arr == NULL)
 		if ((tb_node->tb_arr = (char *)malloc(sizeof(char) * BUFFER_SIZE)) == NULL)
 			return (-1);
-	if (tb_node->tb_size >= (tb_node->tb_end + readlen))
+	if (tb_node->tb_size > (tb_node->tb_end + readlen))
 	{
 		i = -1;
 		while (++i < readlen)
@@ -92,7 +92,7 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 		while (++i <= tb_node->tb_end)
 			temp[i] = tb_node->tb_arr[i];
 		while (i++ <= readlen + tb_node->tb_end)
-			temp[i - 1] = buffer[i - tb_node->tb_end - 2];
+			temp[i - 1] = buffer[i - tb_node->tb_end - 2];	//여기가 좀 이상한듯?
 		free(tb_node->tb_arr);
 		tb_node->tb_arr = NULL;
 		tb_node->tb_arr = temp;
