@@ -3,6 +3,8 @@
 #include "fcntl.h"
 #include "sys/types.h"
 
+
+
 int		main()
 {
 	char	*line;
