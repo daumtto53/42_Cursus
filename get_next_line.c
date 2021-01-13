@@ -6,11 +6,10 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/14 03:04:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/14 03:20:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "get_next_line.h"
 
 int					tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
@@ -96,7 +95,8 @@ int					get_next_line(int fd, char **line)
 
 	if (BUFFER_SIZE <= 0 || line == NULL || fd < 0)
 		return (-1);
-	tb_node = find_tb(&tb_head, fd);
+	if ((tb_node = find_tb(&tb_head, fd)) == NULL)
+		return (-1);
 	index = -2;
 	while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)
 		if ((readlen = read(tb_node->fd, read_buff, BUFFER_SIZE)) == 0)

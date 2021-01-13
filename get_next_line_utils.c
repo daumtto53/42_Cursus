@@ -6,11 +6,10 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/14 03:05:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/14 03:16:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "get_next_line.h"
 
 t_tb			*find_tb(t_tb **tb_head, int fd)
