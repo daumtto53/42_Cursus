@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:41:42 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 17:25:29 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/13 17:49:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct		s_tb{
 int				get_next_line(int fd, char **line);
 t_tb			*find_tb(t_tb **tb_head, int fd);
 t_tb			*return_n_free_tb_node(t_tb *curr_node, t_tb *new_node);
-void	free_tb_node(t_tb **head, t_tb *tb_node);
+void			free_tb_node(t_tb **head, t_tb *tb_node);
 void			init_new_tb_node(t_tb *newnode, int fd);
 long			find_tb_newline(t_tb *tb_node, long index);
 int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen);
