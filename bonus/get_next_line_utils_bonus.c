@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 17:16:21 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 22:30:55 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,6 @@ t_tb			*find_tb(t_tb **tb_head, int fd)
 	}
 	init_new_tb_node(curr_node, fd);
 	return (curr_node);
-}
-
-void	free_tb_node(t_tb **head, t_tb *tb_node)
-{
-	t_tb		*curr_node;
-	t_tb		*prev_node;
-
-	if (*head == tb_node)
-	{
-		free((*head)->tb_arr);
-		free(*head);
-		*head = tb_node->next;
-		return ;
-	}
-	curr_node = (*head)->next;
-	prev_node = (*head);
-	while (curr_node != NULL)
-	{
-		if (curr_node == tb_node)
-		{
-			prev_node->next = curr_node->next;
-			free(curr_node->tb_arr);
-			free(curr_node);
-		}
-		prev_node = curr_node;
-		curr_node = curr_node->next;
-	}
 }
 
 t_tb			*return_n_free_tb_node(t_tb *curr_node, t_tb *new_node)
@@ -129,7 +102,6 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 	return (1);
 }
 
-//이 함수에서 (*line) = 0을 참조하는 순간이 온다.
 int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to)
 {
 	int			i;

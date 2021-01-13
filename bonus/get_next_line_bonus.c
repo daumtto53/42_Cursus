@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 17:15:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/13 14:29:23 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int					get_next_line(int fd, char **line)
 	long			index;
 	char			read_buff[BUFFER_SIZE];
 
+	// free(*line);
 	tb_node =  find_tb(&tb_head, fd);
 	index = -2;
 	//while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)으로, <=을 줄 때는 segerror남.
@@ -37,8 +38,17 @@ int					get_next_line(int fd, char **line)
 	}
 	if (strcpy_n_alloc(line, tb_node, 0, index) < 0)
 		return (-1);
+	// printf("bef-------------------------------------------------line : %s\n", *line);
+	// printf("tb_end : %ld\t readlen : %ld\t, index : %ld\n", tb_node->tb_end, readlen, index);
 	move_tb_arr_n_cpy(tb_node, index);
+	// printf("tb_end : %ld\t readlen : %ld\t, index : %ld\n", tb_node->tb_end, readlen, index);
+	// printf("aft-------------------------------------------------line : %s\n", *line);
+	// printf("--------------------------------------%s\n",*line);
 	if (tb_node->tb_end == 0 && index == -2)
-		free_tb_node(&tb_head, tb_node);
+	{
+		free(tb_node->tb_arr);
+		free(tb_node);
+		tb_head = NULL;
+	}
 	return ((index <= -2) ? (0) : (1));
 }

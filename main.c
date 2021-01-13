@@ -24,6 +24,7 @@ int		main()
 		free(line);
 		line = NULL;
 	}
+	free(line);
 	return (0);
 }
 
