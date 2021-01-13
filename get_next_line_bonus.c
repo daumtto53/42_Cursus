@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 17:17:52 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/13 17:19:00 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int					get_next_line(int fd, char **line)
 	long			index;
 	char			read_buff[BUFFER_SIZE];
 
+	if (BUFFER_SIZE <= 0)
+		return (-1);
 	tb_node =  find_tb(&tb_head, fd);
 	index = -2;
 	while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)

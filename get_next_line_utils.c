@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 17:16:21 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/13 17:40:56 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,16 @@ t_tb			*find_tb(t_tb **tb_head, int fd)
 
 void	free_tb_node(t_tb **head, t_tb *tb_node)
 {
+	t_tb		*temp_node;
 	t_tb		*curr_node;
 	t_tb		*prev_node;
 
 	if (*head == tb_node)
 	{
+		temp_node = tb_node->next;
 		free((*head)->tb_arr);
 		free(*head);
-		*head = tb_node->next;
+		*head = temp_node;
 		return ;
 	}
 	curr_node = (*head)->next;
