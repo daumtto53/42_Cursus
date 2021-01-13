@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 18:39:16 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/13 18:49:32 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_tb			*find_tb(t_tb **tb_head, int fd)
 		curr_node->next = new_node;
 		curr_node = new_node;
 	}
-	return (init_new_tb_node(curr_node, fd));
+	return (init_n_return_new_tb_node(curr_node, fd));
 }
 
 void			free_tb_node(t_tb **head, t_tb *tb_node)
