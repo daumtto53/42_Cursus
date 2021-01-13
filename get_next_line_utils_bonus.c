@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:19 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 15:15:27 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/12 22:30:55 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int				tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 	return (1);
 }
 
-//이 함수에서 (*line) = 0을 참조하는 순간이 온다.
 int				strcpy_n_alloc(char **line, t_tb *tb_node, int from, int to)
 {
 	int			i;
