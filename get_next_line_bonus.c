@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/13 17:15:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/13 17:17:52 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int					get_next_line(int fd, char **line)
 
 	tb_node =  find_tb(&tb_head, fd);
 	index = -2;
-	//while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)으로, <=을 줄 때는 segerror남.
-	//왜 부등호에 등호를 안붙였는가?
 	while ((index = find_tb_newline(tb_node, index + 2)) + 1 < 0)
 	{
 		if ((readlen = read(tb_node->fd, read_buff, BUFFER_SIZE)) == 0)
