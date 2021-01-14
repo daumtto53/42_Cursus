@@ -6,11 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 22:31:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/14 03:20:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/14 14:33:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int					tb_dynamic_add(t_tb *tb_node, char *buffer, ssize_t readlen)
 {
