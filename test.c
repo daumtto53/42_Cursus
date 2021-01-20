@@ -6,7 +6,7 @@ int		main()
 
 	/* ############# wrong type matching argument ########
 	 *
-	 * NO NEED TO CONSIDER
+	 * NO NEED TO CONSIDER!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	 *
 	 * didn't clarify argument == undefined behavior
 	 * printf("%s\n");
@@ -20,14 +20,18 @@ int		main()
 	 *
 	 *####################################################*/
 	
+	
 	/* ############ - flag and  0 flags combined == 0 flag ignored #########
 	 *
 	 * - (-) flag and 0 flag combined == 0 flag ignored
 	 * printf("[%-05d]\n", 5);
 	 * - 0 flag and d i o u x X c precision combined ==> 0 flag ignored.
+	 *   
+	 *   -0 flag and precision can be used together.
 	 * printf("[%020.4d]\n", 12);
 	 *
 	 * ##########################################################*/
+	 
 
 	/* ############## 0 flag + string : works. #############
 	 *
@@ -58,25 +62,28 @@ int		main()
 	*  == precision checked in advance
 	*   .-4 == precision unchecked => interpreted as strlen.
 	*/
+
+	/* ################ precision not considered ###############
+	 *
+	 * printf("[%-20.-s]\n", "string is best");
+	 * printf("[%-20.-4s]\n", "string is best");
+	 *
+	 * ######################################################### */
 	printf("\n");
 	printf("\n");
 	printf("9-------------precision w/ string\n");
 	printf("- str + width 10\n");
 	printf("[%10.3s]\n", "string is best");
 	printf("precision 0\n");
-	printf("[%10.s]\n", "string is best");
+	printf("[%%10.s] : [%10.s]\n", "string is best");
 	printf("precision 0\n");
-	printf("[%10.*s]\n", 0, "string is best");
+	printf("[%%10.*s] : [%10.*s]\n", 0, "string is best");
 	printf("precision ignored. When precision < 0\n"); 
-	printf("[%20.*s]\n", -1, "string is best");
+	printf("[%%20.(-1)s] : [%20.*s]\n", -1, "string is best");
 	printf("\n");
 	 
 	printf("precision checked in advance when * used\n");
-	printf("[%-20.*s]\n", -4, "string is best");
-	printf("precision unchecked => \n");
-	printf("[%-20.-s]\n", "string is best");
-	printf("precision unchecked => interpreted as - (< 0) => strlen <= 0 => 4 interpreted as width\n");
-	printf("[%-20.-4s]\n", "string is best");
+	printf("[%%-20.(-4)s] : [%-20.*s]\n", -4, "string is best");
 	printf("9-----------------------------------\n"); 
 	printf("\n");
 	printf("\n");
@@ -92,6 +99,16 @@ int		main()
 	 * printf("[%-20.-4s]\n", "string is best");
 	 *
 	 * ############################################################################*/
+
+	/* ####################### precision ignored when given as * ##################
+	 *
+	 * printf("WARNING TEST\n");
+	 * printf("[%20.*s]\n", 2, "string");
+	 * printf("[%20.*s]\n", -5, "stringgggggg");
+	 * printf("[%20.*d]\n", 4, 123);
+	 * printf("[%20.*d]\n", -4, 123);
+	 *
+	 * ############################################################################# */
 	
 	/*################### precision + 0 flag combined ################
 	 * 
@@ -103,27 +120,42 @@ int		main()
 
 	// string with 0 flag == UNDEFINED BEHAVIOR
 	// printf("[%020s]\n", "This");
+	//
 	
+	printf("19---------precision when argument == 0--------\n");
+	printf("[%20.d]\n", 0);
+	printf("[%20.0d]\n", 0);
+	printf("[%20.*d]\n",0, 0);
+	printf("[%20.*d]\n", -3, 0);
+	printf("19---------precision when argument == 0--------\n\n");
+	
+	printf("12---------d type with 0 precision-------------\n");
+	printf("[%%20.d] : [%20.d]\n", 1234);
+	printf("[%%20.0d] : [%20.0d]\n", 1234);
+	printf("[%%20.1d] : [%20.1d]\n", 1234);
+	printf("12--------------------------------------------\n\n");
+
 	printf("[%+.d]\n", 1234);
 	printf("[%+.2d]\n", 1234);
 	printf("[%+.4d]\n", 1234);
 	printf("[%+.6d]\n", 1234);
 
 	printf("----------------\n");
+	
+	/*#####################################################################
+	 *
+	 * printf("10---------- p type specifier w/ 0, +, wid, prec ------\n");\
+	 * int		i;
+	 *
+	 * - p type w/ "+" "0" flag and precision = Warning
+	 * printf("[%+p]\n", (void *)&i);
+	 * printf("[%0p]\n", (void *)&i);
+	 * printf("[%15p]\n", (void *)&i);
+	 * printf("[%30.15p]\n", (void *)&i);
+	 *
+	 *#####################################################################*/
 
-	printf("10---------- p type specifier w/ 0, +, wid, prec ------\n");
-	int		i;
-	printf("[%+p]\n", (void *)&i);
-	printf("[%0p]\n", (void *)&i);
-	printf("[%15p]\n", (void *)&i);
-	printf("[%30.15p]\n", (void *)&i);
-	printf("10----------\n");
-	// - precision = 4 -> left-justtify -> width remaining
-	//printf("[%-20.4s]\n", "string is best");
 
-	//precision
-	printf("%.1.2f\n", 1.2);
-	printf("%.d\n", 0);
 
 }
 
