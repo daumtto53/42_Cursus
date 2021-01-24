@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <unistd.h>
 int		main()
 {
 
@@ -155,7 +155,50 @@ int		main()
 	 *
 	 *#####################################################################*/
 
+	printf("\n\n\n----------01 21 Data Test -------------\n");
+	printf("[%020.0d]\n", 12);
+	printf("[%030X]\n", 12312321);
+	printf("[%10c]\n", 0);
+	printf("[%c]\n", 0);
+	printf("%%d : don't print when pre=0,arg=0\n");
+	printf("[%0.0d]\n",0 );
+	printf("[%0.*d]\n",0, 0 );
+	printf("[%0.*d]\n",-3, 0);
+	printf("[%0.*d]\n", 3, 0);
+	
+	
+	printf("%%x : don't print when pre=0,arg=0\n");
+	printf("[%0.0x]\n",0 );
+	printf("[%0.*x]\n",0, 0 );
+	printf("[%0.*x]\n",-3, 0);
+	
+	printf("%%u : don't print when pre=0,arg=0\n");
+	printf("[%0.7u]\n", 256);
+	printf("[%0.0u]\n",0 );
+	printf("[%0.*u]\n",0, 0 );
+	printf("[%0.*u]\n",-3, 0);
+
+	printf("%%s : don't print when pre=0,arg=0\n");
+	printf("[%-20.s]\n", "string");
+	printf("[%-20.*s]\n", -2,  "string");
+	printf("[%-20.*s]\n",0, "string");
+
+	printf("[%-1c]\n", 'c');
+	printf("[%+1d]\n", 1);
+	printf("[%-20.0d]\n", 0);
+	printf("[%-6.9d]\n", 1);
+	printf("[%010d]\n", -20);
+	printf("[%10.3d]\n", -20);
+	printf("[%7.6d]\n", -10000);
 
 
+	printf("\n\n");
+
+	printf("[%]");
+	printf("[%5]");
+	printf("[%05]");
+	printf("[%-05]");
+	printf("[%-5]");
+	
 }
 
