@@ -194,11 +194,68 @@ int		main()
 
 	printf("\n\n");
 
-	printf("[%]");
-	printf("[%5]");
-	printf("[%05]");
-	printf("[%-05]");
-	printf("[%-5]");
+	/*#######     warning error    ##################
+	 * printf("[%]");
+	 * printf("[%5]");
+	 * printf("[%05]");
+	 * printf("[%-05]");
+	 * printf("[%-5]");
+	 * ############################# */
+	
+	
+	printf("\n\n\n");
+	printf("---------NULL Test------\n");
+	/*################# %d with NULL #####################
+	 * printf("####### %%d with NULL Test ######\n");
+	 * printf("[%d]\n", NULL);
+	 * printf("[%10d]\n", NULL);
+	 * printf("[%.3d]\n", NULL);
+	 * printf("[%10.3d]\n", NULL);
+	 * printf("[%-d]\n", NULL);
+	 * printf("[%-10d]\n", NULL);
+	 * printf("[%-.3d]\n", NULL);
+	 * printf("[%-10.3d]\n", NULL);
+	 * printf("[%0d]\n", NULL);
+	 * printf("[%010d]\n", NULL);
+	 * printf("[%0.3d]\n", NULL);
+	 * printf("[%010.3d]\n", NULL);
+	 * ################################################*/
+	
+	 /* ###############%c, x, X, u, i with NULL########
+	  * printf("####### %%c with NULL Test ######\n"); 
+	  * printf("[%c]\n", NULL);
+	  * printf("[%x]\n", NULL);
+	  * printf("[%X]\n", NULL);
+	  * printf("[%u]\n", NULL);
+	  * printf("[%i]\n", NULL);
+	  * ###############################################*/
+	
+	  /*############################################
+	   * printf("####### %%p, %%s  with NULL Test ######\n"); 
+	   * printf("[%s]\n", NULL);
+	   * printf("[%p]\n", NULL);
+	   * printf("[%10s]\n", NULL);
+	   * printf("[%12.3s]\n", NULL);
+	   * printf("[%-12.3s]\n", NULL);
+	   * printf("[%*s]\n", 12, NULL);
+	   * printf("[%*.*s]\n",12, 3, NULL);
+	   * printf("[%.*s]\n", 3, NULL);
+	   * printf("[%.s]\n", NULL);
+	   * printf("[%*.*s]\n",12, -3, NULL);
+	   *  #########################################*/
+
+		/* #########################################
+		 *
+		 *  ####################################### */
+
+	printf("[%p]\n", NULL);
+	printf("[%10p]\n", NULL);
+	printf("[%-10p]\n", NULL);
+	printf("[%-*p]\n", 12, NULL);
+	printf("[%-10p]\n", NULL);
+		
+	 
+
 	
 }
 
