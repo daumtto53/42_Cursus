@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/26 18:21:57 by mchun             #+#    #+#             */
-/*   Updated: 2020/12/26 20:03:40 by mchun            ###   ########.fr       */
+/*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
+/*   Updated: 2021/01/26 17:55:00 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF
+# define FT_PRINTF
 
-/*
-** No Null guard.
-*/
-size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
+# include <stdarg.h>
+# include "libft/libft.h"
+
+# define F_PRECISION	1
+# define F_WIDTH 		2
+# define F_LEFT_JUSTIFY	4
+# define F_ZERO			8
+
+typedef struct		s_parse_info
 {
-	size_t	srcsize;
-	int		len;
-	int		i;
+	int		flag;
+	char	type;
+	int		width;
+	int		prec;
+}					t_parse_info;
 
-	if (!dst || !src)
-		return (0);
-	i = 0;
-	srcsize = ft_strlen(src);
-	if (!!dstsize)
-	{
-		len = (dstsize > srcsize) ? srcsize : dstsize - 1;
-		while (i < len)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (srcsize);
-}
+int		ft_printf(const char *str, ...);
+#endif
