@@ -1,0 +1,131 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    makefile_cp.test                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/03/09 18:24:09 by daelee            #+#    #+#              #
+#    Updated: 2020/12/23 22:43:30 by mchun            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+## .SUFFIXES : 확장자 규칙. .c와 .o 확장자를 확장자 규칙에 의해 처리함.
+## .c.o : .c파일을 .o파일로 (컴파일)시키겠다.
+.SUFFIXES : .c .o
+NAME = libft.a
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+
+##### AR = ar (Archive maintaining program)을 사용하는 이유 :
+# 여러개의 .o파일을 하나의 archive(.a)로 만들어주는 명령어.
+# rcs 옵션 :
+# r : 이전에 존재하는 모듈삭제/치환.
+# c : 아카이브 생성
+# s : 아카이브 인덱스 생성.
+# 그냥 ar명령어를 사용하기 위해서 기본적으로 넣어주는 옵션이라고 생각하면 된다.
+AR = ar rcs
+
+RM = rm -f
+
+FILES = ft_memset \
+		ft_bzero \
+		ft_memcpy \
+		ft_memccpy \
+		ft_memmove \
+		ft_memchr \
+		ft_memcmp \
+		ft_strlen \
+		ft_strlcpy \
+		ft_strlcat \
+		ft_strchr \
+		ft_strrchr \
+		ft_strnstr \
+		ft_strncmp \
+		ft_atoi \
+		ft_isalpha \
+		ft_isdigit \
+		ft_isalnum \
+		ft_isascii \
+		ft_isprint \
+		ft_toupper \
+		ft_tolower \
+		ft_calloc \
+		ft_strdup \
+		ft_substr \
+		ft_strjoin \
+		ft_strtrim \
+		ft_split \
+		ft_itoa \
+		ft_strmapi \
+		ft_putchar_fd \
+		ft_putstr_fd \
+		ft_putendl_fd \
+		ft_putnbr_fd
+
+FILES_B = 	ft_lstnew \
+	  		ft_lstadd_front \
+	  		ft_lstsize \
+	  		ft_lstlast \
+	  		ft_lstadd_back \
+	  		ft_lstdelone \
+	  		ft_lstclear \
+	  		ft_lstiter \
+	  		ft_lstmap
+
+SRCS_DIR = ./
+##### addprefix 와 addsuffix를 사용하여 소스와 오브젝파일의 매크로 설정. #
+# add... 함수는 string을 리턴한다. #####
+SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
+SRCS_B = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES_B)))
+
+OBJS_DIR = ./
+OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+OBJS_B = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES_B)))
+
+## .SUFFIX 매크로.
+###### .c.o는 make 내장 매크로로, .c파일을 컴파일 하여
+# .o파일을 만드는 매크로. #######
+## $@ : target 파일
+## $< : target 파일을 만들기 위해 사용되는 dependency 파일이 modified 되었다면 substitute.
+.c.o: $(SRCS)
+	$(CC) $(CFLAGS) -c $< -o <@
+
+## ----매크로 종료----
+
+## ----Rule----
+## 최종 목표는 archive 파일을 만드는것.
+$(NAME): $(OBJS)
+	$(AR) $@ $^
+
+##무엇이 만들어지는가..?
+bonus: $(OBJS_B)
+	$(AR) $(NAME) $^
+
+## Name 하나만 타겟으로 해서 만들어라..
+## 안에 target들 나열 가능.
+all: $(NAME)
+
+## 만약에 ELF파일까지 만들고 싶다면..?
+## 헤더파일간의 dependency는  고려해주지 않아도 되는 것인가..?
+
+
+## obj파일 지워라
+clean:
+	$(RM) $(OBJS) $(OBJS_B)
+
+## archive 지워라.
+fclean: clean
+	$(RM) $(NAME)
+
+##
+re: clean all
+
+##### clean 이라는 파일이 존재한다면 #
+# clean : .... #
+# 이 clean이라는 target 파일을 만들라는 의미로 해석이 되고 #
+# clean이 존재하며, 갱신되지 않았으므로, rm 명령은 실행되지 않을것. #
+# clean이라는 target이 존재할 경우, 그것이 phony다! 라고 하여 실제 이름을 가리키지 않는다는것을 알려준다.#
+
+.PHONY: bonus all clean fclean re

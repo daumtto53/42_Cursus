@@ -1,0 +1,34 @@
+CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror
+
+FILES = ft_isalpha.c
+
+
+SRCS = $(FILES)
+OBJS = $(SRCS:.c=.o)
+
+NAME = libft.a
+
+$(NAME) : $(OBJS)
+		ar rcs $@ $^
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+all : $(NAME)
+
+clean :
+	rm -f $(OBJS)
+
+fclean :
+	rm -f $(NAME)
+
+re : clean all
+
+# Remove this When submitting.
+so:
+	$(CC) -fPIC $(CFLAGS) -c libft.h $(SRCS)
+	$(CC) -shared  -o libft.so $(OBJS)
+
+.PHONY  : all clean fclean
