@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 20:52:40 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/26 22:43:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define F_WIDTH 		2
 # define F_LEFT_JUSTIFY	4
 # define F_ZERO			8
+# define F_ONLY_DOT		16
 
 typedef struct		s_parse_info
 {
@@ -39,5 +40,14 @@ int		parse_type(const char *s, t_parse_info *p_info);
 int		parse_precision(const char *s, t_parse_info *p_info, va_list *ap);
 int		parse_width(const char *s, t_parse_info *p_info, va_list *ap);
 int		parse_flag(const char *s, t_parse_info *p_info);
+
+int		printer_type_c(t_parse_info *p_info, va_list *ap);
+int		printer_type_s(t_parse_info *p_info, va_list *ap);
+int		printer_type_p(t_parse_info *p_info, va_list *ap);
+int		printer_type_perc(t_parse_info *p_info, va_list *ap);
+int		printer_type_x(t_parse_info *p_info, va_list *ap);
+int		printer_type_d(t_parse_info *p_info, va_list *ap);
+int		printer_type_u(t_parse_info *p_info, va_list *ap);
+
 
 #endif

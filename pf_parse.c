@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 22:06:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/26 22:44:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int		parse_precision(const char *s, t_parse_info *p_info, va_list *ap)
 		if (s[i] == 'c' || s[i] == 's' || s[i] == 'i' || s[i] == 'd' || \
 				s[i] == 'u' || s[i] == 'X' || s[i] == 'x' || s[i] == 'p' || \
 					s[i] == '%')
+		{
 			p_info->prec = 0;
+			p_info->flag |= F_ONLY_DOT;
+		}
 		else if (s[i] == '*')
 		{
 			p_info->prec = va_arg(*ap, int);

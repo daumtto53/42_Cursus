@@ -6,13 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 22:04:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/26 22:47:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 # include <stdio.h>
-#define DEBUG
 
 void	parse_info_renew(t_parse_info *p_info)
 {
@@ -25,24 +24,26 @@ void	parse_info_renew(t_parse_info *p_info)
 int		print_handler(t_parse_info *p_info, va_list *ap)
 {
 	char	t;
+	int		err;
 
 	t = p_info->type;
 	if (t == 'c')
-		printer_type_c(ap, p_info);
+		err = printer_type_c(p_info, ap);
 	else if (t == 's')
-		printer_type_s(ap, p_info);
+		err = printer_type_s(p_info, ap);
 	else if (t == 'p')
-		printer_type_p(ap, p_info);
+		err = printer_type_p(p_info, ap);
 	else if (t == 'x' || t == 'X')
-		printer_type_x(ap, p_info);
+		err = printer_type_x(p_info, ap);
 	else if (t == 'd' || t == 'i')
-		printer_type_d(ap, p_info);
+		err = printer_type_d(p_info, ap);
 	else if (t == 'u')
-		printer_type_u(ap, p_info);
+		err = printer_type_u(p_info, ap);
 	else if (t == '%')
-		printer_type_percent(ap, p_info);
+		err = printer_type_perc(p_info, ap);
 	else
 		return (-1);
+	return (err);
 }
 
 int		handle_parse_info(t_parse_info *p_info)
@@ -56,7 +57,7 @@ int		handle_parse_info(t_parse_info *p_info)
 		return (-1);
 	if (p_info->flag & F_ZERO && p_info->flag & F_LEFT_JUSTIFY && t != '%')
 		return (-1);
-	if (p_info->flag & F_PRECISION && (t == 'c' || t == 'p'))
+	if (p_info->flag & F_PRECISION && (t == 'c' || t == 'p') && !(p_info->flag & F_ONLY_DOT))
 		return (-1);
 	if ((t == 'u' || t == 'd' || t == 'u' || t == 'x' || t == 'X' || \
 			t == 'i') && F_ZERO && F_PRECISION)
