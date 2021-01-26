@@ -27,8 +27,7 @@ void	va_test(int i, ...)
 
 int		main()
 {
-	char	a[9] = "1234567%d";
-	a[9] = '1';
 	va_test(1, 1,'c',"string",0.1);
-	printf(a, 8);
+
+	printf("%d\n", 11 & (~2));
 }

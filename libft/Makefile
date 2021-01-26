@@ -40,10 +40,12 @@ PART_2 =	ft_strdup.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
-			ft_split.c \
-			ft_isspace.c \
+			ft_split.c
+
+CUSTOM =	ft_isspace.c \
 			ft_numtox.c \
-			ft_digitlen.c
+			ft_digitlen.c \
+			ft_strfill.c
 
 BONUS =	ft_lstnew.c \
 		ft_lstadd_front.c \
@@ -55,7 +57,7 @@ BONUS =	ft_lstnew.c \
 		ft_lstiter.c \
 		ft_lstmap.c
 
-FILES = $(PART_1) $(PART_2)
+FILES = $(PART_1) $(PART_2) $(CUSTOM)
 SRCS = $(addprefix $(SRCSDIR), $(FILES))
 OBJS = $(addprefix $(OBJSDIR), $(SRCS:.c=.o))
 BONUSSRCS = $(addprefix $(BONUSDIR), $(BONUS))
