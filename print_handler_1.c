@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/27 18:32:20 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/27 18:45:39 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		printer_type_s(t_parse_info *p_info, va_list *ap)
 	if (printer_type_s_helper(p_info, ap, &front, &strlength) == -1)
 		return (-1);
 	back = front;
+	temp = front;
 	if (p_info->width > strlength)
 	{
 		if ((temp = (char *)calloc(p_info->width - strlength + 1, 1)) == NULL)
@@ -106,6 +107,7 @@ int		printer_type_p(t_parse_info *p_info, va_list *ap)
 
 	if (printer_type_p_helper(p_info, ap, &front, &back) == -1)
 		return (-1);
+	ptr = front;
 	if (p_info->width > ft_strlen(front))
 	{
 		if ((ptr = \
