@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/27 18:45:39 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/27 19:14:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,28 @@ int		printer_type_s(t_parse_info *p_info, va_list *ap)
 {
 	char	*front;
 	char	*back;
-	char	*temp;
+	char	*tmp;
 	int		strlength;
 
 	if (printer_type_s_helper(p_info, ap, &front, &strlength) == -1)
 		return (-1);
 	back = front;
-	temp = front;
+	tmp = front;
 	if (p_info->width > strlength)
 	{
-		if ((temp = (char *)calloc(p_info->width - strlength + 1, 1)) == NULL)
+		if ((tmp = (char *)ft_calloc(p_info->width - strlength + 1, 1)) == NULL)
 			return (-1);
-		temp[p_info->width - strlength] = '\0';
-		ft_strfill(temp, 0, ft_strlen(temp) - 1, ' ');
+		tmp[p_info->width - strlength] = '\0';
+		ft_strfill(tmp, 0, ft_strlen(tmp) - 1, ' ');
 		if (p_info->flag & F_LEFT_JUSTIFY)
-			back = temp;
+			back = tmp;
 		else
-			front = temp;
-		if ((temp = ft_strjoin(front, back)) == NULL)
+			front = tmp;
+		if ((tmp = ft_strjoin(front, back)) == NULL)
 			return (-1);
 	}
-	write(1, temp, ft_strlen(temp));
-	free_all(temp, front, back, NULL);
+	write(1, tmp, ft_strlen(tmp));
+	free_all(tmp, front, back, NULL);
 	return (1);
 }
 
@@ -111,10 +111,10 @@ int		printer_type_p(t_parse_info *p_info, va_list *ap)
 	if (p_info->width > ft_strlen(front))
 	{
 		if ((ptr = \
-			(char *)calloc(p_info->width - ft_strlen(front) + 1, 1)) == NULL)
+			(char *)ft_calloc(p_info->width - ft_strlen(front) + 1, 1)) == NULL)
 			return (-1);
 		ptr[p_info->width - ft_strlen(front)] = '\0';
-		ft_strfill(ptr, 0, ft_strlen(ptr), ' ');
+		ft_strfill(ptr, 0, ft_strlen(ptr) - 1, ' ');
 		if (p_info->flag & F_LEFT_JUSTIFY)
 			back = ptr;
 		else

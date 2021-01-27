@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
 
 void	va_test2(va_list *ap)
 {
@@ -29,7 +30,8 @@ void	va_test(int i, ...)
 int		main()
 {
 	int		a;
+	char *b = "%";
 	va_test(1, 1,'c',"string",0.1, &a);
-
+	write(1, b, 2);
 	printf("%d\n", 11 & (~2));
 }
