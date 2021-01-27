@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 22:47:04 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/27 23:27:21 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		handle_parse_info(t_parse_info *p_info)
 		p_info->flag &= (~F_ZERO);
 	if (p_info->prec < 0 && p_info->flag & F_ZERO)
 		p_info->flag &= (~F_PRECISION);
+	//2147483647, 46은 안뽑아주는걸 처리해야한다.
 }
 
 int		reach_delim(const char *str, int i)
