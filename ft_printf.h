@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 22:43:38 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/27 17:53:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ int		parse_flag(const char *s, t_parse_info *p_info);
 
 int		printer_type_c(t_parse_info *p_info, va_list *ap);
 int		printer_type_s(t_parse_info *p_info, va_list *ap);
+int		printer_type_s_helper(t_parse_info *p, va_list *ap, char **f, int *l);
 int		printer_type_p(t_parse_info *p_info, va_list *ap);
+int		printer_type_p_helper(t_parse_info *p, va_list *a, char **f, char **b);
 int		printer_type_perc(t_parse_info *p_info, va_list *ap);
 int		printer_type_x(t_parse_info *p_info, va_list *ap);
 int		printer_type_d(t_parse_info *p_info, va_list *ap);
 int		printer_type_u(t_parse_info *p_info, va_list *ap);
+
+void	free_all(void *a, void *b, void *c, void *d);
 
 
 #endif

@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_handler_2.c                                  :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/27 17:54:45 by mchun            ###   ########.fr       */
+/*   Created: 2021/01/27 17:22:16 by mchun             #+#    #+#             */
+/*   Updated: 2021/01/27 17:22:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		printer_type_x(t_parse_info *p_info, va_list *ap);
-int		printer_type_d(t_parse_info *p_info, va_list *ap);
-int		printer_type_u(t_parse_info *p_info, va_list *ap);
+void	free_all(void *a, void *b, void *c, void *d)
+{
+	free(a);
+	free(b);
+	free(c);
+	free(d);
+}
