@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/27 19:14:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/28 15:52:01 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,112 +17,125 @@ int		printer_type_c(t_parse_info *p_info, va_list *ap)
 	int				a;
 	unsigned char	c;
 	char			*s;
+	char			*product[1];
 
 	a = va_arg(*ap, int);
 	c = (unsigned char)a;
 	if (p_info->width <= 1)
-		p_info->width = 1;
-	if ((s = (char *)malloc(sizeof(char) * (p_info->width + 1))) == NULL)
-		return (-1);
-	s[p_info->width] = '\0';
-	ft_strfill(s, 0, ft_strlen(s) - 1, ' ');
-	if (p_info->flag & F_LEFT_JUSTIFY)
-		s[0] = c;
+		ft_putchar_fd(c, 1);
 	else
-		s[p_info->width - 1] = c;
-	ft_putstr_fd(s, 1);
-	free(s);
-	s = NULL;
+	{
+		product[0] = c;
+		if ((printer_width_helper(p_info, p_info->width - 1, product)) == NULL)
+			return (-1);
+		ft_putstr_fd(product, 1);
+		free(product);
+	}
 	return (1);
 }
 
-int		printer_type_s_helper(t_parse_info *p, va_list *ap, char **f, int *len)
-{
-	char	*front;
+// char	printer_type_s_helper(t_parse_info *p, va_list *ap, int *len)
+// {
+// 	char	*product;
+// 	char	*strarg;
 
-	front = va_arg(*ap, char *);
-	if (front = NULL)
-		front = "(null)";
-	if (p->flag & F_PRECISION && 0 <= p->prec && p->prec <= ft_strlen(front))
-		*len = p->prec;
-	else
-		*len = ft_strlen(front);
-	if ((front = ft_substr(front, 0, *len)) == NULL)
-		return (-1);
-	*f = front;
-	return (-1);
-}
+// 	strarg = va_arg(*ap, char *);
+// 	if (strarg = NULL)
+// 		strarg = "(null)";
+// 	if (p->flag & F_PRECISION && 0 <= p->prec && p->prec <= ft_strlen(strarg))
+// 		*len = p->prec;
+// 	else
+// 		*len = ft_strlen(strarg);
+// 	if ((product = ft_substr(strarg, 0, *len)) == NULL)
+// 		return (NULL);
+// 	free(strarg);		//doublefree의 위험이 있음. va_end()의 역할에 대해 자세히 알아볼 것.
+// 	return (product);
+// }
 
 int		printer_type_s(t_parse_info *p_info, va_list *ap)
 {
-	char	*front;
-	char	*back;
-	char	*tmp;
 	int		strlength;
+	char	*strarg;
+	char	*product;
 
-	if (printer_type_s_helper(p_info, ap, &front, &strlength) == -1)
+	strarg = va_arg(*ap, char *);
+	if (strarg = NULL)
+		strarg = "(null)";
+	if (p_info->flag & F_PRECISION && 0 <= p_info->prec && p_info->prec <= ft_strlen(strarg))
+		strlength = p_info->prec;
+	else
+		strlength = ft_strlen(strarg);
+	if ((product = ft_substr(strarg, 0, strlength)) == NULL)
 		return (-1);
-	back = front;
-	tmp = front;
+	free(strarg);		//doublefree의 위험이 있음. va_end()의 역할에 대해 자세히 알아볼 것.
 	if (p_info->width > strlength)
-	{
-		if ((tmp = (char *)ft_calloc(p_info->width - strlength + 1, 1)) == NULL)
+		if ((product = printer_width_helper(p_info, \
+				p_info->width - strlength, product)) == NULL)
 			return (-1);
-		tmp[p_info->width - strlength] = '\0';
-		ft_strfill(tmp, 0, ft_strlen(tmp) - 1, ' ');
-		if (p_info->flag & F_LEFT_JUSTIFY)
-			back = tmp;
-		else
-			front = tmp;
-		if ((tmp = ft_strjoin(front, back)) == NULL)
-			return (-1);
-	}
-	write(1, tmp, ft_strlen(tmp));
-	free_all(tmp, front, back, NULL);
+	ft_putstr_fd(product, 1);
+	free(product);
 	return (1);
 }
 
-int		printer_type_p_helper(t_parse_info *p, va_list *a, char **f, char **b)
-{
-	char	*ptr;
-	char	*front;
+// char	printer_type_p_helper(t_parse_info *p, va_list *a)
+// {
+// 	char	*ptr;
+// 	char	*newstr;
 
-	ptr = va_arg(*a, char *);
-	if (ptr == NULL)
-		ptr = 0;
-	if ((ptr = ft_numtox((long long)ptr)) == NULL)
-		return (-1);
-	if ((front = ft_strjoin("0x", ptr)) == NULL)
-		return (-1);
-	*f = front;
-	*b = front;
-	free(ptr);
-}
+// 	ptr = va_arg(*a, char *);
+// 	if (ptr == NULL)
+// 		ptr = 0;
+// 	if ((ptr = ft_numtox((long long)ptr)) == NULL)
+// 		return (NULL);
+// 	if ((newstr = ft_strjoin("0x", ptr)) == NULL)
+// 		return (NULL);
+// 	free(ptr);
+// 	return (newstr);
+// }
 
 int		printer_type_p(t_parse_info *p_info, va_list *ap)
 {
-	char	*ptr;
-	char	*front;
-	char	*back;
+	char	*product;
+	char	*ptrarg;
+	char	tmp;
 
-	if (printer_type_p_helper(p_info, ap, &front, &back) == -1)
+	ptrarg = va_arg(*ap, char *);
+	if (ptrarg == NULL)
+		ptrarg = 0;
+	if ((ptrarg = ft_numtox((long long)ptrarg)) == NULL)
 		return (-1);
-	ptr = front;
-	if (p_info->width > ft_strlen(front))
+	if ((product = ft_strjoin("0x", ptrarg)) == NULL)
+		return (-1);
+	free(ptrarg);
+	if (p_info->width > ft_strlen(product))
 	{
-		if ((ptr = \
-			(char *)ft_calloc(p_info->width - ft_strlen(front) + 1, 1)) == NULL)
-			return (-1);
-		ptr[p_info->width - ft_strlen(front)] = '\0';
-		ft_strfill(ptr, 0, ft_strlen(ptr) - 1, ' ');
-		if (p_info->flag & F_LEFT_JUSTIFY)
-			back = ptr;
-		else
-			front = ptr;
-		if ((ptr = ft_strjoin(front, back)) == NULL)
+		if ((product = printer_width_helper(p_info, p_info->width - ft_strlen(product), product)) == NULL)
 			return (-1);
 	}
-	write(1, ptr, ft_strlen(ptr));
-	free_all(ptr, front, back, NULL);
+	ft_putstr_fd(product, 1);
+	free(product);
+	return (1);
+}
+
+int		printer_type_perc(t_parse_info *p_info, va_list *ap)
+{
+	char	*typearg;
+	char	*product;
+
+	typearg = "%";
+	if (p_info->width > 1)
+	{
+		if ((product = printer_width_helper(p_info, p_info->width - 1, product)) == NULL)
+			return (-1);
+		if (p_info->flag & F_ZERO)
+		{
+			if (p_info->flag & F_LEFT_JUSTIFY)
+				ft_strfill(product, 1, ft_strlen(product) - 1, '0');
+			else
+				ft_strfill(product, 0, ft_strlen(product) - 2, '0');
+		}
+	}
+	ft_putstr_fd(product, 1);
+	free(product);
 	return (1);
 }
