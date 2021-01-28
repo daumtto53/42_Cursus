@@ -6,32 +6,51 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/28 16:16:55 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/28 21:07:37 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void	zero_flag_handler(t_parse_info *p, int sign, int dig, char *prod)
+{
+	if (p->flag & F_ZERO && p->width > dig + sign)
+		ft_strfill(prod, 0, p->width - (dig + sign) - 1, '0');
+	if (sign)
+		prod[0] = '-';
+}
+
+int		prec_num_zero_handler(t_parse_info *p_info, int num, char *prod)
+{
+	if (p_info->flag & F_PRECISION && p_info->prec == 0 && num == 0)
+	{
+		if (p_info->width == 0)
+			return (0);
+		ft_strfill(prod, 0, ft_strlen(prod) - 1, ' ');
+	}
+	return (1);
+}
+
 int		printer_type_xud(t_parse_info *p_info, va_list *ap)
 {
-	char	*sub;
 	int		digitlen;
 	int		num;
 	char	*product;
 	int		sign;
 	int		zero_num;
-	char	*str;
 
 	num = va_arg(*ap, int);
 	sign = (num < 0) ? 1 : 0;
 	if ((product = xud_substr_maker(p_info, num, &digitlen)) == NULL)
 		return (-1);
-	zero_num = p_info->prec - digitlen;
-	if (p_info->width > digitlen + ft_strlen(sub) + zero_num)
+	if (p_info->width > ft_strlen(product))
 	{
-		if ((product = printer_width_helper(p_info, p_info->width - (digitlen + sign + zero_num), product)) == NULL)
+		if ((product = printer_width_helper(p_info, p_info->width - ft_strlen(product), product)) == NULL)
 			return (-1);
 	}
+	zero_flag_handler(p_info, sign, digitlen, product);
+	if (prec_num_zero_handler(p_info, num, product) == 0)
+		return (0);
 	ft_putstr_fd(product, 1);
 	free(product);
 	return (1);
@@ -66,7 +85,6 @@ char	*make_subxud(t_parse_info *p, unsigned int num, int *digitlen)
 	return (original);
 }
 
-// 여기서 해야 할 일은 precision만 해결한 substr을 handler함수에 보내는 것.
 char	*xud_substr_maker(t_parse_info *p, unsigned int num, int *digit)
 {
 	int		digitlen;

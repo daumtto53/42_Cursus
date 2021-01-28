@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/28 16:28:10 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/28 21:18:00 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct	s_parse_info
 int				ft_printf(const char *str, ...);
 void			parse_info_renew(t_parse_info *p_info);
 int				reach_delim(const char *str, int i);
-int				handle_parse_info(t_parse_info *p_info);
-int				print_handler(t_parse_info *p_info, va_list *ap);
+int				handle_p_info(t_parse_info *p_info);
+int				print_handler(t_parse_info *p_info, va_list *ap, int *num);
 
 int				pf_parse(const char *s, t_parse_info *p_info, va_list *ap);
 int				parse_type(const char *s, t_parse_info *p_info);

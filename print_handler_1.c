@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/28 15:52:01 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/28 17:49:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ int		printer_type_c(t_parse_info *p_info, va_list *ap)
 	return (1);
 }
 
-// char	printer_type_s_helper(t_parse_info *p, va_list *ap, int *len)
-// {
-// 	char	*product;
-// 	char	*strarg;
-
-// 	strarg = va_arg(*ap, char *);
-// 	if (strarg = NULL)
-// 		strarg = "(null)";
-// 	if (p->flag & F_PRECISION && 0 <= p->prec && p->prec <= ft_strlen(strarg))
-// 		*len = p->prec;
-// 	else
-// 		*len = ft_strlen(strarg);
-// 	if ((product = ft_substr(strarg, 0, *len)) == NULL)
-// 		return (NULL);
-// 	free(strarg);		//doublefree의 위험이 있음. va_end()의 역할에 대해 자세히 알아볼 것.
-// 	return (product);
-// }
-
 int		printer_type_s(t_parse_info *p_info, va_list *ap)
 {
 	int		strlength;
@@ -76,22 +58,6 @@ int		printer_type_s(t_parse_info *p_info, va_list *ap)
 	free(product);
 	return (1);
 }
-
-// char	printer_type_p_helper(t_parse_info *p, va_list *a)
-// {
-// 	char	*ptr;
-// 	char	*newstr;
-
-// 	ptr = va_arg(*a, char *);
-// 	if (ptr == NULL)
-// 		ptr = 0;
-// 	if ((ptr = ft_numtox((long long)ptr)) == NULL)
-// 		return (NULL);
-// 	if ((newstr = ft_strjoin("0x", ptr)) == NULL)
-// 		return (NULL);
-// 	free(ptr);
-// 	return (newstr);
-// }
 
 int		printer_type_p(t_parse_info *p_info, va_list *ap)
 {
