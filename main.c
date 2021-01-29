@@ -4,6 +4,5 @@
 
 int		main()
 {
-	int	a = ft_printf("1");
 
 }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 13:32:48 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 15:57:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,9 @@ char			*make_subxud(t_parse_info *p, unsigned int num, int *digitlen);
 char			*xud_substr_maker(t_parse_info *p, unsigned int num, int *dig);
 
 void			free_all(void *a, void *b, void *c, void *d);
+
+
+
+void	debug_p_info(t_parse_info *p);
 
 #endif

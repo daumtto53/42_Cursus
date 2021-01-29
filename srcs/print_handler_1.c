@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 13:43:04 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 16:01:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ int		printer_type_c(t_parse_info *p_info, va_list *ap, int *len)
 	if (p_info->width <= 1)
 	{
 		ft_putchar_fd(c, 1);
-		return (1);
+		*len += 1;
 	}
 	else
 	{
-	str[0] = c;
+		str[0] = c;
 		if ((product = printer_width_helper(p_info, p_info->width - 1, str)) == NULL)
 			return (-1);
 		ft_putstr_fd(product, 1);
-		*len = ft_strlen(product);
+		*len += ft_strlen(product);
 		free(product);
-		return (1);
 	}
+	return (1);
 }
 
 int		printer_type_s(t_parse_info *p_info, va_list *ap, int *len)
@@ -53,13 +53,12 @@ int		printer_type_s(t_parse_info *p_info, va_list *ap, int *len)
 		strlength = ft_strlen(strarg);
 	if ((product = ft_substr(strarg, 0, strlength)) == NULL)
 		return (-1);
-	free(strarg);		//doublefree의 위험이 있음. va_end()의 역할에 대해 자세히 알아볼 것.
 	if (p_info->width > strlength)
 		if ((product = printer_width_helper(p_info, \
 				p_info->width - strlength, product)) == NULL)
 			return (-1);
 	ft_putstr_fd(product, 1);
-	*len = ft_strlen(product);
+	*len += ft_strlen(product);
 	free(product);
 	return (1);
 }
@@ -83,7 +82,7 @@ int		printer_type_p(t_parse_info *p_info, va_list *ap, int *len)
 			return (-1);
 	}
 	ft_putstr_fd(product, 1);
-	*len = ft_strlen(product);
+	*len += ft_strlen(product);
 	free(product);
 	return (1);
 }
@@ -92,7 +91,9 @@ int		printer_type_perc(t_parse_info *p_info, int *len)
 {
 	char	*product;
 
-	product = "%";
+	if ((product = (char *)calloc(2, 1)) == NULL)
+		return (-1);
+	product[0] = '%';
 	if (p_info->width > 1)
 	{
 		if ((product = printer_width_helper(p_info, p_info->width - 1, product)) == NULL)
@@ -106,7 +107,7 @@ int		printer_type_perc(t_parse_info *p_info, int *len)
 		}
 	}
 	ft_putstr_fd(product, 1);
-	*len = ft_strlen(product);
+	*len += ft_strlen(product);
 	free(product);
 	return (1);
 }

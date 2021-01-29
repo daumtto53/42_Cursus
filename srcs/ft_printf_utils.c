@@ -6,11 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:22:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 13:43:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 15:57:35 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+# include <stdio.h>
 
 void	free_all(void *a, void *b, void *c, void *d)
 {
@@ -41,4 +42,13 @@ char	*printer_width_helper(t_parse_info *p_info, int len, char *sub)
 		return (NULL);
 	free_all(front, back, NULL, NULL);
 	return (join);
+}
+
+void	debug_p_info(t_parse_info *p)
+{
+
+	printf("type : %c\n", p->type);
+	printf("width : %d\n", p->width);
+	printf("precision : %d\n", p->prec);
+	printf("flag : %d\n", p->flag);
 }

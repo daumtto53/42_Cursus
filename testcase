@@ -1,0 +1,78 @@
+
+0. 기본 testcase
+
+%c
+	printf("ret_val : %d\n", ft_printf("%c\t", '5'));
+	printf("ret_val : %d\n", ft_printf("%c\t", 'b'));
+	printf("ret_val : %d\n", ft_printf("%c\t", 'A'));
+	printf("ret_val : %d\n", ft_printf("%c%c\t", 'a' ,'5'));
+	printf("ret_val : %d\n", ft_printf("%c%c\t", 'b', '5'));
+
+	printf("ret_val : %d\n", ft_printf("%c\t%c", '\0', 'c'));
+	printf("ret_val : %d\n", printf("%c\t%c", '\0', 'c'));
+
+%s
+	printf("ret_val : %d\n", ft_printf("%s\t%s", "GROOT", "KROOT"));
+	printf("ret_val : %d\n", ft_printf("%s\t%s", "GROOT", ""))
+
+%p
+	int	a, b;
+	printf("ret_val : %d\n", ft_printf("%p\t%p", &a, &b));
+	printf("ret_val : %d\n", printf("%p\t%p", &a, &b))
+
+%%
+	printf("ret_val : %d\n", ft_printf("%%\t%%"));
+	printf("ret_val : %d\n", printf("%%\t%%"));
+
+%d
+	printf("ret_val : %d\n", ft_printf("%d\t", -1));
+	printf("ret_val : %d\n", ft_printf("%d\t", 0));
+	printf("ret_val : %d\n", ft_printf("%d\t", -123));
+%i
+	printf("ret_val : %d\n", ft_printf("%i\t", 1));
+	printf("ret_val : %d\n", ft_printf("%i\t", 0));
+	printf("ret_val : %d\n", ft_printf("%i\t", -123));
+%u
+	printf("ret_val : %d\n", printf("%u\t", -1));
+
+%x
+	printf("ret_val : %d\n", ft_printf("%x\t%x", -1, 1024));
+	printf("ret_val : %d\n", printf("%x\t%x", -1, 1024));
+
+
+1. WIDTH CHECKING
+
+%c
+
+%s
+
+%p
+
+%%
+
+%d
+
+%i
+
+%u
+
+%x
+
+
+20. ERROR CHECKING
+
+%c
+
+%s
+
+%p
+
+%%
+
+%d
+
+%i
+
+%u
+
+%x

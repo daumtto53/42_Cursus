@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 13:43:19 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 15:06:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		printer_type_xud(t_parse_info *p_info, va_list *ap, int *len)
 	if (prec_num_zero_handler(p_info, num, product) == 0)
 		return (0);
 	ft_putstr_fd(product, 1);
-	*len = ft_strlen(product);
+	*len += ft_strlen(product);
 	free(product);
 	return (1);
 }

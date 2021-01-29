@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 13:43:11 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 16:36:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ int		print_handler(t_parse_info *p_info, va_list *ap, int *len)
 int		handle_p_info(t_parse_info *p_info)
 {
 	char	t = p_info->type;
+	int		f;
 
+	f = p_info->flag;
 	if (p_info->type == 'i')
 		p_info->type = 'd';
 	if (!(t == 'p' || t == 's' || t == 'c' || t == 'd' || t == 'u' || \
-			t == 'i' || t == 'x' || t == 'X'))
+			t == 'i' || t == 'x' || t == 'X' || t == '%'))
 		return (-1);
 	if (p_info->flag & F_ZERO && (t == 'p' || t == 's' || t == 'c'))
 		return (-1);
@@ -62,7 +64,7 @@ int		handle_p_info(t_parse_info *p_info)
 			!(p_info->flag & F_ONLY_DOT))
 		return (-1);
 	if ((t == 'u' || t == 'd' || t == 'u' || t == 'x' || t == 'X' || \
-			t == 'i') && F_ZERO && F_PRECISION)
+			t == 'i') && (f & F_ZERO) && (f &F_PRECISION))
 		p_info->flag &= (~F_ZERO);
 	if (p_info->prec < 0 && p_info->flag & F_ZERO)
 		p_info->flag &= (~F_PRECISION);
@@ -100,10 +102,12 @@ int		ft_printf(const char *str, ...)
 		len += (j - i);
 		if (str[j] == '\0')
 			return (len);
-		j += pf_parse(str + j + 1, &p_info, &ap);
+		j += (pf_parse(str + j + 1, &p_info, &ap) + 1);
+													// debug_p_info(&p_info);
 		if (handle_p_info(&p_info) < 0 || print_handler(&p_info, &ap, &len) < 0)
 			return (-1);
 		i = j;
 	}
+	va_end(ap);
 	return (len);
 }
