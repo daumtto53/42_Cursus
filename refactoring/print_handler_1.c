@@ -6,14 +6,14 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 00:28:42 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 00:40:27 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../includes/ft_printf.h"
 #include "ft_printf.h"
 
-int		printer_type_c_2(t_info *info, va_list *ap, int *len)
+int		printer_type_c(t_info *info, va_list *ap, int *len)
 {
 	unsigned char	c;
 	int				blank_num;
@@ -39,7 +39,7 @@ int		printer_type_c_2(t_info *info, va_list *ap, int *len)
 	return (1);
 }
 
-int		printer_type_s_2(t_info *info, va_list *ap, int *len)
+int		printer_type_s(t_info *info, va_list *ap, int *len)
 {
 	int		strlength;
 	int		blank_num;
@@ -68,7 +68,7 @@ int		printer_type_s_2(t_info *info, va_list *ap, int *len)
 	return (1);
 }
 
-int		printer_type_p_2(t_info *info, va_list *ap, int *len)
+int		printer_type_p(t_info *info, va_list *ap, int *len)
 {
 	char	*p;
 	int		blank_num;
@@ -98,11 +98,27 @@ int		printer_type_p_2(t_info *info, va_list *ap, int *len)
 
 int		printer_type_perc(t_info *info, int *len)
 {
-	char	product;
+	int		blank_num;
 	char	fill;
 
 	fill = ((info->flag & F_ZERO) ? '0' : ' ');
-	product = '%';
 
-
+	blank_num = info->width;
+	if (info->flag & F_LJUST)
+	{
+		ft_putchar_fd('%', 1);
+		while (--blank_num)
+			ft_putchar_fd(fill, 1);
+	}
+	else
+	{
+		while (--blank_num)
+			ft_putchar_fd(fill, 1);
+		ft_putchar_fd('%', 1);
+	}
+	if (info->width > 1)
+		*len += info->width;
+	else
+		*len += 1;
+	return (1);
 }
