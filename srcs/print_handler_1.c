@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 12:55:52 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 13:43:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		printer_type_c(t_parse_info *p_info, va_list *ap, int *len)
 {
 	int				a;
 	unsigned char	c;
-	char			*s;
-	char			*product[1];
+	char	str[1];
+	char	*product;
 
 	a = va_arg(*ap, int);
 	c = (unsigned char)a;
@@ -28,8 +28,8 @@ int		printer_type_c(t_parse_info *p_info, va_list *ap, int *len)
 	}
 	else
 	{
-		product[0] = c;
-		if ((printer_width_helper(p_info, p_info->width - 1, product)) == NULL)
+	str[0] = c;
+		if ((product = printer_width_helper(p_info, p_info->width - 1, str)) == NULL)
 			return (-1);
 		ft_putstr_fd(product, 1);
 		*len = ft_strlen(product);
@@ -45,9 +45,9 @@ int		printer_type_s(t_parse_info *p_info, va_list *ap, int *len)
 	char	*product;
 
 	strarg = va_arg(*ap, char *);
-	if (strarg = NULL)
+	if (strarg == NULL)
 		strarg = "(null)";
-	if (p_info->flag & F_PRECISION && 0 <= p_info->prec && p_info->prec <= ft_strlen(strarg))
+	if (p_info->flag & F_PRECISION && 0 <= p_info->prec && p_info->prec <= (int)ft_strlen(strarg))
 		strlength = p_info->prec;
 	else
 		strlength = ft_strlen(strarg);
@@ -68,7 +68,6 @@ int		printer_type_p(t_parse_info *p_info, va_list *ap, int *len)
 {
 	char	*product;
 	char	*ptrarg;
-	char	tmp;
 
 	ptrarg = va_arg(*ap, char *);
 	if (ptrarg == NULL)
@@ -78,7 +77,7 @@ int		printer_type_p(t_parse_info *p_info, va_list *ap, int *len)
 	if ((product = ft_strjoin("0x", ptrarg)) == NULL)
 		return (-1);
 	free(ptrarg);
-	if (p_info->width > ft_strlen(product))
+	if (p_info->width > (int)ft_strlen(product))
 	{
 		if ((product = printer_width_helper(p_info, p_info->width - ft_strlen(product), product)) == NULL)
 			return (-1);
@@ -89,12 +88,11 @@ int		printer_type_p(t_parse_info *p_info, va_list *ap, int *len)
 	return (1);
 }
 
-int		printer_type_perc(t_parse_info *p_info, va_list *ap, int *len)
+int		printer_type_perc(t_parse_info *p_info, int *len)
 {
-	char	*typearg;
 	char	*product;
 
-	typearg = "%";
+	product = "%";
 	if (p_info->width > 1)
 	{
 		if ((product = printer_width_helper(p_info, p_info->width - 1, product)) == NULL)

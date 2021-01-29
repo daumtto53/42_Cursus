@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 12:55:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 13:43:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ int		printer_type_xud(t_parse_info *p_info, va_list *ap, int *len)
 	int		num;
 	char	*product;
 	int		sign;
-	int		zero_num;
 
 	num = va_arg(*ap, int);
 	sign = (num < 0) ? 1 : 0;
 	if ((product = xud_substr_maker(p_info, num, &digitlen)) == NULL)
 		return (-1);
-	if (p_info->width > ft_strlen(product))
+	if (p_info->width > (int)ft_strlen(product))
 	{
 		if ((product = printer_width_helper(p_info, p_info->width - ft_strlen(product), product)) == NULL)
 			return (-1);
@@ -72,7 +71,7 @@ char	*make_subxud(t_parse_info *p, unsigned int num, int *digitlen)
 	if (original == NULL)
 		return (NULL);
 	*digitlen = ft_strlen(original);
-	if (p->prec > digitlen && p->flag & F_PRECISION)
+	if (p->prec > *digitlen && p->flag & F_PRECISION)
 	{
 		if ((add = (char *)ft_calloc(p->prec - *digitlen + 1, 1)) == NULL)
 			return (NULL);

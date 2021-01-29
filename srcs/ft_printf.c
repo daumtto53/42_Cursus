@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 12:56:09 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 13:43:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		print_handler(t_parse_info *p_info, va_list *ap, int *len)
 	else if (t == 'u')
 		err = printer_type_xud(p_info, ap, len);
 	else if (t == '%')
-		err = printer_type_perc(p_info, ap, len);
+		err = printer_type_perc(p_info, len);
 	else
 		return (-1);
 	return (err);
@@ -68,6 +68,7 @@ int		handle_p_info(t_parse_info *p_info)
 		p_info->flag &= (~F_PRECISION);
 	if (p_info->prec >= 0 && p_info->flag & F_ZERO)
 		p_info->flag &= (~F_ZERO);
+	return (1);
 	//2147483647, 46은 안뽑아주는걸 처리해야한다.
 }
 

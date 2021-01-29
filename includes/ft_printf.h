@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 12:56:15 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 13:32:48 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char			*printer_width_helper(t_parse_info *info, int len, char *sub);
 int				printer_type_c(t_parse_info *p_info, va_list *ap, int *l);
 int				printer_type_s(t_parse_info *p_info, va_list *ap, int *l);
 int				printer_type_p(t_parse_info *p_info, va_list *ap, int *l);
-int				printer_type_perc(t_parse_info *p_info, va_list *ap, int *l);
+int				printer_type_perc(t_parse_info *p_info, int *l);
 int				printer_type_xud(t_parse_info *p_info, va_list *ap, int *l);
 
 char			*make_subxud(t_parse_info *p, unsigned int num, int *digitlen);
