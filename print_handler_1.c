@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/28 17:49:25 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/28 22:02:57 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		printer_type_c(t_parse_info *p_info, va_list *ap)
+int		printer_type_c(t_parse_info *p_info, va_list *ap, int *len)
 {
 	int				a;
 	unsigned char	c;
@@ -22,19 +22,23 @@ int		printer_type_c(t_parse_info *p_info, va_list *ap)
 	a = va_arg(*ap, int);
 	c = (unsigned char)a;
 	if (p_info->width <= 1)
+	{
 		ft_putchar_fd(c, 1);
+		return (1);
+	}
 	else
 	{
 		product[0] = c;
 		if ((printer_width_helper(p_info, p_info->width - 1, product)) == NULL)
 			return (-1);
 		ft_putstr_fd(product, 1);
+		*len = ft_strlen(product);
 		free(product);
+		return (1);
 	}
-	return (1);
 }
 
-int		printer_type_s(t_parse_info *p_info, va_list *ap)
+int		printer_type_s(t_parse_info *p_info, va_list *ap, int *len)
 {
 	int		strlength;
 	char	*strarg;
@@ -55,11 +59,12 @@ int		printer_type_s(t_parse_info *p_info, va_list *ap)
 				p_info->width - strlength, product)) == NULL)
 			return (-1);
 	ft_putstr_fd(product, 1);
+	*len = ft_strlen(product);
 	free(product);
 	return (1);
 }
 
-int		printer_type_p(t_parse_info *p_info, va_list *ap)
+int		printer_type_p(t_parse_info *p_info, va_list *ap, int *len)
 {
 	char	*product;
 	char	*ptrarg;
@@ -79,11 +84,12 @@ int		printer_type_p(t_parse_info *p_info, va_list *ap)
 			return (-1);
 	}
 	ft_putstr_fd(product, 1);
+	*len = ft_strlen(product);
 	free(product);
 	return (1);
 }
 
-int		printer_type_perc(t_parse_info *p_info, va_list *ap)
+int		printer_type_perc(t_parse_info *p_info, va_list *ap, int *len)
 {
 	char	*typearg;
 	char	*product;
@@ -102,6 +108,7 @@ int		printer_type_perc(t_parse_info *p_info, va_list *ap)
 		}
 	}
 	ft_putstr_fd(product, 1);
+	*len = ft_strlen(product);
 	free(product);
 	return (1);
 }

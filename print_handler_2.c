@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/28 21:07:37 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/28 22:01:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		prec_num_zero_handler(t_parse_info *p_info, int num, char *prod)
 	return (1);
 }
 
-int		printer_type_xud(t_parse_info *p_info, va_list *ap)
+int		printer_type_xud(t_parse_info *p_info, va_list *ap, int *len)
 {
 	int		digitlen;
 	int		num;
@@ -52,6 +52,7 @@ int		printer_type_xud(t_parse_info *p_info, va_list *ap)
 	if (prec_num_zero_handler(p_info, num, product) == 0)
 		return (0);
 	ft_putstr_fd(product, 1);
+	*len = ft_strlen(product);
 	free(product);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/28 21:19:42 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/28 22:00:23 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,21 @@ int		print_handler(t_parse_info *p_info, va_list *ap, int *len)
 
 	t = p_info->type;
 	if (t == 'c')
-		err = printer_type_c(p_info, ap);
+		err = printer_type_c(p_info, ap, len);
 	else if (t == 's')
-		err = printer_type_s(p_info, ap);
+		err = printer_type_s(p_info, ap, len);
 	else if (t == 'p')
-		err = printer_type_p(p_info, ap);
+		err = printer_type_p(p_info, ap, len);
 	else if (t == 'x' || t == 'X')
-		err = printer_type_xud(p_info, ap);
+		err = printer_type_xud(p_info, ap, len);
 	else if (t == 'd' || t == 'i')
-		err = printer_type_xud(p_info, ap);
+		err = printer_type_xud(p_info, ap, len);
 	else if (t == 'u')
-		err = printer_type_xud(p_info, ap);
+		err = printer_type_xud(p_info, ap, len);
 	else if (t == '%')
-		err = printer_type_perc(p_info, ap);
+		err = printer_type_perc(p_info, ap, len);
 	else
 		return (-1);
-	*len += err;
 	return (err);
 }
 
