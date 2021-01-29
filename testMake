@@ -1,0 +1,25 @@
+NAME = libftprintf.a
+FLAGS = -Wall -Wextra -Werror
+SRC = ft_printf.c
+OBJ = $(SRC:.c=.o)
+INC_LINK = -I./includes			// -I옵션은 무엇이며, L옵션 l옵션과 무엇이 다른가, 헤더파일의 위치를 지정하는 옵션.
+LIBFT = -L./Libft -libft		//이건 또 뭔데
+
+all : $(NAME)
+$(NAME) : $(OBJ) libft			//오브젝트 파일을 만들면서, libft를 추가로 컴파일한다.
+	cp Libft/libft.a ./$(NAME)	//굳이 cp를 하는 이유는...?
+	ar rsc $(NAME) $(OBJ)
+%.o: %.c						//컴파일의 기본 옵션이라 건드리지 않는게 좋다..
+	gcc $(FLAGS) $(INC_LINK) -c $< -o $(<:.c=.o)
+
+# libft compile
+libft :
+	@$(MAKE) -C ./Libft all
+clean :
+	@$(MAKE) -C ./Libft clean
+	@rm -rf $(OBJ)
+fclean : clean
+	@$(MAKE) -C ./Libft fclean
+	@rm -rf $(NAME)
+re : fclean all
+.PHONY: all clean fclean re libft
