@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 16:36:26 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 19:58:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	parse_info_renew(t_parse_info *p_info)
+void	parse_info_renew(t_info *p_info)
 {
 	p_info->flag = 0;
 	p_info->prec = 0;
@@ -20,7 +20,7 @@ void	parse_info_renew(t_parse_info *p_info)
 	p_info->width = 0;
 }
 
-int		print_handler(t_parse_info *p_info, va_list *ap, int *len)
+int		print_handler(t_info *p_info, va_list *ap, int *len)
 {
 	char	t;
 	int		err;
@@ -45,7 +45,7 @@ int		print_handler(t_parse_info *p_info, va_list *ap, int *len)
 	return (err);
 }
 
-int		handle_p_info(t_parse_info *p_info)
+int		handle_p_info(t_info *p_info)
 {
 	char	t = p_info->type;
 	int		f;
@@ -86,7 +86,7 @@ int		ft_printf(const char *str, ...)
 	va_list 		ap;
 	int				i;
 	int				j;
-	t_parse_info	p_info;
+	t_info	p_info;
 	int				len;
 
 	len  = 0;

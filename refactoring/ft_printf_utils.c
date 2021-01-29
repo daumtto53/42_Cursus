@@ -6,12 +6,19 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:22:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 19:58:22 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 22:04:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 # include <stdio.h>
+
+int		is_valid_type(char c)
+{
+	return (c == 'c' || c == 's' || c == 'p' || c == '%' || \
+				c == 'd' || c == 'i' || c == 'u' || \
+				c == 'X' || c == 'x');
+}
 
 void	free_all(void *a, void *b, void *c, void *d)
 {

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 21:47:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 21:59:45 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/29 17:14:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int		ft_strfill(char *a, int start, int end, char c)
 {
 	int		i;
-	int		len;
 
-	i = 0;
-	len = end - start;
-	while (i <= len)
+	i = start;
+	while (i <= end)
 	{
-		a[start + i] = c;
+		a[i] = c;
 		i++;
 	}
 	return (i);
