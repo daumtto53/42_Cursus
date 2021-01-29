@@ -1,52 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numtox.c                                        :+:      :+:    :+:   */
+/*   ft_utox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 11:16:52 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 01:13:58 by mchun            ###   ########.fr       */
+/*   Created: 2021/01/30 01:10:40 by mchun             #+#    #+#             */
+/*   Updated: 2021/01/30 01:25:16 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	numtox_initializer(int *sn, int *xd, long long *temp, long long *num)
+char	*ft_utox(unsigned int num)
 {
-	*xd = 0;
-	*sn = 0;
-	if (*num < 0)
-	{
-		*sn = 1;
-		*num *= -1;
-	}
-	*temp = *num;
-}
-
-//change this/
-char	*ft_numtox(long long int num)
-{
-	int				sign;
 	int				xdigit;
+	unsigned int	temp;
 	char			*xchar;
-	long long int	temp;
 
+	xdigit = 0;
 	if (num == 0)
-		return ("0");
-	numtox_initializer(&sign, &xdigit, &temp, &num);
+		xdigit = 1;
+	temp = num;
 	while (temp)
 	{
 		xdigit++;
 		temp /= 16;
 	}
-	if ((xchar = (char *)ft_calloc(xdigit + sign + 1, sizeof(char))) == NULL)
+	if ((xchar = (char *)ft_calloc(xdigit + 1, 1)) == NULL)
 		return (NULL);
-	xchar[xdigit + sign] = '\0';
-	xdigit = xdigit + sign;
-	if (sign == 1)
-		xchar[0] = '-';
-	while (num)
+	xchar[xdigit] = '\0';
+	while (xdigit > 0)
 	{
 		xchar[--xdigit] = "0123456789abcdef"[num % 16];
 		num /= 16;
