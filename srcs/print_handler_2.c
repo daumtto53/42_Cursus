@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 16:41:16 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 18:24:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*xud_substr_maker(t_info *info, int num)
 	char	*str;
 	int		i;
 
+	if (info->prec == 0 && num == 0 && info->flag & F_PREC)
+		return ("");
 	if (info->type == 'd' || info->type == 'i')
 	{
 		num = (num < 0) ? num * -1 : num;
@@ -52,7 +54,7 @@ int		printer_type_xud(t_info *i, va_list *ap, int *len)
 		sign = 1;
 	i->prec = (i->prec > (int)ft_strlen(str)) ? i->prec - (int)ft_strlen(str) : 0;
 	blank_num = i->width - (sign + (int)ft_strlen(str) + i->prec);
-	if (i->flag & F_ZERO && i->width > (sign + (int)ft_strlen(str) + i->prec))
+	if (i->flag & F_ZERO && i->width > (sign + (int)ft_strlen(str) + i->prec) && num < 0)
 	{
 		ft_putchar_fd('-', 1);
 		sign = 0;
@@ -62,7 +64,6 @@ int		printer_type_xud(t_info *i, va_list *ap, int *len)
 	else
 		*len += (sign + (int)ft_strlen(str) + i->prec);
 	printer_type_xud2(i, str, sign, blank_num);
-	free(str);
 	return (1);
 }
 
@@ -70,8 +71,8 @@ void	printer_type_xud2(t_info *info, char *str, int sign, int blank_num)
 {
 	char	fill;
 
-	fill = '-';
-	if (info->flag == F_ZERO)
+	fill = ' ';
+	if (info->flag & F_ZERO)
 		fill = '0';
 	if (info->flag & F_LJUST)
 	{

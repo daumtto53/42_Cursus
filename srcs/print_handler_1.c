@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 16:33:05 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 17:10:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int		printer_type_c(t_info *info, va_list *ap, int *len)
 	if (info->flag & F_LJUST)
 	{
 		ft_putchar_fd(c, 1);
-		while (--blank_num >= 0)
+		while (--blank_num > 0)
 			ft_putchar_fd(' ', 1);
 	}
 	else
 	{
-		while (--blank_num >= 0)
+		while (--blank_num > 0)
 			ft_putchar_fd(' ', 1);
 		ft_putchar_fd(c, 1);
 	}
