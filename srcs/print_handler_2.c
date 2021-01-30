@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 18:24:43 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 19:19:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*xud_substr_maker(t_info *info, int num)
 	char	*str;
 	int		i;
 
+	str = NULL;
 	if (info->prec == 0 && num == 0 && info->flag & F_PREC)
 		return ("");
 	if (info->type == 'd' || info->type == 'i')
