@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 19:19:54 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 19:47:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 # include <stdio.h>
-char	*xud_substr_maker(t_info *info, int num)
+char	*xud_substr_maker(t_info *info, long num)
 {
 	char	*str;
 	int		i;
@@ -42,7 +42,7 @@ char	*xud_substr_maker(t_info *info, int num)
 
 int		printer_type_xud(t_info *i, va_list *ap, int *len)
 {
-	int		num;
+	long	num;
 	int		blank_num;
 	char	*str;
 	int		sign;
