@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 00:56:03 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 02:01:31 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		printer_type_xud(t_info *i, va_list *ap, int *len)
 		sign = 1;
 	i->prec = (i->prec > (int)ft_strlen(str)) ? i->prec - (int)ft_strlen(str) : 0;
 	blank_num = i->width - (sign + (int)ft_strlen(str) + i->prec);
+	printf("%d\n", i->flag & F_ZERO);
 	if (i->flag & F_ZERO && i->width > (sign + (int)ft_strlen(str) + i->prec) && num < 0)
 	{
 		ft_putchar_fd('-', 1);
