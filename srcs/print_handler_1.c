@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 16:00:22 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:33:05 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int		printer_type_c(t_info *info, va_list *ap, int *len)
 	if (info->flag & F_LJUST)
 	{
 		ft_putchar_fd(c, 1);
-		while (--blank_num)
+		while (--blank_num >= 0)
 			ft_putchar_fd(' ', 1);
 	}
 	else
 	{
-		while (--blank_num)
+		while (--blank_num >= 0)
 			ft_putchar_fd(' ', 1);
 		ft_putchar_fd(c, 1);
 	}
@@ -48,18 +48,18 @@ int		printer_type_s(t_info *info, va_list *ap, int *len)
 	if (str == NULL)
 		str = "(null)";
 	strlength = ft_strlen(str);
-	if (0 <= info->prec && info->prec <= ft_strlen(str) && info->flag & F_PREC)
+	if (0 <= info->prec && info->prec <= (int)ft_strlen(str) && info->flag & F_PREC)
 		strlength = info->prec;
 	blank_num = info->width - strlength;
 	if (info->flag & F_LJUST)
 	{
 		write(1, str, strlength);
-		while (blank_num--)
+		while (blank_num-- > 0)
 			ft_putchar_fd(' ', 1);
 	}
 	else
 	{
-		while (blank_num--)
+		while (blank_num-- > 0)
 			ft_putchar_fd(' ', 1);
 		write(1, str, strlength);
 	}
@@ -81,17 +81,17 @@ int		printer_type_p(t_info *info, va_list *ap, int *len)
 	{
 		write(1, "0x", 2);
 		write(1, p, ft_strlen(p));
-		while (blank_num--)
+		while (blank_num-- > 0)
 			ft_putchar_fd(' ', 1);
 	}
 	else
 	{
-		while (blank_num--)
+		while (blank_num-- > 0)
 			ft_putchar_fd(' ', 1);
 		write(1, "0x", 2);
 		write(1, p, ft_strlen(p));
 	}
-	*len += ((info->width > ft_strlen(p) + 2) ? info->width : ft_strlen(p) + 2);
+	*len += ((info->width > (int)ft_strlen(p) + 2) ? info->width : (int)ft_strlen(p) + 2);
 	return (1);
 }
 
@@ -105,12 +105,12 @@ int		printer_type_perc(t_info *info, int *len)
 	if (info->flag & F_LJUST)
 	{
 		ft_putchar_fd('%', 1);
-		while (--blank_num)
+		while (--blank_num > 0)
 			ft_putchar_fd(fill, 1);
 	}
 	else
 	{
-		while (--blank_num)
+		while (--blank_num >= 0)
 			ft_putchar_fd(fill, 1);
 		ft_putchar_fd('%', 1);
 	}

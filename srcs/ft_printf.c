@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 16:00:05 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:55:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		print_handler(t_info *info, va_list *ap, int *len)
 int		handle_p_info(t_info *info)
 {
 	char	t;
-	int		f;
 
 	t = info->type;
 	if (!(t == 'p' || t == 's' || t == 'c' || t == 'd' || t == 'u' || \
@@ -58,10 +57,10 @@ int		handle_p_info(t_info *info)
 		return (-1);
 	if (info->flag & F_ZERO && info->flag & F_LJUST && t != '%')
 		return (-1);
-	if ((t == 'c' || t == 'p') && !(info->flag & F_ONLY_DOT))
-		return (-1);
+	// if ((t == 'c' || t == 'p') && !(info->flag & F_ONLY_DOT))
+		// return (-1);
 	if ((t == 'u' || t == 'd' || t == 'x' || t == 'X' || t == 'i') && \
-			(f & F_ZERO) && (f & F_PREC))
+			(info->flag & F_ZERO) && (info->flag & F_PREC))
 		info->flag &= (~F_ZERO);
 	if (info->prec < 0 && info->flag & F_ZERO)
 		info->flag &= (~F_PREC);
@@ -101,11 +100,11 @@ int		ft_printf(const char *str, ...)
 	while (str[i] != '\0')
 	{
 		parse_info_renew(&info);
-		if (j = print_until_delim(str, i, &len) < 0)
+		if ((j = print_until_delim(str, i, &len)) < 0)
 			return (-1);
 		if (str[j] == '\0')
 			return (len);
-		j += (pf_parse(str + j + 1, &info, &ap));
+		j += (pf_parse(str + j + 1, &info, &ap) + 1);
 		if (handle_p_info(&info) < 0 || print_handler(&info, &ap, &len) < 0)
 			return (-1);
 		i = j;

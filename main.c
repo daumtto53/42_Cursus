@@ -4,11 +4,9 @@
 
 int		main()
 {
-	int		n;
-	unsigned int	u;
-
-	u = -1;
-	n = -1;
-	printf("%d\n", (n < 0));
-	printf("%d\n", (u < 0));
+	printf("ret_val : %d\n", ft_printf("%c\t", '5'));
+	printf("ret_val : %d\n", ft_printf("%c\t", 'b'));
+	printf("ret_val : %d\n", ft_printf("%c\t", 'A'));
+	printf("ret_val : %d\n", ft_printf("%c%c\t", 'a' ,'5'));
+	printf("ret_val : %d\n", ft_printf("%c%c\t", 'b', '5'));
 }

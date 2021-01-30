@@ -45,7 +45,9 @@ PART_2 =	ft_strdup.c \
 CUSTOM =	ft_isspace.c \
 			ft_numtox.c \
 			ft_digitlen.c \
-			ft_strfill.c
+			ft_strfill.c \
+			ft_utox.c \
+			ft_utoa.c
 
 BONUS =	ft_lstnew.c \
 		ft_lstadd_front.c \

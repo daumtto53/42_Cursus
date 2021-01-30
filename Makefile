@@ -10,7 +10,6 @@ OBJSDIR = ./srcs/
 AR = ar -rcs
 
 SRCS =	ft_printf.c \
-		ft_printf_utils.c \
 		pf_parse.c \
 		print_handler_1.c \
 		print_handler_2.c
