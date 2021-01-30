@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 00:54:52 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 00:56:18 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int		handle_p_info(t_info *info)
 		info->flag &= (~F_ZERO);
 	if (info->prec < 0 && info->flag & F_ZERO)
 		info->flag &= (~F_PREC);
-	if (info->prec >= 0 && info->flag & F_ZERO)
-		info->flag &= (~F_ZERO);
+	// if (info->prec >= 0 && info->flag & F_ZERO)
+	// 	info->flag &= (~F_ZERO);
 	if (info->width >= 2147483646 || info->prec >= 2147483646)
 		return (-1);
 	return (1);

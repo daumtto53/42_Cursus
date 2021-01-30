@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 00:52:36 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 00:56:03 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		printer_type_xud(t_info *i, va_list *ap, int *len)
 		sign = 1;
 	i->prec = (i->prec > (int)ft_strlen(str)) ? i->prec - (int)ft_strlen(str) : 0;
 	blank_num = i->width - (sign + (int)ft_strlen(str) + i->prec);
-	printf("zero : %d sign: %d\tstr : %s\twidth: %d\tprec : %d\t blank_num : %d\n", i->flag & F_ZERO,sign, str, i->width, i->prec,blank_num);
 	if (i->flag & F_ZERO && i->width > (sign + (int)ft_strlen(str) + i->prec) && num < 0)
 	{
 		ft_putchar_fd('-', 1);
@@ -65,7 +64,6 @@ int		printer_type_xud(t_info *i, va_list *ap, int *len)
 		*len += i->width;
 	else
 		*len += (sign + (int)ft_strlen(str) + i->prec);
-	printf("zero : %d sign: %d\tstr : %s\twidth: %d\tprec : %d\t blank_num : %d\n", i->flag & F_ZERO,sign, str, i->width, i->prec,blank_num);
 	printer_type_xud2(i, str, sign, blank_num);
 	return (1);
 }
