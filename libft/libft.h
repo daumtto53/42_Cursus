@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 23:53:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 14:27:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 00:29:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int					ft_strfill(char *a, int start, int end, char c);
 char				*ft_numtox(long long int num);
 char				*ft_utoa(unsigned int n);
 char				*ft_utox(unsigned int num);
+char				*ft_ltoa(long n);
 
 
 

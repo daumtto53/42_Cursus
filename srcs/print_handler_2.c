@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 20:12:20 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 00:32:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char	*xud_substr_maker(t_info *info, long num)
 		return ("");
 	if (info->type == 'd' || info->type == 'i')
 	{
-		num = (num < 0) ? num * -1 : num;
-		str = ft_itoa(num);
+		num = (num < 0) ? (num * -1) : (num);
+		str = ft_ltoa((long)num);
 	}
 	else if (info->type == 'x' || info->type == 'X')
 		str = ft_utox(num);
@@ -42,20 +42,20 @@ char	*xud_substr_maker(t_info *info, long num)
 
 int		printer_type_xud(t_info *i, va_list *ap, int *len)
 {
-	long	num;
-	int		blank_num;
-	char	*str;
-	int		sign;
+	long		num;
+	int			blank_num;
+	char		*str;
+	int			sign;
 
 	sign = 0;
-	num = va_arg(*ap, long);
+	num = va_arg(*ap, int);
 	if ((str = xud_substr_maker(i, num)) == NULL)
 		return (-1);
-	if ((i->type == 'd' || i->type == 'i') && num < 0)
+	if ((i->type == 'd' || i->type == 'i') && (int)num < 0)
 		sign = 1;
 	i->prec = (i->prec > (int)ft_strlen(str)) ? i->prec - (int)ft_strlen(str) : 0;
 	blank_num = i->width - (sign + (int)ft_strlen(str) + i->prec);
-	if (i->flag & F_ZERO && i->width > (sign + (int)ft_strlen(str) + i->prec) && num < 0)
+	if (i->flag & F_ZERO && i->width > (sign + (int)ft_strlen(str) + i->prec) && (int)num < 0)
 	{
 		ft_putchar_fd('-', 1);
 		sign = 0;

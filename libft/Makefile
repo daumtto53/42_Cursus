@@ -47,7 +47,8 @@ CUSTOM =	ft_isspace.c \
 			ft_digitlen.c \
 			ft_strfill.c \
 			ft_utox.c \
-			ft_utoa.c
+			ft_utoa.c \
+			ft_ltoa.c
 
 BONUS =	ft_lstnew.c \
 		ft_lstadd_front.c \
