@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 16:00:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 22:14:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		parse_width(const char *s, t_info *info, va_list *ap)
 		if (info->width < 0)
 		{
 			info->flag |= F_LJUST;
+			info->flag &= (~F_ZERO);
 			info->width *= -1;
 		}
 		info->flag |= F_WIDTH;
