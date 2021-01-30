@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 15:48:40 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 19:48:49 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				printer_type_s(t_info *info, va_list *ap, int *l);
 int				printer_type_p(t_info *info, va_list *ap, int *l);
 int				printer_type_perc(t_info *info, int *l);
 
-char			*xud_substr_maker(t_info *info, int num);
+char			*xud_substr_maker(t_info *info, long num);
 int				printer_type_xud(t_info *info, va_list *ap, int *l);
 void			printer_type_xud2(t_info *info, char *str, int sign, int b_num);
 
