@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 02:05:38 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 02:10:05 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		parse_precision(const char *s, t_info *info, va_list *ap)
 	i = 0;
 	if (s[i] == '.')
 	{
-		i++;
 		info->flag |= F_PREC;
+		i++;
 		if (s[i] == 'c' || s[i] == 's' || s[i] == 'i' || s[i] == 'd' || \
 				s[i] == 'u' || s[i] == 'X' || s[i] == 'x' || s[i] == 'p' || \
 					s[i] == '%')
@@ -40,8 +40,6 @@ int		parse_precision(const char *s, t_info *info, va_list *ap)
 		else if (s[i] == '*')
 		{
 			info->prec = va_arg(*ap, int);
-			if (info->prec < 0)
-				info->flag &= (~F_PREC);
 			i++;
 		}
 		else if (ft_isdigit(s[i]))
