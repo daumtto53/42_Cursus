@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 19:47:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 20:12:20 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		printer_type_xud(t_info *i, va_list *ap, int *len)
 	int		sign;
 
 	sign = 0;
-	num = va_arg(*ap, int);
+	num = va_arg(*ap, long);
 	if ((str = xud_substr_maker(i, num)) == NULL)
 		return (-1);
 	if ((i->type == 'd' || i->type == 'i') && num < 0)
