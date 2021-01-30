@@ -6,12 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 22:34:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:00:05 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../includes/ft_printf.h"
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 void	parse_info_renew(t_info *info)
 {
@@ -62,7 +61,7 @@ int		handle_p_info(t_info *info)
 	if ((t == 'c' || t == 'p') && !(info->flag & F_ONLY_DOT))
 		return (-1);
 	if ((t == 'u' || t == 'd' || t == 'x' || t == 'X' || t == 'i') && \
-			(f & F_ZERO) && (f &F_PREC))
+			(f & F_ZERO) && (f & F_PREC))
 		info->flag &= (~F_ZERO);
 	if (info->prec < 0 && info->flag & F_ZERO)
 		info->flag &= (~F_PREC);
@@ -88,7 +87,7 @@ int		print_until_delim(const char *str, int i, int *len)
 
 int		ft_printf(const char *str, ...)
 {
-	va_list 		ap;
+	va_list			ap;
 	t_info			info;
 	int				i;
 	int				j;

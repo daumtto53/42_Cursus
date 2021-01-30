@@ -6,12 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 00:40:27 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:00:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../includes/ft_printf.h"
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int		printer_type_c(t_info *info, va_list *ap, int *len)
 {
@@ -102,7 +101,6 @@ int		printer_type_perc(t_info *info, int *len)
 	char	fill;
 
 	fill = ((info->flag & F_ZERO) ? '0' : ' ');
-
 	blank_num = info->width;
 	if (info->flag & F_LJUST)
 	{

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 22:34:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 15:48:40 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,15 @@ int				parse_precision(const char *s, t_info *info, va_list *ap);
 int				parse_width(const char *s, t_info *info, va_list *ap);
 int				parse_flag(const char *s, t_info *info);
 
-char			*printer_width_helper(t_info *info, int len, char *sub);
-
 int				printer_type_c(t_info *info, va_list *ap, int *l);
 int				printer_type_s(t_info *info, va_list *ap, int *l);
 int				printer_type_p(t_info *info, va_list *ap, int *l);
 int				printer_type_perc(t_info *info, int *l);
+
+char			*xud_substr_maker(t_info *info, int num);
 int				printer_type_xud(t_info *info, va_list *ap, int *l);
+void			printer_type_xud2(t_info *info, char *str, int sign, int b_num);
 
-char			*make_subxud(t_info *info, unsigned int num, int *digitlen);
-char			*xud_substr_maker(t_info *info, unsigned int num, int *dig);
-
-void			free_all(void *a, void *b, void *c, void *d);
-int				is_valid_type(char c);
-
-
-
-void	debug_p_info(t_info *p);
+void			debug_p_info(t_info *p);
 
 #endif

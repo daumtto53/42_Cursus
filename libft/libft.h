@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 23:53:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 22:01:05 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 14:27:57 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,14 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 
 int					ft_isspace(int c);
 unsigned int		ft_digitlen(long num);
-char				*ft_numtox(long long int num);
+
 int					ft_strfill(char *a, int start, int end, char c);
+
+char				*ft_numtox(long long int num);
+char				*ft_utoa(unsigned int n);
+char				*ft_utox(unsigned int num);
+
+
+
 
 #endif

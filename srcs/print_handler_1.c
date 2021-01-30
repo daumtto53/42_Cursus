@@ -6,125 +6,117 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 19:58:11 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:00:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		printer_type_c(t_info *p_info, va_list *ap, int *len)
+int		printer_type_c(t_info *info, va_list *ap, int *len)
 {
-	int				a;
-	char	*str;
-	char	*product;
+	unsigned char	c;
+	int				blank_num;
 
-	a = va_arg(*ap, int);
-	if ((str = (char *)calloc(2, 1)) == NULL)
-		return (-1);
-	str[1] = '\0';
-	str[0] = a;
-	if (p_info->width <= 1)
+	blank_num = info->width;
+	c = (unsigned char)va_arg(*ap, int);
+	if (info->flag & F_LJUST)
 	{
-		ft_putchar_fd(a, 1);
-		*len += 1;
+		ft_putchar_fd(c, 1);
+		while (--blank_num)
+			ft_putchar_fd(' ', 1);
 	}
 	else
 	{
-		if ((product = printer_width_helper(p_info, p_info->width - 1, str)) == NULL)
-			return (-1);
-		ft_putstr_fd(product, 1);
-		*len += ft_strlen(product);
-		free(product);
+		while (--blank_num)
+			ft_putchar_fd(' ', 1);
+		ft_putchar_fd(c, 1);
 	}
+	if (info->width > 1)
+		*len += info->width;
+	else
+		*len += 1;
 	return (1);
 }
-char	*str_null_maker(void)
-{
-	char	*nullstr;
 
-	if ((nullstr = (char *)calloc(7, 1)) == NULL)
-		return (NULL);
-	nullstr[0] = '(';
-	nullstr[1] = 'n';
-	nullstr[2] = 'u';
-	nullstr[3] = 'l';
-	nullstr[4] = 'l';
-	nullstr[5] = ')';
-	nullstr[6] = '\0';
-	return (nullstr);
-}
-
-int		printer_type_s(t_info *p_info, va_list *ap, int *len)
+int		printer_type_s(t_info *info, va_list *ap, int *len)
 {
 	int		strlength;
-	char	*strarg;
-	char	*product;
+	int		blank_num;
+	char	*str;
 
-	strarg = va_arg(*ap, char *);
-	if (strarg == NULL)
-		if ((strarg = str_null_maker()) == NULL)
-			return (-1);
-	if (p_info->flag & F_PRECISION && 0 <= p_info->prec && p_info->prec <= (int)ft_strlen(strarg))
-		strlength = p_info->prec;
+	str = va_arg(*ap, char *);
+	if (str == NULL)
+		str = "(null)";
+	strlength = ft_strlen(str);
+	if (0 <= info->prec && info->prec <= ft_strlen(str) && info->flag & F_PREC)
+		strlength = info->prec;
+	blank_num = info->width - strlength;
+	if (info->flag & F_LJUST)
+	{
+		write(1, str, strlength);
+		while (blank_num--)
+			ft_putchar_fd(' ', 1);
+	}
 	else
-		strlength = ft_strlen(strarg);
-	if ((product = ft_substr(strarg, 0, strlength)) == NULL)
-		return (-1);
-	if (p_info->width > strlength)
-		if ((product = printer_width_helper(p_info, \
-				p_info->width - strlength, product)) == NULL)
-			return (-1);
-	ft_putstr_fd(product, 1);
-	*len += ft_strlen(product);
-	free(product);
+	{
+		while (blank_num--)
+			ft_putchar_fd(' ', 1);
+		write(1, str, strlength);
+	}
+	*len += ((info->width > strlength) ? info->width : strlength);
 	return (1);
 }
 
-int		printer_type_p(t_info *p_info, va_list *ap, int *len)
+int		printer_type_p(t_info *info, va_list *ap, int *len)
 {
-	char	*product;
-	char	*ptrarg;
+	char	*p;
+	int		blank_num;
 
-	ptrarg = va_arg(*ap, char *);
-	if (ptrarg == NULL)
-		ptrarg = 0;
-	if ((ptrarg = ft_numtox((long long)ptrarg)) == NULL)
+	p = va_arg(*ap, char *);
+	p = (p == NULL) ? 0 : p;
+	if ((p = ft_numtox((long long)p)) == NULL)
 		return (-1);
-	if ((product = ft_strjoin("0x", ptrarg)) == NULL)
-		return (-1);
-	free(ptrarg);
-	if (p_info->width > (int)ft_strlen(product))
+	blank_num = info->width - (ft_strlen(p) + 2);
+	if (info->flag & F_LJUST)
 	{
-		if ((product = printer_width_helper(p_info, p_info->width - ft_strlen(product), product)) == NULL)
-			return (-1);
+		write(1, "0x", 2);
+		write(1, p, ft_strlen(p));
+		while (blank_num--)
+			ft_putchar_fd(' ', 1);
 	}
-	ft_putstr_fd(product, 1);
-	*len += ft_strlen(product);
-	free(product);
+	else
+	{
+		while (blank_num--)
+			ft_putchar_fd(' ', 1);
+		write(1, "0x", 2);
+		write(1, p, ft_strlen(p));
+	}
+	*len += ((info->width > ft_strlen(p) + 2) ? info->width : ft_strlen(p) + 2);
 	return (1);
 }
 
-int		printer_type_perc(t_info *p_info, int *len)
+int		printer_type_perc(t_info *info, int *len)
 {
-	char	*product;
+	int		blank_num;
+	char	fill;
 
-	if ((product = (char *)calloc(2, 1)) == NULL)
-		return (-1);
-	product[0] = '%';
-	if (p_info->width > 1)
+	fill = ((info->flag & F_ZERO) ? '0' : ' ');
+	blank_num = info->width;
+	if (info->flag & F_LJUST)
 	{
-		if ((product = printer_width_helper(p_info, p_info->width, product)) == NULL)
-			return (-1);
-		if (p_info->flag & F_ZERO)
-		{
-			if (p_info->flag & F_LEFT_JUSTIFY)
-				ft_strfill(product, 1, ft_strlen(product) - 1, '0');
-			else
-				ft_strfill(product, 0, ft_strlen(product) - 2, '0');
-		}
+		ft_putchar_fd('%', 1);
+		while (--blank_num)
+			ft_putchar_fd(fill, 1);
 	}
-	ft_putstr_fd(product, 1);
-	*len += ft_strlen(product);
-	free(product);
+	else
+	{
+		while (--blank_num)
+			ft_putchar_fd(fill, 1);
+		ft_putchar_fd('%', 1);
+	}
+	if (info->width > 1)
+		*len += info->width;
+	else
+		*len += 1;
 	return (1);
 }

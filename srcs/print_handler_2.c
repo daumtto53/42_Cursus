@@ -6,101 +6,91 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/29 19:58:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/30 16:00:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	zero_flag_handler(t_info *p, int sign, int dig, char *prod)
+char	*xud_substr_maker(t_info *info, int num)
 {
-	if (p->flag & F_ZERO && p->width > dig + sign)
-		ft_strfill(prod, 0, p->width - (dig + sign) - 1, '0');
-	if (sign)
-		prod[0] = '-';
-}
+	char	*str;
+	int		i;
 
-int		prec_num_zero_handler(t_info *p_info, int num, char *prod)
-{
-	if (p_info->flag & F_PRECISION && p_info->prec == 0 && num == 0)
+	if (info->type == 'd' || info->type == 'i')
 	{
-		if (p_info->width == 0)
-			return (0);
-		ft_strfill(prod, 0, ft_strlen(prod) - 1, ' ');
+		num = (num < 0) ? num * -1 : num;
+		str = ft_itoa(num);
 	}
-	return (1);
+	else if (info->type == 'x' || info->type == 'X')
+		str = ft_utox(num);
+	else if (info->type == 'u')
+		str = ft_utoa(num);
+	if (str == NULL)
+		return (NULL);
+	if (info->type == 'X')
+	{
+		i = ft_strlen(str);
+		while (--i >= 0)
+			ft_toupper(str + i);
+	}
+	return (str);
 }
 
-int		printer_type_xud(t_info *p_info, va_list *ap, int *len)
+int		printer_type_xud(t_info *i, va_list *ap, int *len)
 {
-	int		digitlen;
 	int		num;
-	char	*product;
+	int		blank_num;
+	char	*str;
 	int		sign;
 
+	sign = 0;
 	num = va_arg(*ap, int);
-	sign = (num < 0) ? 1 : 0;
-	if ((product = xud_substr_maker(p_info, num, &digitlen)) == NULL)
+	if ((str = xud_substr_maker(i, num)) == NULL)
 		return (-1);
-	if (p_info->width > (int)ft_strlen(product))
+	if ((i->type == 'd' || i->type == 'i') && num < 0)
+		sign = 1;
+	i->prec = (i->prec > ft_strlen(str)) ? i->prec - ft_strlen(str) : 0;
+	blank_num = i->width - (sign + ft_strlen(str) + i->prec);
+	if (i->flag & F_ZERO && i->width > (sign + ft_strlen(str) + i->prec))
 	{
-		if ((product = printer_width_helper(p_info, p_info->width - ft_strlen(product), product)) == NULL)
-			return (-1);
+		ft_putchar_fd('-', 1);
+		sign = 0;
 	}
-	zero_flag_handler(p_info, sign, digitlen, product);
-	if (prec_num_zero_handler(p_info, num, product) == 0)
-		return (0);
-	ft_putstr_fd(product, 1);
-	*len += ft_strlen(product);
-	free(product);
+	printer_type_xud2(i, str, sign, blank_num);
+	if (i->width > (sign + ft_strlen(str) + i->prec))
+		*len += i->width;
+	else
+		*len += (sign + ft_strlen(str) + i->prec);
+	free(str);
 	return (1);
 }
 
-char	*make_subxud(t_info *p, unsigned int num, int *digitlen)
+void	printer_type_xud2(t_info *info, char *str, int sign, int blank_num)
 {
-	char	*add;
-	char	*original;
-	char	*tmp;
+	char	fill;
 
-	if (p->type == 'x' || p->type == 'X')
-		original = ft_numtox(num);
-	else if (p->type == 'd' && (int)num < 0)
-		original = ft_itoa((int)num * -1);
+	fill = '-';
+	if (info->flag == F_ZERO)
+		fill = '0';
+	if (info->flag & F_LJUST)
+	{
+		if (sign)
+			ft_putchar_fd('-', 1);
+		while (info->prec--)
+			ft_putchar_fd('0', 1);
+		ft_putstr_fd(str, 1);
+		while (blank_num--)
+			ft_putchar_fd(fill, 1);
+	}
 	else
-		original = ft_itoa((int)num);
-	if (original == NULL)
-		return (NULL);
-	*digitlen = ft_strlen(original);
-	if (p->prec > *digitlen && p->flag & F_PRECISION)
 	{
-		if ((add = (char *)ft_calloc(p->prec - *digitlen + 1, 1)) == NULL)
-			return (NULL);
-		add[p->prec - *digitlen] = '\0';
-		ft_strfill(add, 0, ft_strlen(add) - 1, 0);
-		if ((tmp = ft_strjoin(add, original)) == NULL)
-			return (NULL);
-		free_all(add, original, NULL, NULL);
-		return (tmp);
+		while (blank_num--)
+			ft_putchar_fd(fill, 1);
+		if (sign && !(info->flag & F_ZERO))
+			ft_putchar_fd('-', 1);
+		while (info->prec--)
+			ft_putchar_fd('0', 1);
+		ft_putstr_fd(str, 1);
 	}
-	return (original);
 }
-
-char	*xud_substr_maker(t_info *p, unsigned int num, int *digit)
-{
-	int		digitlen;
-	char	*tmp;
-	char	*sub;
-
-	if ((sub = make_subxud(p, num, &digitlen)) == NULL)
-		return (NULL);
-	*digit = digitlen;
-	if (p->type == 'd' && (int)num < 0)
-	{
-		if ((tmp = ft_strjoin("-", sub)) == NULL)
-			return (NULL);
-		free(sub);
-		sub = tmp;
-	}
-	return (sub);
-}
-
