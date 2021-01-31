@@ -4,7 +4,7 @@
 
 int		main()
 {
-	ft_printf("%0*.*d\n",2, -1, 8);
+	ft_printf("%0*.*d\n",4, -2, 8);
 	// printf(" --- Return : %d\n", ft_printf("%*.*d\n",4, 4, -12));
 	// printf(" --- Return : %d\n", printf("%*.*d\n",4, 4, -12));
 	// printf(" --- Return : %d\n", ft_printf("%d\n", -2147483648));

@@ -6,12 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 02:12:45 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 13:06:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
+# include <stdio.h>
 int		parse_type(const char *s, t_info *info)
 {
 	int		i;
@@ -41,7 +41,7 @@ int		parse_precision(const char *s, t_info *info, va_list *ap)
 		{
 			info->prec = va_arg(*ap, int);
 			if (info->prec < 0)
-				info->prec &= (~F_PREC);
+				info->flag &= (~F_PREC);
 			i++;
 		}
 		else if (ft_isdigit(s[i]))
