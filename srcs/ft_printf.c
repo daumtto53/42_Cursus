@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 01:52:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 18:04:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,13 @@ int		handle_p_info(t_info *info)
 		return (-1);
 	if (info->flag & F_ZERO && (t == 'p' || t == 's' || t == 'c'))
 		return (-1);
-	if (info->flag & F_ZERO && info->flag & F_LJUST && t != '%')
-		return (-1);
-	// if ((t == 'c' || t == 'p') && !(info->flag & F_ONLY_DOT))
-		// return (-1);
+	if (info->flag & F_ZERO && info->flag & F_LJUST)
+		info->flag = ((info->flag & (~F_ZERO)) & (~F_LJUST));
 	if ((t == 'u' || t == 'd' || t == 'x' || t == 'X' || t == 'i') && \
 			(info->flag & F_ZERO) && (info->flag & F_PREC))
 		info->flag &= (~F_ZERO);
 	if (info->prec < 0 && info->flag & F_ZERO)
 		info->flag &= (~F_PREC);
-	//if (info->prec >= 0 && info->flag & F_ZERO)
-	//	info->flag &= (~F_ZERO);
 	if (info->width >= 2147483646 || info->prec >= 2147483646)
 		return (-1);
 	return (1);
