@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 11:16:52 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 01:13:58 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 16:44:46 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	numtox_initializer(int *sn, int *xd, long long *temp, long long *num)
 {
 	*xd = 0;
+	if (*num == 0)
+		*xd = 1;
 	*sn = 0;
 	if (*num < 0)
 	{
@@ -32,8 +34,6 @@ char	*ft_numtox(long long int num)
 	char			*xchar;
 	long long int	temp;
 
-	if (num == 0)
-		return ("0");
 	numtox_initializer(&sign, &xdigit, &temp, &num);
 	while (temp)
 	{
@@ -46,9 +46,9 @@ char	*ft_numtox(long long int num)
 	xdigit = xdigit + sign;
 	if (sign == 1)
 		xchar[0] = '-';
-	while (num)
+	while (--xdigit >= 0)
 	{
-		xchar[--xdigit] = "0123456789abcdef"[num % 16];
+		xchar[xdigit] = "0123456789abcdef"[num % 16];
 		num /= 16;
 	}
 	return (xchar);
