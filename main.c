@@ -5,6 +5,31 @@
 int		main()
 {
 	int	a;
-	printf(" --- Return : %d\n", ft_printf("[%-15p]\n", &a));
-	printf(" --- Return : %d\n", printf("[%-15p]\n", &a));
+	int	*p;
+	p = &a;
+	ft_printf("-->|%-15p|<--\n", NULL);
+	// ft_printf("-->|%-16.p|<--\n", p);
+	ft_printf("-->|%-16p|<--\n", p);
+	// ft_printf("-->|%-16.p|<--\n", p);
+	// ft_printf("-->|%-16.p|<--\n", p);
+
+	// ft_printf("-->|%-15.p|<--\n", p);
+	ft_printf("-->|%-15p|<--\n", p);
+	// ft_printf("-->|%-16.p|<--\n", p);
+	// ft_printf("-->|%-16.p|<--\n", p);
+	ft_printf("-->|%-16p|<--\n", p);
+
+	printf("\n--------------------\n");
+	printf("-->|%-15p|<--\n", NULL);
+	// printf("-->|%-16.p|<--\n", p);
+	printf("-->|%-16p|<--\n", p);
+	// printf("-->|%-16.p|<--\n", p);
+	// printf("-->|%-16.p|<--\n", p);
+
+	// printf("-->|%-15.p|<--\n", p);
+	printf("-->|%-15p|<--\n", p);
+	// printf("-->|%-16.p|<--\n", p);
+	// printf("-->|%-16.p|<--\n", p);
+	printf("-->|%-16p|<--\n", p);
+
 }

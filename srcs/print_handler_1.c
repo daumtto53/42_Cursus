@@ -6,12 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 15:46:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 16:36:59 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
+#include <stdio.h>
 int		printer_type_c(t_info *info, va_list *ap, int *len)
 {
 	unsigned char	c;
@@ -73,9 +73,10 @@ int		printer_type_p(t_info *info, va_list *ap, int *len)
 	int		blank_num;
 
 	p = va_arg(*ap, char *);
-	p = (p == NULL) ? 0 : p;
-	if ((p = ft_numtox((long long)p)) == NULL)
-		return (-1);
+	if (p == NULL)
+		p = ft_numtox((long long)0);
+	else
+		p = ft_numtox((long long)p);
 	blank_num = info->width - (ft_strlen(p) + 2);
 	if (info->flag & F_LJUST)
 	{
