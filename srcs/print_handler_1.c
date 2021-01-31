@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 16:36:59 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 17:01:56 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int		printer_type_p(t_info *info, va_list *ap, int *len)
 	int		blank_num;
 
 	p = va_arg(*ap, char *);
-	if (p == NULL)
+	if (p == NULL && !(info->prec & F_PREC))
 		p = ft_numtox((long long)0);
+	else if (p == NULL && info->prec & F_PREC)
+		p = ft_strjoin("", "");
 	else
 		p = ft_numtox((long long)p);
 	blank_num = info->width - (ft_strlen(p) + 2);
