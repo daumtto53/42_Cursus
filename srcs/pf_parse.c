@@ -6,12 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 13:06:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/01 17:50:45 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-# include <stdio.h>
+
 int		parse_type(const char *s, t_info *info)
 {
 	int		i;
@@ -30,9 +30,7 @@ int		parse_precision(const char *s, t_info *info, va_list *ap)
 	{
 		info->flag |= F_PREC;
 		i++;
-		if (s[i] == 'c' || s[i] == 's' || s[i] == 'i' || s[i] == 'd' || \
-				s[i] == 'u' || s[i] == 'X' || s[i] == 'x' || s[i] == 'p' || \
-					s[i] == '%')
+		if (ft_isalpha(s[i]) || s[i] == '%')
 		{
 			info->prec = 0;
 			info->flag |= F_ONLY_DOT;

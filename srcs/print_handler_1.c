@@ -6,12 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 17:28:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/01 18:01:48 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
+
 int		printer_type_c(t_info *info, va_list *ap, int *len)
 {
 	unsigned char	c;
@@ -38,22 +38,22 @@ int		printer_type_c(t_info *info, va_list *ap, int *len)
 	return (1);
 }
 
-int		printer_type_s(t_info *info, va_list *ap, int *len)
+int		printer_type_s(t_info *i, va_list *ap, int *len)
 {
 	int		strlength;
 	int		blank_num;
-	char	*str;
+	char	*s;
 
-	str = va_arg(*ap, char *);
-	if (str == NULL)
-		str = "(null)";
-	strlength = ft_strlen(str);
-	if (0 <= info->prec && info->prec <= (int)ft_strlen(str) && info->flag & F_PREC)
-		strlength = info->prec;
-	blank_num = info->width - strlength;
-	if (info->flag & F_LJUST)
+	s = va_arg(*ap, char *);
+	if (s == NULL)
+		s = "(null)";
+	strlength = ft_strlen(s);
+	if (0 <= i->prec && i->prec <= (int)ft_strlen(s) && i->flag & F_PREC)
+		strlength = i->prec;
+	blank_num = i->width - strlength;
+	if (i->flag & F_LJUST)
 	{
-		write(1, str, strlength);
+		write(1, s, strlength);
 		while (blank_num-- > 0)
 			ft_putchar_fd(' ', 1);
 	}
@@ -61,26 +61,33 @@ int		printer_type_s(t_info *info, va_list *ap, int *len)
 	{
 		while (blank_num-- > 0)
 			ft_putchar_fd(' ', 1);
-		write(1, str, strlength);
+		write(1, s, strlength);
 	}
-	*len += ((info->width > strlength) ? info->width : strlength);
+	*len += ((i->width > strlength) ? i->width : strlength);
 	return (1);
 }
 
-int		printer_type_p(t_info *info, va_list *ap, int *len)
+char	*printer_type_p_helper(t_info *i, char *p)
+{
+	if (p == NULL && !(i->flag & F_PREC))
+		p = ft_numtox((long long)0);
+	else if (p == NULL && i->flag & F_PREC)
+		p = ft_strjoin("", "");
+	else
+		p = ft_numtox((long long)p);
+	return (p);
+}
+
+int		printer_type_p(t_info *i, va_list *ap, int *len)
 {
 	char	*p;
 	int		blank_num;
 
 	p = va_arg(*ap, char *);
-	if (p == NULL && !(info->flag & F_PREC))
-		p = ft_numtox((long long)0);
-	else if (p == NULL && info->flag & F_PREC)
-		p = ft_strjoin("", "");
-	else
-		p = ft_numtox((long long)p);
-	blank_num = info->width - (ft_strlen(p) + 2);
-	if (info->flag & F_LJUST)
+	if ((p = printer_type_p_helper(i, p)) == NULL)
+		return (-1);
+	blank_num = i->width - (ft_strlen(p) + 2);
+	if (i->flag & F_LJUST)
 	{
 		write(1, "0x", 2);
 		write(1, p, ft_strlen(p));
@@ -94,7 +101,8 @@ int		printer_type_p(t_info *info, va_list *ap, int *len)
 		write(1, "0x", 2);
 		write(1, p, ft_strlen(p));
 	}
-	*len += ((info->width > (int)ft_strlen(p) + 2) ? info->width : (int)ft_strlen(p) + 2);
+	*len += ((i->width > (int)ft_strlen(p) + 2) \
+				? i->width : (int)ft_strlen(p) + 2);
 	free(p);
 	return (1);
 }

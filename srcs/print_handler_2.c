@@ -6,12 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 17:54:37 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 14:35:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/01 18:04:01 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-# include <stdio.h>
 
 char	*xud_substr_maker(t_info *info, long num)
 {
@@ -54,7 +53,8 @@ int		printer_type_xud(t_info *i, va_list *ap, int *len)
 		return (-1);
 	if ((i->type == 'd' || i->type == 'i') && num < 0)
 		sign = 1;
-	i->prec = (i->prec > (int)ft_strlen(str)) ? i->prec - (int)ft_strlen(str) : 0;
+	i->prec = (i->prec > (int)ft_strlen(str)) ? \
+				i->prec - (int)ft_strlen(str) : 0;
 	blank_num = i->width - (sign + (int)ft_strlen(str) + i->prec);
 	if (i->width > ((int)ft_strlen(str) + sign + i->prec))
 		*len += i->width;
@@ -73,9 +73,7 @@ void	printer_type_xud2(t_info *info, char *str, int sign, int blank_num)
 {
 	char	fill;
 
-	fill = ' ';
-	if (info->flag & F_ZERO)
-		fill = '0';
+	fill = (info->flag & F_ZERO) ? '0' : ' ';
 	if (info->flag & F_LJUST)
 	{
 		if (sign)
