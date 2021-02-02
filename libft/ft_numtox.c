@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 11:16:52 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/31 16:44:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/02 10:26:51 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	numtox_initializer(int *sn, int *xd, long long *temp, long long *num)
 	*temp = *num;
 }
 
-//change this/
 char	*ft_numtox(long long int num)
 {
 	int				sign;

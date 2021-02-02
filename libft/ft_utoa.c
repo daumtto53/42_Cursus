@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 01:26:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/30 01:39:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/02 10:28:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_utoa(unsigned int n)
 {
-	char	*ret_str;
-	int		num_len;
-	unsigned int ln;
+	char			*ret_str;
+	int				num_len;
+	unsigned int	ln;
 
 	num_len = (n <= 0) ? 1 : 0;
 	ln = n;
