@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/05 20:05:11 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 21:45:33 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		pf_parse(char **s, t_info *info, va_list *ap)
 		p++;
 	}
 	if (is_valid_type(*p))
-		info->type = *p++;
-	*s = p;
+		info->type = *p;
+	*s = p + 1;
 	return (FT_NORMAL);
 }

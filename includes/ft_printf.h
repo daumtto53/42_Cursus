@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/05 21:09:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 21:25:48 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdarg.h>
 # include "../libft/libft.h"
-
+#include <stdio.h>
 # define FT_NORMAL		1
 # define FT_ERR			0
 

@@ -3,5 +3,5 @@
 
 int		main()
 {
-
+	ft_printf("%s\n", "123");
 }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/05 21:19:04 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 21:44:00 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		ft_printf(const char *str, ...)
 	{
 		parse_info_renew(&info);
 		len += print_until_delim((char **)&str, &ft_errno);		//str : %에 위치함.
-		if (*str == '\0')
+		if (*str++ == '\0')
 			return (len);
 		pf_parse((char **)&str, &info, &ap);
 		verify_p_info(&info, &ft_errno);
