@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/05 20:00:54 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 21:16:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int		print_controller(t_info *info, va_list *ap, int *ft_errno)
 
 	t = info->type;
 	if (t == 'c')
-		len = printer_type_c(va_arg(*ap, int), info, ft_errno);
+		len = printer_type_c(va_arg(*ap, int), info);
 	else if (t == 's')
-		len = printer_type_s(va_arg(*ap, char *), info, ft_errno);
+		len = printer_type_s(va_arg(*ap, char *));
 	else if (t == 'p')
 		len = printer_type_p(va_arg(*ap, void *), info, ft_errno);
 	else if (t == 'x' || t == 'X')
@@ -39,7 +39,7 @@ int		print_controller(t_info *info, va_list *ap, int *ft_errno)
 	else if (t == 'u')
 		len = printer_type_uint(va_arg(*ap, int), info, ft_errno);
 	else if (t == '%')
-		len = printer_type_c('%', info, ft_errno);
+		len = printer_type_c('%', info);
 	else
 		*ft_errno = FT_ERR;
 	return (len);
