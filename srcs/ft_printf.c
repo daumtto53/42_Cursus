@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/05 21:17:12 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 21:19:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		print_controller(t_info *info, va_list *ap, int *ft_errno)
 	char	t;
 	int		len;
 
+	len = 0;
 	t = info->type;
 	if (t == 'c')
 		len = printer_type_c(va_arg(*ap, int), info);
