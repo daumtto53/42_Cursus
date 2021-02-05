@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/05 21:44:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 21:48:24 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,7 @@ int		ft_printf(const char *str, ...)
 			return (len);
 		pf_parse((char **)&str, &info, &ap);
 		verify_p_info(&info, &ft_errno);
-		if (ft_errno == FT_ERR)
-			return (-1);
 		len += print_controller(&info, &ap, &ft_errno);
-		if (ft_errno == FT_ERR)
-			return (-1);
 	}
 	va_end(ap);
 	return (len);
