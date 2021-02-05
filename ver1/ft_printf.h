@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/05 21:09:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 17:31:59 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,24 @@ typedef struct	s_info
 
 int				ft_printf(const char *str, ...);
 void			parse_info_renew(t_info *info);
-int				print_until_delim(char **str, int *ft_errno);
-int				verify_p_info(t_info *info, int *ft_errno);
-int				print_controller(t_info *info, va_list *ap, int *ft_errno);
+int				print_until_delim(const char *str, int i, int *len);
+int				handle_p_info(t_info *info);
+int				print_handler(t_info *p_info, va_list *ap, int *num);
 
-int		is_valid_type(char c);
-int		is_valid_flag(char c);
-int				ft_abstract_atoi(char **s, va_list *ap);
-int		pf_parse(char **s, t_info *info, va_list *ap);
+int				pf_parse(const char *s, t_info *info, va_list *ap);
+int				parse_type(const char *s, t_info *info);
+int				parse_precision(const char *s, t_info *info, va_list *ap);
+int				parse_width(const char *s, t_info *info, va_list *ap);
+int				parse_flag(const char *s, t_info *info);
 
-int				printer_type_c(unsigned int k, t_info *info);
-int				printer_type_s(char *str, t_info *info);
-int				printer_type_p(void *ptr, t_info *info, int *ft_errno);
- char		*printer_type_p_hexmaker(t_info *i, char *p);
+int				printer_type_c(t_info *info, va_list *ap, int *l);
+int				printer_type_s(t_info *info, va_list *ap, int *l);
+char			*printer_type_p_helper(t_info *i, char *p);
+int				printer_type_p(t_info *info, va_list *ap, int *l);
+int				printer_type_perc(t_info *info, int *l);
 
-char		*hex_interface(unsigned int num, t_info *info);
-int				printer_type_hex(unsigned int num, t_info *info, int *ft_err);
-int		hex_zero(unsigned int num, t_info *i);
-int		hex_normal(unsigned int num, t_info *i);
-int		hex_preczero(t_info *i);
-
-int				printer_type_int(int num, t_info *info, int *ft_errno);
-int		int_zero(long num, t_info *i);
-int		int_normal(long num, t_info *i);
-int		int_preczero(t_info *i);
-
-int				printer_type_uint(unsigned int num, t_info *info, int *ft_errno);
-int		uint_zero(unsigned int num, t_info *i);
-int		uint_normal(unsigned int num, t_info *i);
-int		uint_preczero(t_info *i);
+char			*xud_substr_maker(t_info *info, long num);
+int				printer_type_xud(t_info *info, va_list *ap, int *l);
+void			printer_type_xud2(t_info *info, char *str, int sign, int b_num);
 
 #endif

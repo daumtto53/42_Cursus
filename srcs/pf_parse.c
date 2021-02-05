@@ -6,101 +6,68 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/01 17:50:45 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/05 20:05:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		parse_type(const char *s, t_info *info)
+ int		is_valid_type(char c)
 {
-	int		i;
-
-	i = 0;
-	info->type = s[i];
-	return (i + 1);
+	return (ft_strchr("cspdixXu%%", c) != NULL);
+}
+ int		is_valid_flag(char c)
+{
+	return (ft_strchr("0-*.", c) != NULL);
 }
 
-int		parse_precision(const char *s, t_info *info, va_list *ap)
+int				ft_abstract_atoi(char **s, va_list *ap)
 {
-	int		i;
+	char	*p;
+	int			num;
 
-	i = 0;
-	if (s[i] == '.')
+	p = *s;
+	if (*p == '.')
+		p++;
+	if (*p == '*')
 	{
-		info->flag |= F_PREC;
-		i++;
-		if (ft_isalpha(s[i]) || s[i] == '%')
-		{
-			info->prec = 0;
-			info->flag |= F_ONLY_DOT;
-		}
-		else if (s[i] == '*')
-		{
-			info->prec = va_arg(*ap, int);
-			if (info->prec < 0)
-				info->flag &= (~F_PREC);
-			i++;
-		}
-		else if (ft_isdigit(s[i]))
-			info->prec = ft_atoi(s + i);
-		while (ft_isdigit(s[i]))
-			i++;
+		p++;
+		return (va_arg(*ap, int));
 	}
-	return (i);
+	else
+		num = ft_atoi(p);
+	while (ft_isdigit(*p))
+		p++;
+	p--;
+	*s = p;
+	return (num);
 }
 
-int		parse_width(const char *s, t_info *info, va_list *ap)
+int		pf_parse(char **s, t_info *info, va_list *ap)
 {
-	int		i;
+	char *p;
 
-	i = 0;
-	if (s[i] == '*')
+	p = *s;
+	while((is_valid_type(*p) != 0) && (is_valid_flag(*p) || ft_isdigit(*p)))
 	{
-		info->width = va_arg(*ap, int);
-		if (info->width < 0)
-		{
-			info->flag |= F_LJUST;
-			info->flag &= (~F_ZERO);
-			info->width *= -1;
-		}
-		info->flag |= F_WIDTH;
-		i++;
-	}
-	else if (ft_isdigit(s[i]))
-	{
-		info->flag |= F_WIDTH;
-		info->width = ft_atoi(s + i);
-		while (ft_isdigit(s[i]))
-			i++;
-	}
-	return (i);
-}
-
-int		parse_flag(const char *s, t_info *info)
-{
-	int		i;
-
-	i = 0;
-	while (s[i] == '0' || s[i] == '-')
-	{
-		if (s[i] == '0')
+		if (*p == '0')
 			info->flag |= F_ZERO;
-		else
+		else if (*p == '-')
 			info->flag |= F_LJUST;
-		i++;
+		else if (*p == '*' || ft_isdigit(*p))
+		{
+			info->flag |= F_WIDTH;
+			info->width = ft_abstract_atoi(&p, ap);
+		}
+		else if (*p == '.')
+		{
+			info->flag |= F_PREC;
+			info->prec = ft_abstract_atoi(&p, ap);
+		}
+		p++;
 	}
-	return (i);
-}
-
-int		pf_parse(const char *s, t_info *info, va_list *ap)
-{
-	int		i;
-
-	i = 0;
-	i += parse_flag(s + i, info);
-	i += parse_width(s + i, info, ap);
-	i += parse_precision(s + i, info, ap);
-	i += parse_type(s + i, info);
-	return (i);
+	if (is_valid_type(*p))
+		info->type = *p++;
+	*s = p;
+	return (FT_NORMAL);
 }

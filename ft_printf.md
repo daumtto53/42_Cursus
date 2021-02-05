@@ -232,6 +232,22 @@ Padding은  String의 왼쪽, 오른쪽 또는 양쪽에 *정보와는 무관한
 
 
 
+
+
+
+
+### Double, float의 동작 방식
+
+
+
+### double, float, 그리고 유효숫자.
+
+
+
+
+
+
+
 <br/><br/>
 
 ## 설계 과정 : 
