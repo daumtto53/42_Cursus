@@ -6,26 +6,26 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 00:06:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 01:05:01 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static unsigned long long	num_conversion(unsigned long long n, t_info *i)
-{
-	if (i->len == FT_PF_HH)
-		n &= UCHAR_MAX;
-	else if (i->len == FT_PF_H)
-		n &= USHRT_MAX;
-	else if (i->len == FT_PF_I)
-		n &= UINT_MAX;
-	else if (i->len == FT_PF_L)
-		n &= ULONG_MAX;
-	else
-		n &= n * 1;
-	return (n);
-}
+// static unsigned long long	num_conversion(unsigned long long n, t_info *i)
+// {
+// 	if (i->len == FT_PF_HH)
+// 		n &= UCHAR_MAX;
+// 	else if (i->len == FT_PF_H)
+// 		n &= USHRT_MAX;
+// 	else if (i->len == FT_PF_I)
+// 		n &= UINT_MAX;
+// 	else if (i->len == FT_PF_L)
+// 		n &= ULONG_MAX;
+// 	else
+// 		n &= n * 1;
+// 	return (n);
+// }
 
 static int		hex_zero(unsigned long long num, t_info *i)
 {
@@ -92,7 +92,7 @@ void	printer_type_hex(t_info *info, va_list *ap, int *len)
 		num = ((long)va_arg(*ap, long));
 	else
 		num = ((long long)va_arg(*ap, long long));
-	num = num_conversion(num, info);
+	// num = num_conversion(num, info);
 	if (info->flag & F_ZERO)
 		*len += (hex_zero(num, info));
 	else if (info->flag & F_PREC && num == 0 && info->prec == 0)
