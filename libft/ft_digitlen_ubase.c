@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 11:10:48 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 22:59:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:09:20 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_digitlen_base(unsigned long long num, int base)
+int		ft_digitlen_ubase(unsigned long long num, int base)
 {
 	int			count;
 
