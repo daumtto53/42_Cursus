@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 14:15:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 14:18:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		handle_p_info(t_info *info)
 		return (-1);
 	if (info->flag & F_ZERO && info->flag & F_LJUST)
 		info->flag &= (~F_ZERO);
-	if (ft_strchr("diuxX", t) && (info->flag & (F_ZERO | F_PREC)))
+	if (ft_strchr("diuxX", t) && info->flag & F_ZERO && info->flag & F_PREC)
 		info->flag &= (~F_ZERO);
 	if (info->prec < 0 && info->flag & F_ZERO)
 		info->flag &= (~F_PREC);
