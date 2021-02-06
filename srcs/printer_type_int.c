@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 22:27:38 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 22:53:42 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,25 @@ int		int_zero(long long num, t_info *i)
 	int		padd_len;
 	int		prec_len;
 	int		digit_len;
-	int		ret_len;
+	int		sign;
 
 	digit_len = ft_digitlen_base(num, 10);
 	printf("num : %lld\n", num);
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
 	padd_len = (i->width > (num < 0) + prec_len + digit_len) ? \
-		i->width - ((num < 0) + prec_len + digit_len) : 0;
-	printf("num : %lld digitlen : %d, prec_len : %d, padd_len : %d\n",num, digit_len, prec_len, padd_len);
+		(i->width - ((num < 0) + prec_len + digit_len)) : -1;
+	sign = (num < 0) ? -1 : 1;
 	while (!(i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
+	if (sign == -1)
+		ft_putchar_fd('-', 1);
 	while (prec_len-- > 0)
 		ft_putchar_fd('0', 1);
-	ft_putnbr_base_fd(num, 10, 1, BASE_DOWN);
+	ft_putnbr_base_fd(num * sign , 10, 1, BASE_DOWN);
 	while ((i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
-	if (i->width > (num < 0) + i->prec + digit_len)
-		ret_len = (i->width);
-	else
-		ret_len = (num < 0) + i->prec + digit_len;
-	return (ret_len);
+	return ((i->width > (num < 0) + i->prec + digit_len) ? \
+				i->width : ((num < 0) + i->prec + digit_len));
 }
 
 static int		int_preczero(t_info *i)
