@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 22:28:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 22:58:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static long long	get_nbr_interface(t_info *i, va_list *ap)
 		return ((long long)va_arg(*ap, long long));
 }
 
-static int		uint_zero(long long num, t_info *i)
+static int		uint_zero(unsigned long long num, t_info *i)
 {
 	int		padd_len;
 
