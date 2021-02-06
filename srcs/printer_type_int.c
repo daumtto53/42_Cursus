@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 22:53:42 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 22:56:10 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int		int_zero(long long num, t_info *i)
 	int		sign;
 
 	digit_len = ft_digitlen_base(num, 10);
-	printf("num : %lld\n", num);
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
 	padd_len = (i->width > (num < 0) + prec_len + digit_len) ? \
 		(i->width - ((num < 0) + prec_len + digit_len)) : -1;
