@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 13:54:25 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 14:04:42 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		change_parsed_negative(t_info *info)
 	if (info->prec < 0)
 	{
 		info->prec = 0;
-		info->flag &= F_PREC;
+		info->flag &= (~F_PREC);
 	}
 }
 
@@ -78,6 +78,5 @@ int		pf_parse_2(const char *s, t_info *info, va_list *ap)
 	}
 	change_parsed_negative(info);
 	info->type = s[i];
-	printf("%c, %c\n", s[i], s[i-1]);
 	return (i + 1);
 }
