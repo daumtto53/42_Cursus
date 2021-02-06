@@ -6,14 +6,14 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 14:04:42 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 14:34:07 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-static int		atoi_interface(const char *s, t_info *info, va_list *ap)
+static int		atoi_abstraction(const char *s, t_info *info, va_list *ap)
 {
 	int		i;
 
@@ -67,12 +67,12 @@ int		pf_parse_2(const char *s, t_info *info, va_list *ap)
 		else if (s[i] == '.')
 		{
 			info->flag |= F_PREC;
-			i += atoi_interface(s + i, info, ap);
+			i += atoi_abstraction(s + i, info, ap);
 		}
 		else if (s[i] == '*' || ft_isdigit(s[i]))
 		{
 			info->flag |= F_WIDTH;
-			i += atoi_interface(s + i, info, ap);
+			i += atoi_abstraction(s + i, info, ap);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/01 18:01:48 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 15:01:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,11 @@ int		printer_type_c(t_info *info, va_list *ap, int *len)
 
 	blank_num = info->width;
 	c = (unsigned char)va_arg(*ap, int);
-	if (info->flag & F_LJUST)
-	{
-		ft_putchar_fd(c, 1);
-		while (--blank_num > 0)
-			ft_putchar_fd(' ', 1);
-	}
-	else
-	{
-		while (--blank_num > 0)
-			ft_putchar_fd(' ', 1);
-		ft_putchar_fd(c, 1);
-	}
+	while (!(info->flag & F_LJUST) && blank_num-- > 0)
+		ft_putchar_fd(' ', 1);
+	ft_putchar_fd(c, 1);
+	while (info->flag & F_LJUST && blank_num-- > 0)
+		ft_putchar_fd(' ', 1);
 	if (info->width > 1)
 		*len += info->width;
 	else
