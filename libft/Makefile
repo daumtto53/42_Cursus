@@ -44,11 +44,13 @@ PART_2 =	ft_strdup.c \
 
 CUSTOM =	ft_isspace.c \
 			ft_numtox.c \
-			ft_digitlen.c \
-			ft_strfill.c \
 			ft_utox.c \
 			ft_utoa.c \
-			ft_ltoa.c
+			ft_ltoa.c \
+			ft_putnbr_base_fd.c \
+			ft_putunbr_base_fd.c \
+			ft_digitlen_base.c
+
 
 BONUS =	ft_lstnew.c \
 		ft_lstadd_front.c \

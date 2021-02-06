@@ -11,8 +11,11 @@ AR = ar -rcs
 
 SRCS =	ft_printf.c \
 		pf_parse.c \
-		print_handler_1.c \
-		print_handler_2.c
+		printer_type_csp.c \
+		printer_type_hex.c \
+		printer_type_int.c \
+		printer_type_oct.c \
+		printer_type_uint.c \
 
 LIBFT = -L./libft -lft
 

@@ -6,12 +6,25 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 14:34:07 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 19:15:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include <stdio.h>
+
+static void		pf_parse_flag(const char *s, t_info *info)
+{
+	int		i;
+
+	i = 0;
+	if (s[i] == '0')
+		info->flag |= F_ZERO;
+	else if (s[i] == '-')
+		info->flag |= F_LJUST;
+	else if (s[i] == 'h' || s[i] == 'l')
+		info->len = (s[i] == 'h') ? info->len - 1 : info->len + 1;
+}
 
 static int		atoi_abstraction(const char *s, t_info *info, va_list *ap)
 {
@@ -53,18 +66,15 @@ static void		change_parsed_negative(t_info *info)
 	}
 }
 
-int		pf_parse_2(const char *s, t_info *info, va_list *ap)
+int		pf_parse(const char *s, t_info *info, va_list *ap)
 {
 	int		i;
 
 	i = 0;
-	while (!ft_strchr("cspdiuxX%", s[i]) && (ft_strchr("0-.*", s[i]) || ft_isdigit(s[i])))
+	while (!ft_strchr("cspdiuxX%", s[i]) && (ft_strchr("0-.*lh", s[i]) || ft_isdigit(s[i])))
 	{
-		if (s[i] == '0')
-			info->flag |= F_ZERO;
-		else if (s[i] == '-')
-			info->flag |= F_LJUST;
-		else if (s[i] == '.')
+		pf_parse_flag(s, info);
+		if (s[i] == '.')
 		{
 			info->flag |= F_PREC;
 			i += atoi_abstraction(s + i, info, ap);

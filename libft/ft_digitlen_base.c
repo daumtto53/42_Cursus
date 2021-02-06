@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_digitlen.c                                      :+:      :+:    :+:   */
+/*   ft_digitlen_base.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 11:10:48 by mchun             #+#    #+#             */
-/*   Updated: 2021/01/26 11:15:56 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 22:18:48 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	ft_digitlen(long num)
+int		ft_digitlen_base(long long num, int base)
 {
 	int			count;
 
@@ -24,7 +24,7 @@ unsigned int	ft_digitlen(long num)
 	while (num)
 	{
 		count++;
-		num /= 10;
+		num /= base;
 	}
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 23:53:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/02 10:26:41 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 21:51:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
+
+# define BASE_UP	0
+# define BASE_DOWN	1
 
 typedef struct		s_list
 {
@@ -78,13 +82,15 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 									void (*del)(void *));
 
 int					ft_isspace(int c);
-unsigned int		ft_digitlen(long num);
-
-int					ft_strfill(char *a, int start, int end, char c);
 
 char				*ft_numtox(long long int num);
 char				*ft_utoa(unsigned int n);
 char				*ft_utox(unsigned int num);
 char				*ft_ltoa(long n);
+void				ft_putnbr_base_fd(long long n, int base, int fd, int mode);
+void				ft_putunbr_base_fd(unsigned long long n, \
+						int base, int fd, int mode);
+int		ft_digitlen_base(long long num, int base);
+
 
 #endif

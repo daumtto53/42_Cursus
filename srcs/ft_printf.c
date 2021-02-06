@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 14:18:04 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 21:43:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,31 @@ static void		parse_info_renew(t_info *info)
 	info->prec = 0;
 	info->type = 0;
 	info->width = 0;
+	info->len = 0;
 }
 
 static int		print_handler(t_info *info, va_list *ap, int *len)
 {
 	char	t;
-	int		err;
 
 	t = info->type;
 	if (t == 'c')
-		err = printer_type_c(info, ap, len);
+		printer_type_c(info, ap, len);
 	else if (t == 's')
-		err = printer_type_s(info, ap, len);
+		printer_type_s(info, ap, len);
 	else if (t == 'p')
-		err = printer_type_p(info, ap, len);
+		printer_type_p(info, ap, len);
 	else if (t == 'x' || t == 'X')
-		err = printer_type_xud(info, ap, len);
+		printer_type_hex(info, ap, len);
 	else if (t == 'd' || t == 'i')
-		err = printer_type_xud(info, ap, len);
+		printer_type_int(info, ap, len);
 	else if (t == 'u')
-		err = printer_type_xud(info, ap, len);
+		printer_type_uint(info, ap, len);
 	else if (t == '%')
-		err = printer_type_perc(info, len);
+		printer_type_perc(info, len);
 	else
 		return (-1);
-	return (err);
+	return (1);
 }
 
 static int		handle_p_info(t_info *info)
@@ -52,6 +52,8 @@ static int		handle_p_info(t_info *info)
 
 	t = info->type;
 	if (!ft_strchr("cspdiuxX%", t))
+		return (-1);
+	if (info->len < FT_PF_HH && info->len > FT_PF_LL)
 		return (-1);
 	if (info->flag & F_ZERO && ft_strchr("csp", t))
 		return (-1);
@@ -99,7 +101,7 @@ int		ft_printf(const char *str, ...)
 			return (-1);
 		if (str[j] == '\0')
 			return (len);
-		j += (pf_parse_2(str + j + 1, &info, &ap) + 1);
+		j += (pf_parse(str + j + 1, &info, &ap) + 1);
 		if (handle_p_info(&info) < 0 || print_handler(&info, &ap, &len) < 0)
 			return (-1);
 		i = j;
