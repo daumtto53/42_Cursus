@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 15:05:19 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 15:11:12 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,25 +93,18 @@ int		printer_type_p(t_info *i, va_list *ap, int *len)
 	return (1);
 }
 
-int		printer_type_perc(t_info *info, int *len)
+int		printer_type_perc(t_info *info, va_list *ap, int *len)
 {
-	int		blank_num;
-	char	fill;
+	char			fill;
+	int				blank_num;
 
-	fill = ((info->flag & F_ZERO) ? '0' : ' ');
-	blank_num = info->width;
-	if (info->flag & F_LJUST)
-	{
-		ft_putchar_fd('%', 1);
-		while (--blank_num > 0)
-			ft_putchar_fd(fill, 1);
-	}
-	else
-	{
-		while (--blank_num > 0)
-			ft_putchar_fd(fill, 1);
-		ft_putchar_fd('%', 1);
-	}
+	fill = (info->flag & F_ZERO) ? '0' : ' ';
+	blank_num = info->width - 1;
+	while (!(info->flag & F_LJUST) && blank_num-- > 0)
+		ft_putchar_fd(fill, 1);
+	ft_putchar_fd('%', 1);
+	while (info->flag & F_LJUST && blank_num-- > 0)
+		ft_putchar_fd(fill, 1);
 	if (info->width > 1)
 		*len += info->width;
 	else
