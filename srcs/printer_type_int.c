@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 00:15:38 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 00:43:50 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 static long long	num_conversion(long long n, t_info *i)
 {
 	if (i->len == FT_PF_HH)
-		n &= CHAR_MIN;
+		n &= -1;
 	else if (i->len == FT_PF_H)
-		n &= SHRT_MIN;
+		n &= -1;
 	else if (i->len == FT_PF_I)
-		n &= INT_MIN;
+		n &= -1;
 	else if (i->len == FT_PF_L)
-		n &= LONG_MIN;
+		n &= -1;
 	else
 		n &= n * 1;
+	printf("%lld\n", n);
 	return (n);
 }
 
@@ -100,6 +101,7 @@ void	printer_type_int(t_info *info, va_list *ap, int *len)
 	else
 		num = (long long)va_arg(*ap, long long);
 	num = num_conversion(num, info);
+	printf("%lld\n", num);
 	if (info->flag & F_ZERO)
 		*len += (int_zero(num, info));
 	else if (info->flag & F_PREC && num == 0 && info->prec == 0)
