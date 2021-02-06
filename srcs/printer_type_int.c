@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 00:45:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 00:52:51 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static long long	num_conversion(long long n, t_info *i)
 {
 	if (i->len == FT_PF_HH)
-		n &= -1;
+		n &= (char)-1;
 	else if (i->len == FT_PF_H)
-		n &= -1;
+		n &= (short)-1;
 	else if (i->len == FT_PF_I)
-		n &= -1;
+		n &= (int)-1;
 	else if (i->len == FT_PF_L)
-		n &= -1;
+		n &= -1L;
 	else
 		n &= n * 1;
 	return (n);
