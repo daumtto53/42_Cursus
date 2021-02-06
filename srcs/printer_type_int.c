@@ -6,27 +6,25 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 23:38:33 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 00:11:17 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static long long	get_nbr_interface(t_info *i, va_list *ap)
+static long long	num_conversion(long long n, t_info *i)
 {
-	long long num;
-
 	if (i->len == FT_PF_HH)
-		num = (char)va_arg(*ap, int);
+		n &= CHAR_MAX;
 	else if (i->len == FT_PF_H)
-		num = (short)va_arg(*ap, int);
+		n &= SHRT_MAX;
 	else if (i->len == FT_PF_I)
-		num = (int)va_arg(*ap, int);
+		n &= INT_MAX;
 	else if (i->len == FT_PF_L)
-		num = (long)va_arg(*ap, long);
+		n &= LONG_MAX;
 	else
-		num = (long long)va_arg(*ap, long long);
-	return (num);
+		n &= n * 1;
+	return (n);
 }
 
 int		int_zero(long long num, t_info *i)
@@ -91,7 +89,17 @@ void	printer_type_int(t_info *info, va_list *ap, int *len)
 {
 	long long num;
 
-	num = get_nbr_interface(info, ap);
+	if (info->len == FT_PF_HH)
+		num = (char)va_arg(*ap, int);
+	else if (info->len == FT_PF_H)
+		num = (short)va_arg(*ap, int);
+	else if (info->len == FT_PF_I)
+		num = (int)va_arg(*ap, int);
+	else if (info->len == FT_PF_L)
+		num = (long)va_arg(*ap, long);
+	else
+		num = (long long)va_arg(*ap, long long);
+	num = num_conversion(num, info);
 	if (info->flag & F_ZERO)
 		*len += (int_zero(num, info));
 	else if (info->flag & F_PREC && num == 0 && info->prec == 0)

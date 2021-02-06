@@ -3,10 +3,7 @@
 #include "includes/ft_printf.h"
 int main()
 {
-	int	a;
-	a = 1;
 
-	printf("%d\n", ft_printf("%12.6d\n", -12));
-	printf("%d\n", printf("%12.6d\n", -12));
-	printf("%d\n", a);
+	printf("%d\n", ft_printf("%12.6x\n", -12));
+	printf("%d\n", printf("%12.6x\n", -12));
 }
