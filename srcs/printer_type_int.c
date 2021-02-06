@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 23:24:16 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:34:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ int		int_zero(long long num, t_info *i)
 	sign = (num < 0) ? -1 : 1;
 	if (i->width > (sign == -1) + ft_digitlen_base(num, 10))
 		padd_len = (i->width - ((sign == -1) - ft_digitlen_base(num, 10)));
-	if (sign < 0 && padd_len > 0)
+	if (sign < 0)
 		ft_putchar_fd('-', 1);
 	while (padd_len-- > 0)
 		ft_putchar_fd('0', 1);
-	if (sign < 0 && padd_len == -1)
-		ft_putchar_fd('-', 1);
 	if (num == LLONG_MIN)
 		ft_putstr_fd("9223372036854775808", 1);
 	else
