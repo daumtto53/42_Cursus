@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 23:13:25 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:25:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		uint_zero(unsigned long long num, t_info *i)
 		padd_len = (i->width - ft_digitlen_ubase(num, 10));
 	while (padd_len-- > 0)
 		ft_putchar_fd('0', 1);
-	ft_putnbr_base_fd(num, 10, 1, BASE_DOWN);
+	ft_putnbr_ubase_fd(num, 10, 1, BASE_DOWN);
 	return ((i->width > ft_digitlen_ubase(num, 10)) ? \
 				i->width : ft_digitlen_ubase(num, 10));
 }
@@ -55,7 +55,7 @@ static int		uint_normal(unsigned long long num, t_info *i)
 		ft_putchar_fd(' ', 1);
 	while (prec_len-- > 0)
 		ft_putchar_fd('0', 1);
-	ft_putnbr_base_fd(num, 10, 1, BASE_DOWN);
+	ft_putunbr_base_fd(num, 10, 1, BASE_DOWN);
 	while ((i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
 	if (i->width > prec_len + digit_len)
