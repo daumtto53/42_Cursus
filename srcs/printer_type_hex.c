@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 23:03:29 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:12:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int		hex_normal(unsigned long long num, t_info *i)
 	if (i->width > i->prec + digit_len)
 		ret_len = (i->width);
 	else
-		ret_len = i->prec + digit_len;
+		ret_len = prec_len + digit_len;
 	return (ret_len);
 }
 

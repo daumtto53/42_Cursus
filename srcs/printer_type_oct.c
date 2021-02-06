@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:54:23 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 23:06:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:13:03 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ static int		oct_normal(unsigned long long num, t_info *i)
 	ft_putnbr_base_fd(num, 8, 1, BASE_DOWN);
 	while ((i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
-	if (i->width > i->prec + digit_len)
+	if (i->width > prec_len + digit_len)
 		ret_len = (i->width);
 	else
-		ret_len =  i->prec + digit_len;
+		ret_len = prec_len + digit_len;
 	return (ret_len);
 }
 
