@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 22:58:54 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:06:48 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,13 @@ static int		uint_zero(unsigned long long num, t_info *i)
 	int		padd_len;
 
 	padd_len = -1;
-	if (i->width > ft_digitlen_base(num, 10))
-		padd_len = (i->width - ft_digitlen_base(num, 10));
+	if (i->width > ft_digitlen_ubase(num, 10))
+		padd_len = (i->width - ft_digitlen_ubase(num, 10));
 	while (padd_len-- > 0)
 		ft_putchar_fd('0', 1);
-	if (num == LLONG_MIN)
-		ft_putstr_fd("9223372036854775808", 1);
-	else
-		ft_putnbr_base_fd(num, 10, 1, BASE_DOWN);
-	return ((i->width > ft_digitlen_base(num, 10)) ? \
-				i->width : ft_digitlen_base(num, 10));
+	ft_putnbr_base_fd(num, 10, 1, BASE_DOWN);
+	return ((i->width > ft_digitlen_ubase(num, 10)) ? \
+				i->width : ft_digitlen_ubase(num, 10));
 }
 
 static int		uint_normal(unsigned long long num, t_info *i)
@@ -50,7 +47,7 @@ static int		uint_normal(unsigned long long num, t_info *i)
 	int		digit_len;
 	int		ret_len;
 
-	digit_len = ft_digitlen_base(num, 10);
+	digit_len = ft_digitlen_ubase(num, 10);
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
 	padd_len = (i->width > prec_len + digit_len) ? \
 		i->width - (prec_len + digit_len) : 0;
