@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:54:23 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 23:02:56 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 23:06:31 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ static int		oct_zero(unsigned long long num, t_info *i)
 		padd_len = (i->width - ft_digitlen_ubase(num, 8));
 	while (padd_len-- > 0)
 		ft_putchar_fd('0', 1);
-	if (num == LLONG_MIN)
-		ft_putstr_fd("9223372036854775808", 1);
-	else
-		ft_putnbr_base_fd(num, 8, 1, BASE_DOWN);
+	ft_putnbr_base_fd(num, 8, 1, BASE_DOWN);
 	return ((i->width > ft_digitlen_ubase(num, 8)) ? \
 				i->width : ft_digitlen_ubase(num, 8));
 }
