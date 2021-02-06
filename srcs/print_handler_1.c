@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 15:11:12 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 15:13:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		printer_type_p(t_info *i, va_list *ap, int *len)
 	return (1);
 }
 
-int		printer_type_perc(t_info *info, va_list *ap, int *len)
+int		printer_type_perc(t_info *info, int *len)
 {
 	char			fill;
 	int				blank_num;
