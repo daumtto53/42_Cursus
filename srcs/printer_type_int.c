@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 00:11:17 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 00:15:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static long long	num_conversion(long long n, t_info *i)
 {
 	if (i->len == FT_PF_HH)
-		n &= CHAR_MAX;
+		n &= CHAR_MIN;
 	else if (i->len == FT_PF_H)
-		n &= SHRT_MAX;
+		n &= SHRT_MIN;
 	else if (i->len == FT_PF_I)
-		n &= INT_MAX;
+		n &= INT_MIN;
 	else if (i->len == FT_PF_L)
-		n &= LONG_MAX;
+		n &= LONG_MIN;
 	else
 		n &= n * 1;
 	return (n);
