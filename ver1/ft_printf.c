@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 13:22:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/01/31 18:17:09 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,15 @@ int		handle_p_info(t_info *info)
 	char	t;
 
 	t = info->type;
-	if (!ft_strchr("cspdiuxX%", t))
+	if (!(t == 'p' || t == 's' || t == 'c' || t == 'd' || t == 'u' || \
+			t == 'i' || t == 'x' || t == 'X' || t == '%'))
 		return (-1);
-	if (info->flag & F_ZERO && ft_strchr("csp", t))
+	if (info->flag & F_ZERO && (t == 'p' || t == 's' || t == 'c'))
 		return (-1);
 	if (info->flag & F_ZERO && info->flag & F_LJUST)
 		info->flag &= (~F_ZERO);
-	if (ft_strchr("diuxX", t) && (info->flag & F_ZERO & F_PREC))
+	if ((t == 'u' || t == 'd' || t == 'x' || t == 'X' || t == 'i') && \
+			(info->flag & F_ZERO) && (info->flag & F_PREC))
 		info->flag &= (~F_ZERO);
 	if (info->prec < 0 && info->flag & F_ZERO)
 		info->flag &= (~F_PREC);
@@ -98,7 +100,7 @@ int		ft_printf(const char *str, ...)
 			return (-1);
 		if (str[j] == '\0')
 			return (len);
-		j += (pf_parse_2(str + j + 1, &info, &ap) + 1);
+		j += (pf_parse(str + j + 1, &info, &ap) + 1);
 		if (handle_p_info(&info) < 0 || print_handler(&info, &ap, &len) < 0)
 			return (-1);
 		i = j;
