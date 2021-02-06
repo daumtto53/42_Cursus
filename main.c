@@ -3,5 +3,5 @@
 
 int		main()
 {
-	ft_printf("%s\n", "123");
+	ft_printf("%d 323 %-42d\n", 12, 3123);
 }
