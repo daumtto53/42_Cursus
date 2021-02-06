@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 15:03:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 15:05:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,11 @@ int		printer_type_s(t_info *i, va_list *ap, int *len)
 	if (0 <= i->prec && i->prec <= (int)ft_strlen(s) && i->flag & F_PREC)
 		strlength = i->prec;
 	blank_num = i->width - strlength;
-	if (i->flag & F_LJUST)
-	{
-		write(1, s, strlength);
-		while (blank_num-- > 0)
-			ft_putchar_fd(' ', 1);
-	}
-	else
-	{
-		while (blank_num-- > 0)
-			ft_putchar_fd(' ', 1);
-		write(1, s, strlength);
-	}
+	while (!(i->flag & F_LJUST) && blank_num-- > 0)
+		ft_putchar_fd(' ', 1);
+	write(1, s, strlength);
+	while (i->flag & F_LJUST && blank_num-- > 0)
+		ft_putchar_fd(' ', 1);
 	*len += ((i->width > strlength) ? i->width : strlength);
 	return (1);
 }
