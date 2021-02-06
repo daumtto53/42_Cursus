@@ -49,7 +49,9 @@ CUSTOM =	ft_isspace.c \
 			ft_ltoa.c \
 			ft_putnbr_base_fd.c \
 			ft_putunbr_base_fd.c \
-			ft_digitlen_base.c
+			ft_digitlen_base.c \
+			ft_digitlen_ubase.c
+
 
 
 BONUS =	ft_lstnew.c \
