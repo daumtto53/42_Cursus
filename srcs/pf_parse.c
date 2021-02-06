@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 13:21:27 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 13:26:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		pf_parse_2(const char *s, t_info *info, va_list *ap)
 {
 	int		i;
 
+	i = 0;
 	while (!ft_strchr("cspdiuxX%", s[i]) && (ft_strchr("0-.*", s[i]) || ft_isdigit(s[i])))
 	{
 		if (s[i] == '0')
