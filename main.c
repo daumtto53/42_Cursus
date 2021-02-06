@@ -3,5 +3,6 @@
 
 int		main()
 {
-	ft_printf("%d 323 %-42d\n", 12, 3123);
+	printf("%d\n\n",ft_printf("%*d\n", 13, 3123));
+	printf("%d\n\n",ft_printf("%d\n", 3123));
 }

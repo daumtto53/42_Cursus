@@ -6,11 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 13:39:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 13:52:28 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 static void		parse_info_renew(t_info *info)
 {
@@ -51,9 +52,16 @@ static int		handle_p_info(t_info *info)
 
 	t = info->type;
 	if (!ft_strchr("cspdiuxX%", t))
+	{
+		printf("%c\n", t);
+		printf("55");
 		return (-1);
+	}
 	if (info->flag & F_ZERO && ft_strchr("csp", t))
+	{
+		printf("56");
 		return (-1);
+	}
 	if (info->flag & F_ZERO && info->flag & F_LJUST)
 		info->flag &= (~F_ZERO);
 	if (ft_strchr("diuxX", t) && (info->flag & F_ZERO & F_PREC))

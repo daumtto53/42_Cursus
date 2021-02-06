@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 13:45:26 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/06 13:54:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int		atoi_interface(const char *s, t_info *info, va_list *ap)
 	if (s[i] == '*' && s[i - 1] == '.')
 	{
 		info->prec = va_arg(*ap, int);
-		i += (1 + 1);
+		i++;
 	}
 	else if (s[i] == '*' && s[i - 1] != '.')
 	{
 		info->width = va_arg(*ap, int);
-		i += (1 + 1);
+		i++;
 	}
 	else if (s[i - 1] == '.')
 		info->prec = ft_atoi(s + i);
@@ -78,5 +78,6 @@ int		pf_parse_2(const char *s, t_info *info, va_list *ap)
 	}
 	change_parsed_negative(info);
 	info->type = s[i];
+	printf("%c, %c\n", s[i], s[i-1]);
 	return (i + 1);
 }
