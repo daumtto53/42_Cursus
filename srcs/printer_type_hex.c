@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 19:03:39 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 19:11:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static int		hex_zero(unsigned long long num, t_info *i)
 	int		ox_len;
 
 	padd_len = -1;
-	ox_len = (i->flag & F_POUND) ? 2 : 0;
+	ox_len = (i->flag & F_POUND && num != 0) ? 2 : 0;
 	if (i->width > ft_digitlen_ubase(num, 16) + ox_len)
 		padd_len = (i->width - (ft_digitlen_ubase(num, 16)) + ox_len);
 	while (padd_len-- > 0)
 		ft_putchar_fd('0', 1);
-	if (i->flag & F_POUND && i->type == 'x')
+	if (i->flag & F_POUND && i->type == 'x' && num != 0)
 		ft_putstr_fd("0x", 1);
-	else if (i->flag & F_POUND && i->type == 'X')
+	else if (i->flag & F_POUND && i->type == 'X' && num != 0)
 		ft_putstr_fd("0X", 1);
 	if (i->type == 'x')
 		ft_putunbr_base_fd(num, 16, 1, BASE_DOWN);
@@ -58,15 +58,15 @@ static int		hex_normal(unsigned long long num, t_info *i)
 	int		ox_len;
 
 	digit_len = ft_digitlen_ubase(num, 16);
-	ox_len = (i->flag & F_POUND) ? 2 : 0;
+	ox_len = (i->flag & F_POUND && num != 0) ? 2 : 0;
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
 	padd_len = (i->width > prec_len + digit_len + ox_len) ? \
 		i->width - (prec_len + digit_len + ox_len) : 0;
 	while (!(i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
-	if (i->flag & F_POUND && i->type == 'x')
+	if (i->flag & F_POUND && i->type == 'x' && num != 0)
 		ft_putstr_fd("0x", 1);
-	else if (i->flag & F_POUND && i->type == 'X')
+	else if (i->flag & F_POUND && i->type == 'X' && num != 0)
 		ft_putstr_fd("0X", 1);
 	while (prec_len-- > 0)
 		ft_putchar_fd('0', 1);
