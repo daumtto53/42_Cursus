@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 18:40:59 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 18:57:57 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int		hex_normal(unsigned long long num, t_info *i)
 		ft_putchar_fd(' ', 1);
 	if (i->flag & F_POUND && i->type == 'x')
 		ft_putstr_fd("0x", 1);
-	else
+	else if (i->flag & F_POUND && i->type == 'X')
 		ft_putstr_fd("0X", 1);
 	while (prec_len-- > 0)
 		ft_putchar_fd('0', 1);
