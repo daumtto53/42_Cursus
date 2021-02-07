@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 18:24:33 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 19:27:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,15 @@ int		int_zero(long long num, t_info *i)
 static int		int_preczero(t_info *i)
 {
 	int		padd_len;
+	int		positive;
 
-	padd_len = i->width;
-	while (padd_len-- > 0)
+	positive = 1;
+	padd_len = i->width - (pf_is_sign(positive, i));
+	while (!(i->flag & F_LJUST) && padd_len-- > 0)
+		ft_putchar_fd(' ', 1);
+	if (pf_is_sign(positive, i))
+		put_sign(positive, i);
+	while (i->flag & F_LJUST && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
 	return (i->width);
 }
