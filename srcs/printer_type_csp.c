@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 13:02:50 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 13:06:40 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,68 +51,26 @@ void	printer_type_s(t_info *i, va_list *ap, int *len)
 	*len += ((i->width > strlength) ? i->width : strlength);
 }
 
-// void	printer_type_p(t_info *i, va_list *ap, int *len)
-// {
-// 	unsigned long long	num;
-// 	int					padd_len;
-
-// 	num = (unsigned long long)va_arg(*ap, char *);
-// 	if (num == 0 && (i->flag & F_PREC))
-// 	{
-// 		write(1, "0x", 2);
-// 		while (i->width-- > 0)
-// 			ft_putchar_fd(' ', 1);
-// 		return ;
-// 	}
-// 	padd_len = i->width - (ft_digitlen_base(num, 16) + 2);
-// 	while (!(i->flag & F_LJUST) && padd_len-- > 0)
-// 		ft_putchar_fd(' ', 1);
-// 	write(1, "0x", 2);
-// 	ft_putunbr_base_fd(num, 16, 1, BASE_DOWN);
-// 	while (i->flag & F_LJUST && padd_len-- > 0)
-// 		ft_putchar_fd(' ', 1);
-// 	*len += ((i->width > (int)ft_digitlen_base(num, 16) + 2) \
-// 				? i->width : (int)ft_digitlen_base(num, 16) + 2);
-// }
-
-static char	*printer_type_p_helper(t_info *i, char *p)
+void	printer_type_p(t_info *i, va_list *ap, int *len)
 {
-	if (p == NULL && !(i->flag & F_PREC))
-		p = ft_numtox((long long)0);
-	else if (p == NULL && i->flag & F_PREC)
-		p = ft_strjoin("", "");
-	else
-		p = ft_numtox((long long)p);
-	return (p);
-}
+	unsigned long long	num;
+	int					padd_len;
+	char				*c;
 
-int		printer_type_p(t_info *i, va_list *ap, int *len)
-{
-	char	*p;
-	int		blank_num;
-
-	p = va_arg(*ap, char *);
-	if ((p = printer_type_p_helper(i, p)) == NULL)
-		return (-1);
-	blank_num = i->width - (ft_strlen(p) + 2);
-	if (i->flag & F_LJUST)
-	{
-		write(1, "0x", 2);
-		write(1, p, ft_strlen(p));
-		while (blank_num-- > 0)
-			ft_putchar_fd(' ', 1);
-	}
+	c = "";
+	num = (unsigned long long)va_arg(*ap, char *);
+	padd_len = i->width - (ft_digitlen_base(num, 16) + 2);
+	while (!(i->flag & F_LJUST) && padd_len-- > 0)
+		ft_putchar_fd(' ', 1);
+	write(1, "0x", 2);
+	if (num == 0 && i->flag & F_PREC)
+		ft_putchar_fd(c, 1);
 	else
-	{
-		while (blank_num-- > 0)
-			ft_putchar_fd(' ', 1);
-		write(1, "0x", 2);
-		write(1, p, ft_strlen(p));
-	}
-	*len += ((i->width > (int)ft_strlen(p) + 2) \
-				? i->width : (int)ft_strlen(p) + 2);
-	free(p);
-	return (1);
+		ft_putunbr_base_fd(num, 16, 1, BASE_DOWN);
+	while (i->flag & F_LJUST && padd_len-- > 0)
+		ft_putchar_fd(' ', 1);
+	*len += ((i->width > (int)ft_digitlen_base(num, 16) + 2) \
+				? i->width : (int)ft_digitlen_base(num, 16) + 2);
 }
 
 void	printer_type_perc(t_info *info, int *len)
