@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 13:19:26 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 13:24:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ void	printer_type_p(t_info *i, va_list *ap, int *len)
 		ft_putunbr_base_fd(num, 16, 1, BASE_DOWN);
 	while (i->flag & F_LJUST && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
-	if (num == 0 && i->flag & F_PREC)
-		*len += i->width;
-	else
-		*len += ((i->width > (int)ft_digitlen_base(num, 16) + 2) \
-				? i->width : (int)ft_digitlen_base(num, 16) + 2);
+	*len += ((i->width > (int)ft_digitlen_base(num, 16) + 2 - (!num)) \
+				? i->width : (int)ft_digitlen_base(num, 16) + 2 - (!num));
 }
 
 void	printer_type_perc(t_info *info, int *len)
