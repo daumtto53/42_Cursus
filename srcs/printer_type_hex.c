@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 01:08:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 11:46:10 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 static unsigned long long	num_conversion(unsigned long long n, t_info *i)
 {
+	printf("sssssss%llu\n", n);
 	if (i->len == FT_PF_HH)
 		n &= UCHAR_MAX;
 	else if (i->len == FT_PF_H)
 		n &= USHRT_MAX;
 	else if (i->len == FT_PF_I)
-		n &= UINT_MAX;
+		n = (UINT_MAX) & (unsigned int)n;
 	else if (i->len == FT_PF_L)
 		n &= ULONG_MAX;
 	else
@@ -83,16 +84,17 @@ void	printer_type_hex(t_info *info, va_list *ap, int *len)
 	unsigned long long num;
 
 	if (info->len == FT_PF_HH)
-		num = ((char)va_arg(*ap, int));
+		num = ((unsigned char)va_arg(*ap, int));
 	else if (info->len == FT_PF_H)
-		num = ((short)va_arg(*ap, int));
+		num = ((unsigned short)va_arg(*ap, int));
 	else if (info->len == FT_PF_I)
-		num = ((short)va_arg(*ap, int));
+		num = ((unsigned int)va_arg(*ap, int));
 	else if (info->len == FT_PF_L)
-		num = ((long)va_arg(*ap, long));
+		num = ((unsigned long)va_arg(*ap, long));
 	else
-		num = ((long long)va_arg(*ap, long long));
+		num = ((unsigned long long)va_arg(*ap, long long));
 	num = num_conversion(num, info);
+	ft_putnbr_base_fd(num, 16, 1, BASE_UP);
 	if (info->flag & F_ZERO)
 		*len += (hex_zero(num, info));
 	else if (info->flag & F_PREC && num == 0 && info->prec == 0)

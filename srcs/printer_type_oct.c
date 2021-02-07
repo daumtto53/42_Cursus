@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:54:23 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 00:12:01 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 11:47:10 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ void	printer_type_oct(t_info *info, va_list *ap, int *len)
 	unsigned long long num;
 
 	if (info->len == FT_PF_HH)
-		num = ((char)va_arg(*ap, int));
+		num = ((unsigned char)va_arg(*ap, int));
 	else if (info->len == FT_PF_H)
-		num = ((short)va_arg(*ap, int));
+		num = ((unsigned short)va_arg(*ap, int));
 	else if (info->len == FT_PF_I)
-		num = ((short)va_arg(*ap, int));
+		num = ((unsigned short)va_arg(*ap, int));
 	else if (info->len == FT_PF_L)
-		num = ((long)va_arg(*ap, long));
+		num = ((unsigned long)va_arg(*ap, long));
 	else
-		num = ((long long)va_arg(*ap, long long));
+		num = ((unsigned long long)va_arg(*ap, long long));
 	num = num_conversion(num, info);
 	if (info->flag & F_ZERO)
 		*len += (oct_zero(num, info));
