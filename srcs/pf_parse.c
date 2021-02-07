@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 19:15:43 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 14:31:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ static void		pf_parse_flag(const char *s, t_info *info)
 	else if (s[i] == '-')
 		info->flag |= F_LJUST;
 	else if (s[i] == 'h' || s[i] == 'l')
-		info->len = (s[i] == 'h') ? info->len - 1 : info->len + 1;
+	{
+		if (s[i] == 'h')
+			info->len -= 1;
+		else
+			info->len += 1;
+	}
 }
 
 static int		atoi_abstraction(const char *s, t_info *info, va_list *ap)
@@ -73,7 +78,7 @@ int		pf_parse(const char *s, t_info *info, va_list *ap)
 	i = 0;
 	while (!ft_strchr("cspdiuxX%", s[i]) && (ft_strchr("0-.*lh", s[i]) || ft_isdigit(s[i])))
 	{
-		pf_parse_flag(s, info);
+		pf_parse_flag(s + i, info);
 		if (s[i] == '.')
 		{
 			info->flag |= F_PREC;

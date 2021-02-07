@@ -3,13 +3,10 @@
 #include "includes/ft_printf.h"
 int main()
 {
-	unsigned long long 	a;
 
-	a = 123456789LL;
-	a &= UCHAR_MAX;
-	int		p;
-	ft_printf("-->|%-15.p|<--\n", NULL);
-	printf("-->|%-15.p|<--\n", NULL);
+	printf("%d\n", ft_printf("[%-4.*hhu]", 4, -1));
+	printf("%d\n", printf("[%-4.*hhu]", 4, -1));
+
 
 
 }
