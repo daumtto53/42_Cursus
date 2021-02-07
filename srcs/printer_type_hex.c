@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 19:11:08 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 19:17:18 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		hex_zero(unsigned long long num, t_info *i)
 	padd_len = -1;
 	ox_len = (i->flag & F_POUND && num != 0) ? 2 : 0;
 	if (i->width > ft_digitlen_ubase(num, 16) + ox_len)
-		padd_len = (i->width - (ft_digitlen_ubase(num, 16)) + ox_len);
+		padd_len = (i->width - (ft_digitlen_ubase(num, 16) + ox_len));
 	while (padd_len-- > 0)
 		ft_putchar_fd('0', 1);
 	if (i->flag & F_POUND && i->type == 'x' && num != 0)
