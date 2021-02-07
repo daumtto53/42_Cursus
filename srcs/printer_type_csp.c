@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 13:24:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 13:37:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,16 @@ void	printer_type_p(t_info *i, va_list *ap, int *len)
 	unsigned long long	num;
 	int					padd_len;
 	char				*c;
+	int					sign;
 
 	c = "";
 	num = (unsigned long long)va_arg(*ap, char *);
 	padd_len = i->width - (ft_digitlen_base(num, 16) + 2);
 	if (num == 0 && i->flag & F_PREC)
+	{
+		sign = 1;
 		padd_len = i->width - 2;
+	}
 	while (!(i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
 	write(1, "0x", 2);
@@ -71,8 +75,8 @@ void	printer_type_p(t_info *i, va_list *ap, int *len)
 		ft_putunbr_base_fd(num, 16, 1, BASE_DOWN);
 	while (i->flag & F_LJUST && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
-	*len += ((i->width > (int)ft_digitlen_base(num, 16) + 2 - (!num)) \
-				? i->width : (int)ft_digitlen_base(num, 16) + 2 - (!num));
+	*len += ((i->width > (int)ft_digitlen_base(num, 16) + 2 - (sign)) \
+				? i->width : (int)ft_digitlen_base(num, 16) + 2 - (sign));
 }
 
 void	printer_type_perc(t_info *info, int *len)
