@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 18:57:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 19:02:37 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,24 @@ static unsigned long long	num_conversion(unsigned long long n, t_info *i)
 static int		hex_zero(unsigned long long num, t_info *i)
 {
 	int		padd_len;
+	int		ox_len;
 
 	padd_len = -1;
+	ox_len = (i->flag & F_POUND) ? 2 : 0;
 	if (i->width > ft_digitlen_ubase(num, 16))
-		padd_len = (i->width - ft_digitlen_ubase(num, 16));
+		padd_len = (i->width - (ft_digitlen_ubase(num, 16)) + ox_len);
 	while (padd_len-- > 0)
 		ft_putchar_fd('0', 1);
+	if (i->flag & F_POUND && i->type == 'x')
+		ft_putstr_fd("0x", 1);
+	else if (i->flag & F_POUND && i->type == 'X')
+		ft_putstr_fd("0X", 1);
 	if (i->type == 'x')
 		ft_putunbr_base_fd(num, 16, 1, BASE_DOWN);
 	else
 		ft_putunbr_base_fd(num, 16, 1, BASE_UP);
-	return ((i->width > ft_digitlen_ubase(num, 16)) ? \
-				i->width : ft_digitlen_ubase(num, 16));
+	return ((i->width > ox_len + ft_digitlen_ubase(num, 16)) ? \
+				i->width : ox_len + ft_digitlen_ubase(num, 16));
 }
 
 static int		hex_normal(unsigned long long num, t_info *i)
