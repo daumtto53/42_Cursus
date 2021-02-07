@@ -16,6 +16,7 @@ SRCS =	ft_printf.c \
 		printer_type_int.c \
 		printer_type_oct.c \
 		printer_type_uint.c \
+		ft_printf_utils.c
 
 LIBFT = -L./libft -lft
 

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 21:43:08 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:57:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int		print_handler(t_info *info, va_list *ap, int *len)
 		printer_type_uint(info, ap, len);
 	else if (t == '%')
 		printer_type_perc(info, len);
+	else if (t == 'o')
+		printer_type_oct(info, ap, len);
 	else
 		return (-1);
 	return (1);
@@ -51,7 +53,7 @@ static int		handle_p_info(t_info *info)
 	char	t;
 
 	t = info->type;
-	if (!ft_strchr("cspdiuxX%", t))
+	if (!ft_strchr("cspdiouxX%", t))
 		return (-1);
 	if (info->len < FT_PF_HH && info->len > FT_PF_LL)
 		return (-1);
@@ -59,10 +61,12 @@ static int		handle_p_info(t_info *info)
 		return (-1);
 	if (info->flag & F_ZERO && info->flag & F_LJUST)
 		info->flag &= (~F_ZERO);
-	if (ft_strchr("diuxX", t) && info->flag & F_ZERO && info->flag & F_PREC)
+	if (ft_strchr("diouxX", t) && info->flag & F_ZERO && info->flag & F_PREC)
 		info->flag &= (~F_ZERO);
 	if (info->prec < 0 && info->flag & F_ZERO)
 		info->flag &= (~F_PREC);
+	if (info->flag & F_PLUS && info->flag & F_SPACE)
+		info->flag &= (~F_SPACE);
 	if (info->width >= 2147483646 || info->prec >= 2147483646)
 		return (-1);
 	return (1);

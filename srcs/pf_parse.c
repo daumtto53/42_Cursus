@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 14:31:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 15:27:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static void		pf_parse_flag(const char *s, t_info *info)
 		info->flag |= F_ZERO;
 	else if (s[i] == '-')
 		info->flag |= F_LJUST;
+	else if (s[i] == '#')
+		info->flag |= F_POUND;
+	else if (s[i] == '+')
+		info->flag |= F_PLUS;
+	else if (s[i] == ' ')
+		info->flag |= F_SPACE;
 	else if (s[i] == 'h' || s[i] == 'l')
 	{
 		if (s[i] == 'h')
@@ -76,7 +82,8 @@ int		pf_parse(const char *s, t_info *info, va_list *ap)
 	int		i;
 
 	i = 0;
-	while (!ft_strchr("cspdiuxX%", s[i]) && (ft_strchr("0-.*lh", s[i]) || ft_isdigit(s[i])))
+	while (!ft_strchr("cspdiouxX%", s[i]) && \
+		(ft_strchr("0-.*lh# +", s[i]) || ft_isdigit(s[i])))
 	{
 		pf_parse_flag(s + i, info);
 		if (s[i] == '.')
