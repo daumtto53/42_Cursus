@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 15:38:13 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 17:31:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 11:58:33 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putunbr_base_fd(unsigned long long n, int base, int fd, int mode)
 	unsigned long long	ln;
 	char				*str;
 
-	str = (mode == BASE_DOWN) ? "0123456789abcedf" : "0123456789ABCDEF";
+	str = (mode == BASE_DOWN) ? "0123456789abcdef" : "0123456789ABCDEF";
 	ln = n;
 	if (ln / base == 0)
 	{

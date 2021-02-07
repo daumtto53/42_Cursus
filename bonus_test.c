@@ -10,4 +10,13 @@ int main()
 
 	printf("%d\n", ft_printf("%12.x\n", 123456789));
 	printf("%d\n", printf("%12.6x\n", 123456789));
+	ft_putunbr_base_fd(123456789, 16, 1, BASE_DOWN);
+	printf("\n");
+	ft_putunbr_base_fd(123456789, 16, 1, BASE_UP);
+	printf("\n");
+	printf("\n");
+	ft_putnbr_base_fd(123456789, 16, 1, BASE_DOWN);
+	printf("\n");
+	ft_putnbr_base_fd(123456789, 16, 1, BASE_UP);
+	printf("\n");
 }
