@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 12:57:38 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 12:59:21 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	printer_type_p(t_info *i, va_list *ap, int *len)
 	if (num == 0 && (i->flag & F_PREC))
 	{
 		write(1, "0x", 2);
-		while (i->width-- > 0)
+		while (i->width-- > 2)
 			ft_putchar_fd(' ', 1);
 		return ;
 	}
