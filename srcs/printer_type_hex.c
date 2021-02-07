@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 11:46:10 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 11:51:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static unsigned long long	num_conversion(unsigned long long n, t_info *i)
 {
-	printf("sssssss%llu\n", n);
 	if (i->len == FT_PF_HH)
 		n &= UCHAR_MAX;
 	else if (i->len == FT_PF_H)
