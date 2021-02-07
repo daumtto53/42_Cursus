@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 22:05:15 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 12:45:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	printer_type_p(t_info *i, va_list *ap, int *len)
 	int					padd_len;
 
 	num = (unsigned long long)va_arg(*ap, char *);
-	if (num == 0 && !(i->flag & F_PREC))
+	if (num == 0 && (i->flag & F_PREC))
 	{
 		padd_len = i->width;
 		while (padd_len-- > 0)
