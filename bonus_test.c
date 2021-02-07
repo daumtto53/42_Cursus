@@ -8,8 +8,8 @@ int main()
 	a = 123456789LL;
 	a &= UCHAR_MAX;
 	int		p;
- 	printf("-->|%-16.p|<--\n", &p);
-	ft_printf("-->|%-16.p|<--\n", &p);
+	ft_printf("-->|%-15.p|<--\n", NULL);
+	printf("-->|%-15.p|<--\n", NULL);
 
 
 }
