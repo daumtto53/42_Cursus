@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 11:51:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 11:53:03 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	printer_type_hex(t_info *info, va_list *ap, int *len)
 	else
 		num = ((unsigned long long)va_arg(*ap, long long));
 	num = num_conversion(num, info);
-	ft_putnbr_base_fd(num, 16, 1, BASE_UP);
 	if (info->flag & F_ZERO)
 		*len += (hex_zero(num, info));
 	else if (info->flag & F_PREC && num == 0 && info->prec == 0)
