@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 19:27:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 20:31:47 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ static int		int_preczero(t_info *i)
 		put_sign(positive, i);
 	while (i->flag & F_LJUST && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
-	return (i->width);
+	if (pf_is_sign(positive, i) && i->width == 0)
+		return (1);
+	else
+		return (i->width);
 }
 
 void	printer_type_int(t_info *info, va_list *ap, int *len)
