@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 13:37:22 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/07 13:39:05 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	printer_type_p(t_info *i, va_list *ap, int *len)
 	char				*c;
 	int					sign;
 
+	sign = 0;
 	c = "";
 	num = (unsigned long long)va_arg(*ap, char *);
 	padd_len = i->width - (ft_digitlen_base(num, 16) + 2);
