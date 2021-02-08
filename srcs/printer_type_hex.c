@@ -6,26 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 01:07:22 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 01:12:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-// static unsigned long long	num_conversion(unsigned long long n, t_info *i)
-// {
-// 	if (i->len == FT_PF_HH)
-// 		n &= UCHAR_MAX;
-// 	else if (i->len == FT_PF_H)
-// 		n &= USHRT_MAX;
-// 	else if (i->len == FT_PF_I)
-// 		n = (UINT_MAX) & (unsigned int)n;
-// 	else if (i->len == FT_PF_L)
-// 		n &= ULONG_MAX;
-// 	else
-// 		n &= n * 1;
-// 	return (n);
-// }
 
 void						print_0x(t_info *i, unsigned long long num)
 {

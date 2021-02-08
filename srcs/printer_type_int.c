@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 01:06:23 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 01:12:46 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,6 @@ static void	put_sign(int sign, t_info *i)
 	}
 	ft_putchar_fd(c, 1);
 }
-
-// static long long	num_conversion(long long n, t_info *i)
-// {
-// 	if (i->len == FT_PF_HH)
-// 		n &= (char)-1;
-// 	else if (i->len == FT_PF_H)
-// 		n &= (short)-1;
-// 	else if (i->len == FT_PF_I)
-// 		n &= (int)-1;
-// 	else if (i->len == FT_PF_L)
-// 		n &= -1L;
-// 	else
-// 		n &= n * 1;
-// 	return (n);
-// }
 
 int			int_zero(long long num, t_info *i)
 {
