@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 15:57:19 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/08 22:33:29 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int		print_handler(t_info *info, va_list *ap, int *len)
 		printer_type_perc(info, len);
 	else if (t == 'o')
 		printer_type_oct(info, ap, len);
+	else if (t == 'n')
+		printer_type_n(info, ap, len);
 	else
 		return (-1);
 	return (1);
@@ -53,7 +55,7 @@ static int		handle_p_info(t_info *info)
 	char	t;
 
 	t = info->type;
-	if (!ft_strchr("cspdiouxX%", t))
+	if (!ft_strchr("cspdiouxXn%", t))
 		return (-1);
 	if (info->len < FT_PF_HH && info->len > FT_PF_LL)
 		return (-1);

@@ -4,12 +4,11 @@
 
 int main()
 {
-	printf("%d\n", ft_printf("[%+.i]", 0));
-	printf("%d\n", printf("[%+.i]", 0));
-
-	printf("%d\n", ft_printf("[%#04.*x]", -4, 13));
-	printf("%d\n", printf("[%#04.*x]", -4, 13));
-	printf("%d\n", ft_printf("[%#X]", -1234));
-	printf("%d\n", printf("[%#X]", -1234));
-	ft_putchar_fd('\n', 1);
+  int c;
+  long x;
+  ft_printf("geeks for %n geeks ", &c);
+  printf("%d\n", c);
+  ft_printf("geeks for %ln geeks ", &x);
+  printf("%ld\n", x);
+  return 0;
 }

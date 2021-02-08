@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 18:17:30 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:32:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,11 @@ void			printer_type_oct(t_info *info, va_list *ap, int *len);
 void			printer_type_int(t_info *info, va_list *ap, int *len);
 int				pf_is_sign(long long num, t_info *info);
 void			printer_type_uint(t_info *info, va_list *ap, int *len);
+void			printer_type_n(t_info *info, va_list *ap, int *len);
+void			printer_type_nhh(va_list *ap, int *len);
+void			printer_type_nh(va_list *ap, int *len);
+void			printer_type_ni(va_list *ap, int *len);
+void			printer_type_nl(va_list *ap, int *len);
+void			printer_type_nll(va_list *ap, int *len);
 
 #endif
