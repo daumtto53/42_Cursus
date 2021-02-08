@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 01:01:52 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 01:07:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // 	return (n);
 // }
 
-void		print_0x(t_info *i, unsigned long long num)
+void						print_0x(t_info *i, unsigned long long num)
 {
 	if (i->flag & F_POUND && i->type == 'x' && num != 0)
 		ft_putstr_fd("0x", 1);
@@ -35,7 +35,7 @@ void		print_0x(t_info *i, unsigned long long num)
 		ft_putstr_fd("0X", 1);
 }
 
-static int	hex_zero(unsigned long long num, t_info *i)
+static int					hex_zero(unsigned long long num, t_info *i)
 {
 	int		padd_len;
 	int		ox_len;
@@ -110,7 +110,6 @@ void						printer_type_hex(t_info *i, va_list *ap, int *len)
 		num = ((unsigned long)va_arg(*ap, long)) & ULONG_MAX;
 	else
 		num = ((unsigned long long)va_arg(*ap, long long));
-	num = num_conversion(num, i);
 	if (i->flag & F_ZERO)
 		*len += (hex_zero(num, i));
 	else if (i->flag & F_PREC && num == 0 && i->prec == 0)

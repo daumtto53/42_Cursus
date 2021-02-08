@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 23:53:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/06 23:00:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 01:05:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,5 @@ void				ft_putunbr_base_fd(unsigned long long n, \
 						int base, int fd, int mode);
 int					ft_digitlen_base(long long num, int base);
 int					ft_digitlen_ubase(unsigned long long num, int base);
-
-
 
 #endif

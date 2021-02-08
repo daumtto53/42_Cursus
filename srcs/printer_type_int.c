@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 00:54:34 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 01:06:23 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void		printer_type_int(t_info *info, va_list *ap, int *len)
 		num = (long)va_arg(*ap, long) & (long)-1;
 	else
 		num = (long long)va_arg(*ap, long long);
-	num = num_conversion(num, info);
 	if (info->flag & F_ZERO)
 		*len += (int_zero(num, info));
 	else if (info->flag & F_PREC && num == 0 && info->prec == 0)

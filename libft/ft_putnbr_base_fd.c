@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 15:38:13 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 11:59:43 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 01:04:42 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ void	ft_putnbr_base_fd(long long n, int base, int fd, int mode)
 	else
 		ft_putchar_fd(str[ln % base], fd);
 }
-
