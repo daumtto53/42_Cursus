@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:54:23 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 20:35:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:49:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static unsigned long long	num_conversion(unsigned long long n, t_info *i)
 	return (n);
 }
 
-static int		oct_zero(unsigned long long num, t_info *i)
+static int					oct_zero(unsigned long long num, t_info *i)
 {
 	int		pound_flag;
 	int		padd_len;
@@ -45,7 +45,7 @@ static int		oct_zero(unsigned long long num, t_info *i)
 				i->width : ft_digitlen_ubase(num, 8) + pound_flag);
 }
 
-static int		oct_normal(unsigned long long num, t_info *i)
+static int					oct_normal(unsigned long long num, t_info *i)
 {
 	int		padd_len;
 	int		prec_len;
@@ -53,7 +53,8 @@ static int		oct_normal(unsigned long long num, t_info *i)
 
 	digit_len = ft_digitlen_ubase(num, 8);
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
-	prec_len = (num != 0 && i->flag & F_POUND && prec_len <= 0) ? prec_len + 1 : prec_len;
+	prec_len = (num != 0 && i->flag & F_POUND && prec_len <= 0) ? \
+					prec_len + 1 : prec_len;
 	padd_len = (i->width > prec_len + digit_len) ? \
 		i->width - (prec_len + digit_len) : 0;
 	while (!(i->flag & F_LJUST) && padd_len-- > 0)
@@ -65,10 +66,11 @@ static int		oct_normal(unsigned long long num, t_info *i)
 		ft_putchar_fd(' ', 1);
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
 	prec_len = (num != 0 && i->flag & F_POUND) ? prec_len + 1 : prec_len;
-	return ((i->width > prec_len + digit_len) ? i->width : prec_len + digit_len);
+	return ((i->width > prec_len + digit_len) ? \
+				i->width : prec_len + digit_len);
 }
 
-static int		oct_preczero(t_info *i)
+static int					oct_preczero(t_info *i)
 {
 	int		padd_len;
 
@@ -78,9 +80,10 @@ static int		oct_preczero(t_info *i)
 	return (i->width);
 }
 
-void	printer_type_oct(t_info *info, va_list *ap, int *len)
+void						printer_type_oct(t_info *info, \
+	va_list *ap, int *len)
 {
-	unsigned long long num;
+	unsigned long long	num;
 
 	if (info->len == FT_PF_HH)
 		num = ((unsigned char)va_arg(*ap, int));

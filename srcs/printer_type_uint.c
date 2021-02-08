@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 14:34:36 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:53:03 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static unsigned long long	num_conversion(unsigned long long n, t_info *i)
 	return (n);
 }
 
-static int		uint_zero(unsigned long long num, t_info *i)
+static int					uint_zero(unsigned long long num, t_info *i)
 {
 	int		padd_len;
 
@@ -41,7 +41,7 @@ static int		uint_zero(unsigned long long num, t_info *i)
 				i->width : ft_digitlen_ubase(num, 10));
 }
 
-static int		uint_normal(unsigned long long num, t_info *i)
+static int					uint_normal(unsigned long long num, t_info *i)
 {
 	int		padd_len;
 	int		prec_len;
@@ -59,10 +59,11 @@ static int		uint_normal(unsigned long long num, t_info *i)
 	while ((i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
-	return ((i->width > prec_len + digit_len) ? i->width : prec_len + digit_len);
+	return ((i->width > prec_len + digit_len) ? \
+				i->width : prec_len + digit_len);
 }
 
-static int		uint_preczero(t_info *i)
+static int					uint_preczero(t_info *i)
 {
 	int		padd_len;
 
@@ -72,25 +73,25 @@ static int		uint_preczero(t_info *i)
 	return (i->width);
 }
 
-void	printer_type_uint(t_info *info, va_list *ap, int *len)
+void						printer_type_uint(t_info *i, va_list *ap, int *len)
 {
 	unsigned long long num;
 
-	if (info->len == FT_PF_HH)
+	if (i->len == FT_PF_HH)
 		num = ((unsigned char)va_arg(*ap, int));
-	else if (info->len == FT_PF_H)
+	else if (i->len == FT_PF_H)
 		num = ((unsigned short)va_arg(*ap, int));
-	else if (info->len == FT_PF_I)
+	else if (i->len == FT_PF_I)
 		num = ((unsigned int)va_arg(*ap, int));
-	else if (info->len == FT_PF_L)
+	else if (i->len == FT_PF_L)
 		num = ((unsigned long)va_arg(*ap, long));
 	else
 		num = ((unsigned long long)va_arg(*ap, long long));
-	num = num_conversion(num, info);
-	if (info->flag & F_ZERO)
-		*len += (uint_zero(num, info));
-	else if (info->flag & F_PREC && num == 0 && info->prec == 0)
-		*len += (uint_preczero(info));
+	num = num_conversion(num, i);
+	if (i->flag & F_ZERO)
+		*len += (uint_zero(num, i));
+	else if (i->flag & F_PREC && num == 0 && i->prec == 0)
+		*len += (uint_preczero(i));
 	else
-		*len += (uint_normal(num, info));
+		*len += (uint_normal(num, i));
 }

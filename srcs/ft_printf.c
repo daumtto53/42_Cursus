@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/08 22:33:29 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:51:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int		print_until_delim(const char *str, int i, int *len)
 	return (j);
 }
 
-int		ft_printf(const char *str, ...)
+int				ft_printf(const char *str, ...)
 {
 	va_list			ap;
 	t_info			info;

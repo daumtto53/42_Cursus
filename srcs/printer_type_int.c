@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 20:31:47 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:54:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void			put_sign(int sign, t_info *i)
+static void	put_sign(int sign, t_info *i)
 {
 	char	c;
 
@@ -30,22 +30,22 @@ static void			put_sign(int sign, t_info *i)
 	ft_putchar_fd(c, 1);
 }
 
-static long long	num_conversion(long long n, t_info *i)
-{
-	if (i->len == FT_PF_HH)
-		n &= (char)-1;
-	else if (i->len == FT_PF_H)
-		n &= (short)-1;
-	else if (i->len == FT_PF_I)
-		n &= (int)-1;
-	else if (i->len == FT_PF_L)
-		n &= -1L;
-	else
-		n &= n * 1;
-	return (n);
-}
+// static long long	num_conversion(long long n, t_info *i)
+// {
+// 	if (i->len == FT_PF_HH)
+// 		n &= (char)-1;
+// 	else if (i->len == FT_PF_H)
+// 		n &= (short)-1;
+// 	else if (i->len == FT_PF_I)
+// 		n &= (int)-1;
+// 	else if (i->len == FT_PF_L)
+// 		n &= -1L;
+// 	else
+// 		n &= n * 1;
+// 	return (n);
+// }
 
-int		int_zero(long long num, t_info *i)
+int			int_zero(long long num, t_info *i)
 {
 	int		padd_len;
 	int		sign;
@@ -53,7 +53,8 @@ int		int_zero(long long num, t_info *i)
 	padd_len = -1;
 	sign = (num < 0) ? -1 : 1;
 	if (i->width > (pf_is_sign(num, i) + ft_digitlen_base(num, 10)))
-		padd_len = (i->width - (pf_is_sign(num, i)+ ft_digitlen_base(num, 10)));
+		padd_len = (i->width - \
+			(pf_is_sign(num, i) + ft_digitlen_base(num, 10)));
 	if (pf_is_sign(num, i))
 		put_sign(sign, i);
 	while (padd_len-- > 0)
@@ -62,11 +63,11 @@ int		int_zero(long long num, t_info *i)
 		ft_putstr_fd("9223372036854775808", 1);
 	else
 		ft_putnbr_base_fd(sign * num, 10, 1, BASE_DOWN);
-	return ((i->width > pf_is_sign(num, i)+ ft_digitlen_base(num, 10)) ? \
+	return ((i->width > pf_is_sign(num, i) + ft_digitlen_base(num, 10)) ? \
 				i->width : pf_is_sign(num, i) + ft_digitlen_base(num, 10));
 }
 
- int		int_normal(long long num, t_info *i)
+int			int_normal(long long num, t_info *i)
 {
 	int		padd_len;
 	int		prec_len;
@@ -84,7 +85,7 @@ int		int_zero(long long num, t_info *i)
 		put_sign(sign, i);
 	while (prec_len-- > 0)
 		ft_putchar_fd('0', 1);
-	ft_putnbr_base_fd(num * sign , 10, 1, BASE_DOWN);
+	ft_putnbr_base_fd(num * sign, 10, 1, BASE_DOWN);
 	while ((i->flag & F_LJUST) && padd_len-- > 0)
 		ft_putchar_fd(' ', 1);
 	prec_len = (i->prec > digit_len) ? i->prec - digit_len : 0;
@@ -92,7 +93,7 @@ int		int_zero(long long num, t_info *i)
 				i->width : (pf_is_sign(num, i) + prec_len + digit_len));
 }
 
-static int		int_preczero(t_info *i)
+static int	int_preczero(t_info *i)
 {
 	int		padd_len;
 	int		positive;
@@ -111,18 +112,18 @@ static int		int_preczero(t_info *i)
 		return (i->width);
 }
 
-void	printer_type_int(t_info *info, va_list *ap, int *len)
+void		printer_type_int(t_info *info, va_list *ap, int *len)
 {
-	long long num;
+	long long	num;
 
 	if (info->len == FT_PF_HH)
-		num = (char)va_arg(*ap, int);
+		num = (char)va_arg(*ap, int) & (char)-1;
 	else if (info->len == FT_PF_H)
-		num = (short)va_arg(*ap, int);
+		num = (short)va_arg(*ap, int) & (short)-1;
 	else if (info->len == FT_PF_I)
-		num = (int)va_arg(*ap, int);
+		num = (int)va_arg(*ap, int) & (int)-1;
 	else if (info->len == FT_PF_L)
-		num = (long)va_arg(*ap, long);
+		num = (long)va_arg(*ap, long) & (long)-1;
 	else
 		num = (long long)va_arg(*ap, long long);
 	num = num_conversion(num, info);

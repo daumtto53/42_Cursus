@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 20:04:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/08 22:33:15 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 00:50:39 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void		change_parsed_negative(t_info *info)
 	}
 }
 
-int		pf_parse(const char *s, t_info *info, va_list *ap)
+int				pf_parse(const char *s, t_info *info, va_list *ap)
 {
 	int		i;
 
