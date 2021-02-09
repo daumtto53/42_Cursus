@@ -37,6 +37,8 @@ $(NAME) : $(OBJS)
 
 all : $(NAME)
 
+bonus : $(NAME)
+
 clean :
 	$(MAKE) clean -C ./libft
 	rm -rf $(OBJS)
@@ -47,4 +49,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus
