@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 01:12:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 14:01:41 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	int_preczero(t_info *i)
 		return (i->width);
 }
 
-void		printer_type_int(t_info *info, va_list *ap, int *len)
+void		printer_type_int(t_info *info, va_list *ap, long long *len)
 {
 	long long	num;
 

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 01:05:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 14:00:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,25 @@ typedef struct	s_info
 	char	type;
 }				t_info;
 
-int				ft_printf(const char *str, ...);
+long long		ft_printf(const char *str, ...);
 
 int				pf_parse(const char *s, t_info *info, va_list *ap);
 
-void			printer_type_c(t_info *info, va_list *ap, int *l);
-void			printer_type_s(t_info *info, va_list *ap, int *l);
-void			printer_type_p(t_info *info, va_list *ap, int *l);
-void			printer_type_perc(t_info *info, int *l);
+void			printer_type_c(t_info *info, va_list *ap, long long *l);
+void			printer_type_s(t_info *info, va_list *ap, long long *l);
+void			printer_type_p(t_info *info, va_list *ap, long long *l);
+void			printer_type_perc(t_info *info, long long *l);
 
-void			printer_type_hex(t_info *info, va_list *ap, int *len);
-void			printer_type_oct(t_info *info, va_list *ap, int *len);
-void			printer_type_int(t_info *info, va_list *ap, int *len);
+void			printer_type_hex(t_info *info, va_list *ap, long long *len);
+void			printer_type_oct(t_info *info, va_list *ap, long long *len);
+void			printer_type_int(t_info *info, va_list *ap, long long *len);
 int				pf_is_sign(long long num, t_info *info);
-void			printer_type_uint(t_info *info, va_list *ap, int *len);
-void			printer_type_n(t_info *info, va_list *ap, int *len);
-void			printer_type_nhh(va_list *ap, int *len);
-void			printer_type_nh(va_list *ap, int *len);
-void			printer_type_ni(va_list *ap, int *len);
-void			printer_type_nl(va_list *ap, int *len);
-void			printer_type_nll(va_list *ap, int *len);
+void			printer_type_uint(t_info *info, va_list *ap, long long *len);
+void			printer_type_n(t_info *info, va_list *ap, long long *len);
+void			printer_type_nhh(va_list *ap, long long *len);
+void			printer_type_nh(va_list *ap, long long *len);
+void			printer_type_ni(va_list *ap, long long *len);
+void			printer_type_nl(va_list *ap, long long *len);
+void			printer_type_nll(va_list *ap, long long *len);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 22:09:00 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/07 13:39:05 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 14:01:07 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	printer_type_c(t_info *info, va_list *ap, int *len)
+void	printer_type_c(t_info *info, va_list *ap, long long *len)
 {
 	unsigned char	c;
 	int				blank_num;
@@ -30,7 +30,7 @@ void	printer_type_c(t_info *info, va_list *ap, int *len)
 		*len += 1;
 }
 
-void	printer_type_s(t_info *i, va_list *ap, int *len)
+void	printer_type_s(t_info *i, va_list *ap, long long *len)
 {
 	int		strlength;
 	int		blank_num;
@@ -51,7 +51,7 @@ void	printer_type_s(t_info *i, va_list *ap, int *len)
 	*len += ((i->width > strlength) ? i->width : strlength);
 }
 
-void	printer_type_p(t_info *i, va_list *ap, int *len)
+void	printer_type_p(t_info *i, va_list *ap, long long *len)
 {
 	unsigned long long	num;
 	int					padd_len;
@@ -80,7 +80,7 @@ void	printer_type_p(t_info *i, va_list *ap, int *len)
 				? i->width : (int)ft_digitlen_base(num, 16) + 2 - (sign));
 }
 
-void	printer_type_perc(t_info *info, int *len)
+void	printer_type_perc(t_info *info, long long *len)
 {
 	char			fill;
 	int				blank_num;

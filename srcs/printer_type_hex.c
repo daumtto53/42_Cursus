@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 18:01:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 01:12:38 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 14:01:27 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int					hex_preczero(t_info *i)
 	return (i->width);
 }
 
-void						printer_type_hex(t_info *i, va_list *ap, int *len)
+void						printer_type_hex\
+		(t_info *i, va_list *ap, long long *len)
 {
 	unsigned long long num;
 

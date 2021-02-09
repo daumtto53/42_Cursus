@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:54:23 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 00:49:13 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 14:02:21 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int					oct_preczero(t_info *i)
 }
 
 void						printer_type_oct(t_info *info, \
-	va_list *ap, int *len)
+	va_list *ap, long long *len)
 {
 	unsigned long long	num;
 

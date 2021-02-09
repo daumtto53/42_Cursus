@@ -10,5 +10,6 @@ int main()
   printf("%d\n", c);
   ft_printf("geeks for %ln geeks ", &x);
   printf("%ld\n", x);
+  ft_printf("131232%n\n", NULL);
   return 0;
 }

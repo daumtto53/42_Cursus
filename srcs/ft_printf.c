@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:50:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 00:51:19 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 13:58:05 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		parse_info_renew(t_info *info)
 	info->len = 0;
 }
 
-static int		print_handler(t_info *info, va_list *ap, int *len)
+static int		print_handler(t_info *info, va_list *ap, long long *len)
 {
 	char	t;
 
@@ -74,7 +74,7 @@ static int		handle_p_info(t_info *info)
 	return (1);
 }
 
-static int		print_until_delim(const char *str, int i, int *len)
+static int		print_until_delim(const char *str, int i, long long *len)
 {
 	int		j;
 
@@ -87,13 +87,13 @@ static int		print_until_delim(const char *str, int i, int *len)
 	return (j);
 }
 
-int				ft_printf(const char *str, ...)
+long long			ft_printf(const char *str, ...)
 {
 	va_list			ap;
 	t_info			info;
 	int				i;
 	int				j;
-	int				len;
+	long long		len;
 
 	if (str == NULL)
 		return (-1);

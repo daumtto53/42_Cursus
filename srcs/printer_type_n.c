@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 22:27:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 00:32:41 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 14:02:05 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void			printer_type_n(t_info *info, va_list *ap, int *len)
+void			printer_type_n(t_info *info, va_list *ap, long long *len)
 {
 	if (info->len == FT_PF_HH)
 		printer_type_nhh(ap, len);
