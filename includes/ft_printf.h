@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:47:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 14:00:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/09 20:37:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_info
 	char	type;
 }				t_info;
 
-long long		ft_printf(const char *str, ...);
+int				ft_printf(const char *str, ...);
 
 int				pf_parse(const char *s, t_info *info, va_list *ap);
 
