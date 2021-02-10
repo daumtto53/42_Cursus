@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 00:28:59 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 14:04:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/10 11:18:51 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void			printer_type_nl(va_list *ap, long long *len)
 	p = va_arg(*ap, long *);
 	if (p == NULL)
 		return ;
-	*p = *len & (long)-1;
+	*p = *len & (long)-1L;
 }
 
 void			printer_type_nll(va_list *ap, long long *len)

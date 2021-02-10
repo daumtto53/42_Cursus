@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 17:53:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 14:01:41 by mchun            ###   ########.fr       */
+/*   Updated: 2021/02/10 11:18:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void		printer_type_int(t_info *info, va_list *ap, long long *len)
 	else if (info->len == FT_PF_I)
 		num = (int)va_arg(*ap, int) & (int)-1;
 	else if (info->len == FT_PF_L)
-		num = (long)va_arg(*ap, long) & (long)-1;
+		num = (long)va_arg(*ap, long) & (long)-1L;
 	else
 		num = (long long)va_arg(*ap, long long);
 	if (info->flag & F_ZERO)
