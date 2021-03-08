@@ -3,11 +3,12 @@ cc = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 TESTSRCSDIR = ./srcs/
-INCLUDES = -I./includes -I./debug
+INCLUDES = -I./includes -I./debug -I./x11_key
 
 TESTFILE =	raycasting \
 			init \
 			cub3d_utils \
+			custom_event_handler.c \
 			debug
 
 ### LINUX && MAC COMPILATION DIFFERENT ###

@@ -1,5 +1,6 @@
 #include "../includes/raycasting.h"
 #include "../includes/debug.h"
+#include "../includes/x11_key.h"
 // TEMPORARY WOLRDMAP DEFINEMENT
 #define mapWidth 24
 #define mapHeight 24
@@ -123,7 +124,7 @@ static void	config_hit_wall(t_cub *cub, double sidex, double sidey)
 				printf("comp_double : sidey > sidex\n");
 			#endif
 		}
-		if (comp_double(sidex, sidey) > 0)
+		else
 		{
 			sidey += cub->ray.deltadisty;
 			cub->ray.mapy += (cub->ray.stepy);
@@ -162,12 +163,12 @@ static void	set_perpwalldist(t_cub *cub)
 	ray = &(cub->ray);
 	xweight = (1 - ray->stepx) / 2;
 	yweight = (1 - ray->stepy) / 2;
-	if (ray->side == north || ray->side == south)
+	if (ray->side == east || ray->side == west)
 	{
 		ray->perpwalldist = \
 			(ray->mapx - (cub->player.posx) + xweight) / ray->raydirx;
 	}
-	else
+	else if (ray->side == south || ray->side == north)
 	{
 		ray->perpwalldist = \
 			(ray->mapy - (cub->player.posy) + yweight) / ray->raydiry;
@@ -208,7 +209,7 @@ unsigned int	get_untxtcolor(t_cub *cub)
 	else if (cub->ray.side == west)
 		color = 0x0000FF;
 	else
-		color = 0xFFFFFF;
+		color = 0xF0F0F0;
 #if DEBUG_LEVEL >= 1
 	printf("get_untxtcolor END\n\n");
 #endif
@@ -221,10 +222,16 @@ void			draw_buff_line(t_cub *cub, int screenx, int start, int end)
 	printf("draw_buff_line START\n\n");
 #endif
 	int		i;
+	unsigned int	color;
 
 	i = start - 1;
 	while (++i <= end)
-		buff_drawer(cub, screenx, i, get_untxtcolor(cub));
+	{
+		color = get_untxtcolor(cub);
+		if (cub->ray.side == north || cub->ray.side == south)
+			color = color / 2;
+		buff_drawer(cub, screenx, i, color);
+	}
 #if DEBUG_LEVEL >= 2
 	printf("draw_buff_line : i = %d, end = %d, start = %d\n", i, end, start);
 	printf("screenx: %d, ycoord : %d, color : %#x\n", screenx, i, get_untxtcolor(cub));
@@ -297,6 +304,12 @@ int		main()
 	init_cub(&cub);
 	untextured_rayc(&cub);
 
+	// mlx_hook(cub.win, KEYPRESS, KEYPRESSMASK, event_keypress, &cub);
+	// mlx_hook(cub.win, KEYRELEASE, KEYRELEASEMASK, event_keyrelease, &cub);
+	// mlx_hook(cub.win, DESTORY_NOTIFY, 0, event_destroy, &cub);
+	// mlx_hook(cub.win, CLIENTMESSAGE, BUTTONRELEASEMASK, event_xicon, &cub);
+
+	mlx_loop_hook(cub.mlx_ptr, untextured_rayc, &cub);
 	// 내 이미지를 쓰레드로 돌리는건가?
 	mlx_loop(cub.mlx_ptr);
 #if DEBUG_LEVEL >= 1
