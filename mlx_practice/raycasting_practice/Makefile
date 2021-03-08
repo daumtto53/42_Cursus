@@ -3,10 +3,12 @@ cc = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 TESTSRCSDIR = ./srcs/
-INCLUDES = -I./includes
+INCLUDES = -I./includes -I./debug
 
-TESTFILE = raycasting \
-			init
+TESTFILE =	raycasting \
+			init \
+			cub3d_utils \
+			debug
 
 ### LINUX && MAC COMPILATION DIFFERENT ###
 LINUXOBJFLAG = -I/usr/include -I../../mlx_linux -O3
@@ -22,11 +24,11 @@ TESTOBJS = $(TESTSRCS:.c=.o)
 NAME = raycasting
 
 $(NAME): $(TESTOBJS)
-	$(CC) $(TESTSRCS) -o $(NAME) $(MACLINKFLAG)
+	$(CC) $(TESTSRCS) -o $(NAME) $(LINUXLINKFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
 %.o: %.c
-	$(CC) $(INCLUDES) $(MACOBJFLAG) -c $< -o $@
+	$(CC) $(INCLUDES) $(LINUXOBJFLAG) -c $< -o $@
 
 all :
 	$(NAME)

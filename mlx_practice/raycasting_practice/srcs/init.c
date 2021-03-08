@@ -38,6 +38,7 @@ static void	init_img(t_cub *cub)
 
 static void	init_player(t_cub *cub)
 {
+	// When parsed, needs pos, dir, plane modified.
 	cub->player.dirx = -1.0;
 	cub->player.diry = 0.0;
 	cub->player.posx = 22.0;

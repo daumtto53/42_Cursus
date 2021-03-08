@@ -91,4 +91,5 @@ int		comp_double(double dest, double src);
 void	init_cub(t_cub *cub);
 
 
+
 #endif
