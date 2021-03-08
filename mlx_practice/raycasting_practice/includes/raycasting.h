@@ -18,6 +18,10 @@
 # define SCREEN_H	600
 # define MAP_W		20
 # define MAP_H		20
+# define WPRESSED	1
+# define APRESSED	2
+# define SPRESSED	4
+# define DPRESSED	8
 
 // #define RIGHTDIR 1
 // #define LEFTDIR -1
@@ -51,7 +55,7 @@ typedef struct	s_player
 	double	diry;
 	double	planex;
 	double	planey;
-	int		moveflag;
+	int		wasdpressed;
 }				t_player;
 
 typedef struct	s_map
@@ -90,6 +94,10 @@ typedef struct	s_cub
 int		comp_double(double dest, double src);
 void	init_cub(t_cub *cub);
 
-
+/*keypress functions*/
+int		event_keypress(int keycode ,void *param);
+int		event_keyrelease(int keycode, void *param);
+int		event_destroy(void *param);
+int		event_xicon(void *param);
 
 #endif

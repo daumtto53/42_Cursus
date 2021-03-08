@@ -3,7 +3,7 @@
 #include "raycasting.h"
 
 //DEBUGGER ON/OFF
-#define DEBUG_LEVEL 2
+#define DEBUG_LEVEL 0
 
 void	debug_rayinfo(t_cub *cub);
 void	debug_config_hit_wall(t_cub *cub, double sx, double sy);

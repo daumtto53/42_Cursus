@@ -8,7 +8,7 @@ INCLUDES = -I./includes -I./debug -I./x11_key
 TESTFILE =	raycasting \
 			init \
 			cub3d_utils \
-			custom_event_handler.c \
+			custom_event_handler \
 			debug
 
 ### LINUX && MAC COMPILATION DIFFERENT ###

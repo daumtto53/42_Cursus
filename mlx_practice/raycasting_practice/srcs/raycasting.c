@@ -264,7 +264,7 @@ void		draw_img_line_untxt(t_cub *cub, int screenx)
 #endif
 }
 
-void untextured_rayc(t_cub *cub)
+int untextured_rayc(t_cub *cub)
 {
 #if DEBUG_LEVEL >= 1
 	printf("untextured_rayc START\n\n");
@@ -285,6 +285,8 @@ void untextured_rayc(t_cub *cub)
 		draw_img_line_untxt(cub, screen_x);
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win, cub->img.img_ptr, 0, 0);
+	//take_action(cub);
+	return (0);
 #if DEBUG_LEVEL >= 2
 	debug_print_buffer(cub);
 #endif
@@ -304,10 +306,10 @@ int		main()
 	init_cub(&cub);
 	untextured_rayc(&cub);
 
-	// mlx_hook(cub.win, KEYPRESS, KEYPRESSMASK, event_keypress, &cub);
-	// mlx_hook(cub.win, KEYRELEASE, KEYRELEASEMASK, event_keyrelease, &cub);
-	// mlx_hook(cub.win, DESTORY_NOTIFY, 0, event_destroy, &cub);
-	// mlx_hook(cub.win, CLIENTMESSAGE, BUTTONRELEASEMASK, event_xicon, &cub);
+	mlx_hook(cub.win, KEYPRESS, KEYPRESSMASK, event_keypress, &cub);
+	mlx_hook(cub.win, KEYRELEASE, KEYRELEASEMASK, event_keyrelease, &cub);
+	mlx_hook(cub.win, DESTORY_NOTIFY, 0, event_destroy, &cub);
+	//mlx_hook(cub.win, CLIENTMESSAGE, BUTTONRELEASEMASK, event_xicon, &cub);
 
 	mlx_loop_hook(cub.mlx_ptr, untextured_rayc, &cub);
 	// 내 이미지를 쓰레드로 돌리는건가?

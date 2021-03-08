@@ -46,7 +46,7 @@ static void	init_player(t_cub *cub)
 	cub->player.posy = 12.0;
 	cub->player.planex = 0.66;
 	cub->player.planey = 0.0;
-	cub->player.moveflag = 0;
+	cub->player.wasdpressed = 0;
 }
 
 static void	init_map(t_cub *cub)
