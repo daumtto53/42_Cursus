@@ -1,4 +1,5 @@
 #include "../includes/raycasting.h"
+#include "../includes/debug.h"
 
 static void	init_mlx(t_cub *cub)
 {
@@ -24,8 +25,8 @@ static void	init_img(t_cub *cub)
 		perror("mlx_new_image");
 		exit(1);
 	}
-	cub->img.img_ptr = \
-		mlx_get_data_addr(cub->img.img_ptr, \
+	cub->img.img_buff = \
+		(int *)mlx_get_data_addr(cub->img.img_ptr, \
 			&cub->img.bpp, &cub->img.linelen, &cub->img.endian);
 	if (cub->img.img_ptr == NULL)
 	{
@@ -39,10 +40,10 @@ static void	init_img(t_cub *cub)
 static void	init_player(t_cub *cub)
 {
 	// When parsed, needs pos, dir, plane modified.
-	cub->player.dirx = -1.0;
-	cub->player.diry = 0.0;
+	cub->player.dirx = 1.0;
+	cub->player.diry = -1.0;
 	cub->player.posx = 22.0;
-	cub->player.posy = 12.0;
+	cub->player.posy = 11.5;
 	cub->player.planex = 0;
 	cub->player.planey = 0.66;
 	cub->player.moveflag = 0;
@@ -59,5 +60,4 @@ void	init_cub(t_cub *cub)
 	init_img(cub);
 	init_player(cub);
 	init_map(cub);
-
 }

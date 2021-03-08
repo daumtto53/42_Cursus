@@ -39,8 +39,10 @@ static double func_deltadist(double raydir)
 
 static void config_rayinfo(t_cub *cub, int screen_x)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("config_rayinfo_start\n");
+#endif
+#if DEBUG_LEVEL >= 2
 	debug_rayinfo(cub);
 #endif
 	t_rayinfo *ray;
@@ -56,16 +58,20 @@ static void config_rayinfo(t_cub *cub, int screen_x)
 	ray->mapy = (int)cub->player.posy;
 	ray->deltadistx = func_deltadist(ray->raydirx);
 	ray->deltadisty = func_deltadist(ray->raydiry);
-#ifdef DEBUG
-	printf("config_rayinfo_end\n\n");
+#if DEBUG_LEVEL >= 2
 	debug_rayinfo(cub);
+#endif
+#if DEBUG_LEVEL >= 1
+	printf("config_rayinfo_end\n\n");
 #endif
 }
 
 static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("set_sidedist START\n");
+#endif
+#if DEBUG_LEVEL >= 2
 	debug_rayinfo(cub);
 #endif
 	if (cub->ray.raydirx < 0)
@@ -88,15 +94,17 @@ static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
 		cub->ray.stepy = -1;
 		*sidedy = (cub->ray.mapy + 1.0 - cub->player.posy) * (cub->ray.deltadisty);
 	}
-#ifdef DEBUG
-	printf("set_sidedist END\n\n");
+#if DEBUG_LEVEL >= 2
 	debug_rayinfo(cub);
+#endif
+#if DEBUG_LEVEL >= 1
+	printf("set_sidedist END\n\n");
 #endif
 }
 
 static void	config_hit_wall(t_cub *cub, double sidex, double sidey)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("config_hit_wall START\n");
 #endif
 	int		is_hit;
@@ -111,7 +119,7 @@ static void	config_hit_wall(t_cub *cub, double sidex, double sidey)
 			cub->ray.side = west;
 			if (cub->ray.raydirx > 0)
 				cub->ray.side = east;
-			#ifdef DEBUG
+			#if DEBUG_LEVEL >= 2
 				printf("comp_double : sidey > sidex\n");
 			#endif
 		}
@@ -122,29 +130,29 @@ static void	config_hit_wall(t_cub *cub, double sidex, double sidey)
 			cub->ray.side = south;
 			if (cub->ray.raydiry > 0)
 				cub->ray.side = north;
-			#ifdef DEBUG
+			#if DEBUG_LEVEL >= 2
 				printf("comp_double : sidex > sidey\n");
 			#endif
 		}
 		if (worldMap[cub->ray.mapy][cub->ray.mapx] > 0)
 		{
 			is_hit = HIT;
-			#ifdef DEBUG
+			#if DEBUG_LEVEL >= 2
 				printf("is_hit : %d\n", is_hit);
 			#endif
 		}
-	#ifdef DEBUG
+	#if DEBUG_LEVEL >= 2
 		debug_config_hit_wall(cub, sidex, sidey);
 	#endif
 	}
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("config_hit_wall END\n\n");
 #endif
 }
 
 static void	set_perpwalldist(t_cub *cub)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("set_perpwalldist START\n\n");
 #endif
 	t_rayinfo	*ray;
@@ -164,28 +172,31 @@ static void	set_perpwalldist(t_cub *cub)
 		ray->perpwalldist = \
 			(ray->mapy - (cub->player.posy) + yweight) / ray->raydiry;
 	}
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("set_perpwalldist END\n\n");
 #endif
 }
 
 void			buff_drawer(t_cub *cub, int x, int y, unsigned int color)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("buff_drawer START\n\n");
 #endif
 	int		*img_buff;
 
 	img_buff = cub->img.img_buff;
-	img_buff[SCREEN_H * y + x] = color;
-#ifdef DEBUG
+	img_buff[SCREEN_W * y + x] = color;
+#if DEBUG_LEVEL >= 2
+	printf("imgbuff[y][x] = %#x\n", color);
+#endif
+#if DEBUG_LEVEL >= 1
 	printf("buff_drawer END\n\n");
 #endif
 }
 
 unsigned int	get_untxtcolor(t_cub *cub)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("get_untxtcolor START\n\n");
 #endif
 	unsigned int		color;
@@ -198,7 +209,7 @@ unsigned int	get_untxtcolor(t_cub *cub)
 		color = 0x0000FF;
 	else
 		color = 0xFFFFFF;
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("get_untxtcolor END\n\n");
 #endif
 	return (color);
@@ -206,23 +217,26 @@ unsigned int	get_untxtcolor(t_cub *cub)
 
 void			draw_buff_line(t_cub *cub, int screenx, int start, int end)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("draw_buff_line START\n\n");
 #endif
 	int		i;
 
-	i = end - 1;
-	while (++i <= start)
+	i = start - 1;
+	while (++i <= end)
 		buff_drawer(cub, screenx, i, get_untxtcolor(cub));
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 2
+	printf("draw_buff_line : i = %d, end = %d, start = %d\n", i, end, start);
 	printf("screenx: %d, ycoord : %d, color : %#x\n", screenx, i, get_untxtcolor(cub));
+#endif
+#if DEBUG_LEVEL >= 1
 	printf("draw_buff_line END\n\n");
 #endif
 }
 
 void		draw_img_line_untxt(t_cub *cub, int screenx)
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("draw_img_line_untxt START\n\n");
 #endif
 	int		lineheight;
@@ -238,16 +252,15 @@ void		draw_img_line_untxt(t_cub *cub, int screenx)
 	if (drawend > SCREEN_H - 1)
 		drawend = SCREEN_H - 1;
 	draw_buff_line(cub, screenx, drawstart, drawend);
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("draw_img_line_untxt END\n\n");
 #endif
 }
 
-
-void untextured_rayC(t_cub *cub)
+void untextured_rayc(t_cub *cub)
 {
-#ifdef DEBUG
-	printf("untextured_rayC START\n\n");
+#if DEBUG_LEVEL >= 1
+	printf("untextured_rayc START\n\n");
 #endif
 	int			screen_x;
 	int			color;
@@ -265,28 +278,28 @@ void untextured_rayC(t_cub *cub)
 		draw_img_line_untxt(cub, screen_x);
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win, cub->img.img_ptr, 0, 0);
-#ifdef DEBUG
-	printf("untextured_rayC END\n\n");
+#if DEBUG_LEVEL >= 2
+	debug_print_buffer(cub);
+#endif
+#if DEBUG_LEVEL >= 1
+	printf("untextured_rayc END\n\n");
 #endif
 }
 
 int		main()
 {
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("main START\n\n");
 #endif
 
 	t_cub cub;
 
-	//Something wrong with initiallization of mlx
 	init_cub(&cub);
-
-	untextured_rayC(&cub);
-
+	untextured_rayc(&cub);
 
 	// 내 이미지를 쓰레드로 돌리는건가?
 	mlx_loop(cub.mlx_ptr);
-#ifdef DEBUG
+#if DEBUG_LEVEL >= 1
 	printf("main END\n\n");
 #endif
 }
@@ -298,7 +311,7 @@ int		main()
 	cub.win = mlx_new_window(cub.mlx_ptr, SCREEN_W, SCREEN_H, "ex");
 	cub.img.img_ptr = mlx_new_image(cub.mlx_ptr, SCREEN_W, SCREEN_H);
 	cub.img.img_buff = (int *)mlx_get_data_addr(cub.img.img_ptr, &cub.img.bpp, &cub.img.linelen, &cub.img.endian);
-		int count_w = -1;
+	int count_w = -1;
 	int count_h = -1;
 	while (++count_h < SCREEN_H)
 	{

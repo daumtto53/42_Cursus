@@ -1,5 +1,4 @@
 #include "../includes/raycasting.h"
-#include "../includes/debug.h"
 
 void	debug_rayinfo(t_cub *cub)
 {
@@ -20,4 +19,19 @@ void	debug_config_hit_wall(t_cub *cub, double sx, double sy)
 
 	printf("side : %d, mapx : %d, mapy : %d\n\
 	sidex : %lf, sidey %lf\n", i->side, i->mapx, i->mapy, sx, sy);
+}
+
+void	debug_print_buffer(t_cub *cub)
+{
+	int i, j;
+	int *img_map = cub->img.img_buff;
+
+	for (i = 0; i < SCREEN_H; i++)
+	{
+		for (j = 0; j < SCREEN_W; j++)
+		{
+			printf("%#x ", img_map[SCREEN_W * i + j]);
+		}
+		printf("\n");
+	}
 }
