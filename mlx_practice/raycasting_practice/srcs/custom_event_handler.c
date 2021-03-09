@@ -2,58 +2,37 @@
 #include "../includes/x11_key.h"
 #include "../includes/debug.h"
 
+
+static void	keypress_left_right(int keycode, t_cub *cub)
+{
+	if (keycode == L_KEYSYM_LEFT)
+		cub->player.keypress_flag |= LEFTPRESSED;
+	if (keycode == L_KEYSYM_RIGHT)
+		cub->player.keypress_flag |= RIGHTPRESSED;
+}
+
+static void	keypress_wasd(int keycode, t_cub *cub)
+{
+	if (keycode == L_KEYSYM_W)
+		cub->player.keypress_flag |= WPRESSED;
+	if (keycode == L_KEYSYM_A)
+		cub->player.keypress_flag |= APRESSED;
+	if (keycode == L_KEYSYM_S)
+		cub->player.keypress_flag |= SPRESSED;
+	if (keycode == L_KEYSYM_D)
+		cub->player.keypress_flag |= DPRESSED;
+}
+
 int		event_keypress(int keycode ,void *param)
 {
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-	if (keycode == L_KEYSYM_LEFT)
-	{
-		#if DEBUG_LEVEL >= 0
-			printf("event_keypress() : keycode : %#x\n", keycode);
-		#endif
-		cub->player.keypress_flag |= LEFTPRESSED;
-	}
-	if (keycode == L_KEYSYM_RIGHT)
-	{
-		#if DEBUG_LEVEL >= 0
-			printf("event_keypress() : keycode %#x\n", keycode);
-		#endif
-		cub->player.keypress_flag |= RIGHTPRESSED;
-	}
-	if (keycode == L_KEYSYM_W)
-	{
-		#if DEBUG_LEVEL >= 0
-			printf("event_keypress() : keycode %#x\n", keycode);
-		#endif
-		cub->player.keypress_flag |= WPRESSED;
-	}
-	if (keycode == L_KEYSYM_A)
-	{
-		#if DEBUG_LEVEL >= 0
-			printf("event_keypress() : keycode %#x\n", keycode);
-		#endif
-		cub->player.keypress_flag |= APRESSED;
-	}
-	if (keycode == L_KEYSYM_S)
-	{
-		#if DEBUG_LEVEL >= 0
-			printf("event_keypress() : keycode %#x\n", keycode);
-		#endif
-		cub->player.keypress_flag |= SPRESSED;
-	}
-	if (keycode == L_KEYSYM_D)
-	{
-		#if DEBUG_LEVEL >= 0
-			printf("event_keypress(): keycode %#x\n", keycode);
-		#endif
-		cub->player.keypress_flag |= DPRESSED;
-	}
+
+	keypress_left_right(keycode, cub);
+	keypress_wasd(keycode, cub);
 	if (keycode == L_KEYSYM_ESC)
 	{
-		#if DEBUG_LEVEL >= 0
-			printf("event_keypress() : keycode %#x\n", keycode);
-		#endif
 		mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
 		mlx_destroy_window(cub->mlx_ptr, cub->win);
 		exit(0);
@@ -61,15 +40,33 @@ int		event_keypress(int keycode ,void *param)
 	return (0);
 }
 
+static void	keyrelease_wasd(int keycode, t_cub *cub)
+{
+	if (keycode == L_KEYSYM_W)
+		cub->player.keypress_flag &= ~WPRESSED;
+	if (keycode == L_KEYSYM_A)
+		cub->player.keypress_flag &= ~APRESSED;
+	if (keycode == L_KEYSYM_S)
+		cub->player.keypress_flag &= ~SPRESSED;
+	if (keycode == L_KEYSYM_D)
+		cub->player.keypress_flag &= ~DPRESSED;
+}
+
+static void	keyrelease_left_right(int keycode, t_cub *cub)
+{
+	if (keycode == L_KEYSYM_LEFT)
+		cub->player.keypress_flag &= ~LEFTPRESSED;
+	if (keycode == L_KEYSYM_RIGHT)
+		cub->player.keypress_flag &= ~RIGHTPRESSED;
+}
+
 int		event_keyrelease(int keycode, void *param)
 {
-	#if DEBUG_LEVEL >= 0
-		printf("event_keyrelease() : keycode %#x\n", keycode);
-	#endif
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-	cub->player.keypress_flag = 0;
+	keyrelease_left_right(keycode, cub);
+	keyrelease_wasd(keycode, cub);
 	return (0);
 }
 
@@ -88,9 +85,5 @@ int	event_xicon(void *param)
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-	//mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
-	//mlx_destroy_window(cub->mlx_ptr, cub->img.img_ptr);
     exit (0);
 }
-
-

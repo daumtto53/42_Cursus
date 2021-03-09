@@ -21,7 +21,7 @@ void	take_action(t_cub *cub, int map[MAP_H][MAP_W])
 		matrix_rotation_2d(&p->dirx, &p->diry, -1 * DELTATHETA);
 		matrix_rotation_2d(&p->planex, &p->planey, -1 * DELTATHETA);
 	}
-	else if (p->keypress_flag & LEFTPRESSED)
+	if (p->keypress_flag & LEFTPRESSED)
 	{
 		matrix_rotation_2d(&p->dirx, &p->diry, DELTATHETA);
 		matrix_rotation_2d(&p->planex, &p->planey, DELTATHETA);
