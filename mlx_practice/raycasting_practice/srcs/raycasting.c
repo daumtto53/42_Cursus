@@ -277,13 +277,13 @@ int untextured_rayc(t_cub *cub)
 	double sidedistx;
 	double sidedisty;
 
+	draw_simple_floor_ceiling(cub);
 	for (screen_x = 0; screen_x < SCREEN_W; screen_x++)
 	{
 		config_rayinfo(cub, screen_x);
 		set_sidedist(cub, &sidedistx, &sidedisty);
 		config_hit_wall(cub, &sidedistx, &sidedisty);
 		set_perpwalldist(cub);
-		draw_simple_floor_ceiling(cub);
 		draw_img_line_untxt(cub, screen_x);
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win, cub->img.img_ptr, 0, 0);

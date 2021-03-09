@@ -13,10 +13,10 @@ void	draw_simple_floor_ceiling(t_cub *cub)
 	int		half_height;
 
 	half_height = SCREEN_H / 2;
-	screen_x = -1;
+	screen_x = 0;
 	floor_h = 0;
 	ceiling_h = half_height;
-	while (++screen_x < SCREEN_W)
+	while (screen_x < SCREEN_W)
 	{
 		while (floor_h < half_height)
 		{
@@ -25,5 +25,9 @@ void	draw_simple_floor_ceiling(t_cub *cub)
 			floor_h++;
 			ceiling_h++;
 		}
+		screen_x++;
+		floor_h = 0;
+		ceiling_h = half_height;
+
 	}
 }

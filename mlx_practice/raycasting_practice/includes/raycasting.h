@@ -26,11 +26,11 @@
 # define LEFTPRESSED 16
 # define RIGHTPRESSED 32
 
-/*(360 == 6.3) / 5s : x : 0.2s , x == 0.25*/
+/*(360 == 6.3) / 20s : x : 0.2s , x == 0.063*/
 # define DELTATHETA 0.063
 
 /* 1/60 * 5.0 */
-# define MOVESPEED 0.02
+# define MOVESPEED 0.03
 
 // #define RIGHTDIR 1
 // #define LEFTDIR -1
