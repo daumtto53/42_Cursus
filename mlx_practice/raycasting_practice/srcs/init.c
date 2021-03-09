@@ -9,7 +9,7 @@ static void	init_mlx(t_cub *cub)
 		perror("mlx_init");
 		exit(1);
 	}
-	cub->win = mlx_new_window(cub->mlx_ptr, SCREEN_H, SCREEN_W, "TITLE");
+	cub->win = mlx_new_window(cub->mlx_ptr, SCREEN_W, SCREEN_H, "TITLE");
 	if (cub->win == NULL)
 	{
 		perror("mlx_new_window");
@@ -40,13 +40,13 @@ static void	init_img(t_cub *cub)
 static void	init_player(t_cub *cub)
 {
 	// When parsed, needs pos, dir, plane modified.
-	cub->player.dirx = 0.0;
-	cub->player.diry = -1.0;
+	cub->player.dirx = -1.0;
+	cub->player.diry = 0.0;
 	cub->player.posx = 22.0;
 	cub->player.posy = 12.0;
-	cub->player.planex = 0.66;
-	cub->player.planey = 0.0;
-	cub->player.wasdpressed = 0;
+	cub->player.planex = 0;
+	cub->player.planey = 0.66;
+	cub->player.keypress_flag = 0;
 }
 
 static void	init_map(t_cub *cub)

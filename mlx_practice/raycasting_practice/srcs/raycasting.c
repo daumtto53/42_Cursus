@@ -92,7 +92,7 @@ static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
 	}
 	else
 	{
-		cub->ray.stepy = -1;
+		cub->ray.stepy = 1;
 		*sidedy = (cub->ray.mapy + 1.0 - cub->player.posy) * (cub->ray.deltadisty);
 	}
 #if DEBUG_LEVEL >= 2
@@ -103,7 +103,7 @@ static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
 #endif
 }
 
-static void	config_hit_wall(t_cub *cub, double sidex, double sidey)
+static void	config_hit_wall(t_cub *cub, double *sidex, double *sidey)
 {
 #if DEBUG_LEVEL >= 1
 	printf("config_hit_wall START\n");
@@ -113,9 +113,10 @@ static void	config_hit_wall(t_cub *cub, double sidex, double sidey)
 	is_hit = !HIT;
 	while (is_hit != HIT)
 	{
-		if (comp_double(sidey, sidex) > 0)
+		//if (comp_double(*sidey, *sidex) > 0)
+		if (*sidey > *sidex)
 		{
-			sidex += cub->ray.deltadistx;
+			*sidex += cub->ray.deltadistx;
 			cub->ray.mapx += (cub->ray.stepx);
 			cub->ray.side = west;
 			if (cub->ray.raydirx > 0)
@@ -126,7 +127,7 @@ static void	config_hit_wall(t_cub *cub, double sidex, double sidey)
 		}
 		else
 		{
-			sidey += cub->ray.deltadisty;
+			*sidey += cub->ray.deltadisty;
 			cub->ray.mapy += (cub->ray.stepy);
 			cub->ray.side = south;
 			if (cub->ray.raydiry > 0)
@@ -264,6 +265,8 @@ void		draw_img_line_untxt(t_cub *cub, int screenx)
 #endif
 }
 
+// 단순한 WASD,
+
 int untextured_rayc(t_cub *cub)
 {
 #if DEBUG_LEVEL >= 1
@@ -271,21 +274,20 @@ int untextured_rayc(t_cub *cub)
 #endif
 	int			screen_x;
 	int			color;
-	t_rayinfo	*ray;
 	double sidedistx;
 	double sidedisty;
 
-	ray = &(cub->ray);
 	for (screen_x = 0; screen_x < SCREEN_W; screen_x++)
 	{
 		config_rayinfo(cub, screen_x);
 		set_sidedist(cub, &sidedistx, &sidedisty);
-		config_hit_wall(cub, sidedistx, sidedisty);
+		config_hit_wall(cub, &sidedistx, &sidedisty);
 		set_perpwalldist(cub);
+		draw_simple_floor_ceiling(cub);
 		draw_img_line_untxt(cub, screen_x);
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win, cub->img.img_ptr, 0, 0);
-	//take_action(cub);
+	take_action(cub, worldMap);
 	return (0);
 #if DEBUG_LEVEL >= 2
 	debug_print_buffer(cub);

@@ -16,6 +16,8 @@
 # define	L_KEYSYM_D 0x64
 # define	L_KEYSYM_W 0x77
 # define	L_KEYSYM_ESC 0xff1b
+# define	L_KEYSYM_LEFT 0xff51
+# define	L_KEYSYM_RIGHT	0xff53
 
 /* MAC X11_EVENTS ##NO MASKS REQUIRED IN MAC## **/
 

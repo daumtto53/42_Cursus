@@ -9,6 +9,8 @@ TESTFILE =	raycasting \
 			init \
 			cub3d_utils \
 			custom_event_handler \
+			engine \
+			draw \
 			debug
 
 ### LINUX && MAC COMPILATION DIFFERENT ###

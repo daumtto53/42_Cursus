@@ -16,17 +16,29 @@
 
 # define SCREEN_W	800
 # define SCREEN_H	600
-# define MAP_W		20
-# define MAP_H		20
+# define MAP_W		24
+# define MAP_H		24
+
 # define WPRESSED	1
 # define APRESSED	2
 # define SPRESSED	4
 # define DPRESSED	8
+# define LEFTPRESSED 16
+# define RIGHTPRESSED 32
+
+/*(360 == 6.3) / 5s : x : 0.2s , x == 0.25*/
+# define DELTATHETA 0.063
+
+/* 1/60 * 5.0 */
+# define MOVESPEED 0.02
 
 // #define RIGHTDIR 1
 // #define LEFTDIR -1
 
-#define HIT 1
+# define HIT 1
+
+# define COLOR_FLOOR 0xb3ffc8
+# define COLOR_CEILING 0xc4fff8
 
 typedef enum e_cardinal
 {
@@ -55,7 +67,7 @@ typedef struct	s_player
 	double	diry;
 	double	planex;
 	double	planey;
-	int		wasdpressed;
+	int		keypress_flag;
 }				t_player;
 
 typedef struct	s_map
@@ -92,6 +104,8 @@ typedef struct	s_cub
 }				t_cub;
 
 int		comp_double(double dest, double src);
+void	matrix_rotation_2d(double *x, double *y, double delta_tht);
+
 void	init_cub(t_cub *cub);
 
 /*keypress functions*/
@@ -99,5 +113,11 @@ int		event_keypress(int keycode ,void *param);
 int		event_keyrelease(int keycode, void *param);
 int		event_destroy(void *param);
 int		event_xicon(void *param);
+
+void	buff_drawer(t_cub *cub, int x, int y, unsigned int color);
+
+void	take_action(t_cub *cub, int map[MAP_H][MAP_W]);
+
+void	draw_simple_floor_ceiling(t_cub *cub);
 
 #endif
