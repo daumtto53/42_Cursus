@@ -35,7 +35,7 @@ all :
 	$(NAME)
 
 clean :
-	rm -rf raycasting.o
+	rm -rf $(TESTOBJS)
 	rm -rf $(NAME)
 
 re :
