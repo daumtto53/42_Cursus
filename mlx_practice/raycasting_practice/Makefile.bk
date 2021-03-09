@@ -21,18 +21,13 @@ MACOBJFLAG = -I../../mlx
 MACLINKFLAG = -L../../mlx -lmlx -framework OpenGL -framework AppKit
 ###										###
 
-GNL_LIBFLAG = -L./gnl -lgnl
-LIBFT_LIBFLAG = -L./libft -lft
-
 TESTSRCS = $(addsuffix .c, $(addprefix $(TESTSRCSDIR), $(TESTFILE)))
 TESTOBJS = $(TESTSRCS:.c=.o)
 
 NAME = raycasting
 
 $(NAME): $(TESTOBJS)
-	$(MAKE) all -C ./libft
-	$(MAKE) all -C ./gnl
-	$(CC) $(TESTSRCS) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
+	$(CC) $(TESTSRCS) -o $(NAME) $(LINUXLINKFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
 %.o: %.c
@@ -43,15 +38,7 @@ all :
 
 clean :
 	rm -rf $(TESTOBJS)
-
-fclean :
 	rm -rf $(NAME)
-
-all_clean: clean fclean
-	$(MAKE) fclean -C ./libft
-	$(MAKE) clean -C ./libft
-	$(MAKE) fclean -C ./gnl
-	$(MAKE) clean -C ./gnl
 
 re :
 	clean

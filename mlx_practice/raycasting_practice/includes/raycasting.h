@@ -19,6 +19,10 @@
 # define MAP_W		24
 # define MAP_H		24
 
+# define TEXTURE_NUM 8
+# define TEXTURE_W	64
+# define TEXTURE_H	64
+
 # define WPRESSED	1
 # define APRESSED	2
 # define SPRESSED	4
@@ -97,6 +101,7 @@ typedef struct	s_cub
 {
 	void		*mlx_ptr;
 	void		*win;
+	int			**texture;
 	t_img		img;
 	t_player	player;
 	t_map		map;

@@ -320,26 +320,3 @@ int		main()
 	printf("main END\n\n");
 #endif
 }
-
-/*	############## FOR DEBUGGING : mlx_init() was not working ###########
-	// insert code below
-
-	cub.mlx_ptr = mlx_init();
-	cub.win = mlx_new_window(cub.mlx_ptr, SCREEN_W, SCREEN_H, "ex");
-	cub.img.img_ptr = mlx_new_image(cub.mlx_ptr, SCREEN_W, SCREEN_H);
-	cub.img.img_buff = (int *)mlx_get_data_addr(cub.img.img_ptr, &cub.img.bpp, &cub.img.linelen, &cub.img.endian);
-	int count_w = -1;
-	int count_h = -1;
-	while (++count_h < SCREEN_H)
-	{
-		count_w = -1;
-		while (++count_w < SCREEN_W)
-		{
-			if (count_w % 2)
-				cub.img.img_buff[count_h * SCREEN_W + count_w] = 0xFFFFFF;
-			else
-				cub.img.img_buff[count_h * SCREEN_W + count_w] = 0;
-		}
-	}
-	mlx_put_image_to_window(cub.mlx_ptr, cub.win, cub.img.img_ptr, 0, 0);
-*/

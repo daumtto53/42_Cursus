@@ -54,10 +54,16 @@ static void	init_map(t_cub *cub)
 	memset(cub->map.map, 0, sizeof(char) * MAP_W * MAP_H);
 }
 
+static void	init_texture(t_cub *cub)
+{
+
+}
+
 void	init_cub(t_cub *cub)
 {
 	init_mlx(cub);
 	init_img(cub);
 	init_player(cub);
 	init_map(cub);
+	init_texture(cub);
 }
