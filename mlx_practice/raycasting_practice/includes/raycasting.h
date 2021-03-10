@@ -101,7 +101,7 @@ typedef struct	s_cub
 {
 	void		*mlx_ptr;
 	void		*win;
-	int			**texture;
+	int			**tex_arr;
 	t_img		img;
 	t_player	player;
 	t_map		map;
@@ -124,5 +124,7 @@ void	buff_drawer(t_cub *cub, int x, int y, unsigned int color);
 void	take_action(t_cub *cub, int map[MAP_H][MAP_W]);
 
 void	draw_simple_floor_ceiling(t_cub *cub);
+
+void	load_texture(t_cub *cub);
 
 #endif

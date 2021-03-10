@@ -11,6 +11,8 @@ TESTFILE =	raycasting \
 			custom_event_handler \
 			engine \
 			draw \
+			error \
+			texture \
 			debug
 
 ### LINUX && MAC COMPILATION DIFFERENT ###

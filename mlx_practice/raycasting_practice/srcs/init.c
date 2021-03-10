@@ -6,13 +6,13 @@ static void	init_mlx(t_cub *cub)
 	cub->mlx_ptr = mlx_init();
 	if (cub->mlx_ptr == NULL)
 	{
-		perror("mlx_init");
+		print_err(CUSTOM_ERR_MLX_FAIL);
 		exit(1);
 	}
 	cub->win = mlx_new_window(cub->mlx_ptr, SCREEN_W, SCREEN_H, "TITLE");
 	if (cub->win == NULL)
 	{
-		perror("mlx_new_window");
+		print_err(CUSTOM_ERR_MLX_FAIL);
 		exit(1);
 	}
 }
@@ -22,15 +22,18 @@ static void	init_img(t_cub *cub)
 	cub->img.img_ptr = mlx_new_image(cub->mlx_ptr, SCREEN_W, SCREEN_H);
 	if (cub->img.img_ptr == NULL)
 	{
-		perror("mlx_new_image");
+		mlx_destroy_window(cub->mlx_ptr, cub->win);
+		print_err(CUSTOM_ERR_MLX_FAIL);
 		exit(1);
 	}
 	cub->img.img_buff = \
 		(int *)mlx_get_data_addr(cub->img.img_ptr, \
 			&cub->img.bpp, &cub->img.linelen, &cub->img.endian);
-	if (cub->img.img_ptr == NULL)
+	if (cub->img.img_buff == NULL)
 	{
-		perror("mlx_get_data_addr");
+		mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
+		mlx_destroy_window(cub->mlx_ptr, cub->win);
+		print_err(CUSTOM_ERR_MLX_FAIL);
 		exit(1);
 	}
 	cub->img.img_h = SCREEN_H;
@@ -54,16 +57,11 @@ static void	init_map(t_cub *cub)
 	memset(cub->map.map, 0, sizeof(char) * MAP_W * MAP_H);
 }
 
-static void	init_texture(t_cub *cub)
-{
-
-}
-
 void	init_cub(t_cub *cub)
 {
 	init_mlx(cub);
 	init_img(cub);
 	init_player(cub);
 	init_map(cub);
-	init_texture(cub);
+	load_texture(cub);
 }
