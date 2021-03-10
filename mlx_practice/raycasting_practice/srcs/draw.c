@@ -80,17 +80,20 @@ static void			draw_buff_wall_texture(t_cub *cub, int screenx, int start, int end
 	int	tex_x;
 	double step;
 	double texpos;
+	int	tex_y;
+
 
 	tex_num = get_tex_num(cub);
 	tex_x = get_wall_hit_ratio(cub) * (double)TEXTURE_W;
-	step = (double)TEXTURE_H / (end - start);
-	texpos = (start - SCREEN_H / 2 + (end - start) / 2);
+	step = (double)TEXTURE_H / ((int)(SCREEN_H / cub->ray.perpwalldist));
+	texpos = ((start - SCREEN_H / 2 +  ((int)(SCREEN_H / cub->ray.perpwalldist)) / 2)) * step;
 	y = start - 1;
 	while (++y < end)
 	{
-		buff_drawer(cub, screenx, y, \
-			cub->tex_arr[tex_num][get_texture_mapping(tex_x, texpos)]);
+		tex_y = (int)texpos & (TEXTURE_H - 1);
 		texpos += step;
+		buff_drawer(cub, screenx, y, \
+			cub->tex_arr[tex_num][TEXTURE_H * tex_y + tex_x]);
 	}
 #if DEBUG_LEVEL >= 5
 	printf("draw_buff_line : i = %d, end = %d, start = %d\n", i, end, start);
