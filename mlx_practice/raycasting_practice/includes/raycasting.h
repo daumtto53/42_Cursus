@@ -23,6 +23,13 @@
 # define TEXTURE_W	64
 # define TEXTURE_H	64
 
+# define TEXTURE_WALL_0 0
+# define TEXTURE_WALL_1 1
+# define TEXTURE_WALL_2 2
+# define TEXTURE_WALL_3 3
+# define TEXTURE_FLOOR	4
+# define TEXTURE_CEILING 5
+
 # define WPRESSED	1
 # define APRESSED	2
 # define SPRESSED	4
@@ -95,6 +102,7 @@ typedef struct	s_rayinfo
 	int			mapy;
 	int			stepx;
 	int			stepy;
+	int			wall_x;
 }				t_rayinfo;
 
 typedef struct	s_cub
@@ -110,6 +118,8 @@ typedef struct	s_cub
 
 int		comp_double(double dest, double src);
 void	matrix_rotation_2d(double *x, double *y, double delta_tht);
+double		get_wall_hit_ratio(t_cub *cub);
+int		get_texture_mapping(int tex_x, double texpos);
 
 void	init_cub(t_cub *cub);
 
@@ -119,11 +129,12 @@ int		event_keyrelease(int keycode, void *param);
 int		event_destroy(void *param);
 int		event_xicon(void *param);
 
-void	buff_drawer(t_cub *cub, int x, int y, unsigned int color);
+// void	buff_drawer(t_cub *cub, int x, int y, unsigned int color);
 
 void	take_action(t_cub *cub, int map[MAP_H][MAP_W]);
 
 void	draw_simple_floor_ceiling(t_cub *cub);
+void	draw_img_line_textured(t_cub *cub, int screenx);
 
 void	load_texture(t_cub *cub);
 

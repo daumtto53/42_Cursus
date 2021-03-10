@@ -8,7 +8,7 @@
 # define CUSTOM_ERR_ETC			0
 
 //DEBUGGER ON/OFF
-#define DEBUG_LEVEL -1
+#define DEBUG_LEVEL -100
 
 void	debug_rayinfo(t_cub *cub);
 void	debug_config_hit_wall(t_cub *cub, double sx, double sy);

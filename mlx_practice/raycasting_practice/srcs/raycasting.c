@@ -33,6 +33,94 @@ int worldMap[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+/** simple wall drawing functions **/
+static void			buff_drawer(t_cub *cub, int x, int y, unsigned int color)
+{
+#if DEBUG_LEVEL >= 1
+	printf("buff_drawer START\n\n");
+#endif
+	int		*img_buff;
+
+	img_buff = cub->img.img_buff;
+	img_buff[SCREEN_W * y + x] = color;
+#if DEBUG_LEVEL >= 2
+	printf("imgbuff[y][x] = %#x\n", color);
+#endif
+#if DEBUG_LEVEL >= 1
+	printf("buff_drawer END\n\n");
+#endif
+}
+
+unsigned int	get_untxtcolor(t_cub *cub)
+{
+#if DEBUG_LEVEL >= 1
+	printf("get_untxtcolor START\n\n");
+#endif
+	unsigned int		color;
+
+	if (cub->ray.side == north)
+		color = 0xFF0000;
+	else if (cub->ray.side == south)
+		color = 0x00FF00;
+	else if (cub->ray.side == west)
+		color = 0x0000FF;
+	else
+		color = 0xF0F0F0;
+#if DEBUG_LEVEL >= 1
+	printf("get_untxtcolor END\n\n");
+#endif
+	return (color);
+}
+
+void			draw_buff_line(t_cub *cub, int screenx, int start, int end)
+{
+#if DEBUG_LEVEL >= 1
+	printf("draw_buff_line START\n\n");
+#endif
+	int		i;
+	unsigned int	color;
+
+	i = start - 1;
+	while (++i <= end)
+	{
+		color = get_untxtcolor(cub);
+		if (cub->ray.side == north || cub->ray.side == south)
+			color = color / 2;
+		buff_drawer(cub, screenx, i, color);
+	}
+#if DEBUG_LEVEL >= 2
+	printf("draw_buff_line : i = %d, end = %d, start = %d\n", i, end, start);
+	printf("screenx: %d, ycoord : %d, color : %#x\n", screenx, i, get_untxtcolor(cub));
+#endif
+#if DEBUG_LEVEL >= 1
+	printf("draw_buff_line END\n\n");
+#endif
+}
+
+void		draw_img_line_untxt(t_cub *cub, int screenx)
+{
+#if DEBUG_LEVEL >= 1
+	printf("draw_img_line_untxt START\n\n");
+#endif
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+	unsigned int		color;
+
+	lineheight = (int)(SCREEN_H / cub->ray.perpwalldist);
+	drawstart = (SCREEN_H / 2) - (lineheight / 2);
+	drawend = (SCREEN_H / 2) + (lineheight / 2);
+	if (drawstart < 0)
+		drawstart = 0;
+	if (drawend > SCREEN_H - 1)
+		drawend = SCREEN_H - 1;
+	draw_buff_line(cub, screenx, drawstart, drawend);
+#if DEBUG_LEVEL >= 1
+	printf("draw_img_line_untxt END\n\n");
+#endif
+}
+/**simple wall drawing functions end**/
+
 static double func_deltadist(double raydir)
 {
 	return (fabs(1 / raydir));
@@ -179,92 +267,6 @@ static void	set_perpwalldist(t_cub *cub)
 #endif
 }
 
-void			buff_drawer(t_cub *cub, int x, int y, unsigned int color)
-{
-#if DEBUG_LEVEL >= 1
-	printf("buff_drawer START\n\n");
-#endif
-	int		*img_buff;
-
-	img_buff = cub->img.img_buff;
-	img_buff[SCREEN_W * y + x] = color;
-#if DEBUG_LEVEL >= 2
-	printf("imgbuff[y][x] = %#x\n", color);
-#endif
-#if DEBUG_LEVEL >= 1
-	printf("buff_drawer END\n\n");
-#endif
-}
-
-unsigned int	get_untxtcolor(t_cub *cub)
-{
-#if DEBUG_LEVEL >= 1
-	printf("get_untxtcolor START\n\n");
-#endif
-	unsigned int		color;
-
-	if (cub->ray.side == north)
-		color = 0xFF0000;
-	else if (cub->ray.side == south)
-		color = 0x00FF00;
-	else if (cub->ray.side == west)
-		color = 0x0000FF;
-	else
-		color = 0xF0F0F0;
-#if DEBUG_LEVEL >= 1
-	printf("get_untxtcolor END\n\n");
-#endif
-	return (color);
-}
-
-void			draw_buff_line(t_cub *cub, int screenx, int start, int end)
-{
-#if DEBUG_LEVEL >= 1
-	printf("draw_buff_line START\n\n");
-#endif
-	int		i;
-	unsigned int	color;
-
-	i = start - 1;
-	while (++i <= end)
-	{
-		color = get_untxtcolor(cub);
-		if (cub->ray.side == north || cub->ray.side == south)
-			color = color / 2;
-		buff_drawer(cub, screenx, i, color);
-	}
-#if DEBUG_LEVEL >= 2
-	printf("draw_buff_line : i = %d, end = %d, start = %d\n", i, end, start);
-	printf("screenx: %d, ycoord : %d, color : %#x\n", screenx, i, get_untxtcolor(cub));
-#endif
-#if DEBUG_LEVEL >= 1
-	printf("draw_buff_line END\n\n");
-#endif
-}
-
-void		draw_img_line_untxt(t_cub *cub, int screenx)
-{
-#if DEBUG_LEVEL >= 1
-	printf("draw_img_line_untxt START\n\n");
-#endif
-	int		lineheight;
-	int		drawstart;
-	int		drawend;
-	unsigned int		color;
-
-	lineheight = (int)(SCREEN_H / cub->ray.perpwalldist);
-	drawstart = (SCREEN_H / 2) - (lineheight / 2);
-	drawend = (SCREEN_H / 2) + (lineheight / 2);
-	if (drawstart < 0)
-		drawstart = 0;
-	if (drawend > SCREEN_H - 1)
-		drawend = SCREEN_H - 1;
-	draw_buff_line(cub, screenx, drawstart, drawend);
-#if DEBUG_LEVEL >= 1
-	printf("draw_img_line_untxt END\n\n");
-#endif
-}
-
 // 단순한 WASD,
 
 int untextured_rayc(t_cub *cub)
@@ -284,7 +286,8 @@ int untextured_rayc(t_cub *cub)
 		set_sidedist(cub, &sidedistx, &sidedisty);
 		config_hit_wall(cub, &sidedistx, &sidedisty);
 		set_perpwalldist(cub);
-		draw_img_line_untxt(cub, screen_x);
+		draw_img_line_textured(cub, screen_x);
+		//draw_img_line_untxt(cub, screen_x);
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win, cub->img.img_ptr, 0, 0);
 	take_action(cub, worldMap);
