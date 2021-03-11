@@ -26,5 +26,7 @@
 # define 	M_KEYSYM_A			0
 # define 	M_KEYSYM_S			1
 # define 	M_KEYSYM_D			2
+# define	M_KEYSYM_LEFT		123
+# define	M_KEYSYM_RIGHT		124
 
 #endif
