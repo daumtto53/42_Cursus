@@ -35,3 +35,18 @@ void	debug_print_buffer(t_cub *cub)
 		printf("\n");
 	}
 }
+
+void	debug_texture_rgb(t_cub *cub, int tex_num)
+{
+	int i, j;
+	int *tex_map = cub->tex_arr[tex_num];
+
+	for (i = 0; i < TEXTURE_H; i++)
+	{
+		for (j = 0; j < TEXTURE_W; j++)
+		{
+			printf("%#x ", tex_map[TEXTURE_W * i + j]);
+		}
+		printf("\n");
+	}
+}

@@ -267,7 +267,36 @@ static void	set_perpwalldist(t_cub *cub)
 #endif
 }
 
-// 단순한 WASD,
+void	ceiling_floor_rayc(t_cub *cub)
+{
+	t_ceilfloor cf;
+	int y;
+	int	x;
+	unsigned int	color_floor;
+	unsigned int	color_ceil;
+
+	y = -1;
+	x = -1;
+	while (++y < SCREEN_H)
+	{
+		init_ceilfloor(cub, &cf, y);
+		while (++x < SCREEN_W)
+		{
+			cf.cellx = (int)(cf.ceilfloorx);
+			cf.celly = (int)(cf.ceilfloory);
+			cf.texx = (int)(TEXTURE_W * (cf.ceilfloorx - cf.cellx)) & (TEXTURE_W - 1);
+			cf.texy = (int)(TEXTURE_H * (cf.ceilfloory - cf.celly)) & (TEXTURE_H - 1);
+			cf.ceilfloorx += cf.stepx;
+			cf.ceilfloory += cf.stepy;
+			color_floor = cub->tex_arr[TEXTURE_FLOOR][TEXTURE_W * cf.texy + cf.texx];
+			buff_drawer(cub, x, y, color_floor);
+			color_ceil = cub->tex_arr[TEXTURE_CEILING][TEXTURE_W * cf.texy + cf.texx];
+			buff_drawer(cub, x, SCREEN_H - 1 - y, color_ceil);
+			// printf("x : %d, y : %d, color_floor : %u, color_ceil : %u\n", x, y, color_floor, color_floor);
+		}
+		x = -1;
+	}
+}
 
 int untextured_rayc(t_cub *cub)
 {
@@ -279,7 +308,8 @@ int untextured_rayc(t_cub *cub)
 	double sidedistx;
 	double sidedisty;
 
-	draw_simple_floor_ceiling(cub);
+	//draw_simple_floor_ceiling(cub);
+	ceiling_floor_rayc(cub);
 	for (screen_x = 0; screen_x < SCREEN_W; screen_x++)
 	{
 		config_rayinfo(cub, screen_x);

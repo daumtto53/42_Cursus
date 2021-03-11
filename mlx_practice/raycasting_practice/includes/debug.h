@@ -14,5 +14,6 @@ void	debug_rayinfo(t_cub *cub);
 void	debug_config_hit_wall(t_cub *cub, double sx, double sy);
 void	debug_print_buffer(t_cub *cub);
 void	print_err(int err_num);
+void	debug_texture_rgb(t_cub *cub, int tex_num);
 
 #endif

@@ -65,3 +65,17 @@ void	init_cub(t_cub *cub)
 	init_map(cub);
 	load_texture(cub);
 }
+
+void	init_ceilfloor(t_cub *cub, t_ceilfloor *cf, int y)
+{
+	cf->raydirx0 = cub->player.dirx - cub->player.planex;
+	cf->raydirx1 = cub->player.dirx + cub->player.planex;
+	cf->raydiry0 = cub->player.diry - cub->player.planey;
+	cf->raydiry1 = cub->player.diry + cub->player.planey;
+	cf->standardy = y - SCREEN_H / 2;
+	cf->rowdistance = (SCREEN_H * 0.5) / cf->standardy;
+	cf->stepx = cf->rowdistance * (cf->raydirx1 - cf->raydirx0) / SCREEN_W;
+	cf->stepy = cf->rowdistance * (cf->raydiry1 - cf->raydiry0) / SCREEN_W;
+	cf->ceilfloorx = cub->player.posx + cf->rowdistance * cf->raydirx0;
+	cf->ceilfloory = cub->player.posy + cf->rowdistance * cf->raydiry0;
+}

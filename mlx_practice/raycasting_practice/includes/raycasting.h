@@ -116,13 +116,31 @@ typedef struct	s_cub
 	t_rayinfo	ray;
 }				t_cub;
 
+typedef struct	s_ceilfloor
+{
+	double	raydirx0;
+	double	raydirx1;
+	double	raydiry0;
+	double	raydiry1;
+	double	rowdistance;
+	double	stepx;
+	double	stepy;
+	double	ceilfloorx;
+	double	ceilfloory;
+	int		cellx;
+	int		celly;
+	int		texx;
+	int		texy;
+	int		standardy;
+}				t_ceilfloor;
+
 int		comp_double(double dest, double src);
 void	matrix_rotation_2d(double *x, double *y, double delta_tht);
 double		get_wall_hit_ratio(t_cub *cub);
 int		get_texture_mapping(int tex_x, double texpos);
 
 void	init_cub(t_cub *cub);
-
+void	init_ceilfloor(t_cub *cub, t_ceilfloor *cf, int y);
 /*keypress functions*/
 int		event_keypress(int keycode ,void *param);
 int		event_keyrelease(int keycode, void *param);
