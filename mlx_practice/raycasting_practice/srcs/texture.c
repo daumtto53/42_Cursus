@@ -66,7 +66,7 @@ static void	load_img_2_texture(t_cub *cub, int tex_num, char *tex_path)
 	{
 		while (++j < img.img_w)
 			cub->tex_arr[tex_num][TEXTURE_W * i + j] = img.img_buff[img.img_w * i + j];
-		j = 0;
+		j = -1;
 	}
 	mlx_destroy_image(cub->mlx_ptr, img.img_ptr);
 }
@@ -81,7 +81,7 @@ void	load_texture(t_cub *cub)
 	load_img_2_texture(cub, 3, "../../imgsrcs/wall_4.xpm");
 	load_img_2_texture(cub, 4, "../../imgsrcs/wall_2.xpm");
 	load_img_2_texture(cub, 5, "../../imgsrcs/wall_2.xpm");
-	debug_texture_rgb(cub, 1);
-	printf("\n\n");
-	debug_texture_rgb(cub, 2);
+	// debug_texture_rgb(cub, 1);
+	// printf("\n\n");
+	// debug_texture_rgb(cub, 2);
 }
