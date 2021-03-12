@@ -34,11 +34,11 @@ NAME = raycasting
 $(NAME): $(TESTOBJS)
 	$(MAKE) all -C ./libft
 	$(MAKE) all -C ./gnl
-	$(CC) $(TESTSRCS) -o $(NAME) $(MACLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
+	$(CC) $(TESTSRCS) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
 %.o: %.c
-	$(CC) $(INCLUDES) $(MACOBJFLAG) -c $< -o $@
+	$(CC) $(INCLUDES) $(LINUXOBJFLAG) -c $< -o $@
 
 all :
 	$(NAME)

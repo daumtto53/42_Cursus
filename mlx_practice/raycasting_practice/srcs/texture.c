@@ -75,13 +75,10 @@ void	load_texture(t_cub *cub)
 {
 	allocate_tex_arr(cub);
 	allocate_textures(cub);
-	load_img_2_texture(cub, 0, "../../imgsrcs/wall_1.xpm");
-	load_img_2_texture(cub, 1, "../../imgsrcs/wall_2.xpm");
-	load_img_2_texture(cub, 2, "../../imgsrcs/wall_3.xpm");
-	load_img_2_texture(cub, 3, "../../imgsrcs/wall_4.xpm");
-	load_img_2_texture(cub, 4, "../../imgsrcs/wall_2.xpm");
-	load_img_2_texture(cub, 5, "../../imgsrcs/wall_2.xpm");
-	// debug_texture_rgb(cub, 1);
-	// printf("\n\n");
-	// debug_texture_rgb(cub, 2);
+	load_img_2_texture(cub, TEXTURE_WALL_0, "../../imgsrcs/wall_1.xpm");
+	load_img_2_texture(cub, TEXTURE_WALL_1, "../../imgsrcs/wall_2.xpm");
+	load_img_2_texture(cub, TEXTURE_WALL_2, "../../imgsrcs/wall_3.xpm");
+	load_img_2_texture(cub, TEXTURE_WALL_3, "../../imgsrcs/wall_4.xpm");
+	load_img_2_texture(cub, TEXTURE_FLOOR, "../../imgsrcs/floor.xpm");
+	load_img_2_texture(cub, TEXTURE_CEILING, "../../imgsrcs/ceiling.xpm");
 }

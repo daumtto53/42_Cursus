@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 23:53:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/02/09 01:05:04 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/12 23:00:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char				*ft_strjoin(const char *s1, const char *s2);
 char				*ft_strtrim(const char *s, const char *set);
 char				*ft_itoa(int n);
 char				**ft_split(char const *str, char c);
+void				ft_split_free(char **splitstr);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 void				ft_putchar_fd(char c, int fd);
