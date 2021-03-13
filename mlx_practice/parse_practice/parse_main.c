@@ -16,8 +16,16 @@ static int		parse_type(t_conf *conf, int fd)
 	int		valid;
 
 	line_num = -1;
-	while (++line_num < 8 && get_next_line(fd, &str))
+	while (++line_num < 8)
 	{
+		valid = get_next_line(fd, &str);
+		if (valid == -1)
+		{
+			//추후에 break걸어서 에러 처리 한번에 해줄 수 있을 듯?
+			printf("parse_type() : get_next_line error\n");
+			free(str);
+			exit(0);
+		}
 		splitstr = ft_split(str, ' ');
 		if (splitstr[0] == '\0')
 		{
@@ -26,24 +34,33 @@ static int		parse_type(t_conf *conf, int fd)
 		}
 		if (!splitstr)
 		{
-			printf("parse type : split error\n");
+			printf("parse_type() : split error\n");
 			exit(0);
 		}
 		valid = parse_identifier(conf, fd, splitstr);
 		ft_split_free(splitstr);
 		if (valid == -1)
 		{
-			printf("parse error\n");
+			printf("parse_type() : parse error\n");
 			exit(0);
 		}
 	}
 	return (1);
 }
 
-// int		parse_map(t_conf *conf, int fd)
-// {
+int		parse_map(t_conf *conf, int fd)
+{
+	// map parser; + map W H assigner
+	init_map(conf, fd);
 
-// }
+	// map valid check;
+	if (!is_valid_map(&conf->map, fd))
+	{
+		//free map;
+		// print invalid map error;
+	}
+
+}
 
 static void	parse_conf(t_conf *conf, int fd)
 {

@@ -44,6 +44,12 @@ typedef struct s_conf
 	unsigned int	map_w;
 }				t_conf;
 
+typedef struct	s_dynamic_map
+{
+	char	**map;
+	int		size;
+	int		len;
+}				t_dynamic_map;
 
 int		open_conf_cub(char **argv);
 int		is_argc_argv_vaild(int argc, char **argv);
