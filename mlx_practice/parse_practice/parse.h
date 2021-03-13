@@ -21,10 +21,10 @@
 # define TEX_PATH_SO	1 << 7
 # define TEX_PATH_EA	1 << 8
 # define TEX_PATH_S		1 << 9
-# define RGB_R_OP		1 << 16
-# define RGB_G_OP		1 << 8
+# define RGB_R_OP		1 << 15
+# define RGB_G_OP		1 << 7
 # define RGB_B_OP		0
-# define COMPLETE_INPUT	0x3F
+# define COMPLETE_INPUT	0x3FE
 
 //provided
 typedef struct s_conf
@@ -54,6 +54,8 @@ int		identifier_fc(t_conf *conf, int fd, char **splitstr, char *id);
 
 int		parse_conf_cub(int argc, char **argv, t_conf *conf);
 int		identifier_nwe(t_conf *conf, int fd, char **splitstr, char *id);
-int		identifier_es(t_conf *conf, int fd, char **splitstr, char *id);
+int		identifier_ss(t_conf *conf, int fd, char **splitstr, char *id);
+
+void		print_conf(t_conf *conf);
 
 #endif

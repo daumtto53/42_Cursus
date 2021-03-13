@@ -82,7 +82,6 @@ static void			draw_buff_wall_texture(t_cub *cub, int screenx, int start, int end
 	double texpos;
 	int	tex_y;
 
-
 	tex_num = get_tex_num(cub);
 	tex_x = get_wall_hit_ratio(cub) * (double)TEXTURE_W;
 	step = (double)TEXTURE_H / ((int)(SCREEN_H / cub->ray.perpwalldist));

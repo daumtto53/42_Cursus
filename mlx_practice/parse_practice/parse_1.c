@@ -3,6 +3,8 @@
 static void	init_conf(t_conf *conf)
 {
 	conf->complete_input = 0;
+	conf->color_ceil = 0;
+	conf->color_floor = 0;
 }
 
 static int		parse_identifier(t_conf *conf, int fd, char **splitstr)
@@ -16,7 +18,10 @@ static int		parse_identifier(t_conf *conf, int fd, char **splitstr)
 	valid = identifier_fc(conf, fd, splitstr, identifier);
 	if (valid == -1)
 		return (-1);
-	valid = identifier_nwses(conf, fd, splitstr, identifier);
+	valid = identifier_nwe(conf, fd, splitstr, identifier);
+	if (valid == -1)
+		return (-1);
+	valid = identifier_ss(conf, fd, splitstr, identifier);
 	if (valid == -1)
 		return (-1);
 	return (1);
@@ -31,9 +36,14 @@ static int		parse_type(t_conf *conf, int fd)
 	int		valid;
 
 	line_num = -1;
-	while (++line_num < 8 && !get_next_line(fd, &str))
+	while (++line_num < 8 && get_next_line(fd, &str))
 	{
 		splitstr = ft_split(str, ' ');
+		if (splitstr[0] == '\0')
+		{
+			line_num--;
+			continue;
+		}
 		if (!splitstr)
 		{
 			printf("parse type : split error\n");
@@ -62,9 +72,10 @@ static void	parse_conf(t_conf *conf, int fd)
 		printf("parsing_error\n");
 		exit(0);
 	}
+	print_conf(conf);
 	if (conf->complete_input != COMPLETE_INPUT)
 	{
-		printf("wrong identifier num\n");
+		printf("complete_input : %#x\twrong identifier num\n", conf->complete_input);
 		exit(0);
 	}
 	// if (parse_map(conf, fd) == -1)
@@ -91,5 +102,5 @@ int		parse_conf_cub(int argc, char **argv, t_conf *conf)
 	// {
 	// 	printf("add bmp logic\n");
 	// }
-
+	return (1);
 }

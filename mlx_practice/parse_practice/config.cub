@@ -1,11 +1,15 @@
 R      800 600
-
 NO         ../../imgsrcs/wall_1.xpm
-SO            ../../imgsrcs/wall_2.xpm
-WE             ../../imgsrcs/wall_3.xpm
 
-S  ../../imgsrcs/tux.xpm
-EA ../../imgsrcs/wall_4.xpm
+SO            ../../imgsrcs/wall_2.xpm
+
+
+        WE             ../../imgsrcs/wall_3.xpm
+        S  ../../imgsrcs/tux.xpm
+
+
+    EA ../../imgsrcs/wall_4.xpm
+
 
 F 220,100,0
 C 225,30,0
