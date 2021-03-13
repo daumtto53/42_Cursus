@@ -48,13 +48,9 @@ typedef struct s_conf
 int		open_conf_cub(char **argv);
 int		is_argc_argv_vaild(int argc, char **argv);
 
-
-void	identifier_r(t_conf *conf, int fd, char **splitstr, char *id);
-int		identifier_fc(t_conf *conf, int fd, char **splitstr, char *id);
+int		parse_identifier(t_conf *conf, int fd, char **splitstr);
 
 int		parse_conf_cub(int argc, char **argv, t_conf *conf);
-int		identifier_nwe(t_conf *conf, int fd, char **splitstr, char *id);
-int		identifier_ss(t_conf *conf, int fd, char **splitstr, char *id);
 
 void		print_conf(t_conf *conf);
 
