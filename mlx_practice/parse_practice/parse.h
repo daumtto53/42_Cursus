@@ -26,6 +26,12 @@
 # define RGB_B_OP		0
 # define COMPLETE_INPUT	0x3FE
 
+typedef struct	s_dynamic_map
+{
+	char	**map;
+	int		size;
+	int		len;
+}				t_dynamic_map;
 //provided
 typedef struct s_conf
 {
@@ -39,17 +45,10 @@ typedef struct s_conf
 	char			*tex_path_so;
 	char			*tex_path_ea;
 	char			*tex_path_s;
-	char			**map;
+	t_dynamic_map	dyn;
 	unsigned int	map_h;
 	unsigned int	map_w;
 }				t_conf;
-
-typedef struct	s_dynamic_map
-{
-	char	**map;
-	int		size;
-	int		len;
-}				t_dynamic_map;
 
 int		open_conf_cub(char **argv);
 int		is_argc_argv_vaild(int argc, char **argv);
@@ -59,5 +58,7 @@ int		parse_identifier(t_conf *conf, int fd, char **splitstr);
 int		parse_conf_cub(int argc, char **argv, t_conf *conf);
 
 void		print_conf(t_conf *conf);
+
+int			parse_map(t_conf *conf, int fd);
 
 #endif

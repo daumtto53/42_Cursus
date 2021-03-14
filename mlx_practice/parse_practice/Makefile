@@ -5,7 +5,8 @@ SRCSDIR = ./
 FILE =	main \
 		valid \
 		parse_main \
-		parse_type
+		parse_type \
+		parse_map
 
 GNL_LIBFLAG = -L../raycasting_practice/gnl -lgnl
 LIBFT_LIBFLAG = -L../raycasting_practice/libft -lft
