@@ -67,7 +67,7 @@ int		parse_conf_cub(int argc, char **argv, t_conf *conf)
 		exit(0);
 	init_conf(conf);
 	parse_conf(conf, conf_fd);
-	if (!is_valid_map(conf->dyn.map))
+	if (!is_valid_map(conf))
 	{
 		printf("invalid map error\n");
 		ft_split_free(conf->dyn.map);

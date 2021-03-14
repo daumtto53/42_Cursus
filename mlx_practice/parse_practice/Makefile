@@ -6,6 +6,7 @@ FILE =	main \
 		valid \
 		parse_main \
 		parse_type \
+		valid_map \
 		parse_map
 
 GNL_LIBFLAG = -L../raycasting_practice/gnl -lgnl

@@ -9,6 +9,7 @@
 # include "../raycasting_practice/libft/libft.h"
 # include "../raycasting_practice/gnl/includes/get_next_line.h"
 
+
 # 	 define DEBUG_LEVEL 1
 
 # define MAP			1
@@ -60,5 +61,11 @@ int		parse_conf_cub(int argc, char **argv, t_conf *conf);
 void		print_conf(t_conf *conf);
 
 int			parse_map(t_conf *conf, int fd);
+
+int			is_valid_map(t_conf *conf);
+
+/* for debug : todelete */
+
+
 
 #endif
