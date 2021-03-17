@@ -33,6 +33,13 @@ typedef struct	s_dynamic_map
 	int		size;
 	int		len;
 }				t_dynamic_map;
+
+typedef struct s_point
+{
+	int		x;
+	int		y;
+}				t_point;
+
 //provided
 typedef struct s_conf
 {
@@ -63,6 +70,8 @@ void		print_conf(t_conf *conf);
 int			parse_map(t_conf *conf, int fd);
 
 int			is_valid_map(t_conf *conf);
+
+int		validation_check_dfs(t_conf *conf);
 
 /* for debug : todelete */
 

@@ -75,7 +75,10 @@ int		is_valid_map(t_conf *conf)
 	if (!resized)
 		return (-1);
 	copy_map_data(resized, conf->dyn.map);
-	print_map(resized);
-	validation_check_dfs(resized);
+	free(conf->dyn.map);
+	conf->dyn.map = resized;
+	print_map(conf->dyn.map);
+	if (validation_check_dfs(conf) == -1)
+		return (-1);
 	return (1);
 }
