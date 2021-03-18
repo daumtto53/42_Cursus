@@ -1,7 +1,7 @@
 #include "../../includes/raycasting.h"
 #include "../../includes/debug.h"
 
-static void	init_mlx(t_cub *cub)
+static void	init_mlx(t_cub *cub, t_conf *conf)
 {
 	cub->mlx_ptr = mlx_init();
 	if (cub->mlx_ptr == NULL)
@@ -9,6 +9,11 @@ static void	init_mlx(t_cub *cub)
 		print_err(CUSTOM_ERR_MLX_FAIL);
 		exit(1);
 	}
+	mlx_get_screen_size(cub->mlx_ptr, &cub->screen_x, &cub->screen_y);
+	if (conf->resolution_w < cub->screen_x)
+		cub->screen_x = conf->resolution_w;
+	if (conf->resolution_h < cub->screen_y)
+		cub->screen_y = conf->resolution_h;
 	cub->win = mlx_new_window(cub->mlx_ptr, cub->screen_x, cub->screen_y, "TITLE");
 	if (cub->win == NULL)
 	{
@@ -73,11 +78,10 @@ static void	init_map(t_cub *cub, t_conf *conf)
 
 void	init_cub(t_cub *cub, t_conf *conf)
 {
-	cub->screen_x = conf->resolution_w;
-	cub->screen_y = conf->resolution_h;
+
+	init_mlx(cub, conf);
+	init_img(cub);
 	init_player(cub, conf);
 	init_map(cub, conf);
-	init_mlx(cub);
-	init_img(cub);
 	load_texture(cub, conf);
 }

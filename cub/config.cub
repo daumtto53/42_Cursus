@@ -1,4 +1,4 @@
-R      800 600
+R      4000 4000
 NO         ./imgsrcs/wall_1.xpm
 
 SO            ./imgsrcs/wall_2.xpm
