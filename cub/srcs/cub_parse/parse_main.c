@@ -110,7 +110,6 @@ int		parse_conf_cub(int argc, char **argv, t_conf *conf)
 		close(conf_fd);
 		exit(0);
 	}
-	//bmp_logic(); when argc == 3
 	close(conf_fd);
 	return (1);
 }

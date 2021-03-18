@@ -159,6 +159,6 @@ void	load_texture(t_cub *cub, t_conf *conf);
 
 void	ceiling_floor_rayc(t_cub *cub);
 
-int 	untextured_rayc(t_cub *cub);
+int 	untextured_rayc(t_cub *cub, int argc);
 
 #endif

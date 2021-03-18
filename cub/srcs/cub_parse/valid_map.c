@@ -91,7 +91,7 @@ int		is_valid_map(t_conf *conf)
 	init_map_data(conf, resized, conf->dyn.map);
 	ft_split_free(conf->dyn.map);
 	conf->dyn.map = resized;
-	print_map(conf->dyn.map);
+	//print_map(conf->dyn.map);
 	if (validation_check_dfs(conf) == -1)
 		return (0);
 	return (1);

@@ -93,7 +93,7 @@ static void	set_perpwalldist(t_cub *cub)
 	}
 }
 
-int untextured_rayc(t_cub *cub)
+int untextured_rayc(t_cub *cub, int argc)
 {
 	int			screen_x;
 	int			color;
@@ -111,6 +111,8 @@ int untextured_rayc(t_cub *cub)
 		draw_img_line_textured(cub, screen_x);
 		//draw_img_line_untxt(cub, screen_x);
 	}
+	if (argc == 3)
+		return (0);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win, cub->img.img_ptr, 0, 0);
 	take_action(cub);
 	return (0);

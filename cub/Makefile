@@ -2,9 +2,12 @@ cc = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
+SRCSDIR_BMP = ./srcs/cub_bmp/
 SRCSDIR_PARSE = ./srcs/cub_parse/
 SRCSDIR_RAY = ./srcs/cub_ray/
 INCLUDES = -I./includes -I./debug -I./x11_key -I./parse
+
+FILE_BMP =		bmp_maker
 
 FILE_RAY =		raycasting_1 \
 				raycasting_2 \
@@ -39,17 +42,19 @@ MACLINKFLAG = -L../../mlx -lmlx -framework OpenGL -framework AppKit
 GNL_LIBFLAG = -L./gnl -lgnl
 LIBFT_LIBFLAG = -L./libft -lft
 
-SRCS_PARSE = $(addsuffix .c, $(addprefix $(SRCSDIR_PARSE), $(FILE_PARSE)))
-OBJS_PARSE = $(SRCS_PARSE:.c=.o)
+SRCS_BMP = $(addsuffix .c, $(addprefix $(SRCSDIR_BMP), $(FILE_BMP)))
+OBJS_BMP = $(SRCS_BMP:.c=.o)
 SRCS_RAY = $(addsuffix .c, $(addprefix $(SRCSDIR_RAY), $(FILE_RAY)))
 OBJS_RAY = $(SRCS_RAY:.c=.o)
+SRCS_PARSE = $(addsuffix .c, $(addprefix $(SRCSDIR_PARSE), $(FILE_PARSE)))
+OBJS_PARSE = $(SRCS_PARSE:.c=.o)
 
 NAME = cub3d
 
-$(NAME): $(OBJS_RAY) $(OBJS_PARSE)
+$(NAME): $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE)
 	$(MAKE) all -C ./libft
 	$(MAKE) all -C ./gnl
-	$(CC) $(SRCS_PARSE) $(SRCS_RAY) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
+	$(CC) $(SRCS_BMP) $(SRCS_PARSE) $(SRCS_RAY) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
 %.o: %.c
@@ -59,7 +64,7 @@ all :
 	$(NAME)
 
 clean :
-	rm -rf $(OBJS_PARSE) $(OBJS_RAY)
+	rm -rf $(OBJS_BMP) $(OBJS_PARSE) $(OBJS_RAY)
 
 fclean :
 	rm -rf $(NAME)
