@@ -70,9 +70,13 @@ static int		identifier_ss(t_conf *conf, int fd, char **splitstr, char *id)
 {
 	char	*dup;
 
-	dup = ft_strdup(splitstr[1]);
-	if (!dup)
-		return (-1);
+	dup = NULL;
+	if (ft_strncmp(id, "SO", 2) == 0 || ft_strncmp(id, "S", 1) == 0)
+	{
+		dup = ft_strdup(splitstr[1]);
+		if (!dup)
+			return (-1);
+	}
 	if (ft_strncmp(id, "SO", 2) == 0)
 	{
 		conf->tex_path_so = dup;

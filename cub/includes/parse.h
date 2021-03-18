@@ -75,8 +75,6 @@ int		validation_check_dfs(t_conf *conf);
 
 void	parse_error_cleaner(t_conf *conf);
 
-/* for debug : todelete */
-
-
+void	free_all_ptr(char **splitstr, char *str);
 
 #endif

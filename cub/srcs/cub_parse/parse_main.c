@@ -13,6 +13,7 @@ static void	init_conf(t_conf *conf)
 	conf->tex_path_s = NULL;
 }
 
+// 줄 줄이기 필요
 static int		parse_type(t_conf *conf, int fd)
 {
 	char	*str;
@@ -30,14 +31,17 @@ static int		parse_type(t_conf *conf, int fd)
 			free(str);
 			return (-1);
 		}
-		if (splitstr[0] == NULL)
+		if (splitstr[0] == NULL && line_num--)
 		{
-			line_num--;
+			free_all_ptr(splitstr, str);
 			continue;
 		}
 		if (parse_identifier(conf, fd, splitstr) == -1)
+		{
+			free_all_ptr(splitstr, str);
 			return (-1);
-		ft_split_free(splitstr);
+		}
+		free_all_ptr(splitstr, str);
 	}
 	return (1);
 }
@@ -103,8 +107,10 @@ int		parse_conf_cub(int argc, char **argv, t_conf *conf)
 	{
 		printf("invalid map error\n");
 		parse_error_cleaner(conf);
+		close(conf_fd);
 		exit(0);
 	}
 	//bmp_logic(); when argc == 3
+	close(conf_fd);
 	return (1);
 }

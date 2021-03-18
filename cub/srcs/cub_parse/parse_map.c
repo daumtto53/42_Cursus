@@ -19,6 +19,7 @@ static int		map_push_back(t_dynamic_map *dyn, char *line)
 	char	**temp;
 	int		i;
 
+	//dyn->len > dyn->size - 1
 	if (dyn->len > dyn->size - 1)
 	{
 		temp = (char **)calloc(dyn->size * 2 + 1, sizeof(char **));
@@ -31,7 +32,7 @@ static int		map_push_back(t_dynamic_map *dyn, char *line)
 		while (dyn->map[++i])
 			temp[i] = dyn->map[i];
 		dyn->size = dyn->size * 2;
-		temp[dyn->size] = '\0';
+		temp[dyn->size] = NULL;
 		free(dyn->map);
 		dyn->map = temp;
 	}
@@ -61,5 +62,8 @@ int		parse_map(t_conf *conf, int fd)
 			return (-1);
 		}
 	}
+	if (str[0] == '\0')
+		free(str);
 	return (1);
 }
+

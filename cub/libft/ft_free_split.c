@@ -5,7 +5,7 @@ void	ft_split_free(char **splitstr)
 	int		i;
 
 	i = 0;
-	while (!splitstr[i])
+	while (splitstr[i])
 	{
 		free(splitstr[i]);
 		i++;

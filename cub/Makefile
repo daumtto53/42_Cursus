@@ -25,7 +25,8 @@ FILE_PARSE =	valid \
 				parse_type \
 				valid_map \
 				valid_map_dfs \
-				parse_map
+				parse_map \
+				parse_utils
 
 ### LINUX && MAC COMPILATION DIFFERENT ###
 LINUXOBJFLAG = -I/usr/include -I../../mlx_linux -O3

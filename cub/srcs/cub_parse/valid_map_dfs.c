@@ -95,23 +95,18 @@ int		validation_check_dfs(t_conf *conf)
 	int		**visited;
 
 	visited =  create_visited_arr(conf);
+	i = -1;
 	if (!visited)
 		return (-1);
-	if (find_pos(conf) == 0)
+	if (find_pos(conf) == 0 || dfs(conf, visited, conf->posx, conf->posy) == 0)
 	{
-		i = -1;
 		while (++i < conf->map_h)
 			free(visited[i]);
 		free(visited);
 		return (-1);
 	}
-	if (dfs(conf, visited, conf->posx, conf->posy) == 0)
-	{
-		i = -1;
-		while (++i < conf->map_h)
-			free(visited[i]);
-		free(visited);
-		return (-1);
-	}
+	while (++i < conf->map_h)
+		free(visited[i]);
+	free(visited);
 	return (1);
 }

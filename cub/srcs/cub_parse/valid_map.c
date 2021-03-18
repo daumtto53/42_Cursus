@@ -89,7 +89,7 @@ int		is_valid_map(t_conf *conf)
 	if (!resized)
 		return (-1);
 	init_map_data(conf, resized, conf->dyn.map);
-	free(conf->dyn.map);
+	ft_split_free(conf->dyn.map);
 	conf->dyn.map = resized;
 	print_map(conf->dyn.map);
 	if (validation_check_dfs(conf) == -1)
