@@ -24,14 +24,14 @@ static char		**resize_map(t_conf *conf)
 	char	**temp;
 	int		i;
 
-	temp = (char **)calloc(conf->map_h + 1, sizeof(char *));
+	temp = (char **)ft_calloc(conf->map_h + 1, sizeof(char *));
 	if (!temp)
 		return (NULL);
 	temp[conf->map_h] = NULL;
 	i = -1;
 	while (++i < conf->map_h)
 	{
-		temp[i] = (char *)calloc(conf->map_w + 1, sizeof(char));
+		temp[i] = (char *)ft_calloc(conf->map_w + 1, sizeof(char));
 		if (!temp[i])
 		{
 			ft_split_free(temp);

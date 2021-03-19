@@ -4,7 +4,7 @@ static int		init_dyn_map(t_dynamic_map *dyn)
 {
 	dyn->len = 0;
 	dyn->size = 2;
-	dyn->map = (char **)calloc(dyn->size + 1, sizeof(char **));
+	dyn->map = (char **)ft_calloc(dyn->size + 1, sizeof(char **));
 	if (!dyn->map)
 	{
 		printf("dynamic map allocation error\n");
@@ -22,7 +22,7 @@ static int		map_push_back(t_dynamic_map *dyn, char *line)
 	//dyn->len > dyn->size - 1
 	if (dyn->len > dyn->size - 1)
 	{
-		temp = (char **)calloc(dyn->size * 2 + 1, sizeof(char **));
+		temp = (char **)ft_calloc(dyn->size * 2 + 1, sizeof(char **));
 		if (!temp)
 		{
 			printf("dynamic map push_back allocation error\n");

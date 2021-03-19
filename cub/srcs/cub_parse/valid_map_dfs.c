@@ -66,13 +66,13 @@ static int		**create_visited_arr(t_conf *conf)
 	int		j;
 	int		**visited;
 
-	visited = (int **)calloc(conf->map_h, sizeof(int *));
+	visited = (int **)ft_calloc(conf->map_h, sizeof(int *));
 	if (!visited)
 		return (NULL);
 	i = -1;
 	while (++i < conf->map_h)
 	{
-		visited[i] = (int *)calloc(conf->map_w, sizeof(int *));
+		visited[i] = (int *)ft_calloc(conf->map_w, sizeof(int *));
 		if (!visited[i])
 		{
 			j = -1;

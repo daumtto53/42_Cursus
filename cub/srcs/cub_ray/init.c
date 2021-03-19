@@ -47,7 +47,6 @@ static void	init_img(t_cub *cub)
 
 static void	init_player(t_cub *cub, t_conf *conf)
 {
-	// When parsed, needs pos, dir, plane modified.
 	cub->player.dirx = 0.0;
 	cub->player.diry = 0.0;
 	cub->player.planex = 0.0;
@@ -78,10 +77,18 @@ static void	init_map(t_cub *cub, t_conf *conf)
 
 void	init_cub(t_cub *cub, t_conf *conf)
 {
+	double	*perpbuff;
 
 	init_mlx(cub, conf);
 	init_img(cub);
+	perpbuff = (double *)ft_calloc(cub->screen_x, sizeof(double));
+	if (!perpbuff)
+	{
+		print_err(CUSTOM_ERR_MALLOC_FAIL);
+		exit(0);
+	}
 	init_player(cub, conf);
 	init_map(cub, conf);
 	load_texture(cub, conf);
+
 }

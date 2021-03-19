@@ -16,7 +16,7 @@
 
 #include <string.h>
 
-# define TEXTURE_NUM 6
+# define TEXTURE_NUM 10
 # define TEXTURE_W	64
 # define TEXTURE_H	64
 
@@ -26,6 +26,10 @@
 # define TEXTURE_WALL_3 3
 # define TEXTURE_FLOOR	4
 # define TEXTURE_CEILING 5
+# define TEXTURE_SP_1	6
+# define TEXTURE_SP_2	7
+# define TEXTURE_SP_3	8
+# define TEXTURE_SP_4	9
 
 # define WPRESSED	1
 # define APRESSED	2
@@ -33,6 +37,8 @@
 # define DPRESSED	8
 # define LEFTPRESSED 16
 # define RIGHTPRESSED 32
+
+# define SPRITE_NUM		10
 
 /*(360 == 6.3) / 20s : x : 0.2s , x == 0.063*/
 # define DELTATHETA 0.063
@@ -102,6 +108,31 @@ typedef struct	s_rayinfo
 	int			wall_x;
 }				t_rayinfo;
 
+typedef struct	s_sprite
+{
+	double	x;
+	double	y;
+	int		sprite_num;
+}				t_sprite;
+
+typedef struct	s_sprite_op
+{
+	double	spritex;
+	double	spritey;
+	double	inv_det;
+	double	trans_x;
+	double	trans_y;
+	int		sprite_scx;
+	int		sprite_h;
+	int		sprite_w;
+	int		drawstart_x;
+	int		drawend_x;
+	int		drawstart_y;
+	int		drawend_y;
+	int		texx;
+	int		texy;
+}				t_sprite_op;
+
 typedef struct	s_cub
 {
 	void		*mlx_ptr;
@@ -114,6 +145,10 @@ typedef struct	s_cub
 	t_player	player;
 	t_map		map;
 	t_rayinfo	ray;
+	t_sprite	sprite_arr[SPRITE_NUM];
+	double		sprite_dist[SPRITE_NUM];
+	int			sprite_order[SPRITE_NUM];
+	double		*perp_buff;
 }				t_cub;
 
 typedef struct	s_ceilfloor

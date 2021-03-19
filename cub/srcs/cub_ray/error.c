@@ -25,4 +25,5 @@ void	free_cub_struct(t_cub *cub)
 	while (++i < TEXTURE_NUM)
 		free(cub->tex_arr[i]);
 	free(cub->tex_arr);
+	free(cub->perp_buff);
 }

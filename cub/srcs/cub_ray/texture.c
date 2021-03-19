@@ -9,7 +9,7 @@ static int		allocate_tex_arr(t_cub *cub)
 {
 	int		**tex_arr;
 
-	tex_arr = (int **)calloc(TEXTURE_NUM, sizeof(int *));
+	tex_arr = (int **)ft_calloc(TEXTURE_NUM, sizeof(int *));
 	if (!tex_arr)
 	{
 		//앞에서 만들었던 동적할당된 변수들 할당 해제 필요.
@@ -27,7 +27,7 @@ static int		allocate_textures(t_cub *cub)
 	i = -1;
 	while (++i < TEXTURE_NUM)
 	{
-		arr = (int *)calloc(TEXTURE_H * TEXTURE_W, sizeof(int));
+		arr = (int *)ft_calloc(TEXTURE_H * TEXTURE_W, sizeof(int));
 		if (!arr)
 		{
 			while (--i >= 0)
@@ -80,4 +80,8 @@ void	load_texture(t_cub *cub, t_conf *conf)
 	load_img_2_texture(cub, TEXTURE_WALL_3, conf->tex_path_ea);
 	load_img_2_texture(cub, TEXTURE_FLOOR, "./imgsrcs/floor.xpm");
 	load_img_2_texture(cub, TEXTURE_CEILING, "./imgsrcs/ceiling.xpm");
+	load_img_2_texture(cub, TEXTURE_SP_1, conf->tex_path_s);
+	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_1.xpm");
+	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_2.xpm");
+	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_3.xpm");
 }

@@ -109,6 +109,7 @@ int untextured_rayc(t_cub *cub, int argc)
 		config_hit_wall(cub, &sidedistx, &sidedisty);
 		set_perpwalldist(cub);
 		draw_img_line_textured(cub, screen_x);
+		cub->perp_buff[screen_x] = cub->ray.perpwalldist;
 		//draw_img_line_untxt(cub, screen_x);
 	}
 	if (argc == 3)
