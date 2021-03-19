@@ -16,7 +16,7 @@
 
 #include <string.h>
 
-# define TEXTURE_NUM 8
+# define TEXTURE_NUM 6
 # define TEXTURE_W	64
 # define TEXTURE_H	64
 
@@ -161,5 +161,7 @@ void	load_texture(t_cub *cub, t_conf *conf);
 void	ceiling_floor_rayc(t_cub *cub);
 
 int 	untextured_rayc(t_cub *cub, int argc);
+
+void	free_cub_struct(t_cub *cub);
 
 #endif

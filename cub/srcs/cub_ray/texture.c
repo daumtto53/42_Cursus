@@ -71,6 +71,7 @@ static void	load_img_2_texture(t_cub *cub, int tex_num, char *tex_path)
 
 void	load_texture(t_cub *cub, t_conf *conf)
 {
+	cub->tex_num = TEXTURE_NUM;
 	allocate_tex_arr(cub);
 	allocate_textures(cub);
 	load_img_2_texture(cub, TEXTURE_WALL_0, conf->tex_path_no);
