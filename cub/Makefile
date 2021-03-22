@@ -22,7 +22,6 @@ FILE_RAY =		raycasting_1 \
 				draw_sprite \
 				error \
 				texture \
-				debug \
 				main \
 
 FILE_PARSE =	valid \
@@ -57,7 +56,7 @@ $(NAME): $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE)
 	$(MAKE) all -C ./libft
 	$(MAKE) all -C ./gnl
 	$(MAKE) all -C ./mlx_linux
-	$(CC) $(SRCS_BMP) $(SRCS_PARSE) $(SRCS_RAY) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
+	$(CC) $(CFLAGS) $(SRCS_BMP) $(SRCS_PARSE) $(SRCS_RAY) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
 %.o: %.c

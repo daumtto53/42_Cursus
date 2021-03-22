@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:15:27 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:44:17 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parse.h"
 
-static int		is_file_extension_cub(char *file_path)
+static int	is_file_extension_cub(char *file_path)
 {
 	char	*cub;
 
@@ -13,7 +25,7 @@ static int		is_file_extension_cub(char *file_path)
 	return (1);
 }
 
-static int		is_argv_2_save(char **argv)
+static int	is_argv_2_save(char **argv)
 {
 	int		is_valid;
 	char	*argv_2;
@@ -25,11 +37,8 @@ static int		is_argv_2_save(char **argv)
 	return (is_valid);
 }
 
-int		is_argc_argv_vaild(int argc, char **argv)
+int			is_argc_argv_vaild(int argc, char **argv)
 {
-	int		is_error;
-
-	is_error = 0;
 	if (!(1 <= argc && argc <= 3))
 	{
 		printf("argument number error\n");
@@ -53,7 +62,7 @@ int		is_argc_argv_vaild(int argc, char **argv)
 	return (1);
 }
 
-int		open_conf_cub(char **argv)
+int			open_conf_cub(char **argv)
 {
 	int		conf_fd;
 

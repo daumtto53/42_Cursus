@@ -1,22 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid_map_dfs.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:10:59 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:48:53 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parse.h"
 
-static int		is_valid(t_conf *conf, int **visited, int x, int y)
+static int	is_valid(t_conf *conf, int x, int y)
 {
 	int		valid;
-	char	**map;
 
 	valid = (0 <= x && x < conf->map_w && 0 <= y && y < conf->map_h);
 	valid = valid && conf->dyn.map[y][x] != '1';
 	return (valid);
 }
 
-static int		dfs(t_conf *conf, int **visited, int x, int y)
+static int	dfs(t_conf *conf, int **visited, int x, int y)
 {
 	const int	step_x[4] = {1, 0, -1, 0};
 	const int	step_y[4] = {0, -1, 0, 1};
-	int		i;
-	int		newx;
-	int		newy;
+	int			i;
+	int			newx;
+	int			newy;
 
 	if (conf->dyn.map[y][x] == '+')
 		return (0);
@@ -26,7 +37,7 @@ static int		dfs(t_conf *conf, int **visited, int x, int y)
 	{
 		newx = x + step_x[i];
 		newy = y + step_y[i];
-		if (is_valid(conf, visited, newx, newy) && !visited[newy][newx])
+		if (is_valid(conf, newx, newy) && !visited[newy][newx])
 		{
 			if (dfs(conf, visited, newx, newy) == 0)
 				return (0);
@@ -35,12 +46,13 @@ static int		dfs(t_conf *conf, int **visited, int x, int y)
 	return (1);
 }
 
-static int		find_pos(t_conf *conf)
+static int	find_pos(t_conf *conf)
 {
 	int		i;
 	int		j;
-	char	**map = conf->dyn.map;
+	char	**map;
 
+	map = conf->dyn.map;
 	i = -1;
 	while (++i < conf->map_h)
 	{
@@ -60,7 +72,7 @@ static int		find_pos(t_conf *conf)
 	return (0);
 }
 
-static int		**create_visited_arr(t_conf *conf)
+static int	**create_visited_arr(t_conf *conf)
 {
 	int		i;
 	int		j;
@@ -88,13 +100,12 @@ static int		**create_visited_arr(t_conf *conf)
 	return (visited);
 }
 
-
-int		validation_check_dfs(t_conf *conf)
+int			validation_check_dfs(t_conf *conf)
 {
 	int		i;
 	int		**visited;
 
-	visited =  create_visited_arr(conf);
+	visited = create_visited_arr(conf);
 	i = -1;
 	if (!visited)
 		return (-1);

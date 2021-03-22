@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:13:11 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:49:32 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parse.h"
 
-static int		init_dyn_map(t_dynamic_map *dyn)
+static int	init_dyn_map(t_dynamic_map *dyn)
 {
 	dyn->len = 0;
 	dyn->size = 2;
@@ -14,12 +26,11 @@ static int		init_dyn_map(t_dynamic_map *dyn)
 	return (1);
 }
 
-static int		map_push_back(t_dynamic_map *dyn, char *line)
+static int	map_push_back(t_dynamic_map *dyn, char *line)
 {
 	char	**temp;
 	int		i;
 
-	//dyn->len > dyn->size - 1
 	if (dyn->len > dyn->size - 1)
 	{
 		temp = (char **)ft_calloc(dyn->size * 2 + 1, sizeof(char **));
@@ -40,9 +51,8 @@ static int		map_push_back(t_dynamic_map *dyn, char *line)
 	return (1);
 }
 
-int		parse_map(t_conf *conf, int fd)
+int			parse_map(t_conf *conf, int fd)
 {
-	int		gnl;
 	char	*str;
 
 	str = NULL;
@@ -66,4 +76,3 @@ int		parse_map(t_conf *conf, int fd)
 		free(str);
 	return (1);
 }
-

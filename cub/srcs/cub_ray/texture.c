@@ -1,25 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:51:11 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 00:56:57 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/debug.h"
-/*
- * needed functions :
- *  1. mallocing
-*/
 
-static int		allocate_tex_arr(t_cub *cub)
+static int	allocate_tex_arr(t_cub *cub)
 {
 	int		**tex_arr;
 
 	tex_arr = (int **)ft_calloc(TEXTURE_NUM, sizeof(int *));
 	if (!tex_arr)
-	{
-		//앞에서 만들었던 동적할당된 변수들 할당 해제 필요.
-		return (0);
-	}
+		exit(0);
 	cub->tex_arr = tex_arr;
 	return (1);
 }
 
-static int		allocate_textures(t_cub *cub)
+static int	allocate_textures(t_cub *cub)
 {
 	int		*arr;
 	int		i;
@@ -40,36 +45,45 @@ static int		allocate_textures(t_cub *cub)
 	return (1);
 }
 
-static void	load_img_2_texture(t_cub *cub, int tex_num, char *tex_path)
+static void	assign_tex_2_buff(t_cub *cub, t_img *img, int tex_num)
 {
-	t_img	img;
 	int		i;
 	int		j;
 
-	img.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, tex_path, &img.img_w, &img.img_h);
+	i = -1;
+	while (++i < img->img_h)
+	{
+		j = -1;
+		while (++j < img->img_w)
+			cub->tex_arr[tex_num][TEXTURE_W * i + j] = \
+				img->img_buff[img->img_w * i + j];
+	}
+}
+
+static void	load_img_2_texture(t_cub *cub, int tex_num, char *tex_path)
+{
+	t_img	img;
+
+	img.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, tex_path, \
+		&img.img_w, &img.img_h);
 	if (img.img_ptr == NULL)
 	{
 		print_err(CUSTOM_ERR_MLX_FAIL);
 		exit(0);
 	}
-	img.img_buff = (int *)mlx_get_data_addr(img.img_ptr, &img.bpp, &img.linelen, &img.endian);
+	img.img_buff = (int *)mlx_get_data_addr(img.img_ptr, &img.bpp, \
+		&img.linelen, &img.endian);
 	if (img.img_buff == NULL)
 	{
 		mlx_destroy_image(cub->mlx_ptr, img.img_ptr);
 		print_err(CUSTOM_ERR_MLX_FAIL);
 		exit(0);
 	}
-	i = -1;
-	while(++i < img.img_h)
-	{
-		j = -1;
-		while (++j < img.img_w)
-			cub->tex_arr[tex_num][TEXTURE_W * i + j] = img.img_buff[img.img_w * i + j];
-	}
+	assign_tex_2_buff(cub, &img, tex_num);
 	mlx_destroy_image(cub->mlx_ptr, img.img_ptr);
 }
 
-void	load_texture(t_cub *cub, t_conf *conf)
+void		load_texture(t_cub *cub, t_conf *conf)
 {
 	cub->tex_num = TEXTURE_NUM;
 	allocate_tex_arr(cub);

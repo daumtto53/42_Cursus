@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:38:26 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 00:38:55 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/debug.h"
 #include "../../includes/x11_key.h"
@@ -7,7 +19,7 @@
 
 int		main(int argc, char **argv)
 {
-	t_cub 	cub;
+	t_cub	cub;
 	t_conf	conf;
 
 	parse_conf_cub(argc, argv, &conf);

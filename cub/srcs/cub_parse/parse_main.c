@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_main.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:07:35 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:46:42 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parse.h"
 
 static void	init_conf(t_conf *conf)
@@ -13,8 +25,7 @@ static void	init_conf(t_conf *conf)
 	conf->tex_path_s = NULL;
 }
 
-// 줄 줄이기 필요
-static int		parse_type(t_conf *conf, int fd)
+static int	parse_type(t_conf *conf, int fd)
 {
 	char	*str;
 	int		line_num;
@@ -36,17 +47,12 @@ static int		parse_type(t_conf *conf, int fd)
 			free_all_ptr(splitstr, str);
 			continue;
 		}
-		if (parse_identifier(conf, fd, splitstr) == -1)
-		{
-			free_all_ptr(splitstr, str);
-			return (-1);
-		}
+		parse_identifier(conf, splitstr);
 		free_all_ptr(splitstr, str);
 	}
 	return (1);
 }
 
-// parse type && parse map
 static void	parse_conf(t_conf *conf, int fd)
 {
 	if (parse_type(conf, fd) == -1)
@@ -58,7 +64,7 @@ static void	parse_conf(t_conf *conf, int fd)
 	if (conf->complete_input != COMPLETE_INPUT)
 	{
 		parse_error_cleaner(conf);
-		printf("complete_input : %#x\twrong identifier num\n", conf->complete_input);
+		printf("wrong identifier num\n");
 		exit(0);
 	}
 	if (parse_map(conf, fd) == -1)
@@ -69,7 +75,7 @@ static void	parse_conf(t_conf *conf, int fd)
 	}
 }
 
-int		parse_conf_cub(int argc, char **argv, t_conf *conf)
+int			parse_conf_cub(int argc, char **argv, t_conf *conf)
 {
 	int		conf_fd;
 

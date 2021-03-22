@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 21:19:42 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/18 22:18:16 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 00:03:59 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ long long	ft_endian_converter(long long src, int size)
 		mask = 0xFF000000;
 	else if (size == 2)
 		mask = 0xFF00;
-
 	return_value = 0;
 	s = size * 2;
 	while (size)

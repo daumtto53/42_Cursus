@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_texture.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:26:45 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:53:33 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/x11_key.h"
 #include "../../includes/debug.h"
 
-void	draw_simple_floor_ceiling(t_cub *cub)
+void				draw_simple_floor_ceiling(t_cub *cub)
 {
 	int		screen_x;
 	int		floor_h;
@@ -43,18 +55,20 @@ static unsigned int	get_tex_num(t_cub *cub)
 	return (tex_num);
 }
 
-static void			draw_buff_wall_texture(t_cub *cub, int screenx, int start, int end)
+static void			draw_buff_wall_texture(t_cub *cub, int screenx, \
+	int start, int end)
 {
 	int		y;
-	int	tex_x;
-	double step;
-	double texpos;
-	int	tex_y;
+	int		tex_x;
+	double	step;
+	double	texpos;
+	int		tex_y;
 
 	cub->tex_num = get_tex_num(cub);
 	tex_x = get_wall_hit_ratio(cub) * (double)TEXTURE_W;
 	step = (double)TEXTURE_H / ((int)(cub->screen_y / cub->ray.perpwalldist));
-	texpos = ((start - cub->screen_y / 2 +  ((int)(cub->screen_y / cub->ray.perpwalldist)) / 2)) * step;
+	texpos = ((start - cub->screen_y / 2 +  \
+			((int)(cub->screen_y / cub->ray.perpwalldist)) / 2)) * step;
 	y = start - 1;
 	while (++y < end)
 	{
@@ -65,12 +79,11 @@ static void			draw_buff_wall_texture(t_cub *cub, int screenx, int start, int end
 	}
 }
 
-void		draw_img_line_textured(t_cub *cub, int screenx)
+void				draw_img_line_textured(t_cub *cub, int screenx)
 {
-	int		lineheight;
-	int		drawstart;
-	int		drawend;
-	unsigned int		color;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
 
 	lineheight = (int)(cub->screen_y / cub->ray.perpwalldist);
 	drawstart = (cub->screen_y / 2) - (lineheight / 2);

@@ -1,30 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bmp_maker.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:06:24 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:43:37 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/bmp.h"
 
-static void	write_bitmap_2_bmp(t_cub *cub, int fd)
+static void		write_bitmap_2_bmp(t_cub *cub, int fd)
 {
 	char	*bit_map;
 	int		image_h;
-	int		write_val;
-	int		j;
 
 	image_h = cub->screen_y;
 	bit_map = (char *)cub->img.img_buff;
 	while (--image_h >= 0)
-		write_val = write(fd, bit_map + image_h * cub->screen_x * 4, \
+		write(fd, bit_map + image_h * cub->screen_x * 4, \
 			cub->screen_x * 4);
 }
 
-static void	write_data_2_bmp(t_cub *cub, t_bmpfhdr *f, t_bmpihdr *i, int fd)
+static void		write_data_2_bmp(t_bmpfhdr *f, t_bmpihdr *i, \
+					int fd)
 {
-	int		write_val;
-
-	write_val = write(fd, f, 14);
-	write_val += write(fd, i, 40);
+	write(fd, f, 14);
+	write(fd, i, 40);
 }
 
-
-static void	init_bmp_header(t_cub *cub, t_bmpfhdr *f, t_bmpihdr *i)
+static void		init_bmp_header(t_cub *cub, t_bmpfhdr *f, t_bmpihdr *i)
 {
 	ft_memset(f, 0, sizeof(t_bmpfhdr));
 	ft_memset(i, 0, sizeof(t_bmpihdr));
@@ -38,7 +46,7 @@ static void	init_bmp_header(t_cub *cub, t_bmpfhdr *f, t_bmpihdr *i)
 	i->bpp = 0x20;
 }
 
-int	bmp_maker(t_cub *cub)
+int				bmp_maker(t_cub *cub)
 {
 	t_bmpfhdr	f;
 	t_bmpihdr	i;
@@ -48,7 +56,7 @@ int	bmp_maker(t_cub *cub)
 	if (fd == -1)
 		return (-1);
 	init_bmp_header(cub, &f, &i);
-	write_data_2_bmp(cub, &f, &i, fd);
+	write_data_2_bmp(&f, &i, fd);
 	write_bitmap_2_bmp(cub, fd);
 	close(fd);
 	return (1);

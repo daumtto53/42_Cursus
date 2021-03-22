@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_type.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:14:02 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:46:00 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parse.h"
 
-static void	identifier_r(t_conf *conf, int fd, char **splitstr, char *id)
+static void	identifier_r(t_conf *conf, char **splitstr, char *id)
 {
 	if (ft_strncmp(id, "R", 1) == 0)
 	{
 		conf->resolution_w = ft_atoi(splitstr[1]);
 		conf->resolution_h = ft_atoi(splitstr[2]);
-		conf->complete_input |=  (RESOLUTION_H | RESOLUTION_W);
+		conf->complete_input |= (RESOLUTION_H | RESOLUTION_W);
 	}
 }
 
-static int		identifier_fc(t_conf *conf, int fd, char **splitstr, char *id)
+static int	identifier_fc(t_conf *conf, char **splitstr, char *id)
 {
 	char	**str;
 
@@ -19,8 +31,8 @@ static int		identifier_fc(t_conf *conf, int fd, char **splitstr, char *id)
 		str = ft_split(splitstr[1], ',');
 		if (!str)
 			return (-1);
-		conf->color_floor |= ((ft_atoi(str[0]) << RGB_R_OP) |\
-			(ft_atoi(str[1]) << RGB_G_OP) | (ft_atoi(str[2]) << RGB_B_OP));
+		conf->color_floor |= ((ft_atoi(str[0]) << 16) | \
+			(ft_atoi(str[1]) << 8) | (ft_atoi(str[2])));
 		conf->complete_input |= (RGB_FLOOR);
 		ft_split_free(str);
 	}
@@ -29,15 +41,15 @@ static int		identifier_fc(t_conf *conf, int fd, char **splitstr, char *id)
 		str = ft_split(splitstr[1], ',');
 		if (!str)
 			return (-1);
-		conf->color_ceil |= ((ft_atoi(str[0]) << RGB_R_OP) |\
-			(ft_atoi(str[1]) << RGB_G_OP) | (ft_atoi(str[2]) << RGB_B_OP));
+		conf->color_ceil |= ((ft_atoi(str[0]) << 16) | \
+			(ft_atoi(str[1]) << 8) | (ft_atoi(str[2])));
 		conf->complete_input |= (RGB_CEIL);
 		ft_split_free(str);
 	}
 	return (1);
 }
 
-static int		identifier_nwe(t_conf *conf, int fd, char **splitstr, char *id)
+static int	identifier_nwe(t_conf *conf, char **splitstr, char *id)
 {
 	char	*dup;
 
@@ -66,7 +78,7 @@ static int		identifier_nwe(t_conf *conf, int fd, char **splitstr, char *id)
 	return (1);
 }
 
-static int		identifier_ss(t_conf *conf, int fd, char **splitstr, char *id)
+static int	identifier_ss(t_conf *conf, char **splitstr, char *id)
 {
 	char	*dup;
 
@@ -90,21 +102,20 @@ static int		identifier_ss(t_conf *conf, int fd, char **splitstr, char *id)
 	return (1);
 }
 
-int		parse_identifier(t_conf *conf, int fd, char **splitstr)
+int			parse_identifier(t_conf *conf, char **splitstr)
 {
 	char	*identifier;
-	char	**colorstr;
 	int		valid;
 
 	identifier = splitstr[0];
-	identifier_r(conf, fd, splitstr, identifier);
-	valid = identifier_fc(conf, fd, splitstr, identifier);
+	identifier_r(conf, splitstr, identifier);
+	valid = identifier_fc(conf, splitstr, identifier);
 	if (valid == -1)
 		return (-1);
-	valid = identifier_nwe(conf, fd, splitstr, identifier);
+	valid = identifier_nwe(conf, splitstr, identifier);
 	if (valid == -1)
 		return (-1);
-	valid = identifier_ss(conf, fd, splitstr, identifier);
+	valid = identifier_ss(conf, splitstr, identifier);
 	if (valid == -1)
 		return (-1);
 	return (1);

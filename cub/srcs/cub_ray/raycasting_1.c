@@ -1,18 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:42:08 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:50:11 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/debug.h"
 #include "../../includes/x11_key.h"
 
-static void config_rayinfo(t_cub *cub, int screen_x)
+static void	config_rayinfo(t_cub *cub, int screen_x)
 {
 	t_rayinfo *ray;
 
 	ray = &(cub->ray);
-	// needs normalization on camera plane.
 	ray->camerax = (2 * screen_x) / (double)cub->screen_x - 1;
-	// ray's direction vector == dir vector + plane vector * ratio
 	ray->raydirx = cub->player.dirx + cub->player.planex * ray->camerax;
 	ray->raydiry = cub->player.diry + cub->player.planey * ray->camerax;
-
 	ray->mapx = (int)cub->player.posx;
 	ray->mapy = (int)cub->player.posy;
 	ray->deltadistx = func_deltadist(ray->raydirx);
@@ -29,7 +38,8 @@ static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
 	else
 	{
 		cub->ray.stepx = 1;
-		*sidedx = (cub->ray.mapx + 1.0 - cub->player.posx) * (cub->ray.deltadistx);
+		*sidedx = (cub->ray.mapx + 1.0 - cub->player.posx) * \
+			(cub->ray.deltadistx);
 	}
 	if (cub->ray.raydiry < 0)
 	{
@@ -39,7 +49,8 @@ static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
 	else
 	{
 		cub->ray.stepy = 1;
-		*sidedy = (cub->ray.mapy + 1.0 - cub->player.posy) * (cub->ray.deltadisty);
+		*sidedy = (cub->ray.mapy + 1.0 - cub->player.posy) * \
+			(cub->ray.deltadisty);
 	}
 }
 
@@ -50,7 +61,6 @@ static void	config_hit_wall(t_cub *cub, double *sidex, double *sidey)
 	is_hit = !HIT;
 	while (is_hit != HIT)
 	{
-		//if (comp_double(*sidey, *sidex) > 0)
 		if (*sidey > *sidex)
 		{
 			*sidex += cub->ray.deltadistx;
@@ -93,15 +103,15 @@ static void	set_perpwalldist(t_cub *cub)
 	}
 }
 
-int untextured_rayc(t_cub *cub, int argc)
+int			untextured_rayc(t_cub *cub, int argc)
 {
 	int			screen_x;
-	int			color;
-	double sidedistx;
-	double sidedisty;
+	double		sidedistx;
+	double		sidedisty;
 
 	draw_simple_floor_ceiling(cub);
-	for (screen_x = 0; screen_x < cub->screen_x; screen_x++)
+	screen_x = 0;
+	while (++screen_x < cub->screen_x)
 	{
 		config_rayinfo(cub, screen_x);
 		set_sidedist(cub, &sidedistx, &sidedisty);

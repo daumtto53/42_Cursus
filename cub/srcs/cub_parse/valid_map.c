@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:11:38 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:49:09 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parse.h"
 
-static void		conf_map_max_h_w(t_conf *conf)
+static void	conf_map_max_h_w(t_conf *conf)
 {
 	int		i;
 	int		arr_len;
@@ -19,7 +31,7 @@ static void		conf_map_max_h_w(t_conf *conf)
 	conf->map_h += 2;
 }
 
-static char		**resize_map(t_conf *conf)
+static char	**resize_map(t_conf *conf)
 {
 	char	**temp;
 	int		i;
@@ -62,25 +74,12 @@ static void	init_map_data(t_conf *conf, char **dest_map, char **src_map)
 			if (src_map[i][j] == ' ')
 				dest_map[i + 1][j + 1] = '+';
 			else
-				dest_map[i+ 1][j + 1] = src_map[i][j];
+				dest_map[i + 1][j + 1] = src_map[i][j];
 		}
 	}
 }
 
-static void		print_map(char **map)
-{
-	int		i;
-
-	i = 0;
-	printf("print resized : map()\n");
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-}
-
-int		is_valid_map(t_conf *conf)
+int			is_valid_map(t_conf *conf)
 {
 	char	**resized;
 
@@ -91,7 +90,6 @@ int		is_valid_map(t_conf *conf)
 	init_map_data(conf, resized, conf->dyn.map);
 	ft_split_free(conf->dyn.map);
 	conf->dyn.map = resized;
-	//print_map(conf->dyn.map);
 	if (validation_check_dfs(conf) == -1)
 		return (0);
 	return (1);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:14:56 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 00:15:00 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parse.h"
 
 void	free_all_ptr(char **splitstr, char *str)
@@ -28,4 +40,3 @@ void	parse_error_cleaner(t_conf *conf)
 		free(conf->dyn.map);
 	}
 }
-

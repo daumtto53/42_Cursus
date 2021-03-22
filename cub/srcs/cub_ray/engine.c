@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   engine.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:32:06 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 00:36:18 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/debug.h"
 #include "../../includes/x11_key.h"
 #include "../../includes/debug.h"
 
-
-static int		is_collision(t_cub *cub, int x, int y)
+static int	is_collision(t_cub *cub, int x, int y)
 {
 	char	**map;
 
@@ -11,12 +22,11 @@ static int		is_collision(t_cub *cub, int x, int y)
 	return (map[y][x] == '1');
 }
 
-// static int		take_action_part1(t_cub *cub);
-//needs argument deleted when revising.
-void	take_action(t_cub *cub)
+static void	key_pressed_1(t_cub *cub)
 {
-	t_player *p = &(cub->player);
+	t_player *p;
 
+	p = &(cub->player);
 	if (p->keypress_flag & RIGHTPRESSED)
 	{
 		matrix_rotation_2d(&p->dirx, &p->diry, -1 * DELTATHETA);
@@ -29,30 +39,59 @@ void	take_action(t_cub *cub)
 	}
 	if (p->keypress_flag & WPRESSED)
 	{
-		if (!is_collision(cub, (int)(p->posx + p->dirx * MOVESPEED), (int)p->posy))
+		if (!is_collision(cub, (int)(p->posx + p->dirx * MOVESPEED), \
+				(int)p->posy))
 			p->posx += p->dirx * MOVESPEED;
-		if (!is_collision(cub, (int)p->posx, (int)(p->posy + p->diry * MOVESPEED)))
+		if (!is_collision(cub, (int)p->posx, \
+				(int)(p->posy + p->diry * MOVESPEED)))
 			p->posy += p->diry * MOVESPEED;
 	}
-	if (p->keypress_flag & SPRESSED)
-	{
-		if (!is_collision(cub, (int)(p->posx - p->dirx * MOVESPEED), (int)p->posy))
-			p->posx -= p->dirx * MOVESPEED;
-		if (!is_collision(cub, (int)p->posx, (int)(p->posy - p->diry * MOVESPEED)))
-			p->posy -= p->diry * MOVESPEED;
-	}
+}
+
+static void	key_pressed_2(t_cub *cub)
+{
+	t_player *p;
+
+	p = &(cub->player);
 	if (p->keypress_flag & DPRESSED)
 	{
-		if (!is_collision(cub, (int)(p->posx + p->planex * MOVESPEED), (int)p->posy))
+		if (!is_collision(cub, (int)(p->posx + p->planex * MOVESPEED), \
+				(int)p->posy))
 			p->posx += p->planex * MOVESPEED;
-		if (!is_collision(cub, (int)p->posx, (int)(p->posy + p->planey * MOVESPEED)))
+		if (!is_collision(cub, (int)p->posx, \
+				(int)(p->posy + p->planey * MOVESPEED)))
 			p->posy += p->planey * MOVESPEED;
 	}
 	if (p->keypress_flag & APRESSED)
 	{
-		if (!is_collision(cub, (int)(p->posx - p->planex * MOVESPEED), (int)p->posy))
+		if (!is_collision(cub, (int)(p->posx - p->planex * MOVESPEED), \
+				(int)p->posy))
 			p->posx -= p->planex * MOVESPEED;
-		if (!is_collision(cub, (int)p->posx, (int)(p->posy - p->planey * MOVESPEED)))
+		if (!is_collision(cub, (int)p->posx, \
+				(int)(p->posy - p->planey * MOVESPEED)))
 			p->posy -= p->planey * MOVESPEED;
 	}
+}
+
+static void	key_pressed_3(t_cub *cub)
+{
+	t_player *p;
+
+	p = &(cub->player);
+	if (p->keypress_flag & SPRESSED)
+	{
+		if (!is_collision(cub, (int)(p->posx - p->dirx * MOVESPEED), \
+				(int)p->posy))
+			p->posx -= p->dirx * MOVESPEED;
+		if (!is_collision(cub, (int)p->posx, \
+			(int)(p->posy - p->diry * MOVESPEED)))
+			p->posy -= p->diry * MOVESPEED;
+	}
+}
+
+void		take_action(t_cub *cub)
+{
+	key_pressed_1(cub);
+	key_pressed_2(cub);
+	key_pressed_3(cub);
 }

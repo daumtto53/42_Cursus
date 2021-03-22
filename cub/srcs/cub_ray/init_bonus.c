@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:37:03 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 00:37:44 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/debug.h"
 
@@ -14,7 +26,8 @@ static void	init_mlx(t_cub *cub, t_conf *conf)
 		cub->screen_x = conf->resolution_w;
 	if (conf->resolution_h < cub->screen_y)
 		cub->screen_y = conf->resolution_h;
-	cub->win = mlx_new_window(cub->mlx_ptr, cub->screen_x, cub->screen_y, "TITLE");
+	cub->win = mlx_new_window(cub->mlx_ptr, cub->screen_x, \
+			cub->screen_y, "TITLE");
 	if (cub->win == NULL)
 	{
 		print_err(CUSTOM_ERR_MLX_FAIL);
@@ -24,7 +37,8 @@ static void	init_mlx(t_cub *cub, t_conf *conf)
 
 static void	init_img(t_cub *cub)
 {
-	cub->img.img_ptr = mlx_new_image(cub->mlx_ptr, cub->screen_x, cub->screen_y);
+	cub->img.img_ptr = mlx_new_image(cub->mlx_ptr, cub->screen_x, \
+		cub->screen_y);
 	if (cub->img.img_ptr == NULL)
 	{
 		mlx_destroy_window(cub->mlx_ptr, cub->win);
@@ -75,7 +89,7 @@ static void	init_map(t_cub *cub, t_conf *conf)
 	cub->map.map_w = conf->map_w;
 }
 
-void	init_cub(t_cub *cub, t_conf *conf)
+void		init_cub(t_cub *cub, t_conf *conf)
 {
 	double	*perpbuff;
 

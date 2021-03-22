@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:21:17 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 00:21:59 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/debug.h"
 
@@ -19,14 +31,13 @@ void	matrix_rotation_2d(double *x, double *y, double delta_tht)
 
 	old_x = *x;
 	old_y = *y;
-
 	*x = old_x * cos(delta_tht) - old_y * sin(delta_tht);
 	*y = old_x * sin(delta_tht) + old_y * cos(delta_tht);
 }
 
 double	get_wall_hit_ratio(t_cub *cub)
 {
-	double		wall_x;
+	double	wall_x;
 
 	if (cub->ray.side == north || cub->ray.side == south)
 		wall_x = cub->player.posx + cub->ray.perpwalldist * cub->ray.raydirx;
@@ -44,7 +55,7 @@ int		get_texture_mapping(int tex_x, double texpos)
 	return (TEXTURE_H * tex_y + tex_x);
 }
 
-double func_deltadist(double raydir)
+double	func_deltadist(double raydir)
 {
 	return (fabs(1 / raydir));
 }

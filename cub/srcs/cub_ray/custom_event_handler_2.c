@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom_event_handler_2.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 00:23:18 by mchun             #+#    #+#             */
+/*   Updated: 2021/03/23 01:53:21 by mchun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/raycasting.h"
 #include "../../includes/x11_key.h"
 #include "../../includes/debug.h"
@@ -22,31 +34,7 @@ static void	keyrelease_left_right(int keycode, t_cub *cub)
 		cub->player.keypress_flag &= ~RIGHTPRESSED;
 }
 
-/* MAC KEYBINDING START */
-// static void	keyrelease_wasd(int keycode, t_cub *cub)
-// {
-// 	if (keycode == M_KEYSYM_W)
-// 		cub->player.keypress_flag &= ~WPRESSED;
-// 	if (keycode == M_KEYSYM_A)
-// 		cub->player.keypress_flag &= ~APRESSED;
-// 	if (keycode == M_KEYSYM_S)
-// 		cub->player.keypress_flag &= ~SPRESSED;
-// 	if (keycode == M_KEYSYM_D)
-// 		cub->player.keypress_flag &= ~DPRESSED;
-// }
-
-// static void	keyrelease_left_right(int keycode, t_cub *cub)
-// {
-// 	if (keycode == M_KEYSYM_LEFT)
-// 		cub->player.keypress_flag &= ~LEFTPRESSED;
-// 	if (keycode == M_KEYSYM_RIGHT)
-// 		cub->player.keypress_flag &= ~RIGHTPRESSED;
-// }
-/* MAC KEYBINDING END */
-
-
-
-int		event_keyrelease(int keycode, void *param)
+int			event_keyrelease(int keycode, void *param)
 {
 	t_cub	*cub;
 
@@ -56,22 +44,22 @@ int		event_keyrelease(int keycode, void *param)
 	return (0);
 }
 
-int event_destroy(void *param)
+int			event_destroy(void *param)
 {
-    t_cub	*cub;
+	t_cub	*cub;
 
 	cub = (t_cub *)param;
 	mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
 	mlx_destroy_window(cub->mlx_ptr, cub->win);
 	free(cub->mlx_ptr);
-    exit (0);
+	exit(0);
 }
 
-int	event_xicon(void *param)
+int			event_xicon(void *param)
 {
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-    exit (0);
+	free(cub->mlx_ptr);
+	exit(0);
 }
-
