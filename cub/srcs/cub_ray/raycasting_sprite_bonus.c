@@ -2,7 +2,11 @@
 
 static void		conf_sprite(t_cub *cub, double x, double y, int sp_index)
 {
-	cub->sprite_arr[sp_index].tex_num = TEXTURE_SP_1 ;
+	int		ran;
+
+	ran =  rand() % 4;
+	printf("ran : %d\n", ran);
+	cub->sprite_arr[sp_index].tex_num = TEXTURE_SP_1 + ran;
 	cub->sprite_arr[sp_index].x = x;
 	cub->sprite_arr[sp_index].y = y;
 }

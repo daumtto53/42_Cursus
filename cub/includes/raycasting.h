@@ -112,7 +112,7 @@ typedef struct	s_sprite
 {
 	double	x;
 	double	y;
-	int		sprite_num;
+	int		tex_num;
 }				t_sprite;
 
 typedef struct	s_sprite_op
@@ -149,6 +149,8 @@ typedef struct	s_cub
 	double		sprite_dist[SPRITE_NUM];
 	int			sprite_order[SPRITE_NUM];
 	double		*perp_buff;
+	int			color_ceil;
+	int			color_floor;
 }				t_cub;
 
 typedef struct	s_ceilfloor
@@ -185,6 +187,8 @@ int		event_xicon(void *param);
 
 // void	buff_drawer(t_cub *cub, int x, int y, unsigned int color);
 
+void		draw_img_line_untxt(t_cub *cub, int screenx);
+
 void	take_action(t_cub *cub);
 
 void	buff_drawer(t_cub *cub, int x, int y, unsigned int color);
@@ -198,5 +202,13 @@ void	ceiling_floor_rayc(t_cub *cub);
 int 	untextured_rayc(t_cub *cub, int argc);
 
 void	free_cub_struct(t_cub *cub);
+
+//sprite
+void	sprite_rayc(t_cub *cub);
+//draw_sprite.c
+void	sprite_rayc_calculator(t_cub *cub, t_sprite_op *op, int i, int line);
+
+void		init_sprite(t_cub *cub);
+void		sort_sprites(double *dist, int *order);
 
 #endif

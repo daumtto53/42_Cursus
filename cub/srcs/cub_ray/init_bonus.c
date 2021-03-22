@@ -49,10 +49,10 @@ static void	init_player(t_cub *cub, t_conf *conf)
 {
 	cub->player.dirx = 0.0;
 	cub->player.diry = 0.0;
-	cub->player.posx = conf->posx;
-	cub->player.posy = conf->posy;
 	cub->player.planex = 0.0;
 	cub->player.planey = 0.0;
+	cub->player.posx = conf->posx;
+	cub->player.posy = conf->posy;
 	if (conf->dir == 'N')
 		cub->player.diry = 1.0;
 	else if (conf->dir == 'S')
@@ -61,14 +61,10 @@ static void	init_player(t_cub *cub, t_conf *conf)
 		cub->player.dirx = -1.0;
 	else
 		cub->player.dirx = 1.0;
-	if (conf->dir == 'N')
+	if (conf->dir == 'N' || conf->dir == 'S')
 		cub->player.planex = 0.66;
-	else if (conf->dir == 'S')
-		cub->player.planex = -0.66;
-	else if (conf->dir == 'W')
-		cub->player.planey = 0.66;
 	else
-		cub->player.planey = -0.66;
+		cub->player.planey = 0.66;
 	cub->player.keypress_flag = 0;
 }
 
@@ -92,8 +88,6 @@ void	init_cub(t_cub *cub, t_conf *conf)
 		exit(0);
 	}
 	cub->perp_buff = perpbuff;
-	cub->color_ceil = conf->color_ceil;
-	cub->color_floor = conf->color_floor;
 	init_player(cub, conf);
 	init_map(cub, conf);
 	load_texture(cub, conf);

@@ -55,17 +55,17 @@ static void	config_hit_wall(t_cub *cub, double *sidex, double *sidey)
 		{
 			*sidex += cub->ray.deltadistx;
 			cub->ray.mapx += (cub->ray.stepx);
-			cub->ray.side = west;
+			cub->ray.side = east;
 			if (cub->ray.raydirx > 0)
-				cub->ray.side = east;
+				cub->ray.side = west;
 		}
 		else
 		{
 			*sidey += cub->ray.deltadisty;
 			cub->ray.mapy += (cub->ray.stepy);
-			cub->ray.side = south;
+			cub->ray.side = north;
 			if (cub->ray.raydiry > 0)
-				cub->ray.side = north;
+				cub->ray.side = south;
 		}
 		if (cub->map.map[cub->ray.mapy][cub->ray.mapx] == '1')
 			is_hit = HIT;
@@ -100,7 +100,8 @@ int untextured_rayc(t_cub *cub, int argc)
 	double sidedistx;
 	double sidedisty;
 
-	draw_simple_floor_ceiling(cub);
+	//draw_simple_floor_ceiling(cub);
+	ceiling_floor_rayc(cub);
 	for (screen_x = 0; screen_x < cub->screen_x; screen_x++)
 	{
 		config_rayinfo(cub, screen_x);
@@ -109,6 +110,7 @@ int untextured_rayc(t_cub *cub, int argc)
 		set_perpwalldist(cub);
 		draw_img_line_textured(cub, screen_x);
 		cub->perp_buff[screen_x] = cub->ray.perpwalldist;
+		//draw_img_line_untxt(cub, screen_x);
 	}
 	sprite_rayc(cub);
 	if (argc == 3)

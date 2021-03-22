@@ -82,6 +82,6 @@ void	load_texture(t_cub *cub, t_conf *conf)
 	load_img_2_texture(cub, TEXTURE_CEILING, "./imgsrcs/ceiling.xpm");
 	load_img_2_texture(cub, TEXTURE_SP_1, conf->tex_path_s);
 	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_1.xpm");
-	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_2.xpm");
-	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_3.xpm");
+	load_img_2_texture(cub, TEXTURE_SP_3, "./imgsrcs/sprite_2.xpm");
+	load_img_2_texture(cub, TEXTURE_SP_4, "./imgsrcs/sprite_3.xpm");
 }

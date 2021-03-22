@@ -11,20 +11,20 @@ void	draw_simple_floor_ceiling(t_cub *cub)
 
 	half_height = cub->screen_y / 2;
 	screen_x = 0;
-	floor_h = 0;
-	ceiling_h = half_height;
-	while (screen_x < cub->screen_y)
+	floor_h = half_height;
+	ceiling_h = 0;
+	while (screen_x < cub->screen_x)
 	{
-		while (floor_h < half_height)
+		while (ceiling_h < half_height)
 		{
-			buff_drawer(cub, screen_x, floor_h, COLOR_FLOOR);
-			buff_drawer(cub, screen_x, ceiling_h, COLOR_CEILING);
+			buff_drawer(cub, screen_x, floor_h, cub->color_floor);
+			buff_drawer(cub, screen_x, ceiling_h, cub->color_ceil);
 			floor_h++;
 			ceiling_h++;
 		}
 		screen_x++;
-		floor_h = 0;
-		ceiling_h = half_height;
+		floor_h = half_height;
+		ceiling_h = 0;
 	}
 }
 

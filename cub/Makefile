@@ -11,6 +11,7 @@ FILE_BMP =		bmp_maker
 
 FILE_RAY =		raycasting_1 \
 				raycasting_2 \
+				raycasting_sprite \
 				init \
 				cub3d_utils \
 				custom_event_handler_1 \
@@ -18,6 +19,7 @@ FILE_RAY =		raycasting_1 \
 				engine \
 				draw_texture \
 				draw_untexture \
+				draw_sprite \
 				error \
 				texture \
 				debug \
@@ -54,6 +56,7 @@ NAME = cub3d
 $(NAME): $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE)
 	$(MAKE) all -C ./libft
 	$(MAKE) all -C ./gnl
+	$(MAKE) all -C ./mlx_linux
 	$(CC) $(SRCS_BMP) $(SRCS_PARSE) $(SRCS_RAY) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
@@ -74,6 +77,7 @@ all_clean: clean fclean
 	$(MAKE) clean -C ./libft
 	$(MAKE) fclean -C ./gnl
 	$(MAKE) clean -C ./gnl
+	$(MAKE) clean -C ./mlx_linux
 
 re :
 	clean
