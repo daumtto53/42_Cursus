@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:46:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 02:05:54 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 02:07:00 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static void	init_ceilfloor(t_cub *cub, t_ceilfloor *cf, int y)
 
 static void	tex_calculator(t_ceilfloor *cf)
 {
-	int		texx;
-	int		texy;
 	double	subx;
 	double	suby;
 
