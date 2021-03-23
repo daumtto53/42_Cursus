@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:14:02 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:46:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 12:11:01 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,10 @@ static int	identifier_nwe(t_conf *conf, char **splitstr, char *id)
 {
 	char	*dup;
 
+	dup = NULL;
 	if (ft_strncmp(id, "NO", 2) == 0 || ft_strncmp(id, "WE", 2) == 0 || \
 		ft_strncmp(id, "EA", 2) == 0)
-	{
 		dup = ft_strdup(splitstr[1]);
-		if (!dup)
-			return (-1);
-	}
 	if (ft_strncmp(id, "NO", 2) == 0)
 	{
 		conf->tex_path_no = dup;

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:51:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 11:41:53 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 14:06:46 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static int	allocate_tex_arr(t_cub *cub)
 
 	tex_arr = (int **)ft_calloc(TEXTURE_NUM, sizeof(int *));
 	if (!tex_arr)
+	{
+		print_err(CUSTOM_ERR_MALLOC_FAIL);
 		exit(0);
+	}
 	cub->tex_arr = tex_arr;
 	return (1);
 }

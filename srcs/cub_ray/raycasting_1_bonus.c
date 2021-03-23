@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:39:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:50:15 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 14:33:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/debug.h"
 #include "../../includes/x11_key.h"
 
-static void	config_rayinfo(t_cub *cub, int screen_x)
+static void	config_rayinfo_b(t_cub *cub, int screen_x)
 {
 	t_rayinfo *ray;
 
@@ -28,7 +28,7 @@ static void	config_rayinfo(t_cub *cub, int screen_x)
 	ray->deltadisty = func_deltadist(ray->raydiry);
 }
 
-static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
+static void	set_sidedist_b(t_cub *cub, double *sidedx, double *sidedy)
 {
 	if (cub->ray.raydirx < 0)
 	{
@@ -54,7 +54,7 @@ static void	set_sidedist(t_cub *cub, double *sidedx, double *sidedy)
 	}
 }
 
-static void	config_hit_wall(t_cub *cub, double *sidex, double *sidey)
+static void	config_hit_wall_b(t_cub *cub, double *sidex, double *sidey)
 {
 	int		is_hit;
 
@@ -65,24 +65,24 @@ static void	config_hit_wall(t_cub *cub, double *sidex, double *sidey)
 		{
 			*sidex += cub->ray.deltadistx;
 			cub->ray.mapx += (cub->ray.stepx);
-			cub->ray.side = east;
+			cub->ray.side = west;
 			if (cub->ray.raydirx > 0)
-				cub->ray.side = west;
+				cub->ray.side = east;
 		}
 		else
 		{
 			*sidey += cub->ray.deltadisty;
 			cub->ray.mapy += (cub->ray.stepy);
-			cub->ray.side = north;
+			cub->ray.side = south;
 			if (cub->ray.raydiry > 0)
-				cub->ray.side = south;
+				cub->ray.side = north;
 		}
 		if (cub->map.map[cub->ray.mapy][cub->ray.mapx] == '1')
 			is_hit = HIT;
 	}
 }
 
-static void	set_perpwalldist(t_cub *cub)
+static void	set_perpwalldist_b(t_cub *cub)
 {
 	t_rayinfo	*ray;
 	int			xweight;
@@ -113,10 +113,10 @@ int			untextured_rayc(t_cub *cub, int argc)
 	screen_x = -1;
 	while (++screen_x < cub->screen_x)
 	{
-		config_rayinfo(cub, screen_x);
-		set_sidedist(cub, &sidedistx, &sidedisty);
-		config_hit_wall(cub, &sidedistx, &sidedisty);
-		set_perpwalldist(cub);
+		config_rayinfo_b(cub, screen_x);
+		set_sidedist_b(cub, &sidedistx, &sidedisty);
+		config_hit_wall_b(cub, &sidedistx, &sidedisty);
+		set_perpwalldist_b(cub);
 		draw_img_line_textured(cub, screen_x);
 		cub->perp_buff[screen_x] = cub->ray.perpwalldist;
 	}

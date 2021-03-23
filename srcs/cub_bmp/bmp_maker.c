@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:06:24 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:43:37 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 12:04:29 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,24 @@ static void		write_bitmap_2_bmp(t_cub *cub, int fd)
 {
 	char	*bit_map;
 	int		image_h;
+	int		i;
 
 	image_h = cub->screen_y;
 	bit_map = (char *)cub->img.img_buff;
 	while (--image_h >= 0)
-		write(fd, bit_map + image_h * cub->screen_x * 4, \
+		i = write(fd, bit_map + image_h * cub->screen_x * 4, \
 			cub->screen_x * 4);
+	i += 1;
 }
 
 static void		write_data_2_bmp(t_bmpfhdr *f, t_bmpihdr *i, \
 					int fd)
 {
-	write(fd, f, 14);
-	write(fd, i, 40);
+	int		del;
+
+	del = write(fd, f, 14);
+	del += write(fd, i, 40);
+	del = 1;
 }
 
 static void		init_bmp_header(t_cub *cub, t_bmpfhdr *f, t_bmpihdr *i)

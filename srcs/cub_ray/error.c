@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:36:33 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 00:36:34 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 12:25:32 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@
 void	print_err(int err_num)
 {
 	if (err_num == CUSTOM_ERR_MALLOC_FAIL)
-		perror("malloc failed ");
+		perror("Error\nmalloc failed ");
 	else if (err_num == CUSTOM_ERR_WRONG_INPUT)
-		printf("wrong input ");
+		printf("Error\nwrong input ");
 	else if (err_num == CUSTOM_ERR_MLX_FAIL)
-		perror("mlx_*_failed ");
+		perror("Error\nmlx_*_failed ");
 	else
-		printf("etc error ");
-	printf("Error\n");
+		printf("Error\netc error ");
 }
 
 void	free_cub_struct(t_cub *cub)

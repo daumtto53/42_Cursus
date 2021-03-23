@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:07:35 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:46:42 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 12:26:01 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ static void	parse_conf(t_conf *conf, int fd)
 	if (parse_type(conf, fd) == -1)
 	{
 		parse_error_cleaner(conf);
-		printf("parsing_error\n");
+		printf("Error\nparsing_error\n");
 		exit(0);
 	}
 	if (conf->complete_input != COMPLETE_INPUT)
 	{
 		parse_error_cleaner(conf);
-		printf("wrong identifier num\n");
+		printf("Error\nwrong identifier num\n");
 		exit(0);
 	}
 	if (parse_map(conf, fd) == -1)
 	{
 		parse_error_cleaner(conf);
-		printf("map parsing error\n");
+		printf("Error\nmap parsing error\n");
 		exit(0);
 	}
 }
@@ -88,7 +88,7 @@ int			parse_conf_cub(int argc, char **argv, t_conf *conf)
 	parse_conf(conf, conf_fd);
 	if (!is_valid_map(conf))
 	{
-		printf("invalid map error\n");
+		printf("Error\ninvalid map error\n");
 		parse_error_cleaner(conf);
 		close(conf_fd);
 		exit(0);

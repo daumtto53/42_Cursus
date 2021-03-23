@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:14:56 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 00:15:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 13:02:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,21 @@ void	parse_error_cleaner(t_conf *conf)
 			free(conf->dyn.map[i]);
 		free(conf->dyn.map);
 	}
+}
+
+void	conf_pos_mediator(t_conf *conf)
+{
+	double	axis_x;
+	double	axis_y;
+
+	axis_x = conf->map_w / 2;
+	axis_y = conf->map_h / 2;
+	if (conf->posx < axis_x)
+		conf->posx += 0.5;
+	else
+		conf->posx -= 0.5;
+	if (conf->posy < axis_y)
+		conf->posy += 0.5;
+	else
+		conf->posy -= 0.5;
 }

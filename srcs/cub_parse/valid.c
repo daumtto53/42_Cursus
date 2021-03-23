@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:15:27 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:44:17 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 12:25:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	is_file_extension_cub(char *file_path)
 	cub = ft_strnstr(file_path, ".cub", ft_strlen(file_path));
 	if (cub == NULL)
 	{
+		printf("Error\n");
 		printf("file extension error\n");
 		return (0);
 	}
@@ -41,22 +42,22 @@ int			is_argc_argv_vaild(int argc, char **argv)
 {
 	if (!(1 <= argc && argc <= 3))
 	{
-		printf("argument number error\n");
+		printf("Error\nargument number error\n");
 		return (0);
 	}
 	if (argv[1] == NULL)
 	{
-		printf("file path argument error\n");
+		printf("Error\nfile path argument error\n");
 		return (0);
 	}
 	if (!is_file_extension_cub(argv[1]))
 	{
-		printf("1st argument file_extension not .cub\n");
+		printf("Error\n1st argument file_extension not .cub\n");
 		return (0);
 	}
 	if (argc == 3 && !is_argv_2_save(argv))
 	{
-		printf("2nd argument not '--save'\n");
+		printf("Error\n2nd argument not '--save'\n");
 		return (0);
 	}
 	return (1);
@@ -69,7 +70,7 @@ int			open_conf_cub(char **argv)
 	conf_fd = open(argv[1], O_RDONLY);
 	if (conf_fd < 0)
 	{
-		perror("open error\n");
+		perror("Error\nopen error\n");
 		return (-1);
 	}
 	return (conf_fd);

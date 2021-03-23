@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 23:51:35 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:52:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 13:03:09 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct			s_conf
 	t_dynamic_map		dyn;
 	int					map_h;
 	int					map_w;
-	int					posx;
-	int					posy;
+	double				posx;
+	double				posy;
 	char				dir;
 }						t_conf;
 
@@ -84,5 +84,6 @@ int						validation_check_dfs(t_conf *conf);
 void					parse_error_cleaner(t_conf *conf);
 
 void					free_all_ptr(char **splitstr, char *str);
+void					conf_pos_mediator(t_conf *conf);
 
 #endif

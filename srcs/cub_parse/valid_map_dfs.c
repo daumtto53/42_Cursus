@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:10:59 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:48:53 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 12:57:01 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static int	find_pos(t_conf *conf)
 			if (map[i][j] == 'N' || map[i][j] == 'S' || \
 				map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				conf->posx = j;
-				conf->posy = i;
+				conf->posx = (double)j;
+				conf->posy = (double)i;
 				conf->dir = map[i][j];
 				return (1);
 			}

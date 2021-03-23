@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 23:58:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:51:23 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 13:47:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ void			load_texture(t_cub *cub, t_conf *conf);
 void			ceiling_floor_rayc(t_cub *cub);
 
 int				untextured_rayc(t_cub *cub, int argc);
+int				bonus_rayc_b(t_cub *cub, int argc);
 
 void			free_cub_struct(t_cub *cub);
 

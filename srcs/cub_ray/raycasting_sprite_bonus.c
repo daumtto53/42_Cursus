@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:46:58 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:50:35 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 14:33:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	conf_sprite(t_cub *cub, double x, double y, int sp_index)
 	int		ran;
 
 	ran = rand() % 4;
-	printf("ran : %d\n", ran);
 	cub->sprite_arr[sp_index].tex_num = TEXTURE_SP_1 + ran;
 	cub->sprite_arr[sp_index].x = x;
 	cub->sprite_arr[sp_index].y = y;

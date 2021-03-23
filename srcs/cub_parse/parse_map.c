@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:13:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 11:28:15 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 12:26:17 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	init_dyn_map(t_dynamic_map *dyn)
 	dyn->map = (char **)ft_calloc(dyn->size + 1, sizeof(char **));
 	if (!dyn->map)
 	{
-		printf("dynamic map allocation error\n");
+		printf("Error\ndynamic map allocation error\n");
 		return (-1);
 	}
 	dyn->map[dyn->size] = NULL;
@@ -36,7 +36,7 @@ static int	map_push_back(t_dynamic_map *dyn, char *line)
 		temp = (char **)ft_calloc(dyn->size * 2 + 1, sizeof(char **));
 		if (!temp)
 		{
-			printf("dynamic map push_back allocation error\n");
+			printf("Error\ndynamic map push_back allocation error\n");
 			return (-1);
 		}
 		i = -1;
