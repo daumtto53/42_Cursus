@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:11:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:49:09 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 11:45:49 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,22 @@ static void	init_map_data(t_conf *conf, char **dest_map, char **src_map)
 	}
 }
 
+static void	symmetric_map(t_conf *conf)
+{
+	char	**map;
+	int		i;
+	char	*temp;
+
+	map = conf->dyn.map;
+	i = -1;
+	while (++i < conf->map_h / 2)
+	{
+		temp = map[i];
+		map[i] = map[conf->map_h - 1 - i];
+		map[conf->map_h - 1 - i] = temp;
+	}
+}
+
 int			is_valid_map(t_conf *conf)
 {
 	char	**resized;
@@ -90,6 +106,7 @@ int			is_valid_map(t_conf *conf)
 	init_map_data(conf, resized, conf->dyn.map);
 	ft_split_free(conf->dyn.map);
 	conf->dyn.map = resized;
+	symmetric_map(conf);
 	if (validation_check_dfs(conf) == -1)
 		return (0);
 	return (1);
