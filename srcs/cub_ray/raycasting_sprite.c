@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:49:26 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 01:50:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 19:15:03 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void		init_sprite(t_cub *cub)
 	conf_sprite(cub, 10.5, 4.5, 6);
 	conf_sprite(cub, 8.5, 4.5, 7);
 	conf_sprite(cub, 3.0, 4.5, 8);
-	conf_sprite(cub, 11.5, 4.5, 9);
 }
 
 void		sort_sprites(double *dist, int *order)

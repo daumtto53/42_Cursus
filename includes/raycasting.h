@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 23:58:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 13:47:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 19:13:42 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # include <string.h>
 
-# define TEXTURE_NUM 10
+# define TEXTURE_NUM 9
 # define TEXTURE_W	64
 # define TEXTURE_H	64
 
@@ -48,7 +48,7 @@
 # define LEFTPRESSED 16
 # define RIGHTPRESSED 32
 
-# define SPRITE_NUM		10
+# define SPRITE_NUM		9
 
 # define DELTATHETA 0.063
 

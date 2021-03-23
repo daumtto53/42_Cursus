@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:51:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 14:06:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 17:28:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void		load_texture(t_cub *cub, t_conf *conf)
 	load_img_2_texture(cub, TEXTURE_FLOOR, "./imgsrcs/floor.xpm");
 	load_img_2_texture(cub, TEXTURE_CEILING, "./imgsrcs/ceiling.xpm");
 	load_img_2_texture(cub, TEXTURE_SP_1, conf->tex_path_s);
-	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_1.xpm");
-	load_img_2_texture(cub, TEXTURE_SP_3, "./imgsrcs/sprite_2.xpm");
-	load_img_2_texture(cub, TEXTURE_SP_4, "./imgsrcs/sprite_3.xpm");
+	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_2.xpm");
+	load_img_2_texture(cub, TEXTURE_SP_3, "./imgsrcs/sprite_3.xpm");
 }

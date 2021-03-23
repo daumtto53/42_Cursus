@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:26:10 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 00:26:11 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/23 18:03:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sprite_rayc_calculator(t_cub *cub, t_sprite_op *op, int i, int line)
 			y = op->drawstart_y;
 			while (++y < op->drawend_y)
 			{
-				op->texy = y - cub->screen_y / 2 + op->sprite_h / 2;
-				op->texy = (op->texy * TEXTURE_H) / op->sprite_h;
+				op->texy = (y - cub->screen_y / 2 + op->sprite_h / 2) ;
+				op->texy = ((op->texy * TEXTURE_H) / op->sprite_h) ;
 				tex_num = cub->sprite_arr[cub->sprite_order[i]].tex_num;
 				color = cub->tex_arr[tex_num][TEXTURE_W * op->texy + op->texx];
 				if ((color & 0x00FFFFFF) != 0)
