@@ -23,10 +23,12 @@ FILE_RAY =		raycasting_2 \
 				main \
 
 FILE_RAY_BASE = raycasting_1 \
-				raycasting_sprite
+				raycasting_sprite \
+				init_sprite
 
 FILE_RAY_BONUS =	raycasting_1_bonus \
-					raycasting_sprite_bonus
+					raycasting_sprite_bonus \
+					init_sprite_bonus
 
 FILE_PARSE =	valid \
 				parse_main \

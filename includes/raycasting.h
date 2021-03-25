@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 23:58:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/25 13:41:27 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/25 23:59:47 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,13 @@ typedef struct	s_cub
 	t_player	player;
 	t_map		map;
 	t_rayinfo	ray;
-	t_sprite	sprite_arr[SPRITE_NUM];
-	double		sprite_dist[SPRITE_NUM];
-	int			sprite_order[SPRITE_NUM];
-	double		*perp_buff;
 	int			color_ceil;
 	int			color_floor;
+	double		*perp_buff;
+	t_sprite	*sprite_arr;
+	double		*sprite_dist;
+	int			*sprite_order;
+	int			sprite_num;
 }				t_cub;
 
 typedef struct	s_ceilfloor
@@ -209,7 +210,6 @@ void			sprite_rayc(t_cub *cub);
 void			sprite_rayc_calculator(t_cub *cub, t_sprite_op *op, \
 					int i, int line);
 
-void			init_sprite(t_cub *cub);
-void			sort_sprites(double *dist, int *order);
+int				init_sprite(t_cub *cub);
 
 #endif

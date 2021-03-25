@@ -6,33 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:49:26 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 19:15:03 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/25 23:51:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/raycasting.h"
 
-static void	conf_sprite(t_cub *cub, double x, double y, int sp_index)
-{
-	cub->sprite_arr[sp_index].tex_num = TEXTURE_SP_1;
-	cub->sprite_arr[sp_index].x = x;
-	cub->sprite_arr[sp_index].y = y;
-}
-
-void		init_sprite(t_cub *cub)
-{
-	conf_sprite(cub, 10.5, 3.5, 0);
-	conf_sprite(cub, 10.5, 4.5, 1);
-	conf_sprite(cub, 10.5, 4.5, 2);
-	conf_sprite(cub, 10.5, 4.5, 3);
-	conf_sprite(cub, 3.5, 4.5, 4);
-	conf_sprite(cub, 9.5, 4.5, 5);
-	conf_sprite(cub, 10.5, 4.5, 6);
-	conf_sprite(cub, 8.5, 4.5, 7);
-	conf_sprite(cub, 3.0, 4.5, 8);
-}
-
-void		sort_sprites(double *dist, int *order)
+static void	sort_sprites(t_cub *cub, double *dist, int *order)
 {
 	int		i;
 	int		j;
@@ -40,10 +20,10 @@ void		sort_sprites(double *dist, int *order)
 	double	aux_d;
 
 	i = -1;
-	while (++i < SPRITE_NUM - 1)
+	while (++i < cub->sprite_num - 1)
 	{
 		j = -1;
-		while (++j < SPRITE_NUM - i - 1)
+		while (++j < cub->sprite_num - i - 1)
 		{
 			if (dist[j] < dist[j + 1])
 			{
@@ -93,16 +73,16 @@ void		sprite_rayc(t_cub *cub)
 	int				line;
 
 	i = -1;
-	while (++i < SPRITE_NUM)
+	while (++i < cub->sprite_num)
 	{
 		cub->sprite_order[i] = i;
 		cub->sprite_dist[i] = \
 			pow((cub->player.posx - cub->sprite_arr[i].x), 2.0) + \
 			pow((cub->player.posy - cub->sprite_arr[i].y), 2.0);
 	}
-	sort_sprites(cub->sprite_dist, cub->sprite_order);
+	sort_sprites(cub, cub->sprite_dist, cub->sprite_order);
 	i = -1;
-	while (++i < SPRITE_NUM)
+	while (++i < cub->sprite_num)
 	{
 		init_sprite_op_data(cub, &op, i);
 		line = op.drawstart_x;

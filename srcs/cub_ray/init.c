@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:37:51 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 14:38:05 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/25 23:42:07 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ static void	init_map(t_cub *cub, t_conf *conf)
 	cub->map.map = conf->dyn.map;
 	cub->map.map_h = conf->map_h;
 	cub->map.map_w = conf->map_w;
+	cub->sprite_arr = NULL;
+	cub->sprite_dist = NULL;
+	cub->sprite_order = NULL;
 }
 
 void		init_cub(t_cub *cub, t_conf *conf)
@@ -110,6 +113,10 @@ void		init_cub(t_cub *cub, t_conf *conf)
 	cub->color_floor = conf->color_floor;
 	init_player(cub, conf);
 	init_map(cub, conf);
+	if (init_sprite(cub) == -1)
+	{
+		print_err(CUSTOM_ERR_MALLOC_FAIL);
+		exit(0);
+	}
 	load_texture(cub, conf);
-	init_sprite(cub);
 }
