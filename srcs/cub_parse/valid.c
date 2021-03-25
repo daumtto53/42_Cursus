@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:15:27 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 12:25:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/25 12:44:35 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 static int	is_file_extension_cub(char *file_path)
 {
-	char	*cub;
+	int		l;
+	char	*f;
 
-	cub = ft_strnstr(file_path, ".cub", ft_strlen(file_path));
-	if (cub == NULL)
-	{
-		printf("Error\n");
-		printf("file extension error\n");
-		return (0);
-	}
-	return (1);
+	f = file_path;
+	l = ft_strlen(f);
+	if (f[l - 4] == '.' && f[l - 3] == 'c' && f[l - 2] == 'u' && \
+			f[l - 1] == 'b')
+		return (1);
+	return (0);
 }
 
 static int	is_argv_2_save(char **argv)

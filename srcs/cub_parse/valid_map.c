@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:11:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 14:07:01 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/25 12:28:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int			is_valid_map(t_conf *conf)
 	ft_split_free(conf->dyn.map);
 	conf->dyn.map = resized;
 	symmetric_map(conf);
-	if (validation_check_dfs(conf) == -1)
+	if (validation_check_dfs(conf) == -1 || !is_valid_map_element(conf))
 		return (0);
 	conf_pos_mediator(conf);
 	return (1);

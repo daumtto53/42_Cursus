@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:10:59 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 12:57:01 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/25 13:04:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,26 @@ static int	find_pos(t_conf *conf)
 	int		i;
 	int		j;
 	char	**map;
+	int		count;
 
 	map = conf->dyn.map;
 	i = -1;
+	count = 0;
 	while (++i < conf->map_h)
 	{
 		j = -1;
 		while (++j < conf->map_w)
-		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || \
 				map[i][j] == 'W' || map[i][j] == 'E')
 			{
 				conf->posx = (double)j;
 				conf->posy = (double)i;
 				conf->dir = map[i][j];
-				return (1);
+				count++;
 			}
-		}
 	}
+	if (count == 1)
+		return (1);
 	return (0);
 }
 

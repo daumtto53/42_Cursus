@@ -33,8 +33,9 @@ FILE_PARSE =	valid \
 				parse_type \
 				valid_map \
 				valid_map_dfs \
+				valid_map_utils \
 				parse_map \
-				parse_utils
+				parse_utils \
 
 
 ### LINUX && MAC COMPILATION DIFFERENT ###
@@ -60,9 +61,9 @@ OBJS_RAY_BONUS = $(SRCS_RAY_BONUS:.c=.o)
 SRCS_PARSE = $(addsuffix .c, $(addprefix $(SRCSDIR_PARSE), $(FILE_PARSE)))
 OBJS_PARSE = $(SRCS_PARSE:.c=.o)
 
-NAME = cub3d
+NAME = cub3D
 
-BONUS = cub3d_bonus
+BONUS = cub3D_bonus
 
 $(NAME): $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE) $(OBJS_RAY_BASE)
 	$(MAKE) all -C ./libft
