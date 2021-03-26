@@ -21,7 +21,7 @@ FILE_RAY =		raycasting_2 \
 				draw_untexture \
 				draw_sprite \
 				error \
-				texture \
+				texture
 
 FILE_RAY_BASE = raycasting_1 \
 				custom_event_handler_1 \
@@ -44,7 +44,7 @@ FILE_PARSE =	valid \
 				valid_map_dfs \
 				valid_map_utils \
 				parse_map \
-				parse_utils \
+				parse_utils
 
 
 ### LINUX && MAC COMPILATION DIFFERENT ###
@@ -83,13 +83,12 @@ $(NAME): $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE) $(OBJS_RAY_BASE)
 	cp ./mlx_linux/libmlx_Linux.a .
 	$(CC) $(CFLAGS) $(SRCS_BMP) $(SRCS_PARSE) $(SRCS_RAY) $(SRCS_RAY_BASE) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
 
-
-$(BONUS) : $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE) $(OBJS_RAY_BONUS)
+$(BONUS) : $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE) $(OBJS_RAY_BONUS) $(OBJS_ETC)
 	$(MAKE) all -C ./libft
 	$(MAKE) all -C ./gnl
 	$(MAKE) all -C ./mlx_linux
 	cp ./mlx_linux/libmlx_Linux.a .
-	$(CC) $(CFLAGS) $(SRCS_BMP) $(SRCS_ETC) $(SRCS_PARSE) $(SRCS_RAY) $(SRCS_RAY_BONUS) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
+	$(CC) $(CFLAGS) $(SRCS_BMP) $(SRCS_ETC) $(SRCS_PARSE) $(SRCS_RAY) $(SRCS_RAY_BONUS) -o $(BONUS) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
 %.o: %.c
@@ -114,5 +113,5 @@ all_clean: clean fclean
 	rm libmlx_Linux.a
 
 re :
-	clean
+	fclean
 	all
