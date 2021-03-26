@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:15:27 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/26 19:25:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/26 21:01:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	is_file_extension_cub(char *file_path)
 
 static int	is_argv_2_save(char **argv)
 {
-	int		is_valid ;
+	int		is_valid;
 
 	is_valid = 0;
 	if (ft_strlen(argv[2]) == 6 && ft_strncmp("--save", argv[2], 6) == 0)
