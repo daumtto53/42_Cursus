@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:36:33 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/25 23:45:36 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/26 12:58:12 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	free_cub_struct(t_cub *cub)
 	mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
 	mlx_destroy_window(cub->mlx_ptr, cub->win);
 	free(cub->mlx_ptr);
-	while (++i < cub->tex_num)
+	while (++i < TEXTURE_NUM)
 		free(cub->tex_arr[i]);
 	free(cub->tex_arr);
 	free(cub->perp_buff);
+	free(cub->sprite_arr);
+	free(cub->sprite_dist);
+	free(cub->sprite_order);
 }

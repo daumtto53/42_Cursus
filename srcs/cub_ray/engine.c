@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:32:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 00:36:18 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/26 13:08:49 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_collision(t_cub *cub, int x, int y)
 	char	**map;
 
 	map = cub->map.map;
-	return (map[y][x] == '1');
+	return (map[y][x] == '1' || map[y][x] == '2');
 }
 
 static void	key_pressed_1(t_cub *cub)

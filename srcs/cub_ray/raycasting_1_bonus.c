@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:39:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/23 14:33:22 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/26 13:16:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int			untextured_rayc(t_cub *cub, int argc)
 	if (argc == 3)
 		return (0);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win, cub->img.img_ptr, 0, 0);
+	print_status(cub);
 	take_action(cub);
 	return (0);
 }

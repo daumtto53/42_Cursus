@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 23:58:01 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/25 23:59:47 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/26 14:43:28 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 # include <errno.h>
 # include <fcntl.h>
 
+# include <string.h>
 # include <stdlib.h>
+# include <unistd.h>
+
 # include "../mlx_linux/mlx.h"
 # include "./parse.h"
-
-# include <string.h>
 
 # define TEXTURE_NUM 9
 # define TEXTURE_W	64
@@ -156,6 +157,7 @@ typedef struct	s_cub
 	double		*sprite_dist;
 	int			*sprite_order;
 	int			sprite_num;
+	int			pid;
 }				t_cub;
 
 typedef struct	s_ceilfloor
@@ -211,5 +213,11 @@ void			sprite_rayc_calculator(t_cub *cub, t_sprite_op *op, \
 					int i, int line);
 
 int				init_sprite(t_cub *cub);
+
+void			print_status(t_cub *cub);
+
+void			play_background_music();
+
+void			kill_background_music();
 
 #endif

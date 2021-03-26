@@ -5,30 +5,37 @@ CFLAGS = -Wall -Wextra -Werror
 SRCSDIR_BMP = ./srcs/cub_bmp/
 SRCSDIR_PARSE = ./srcs/cub_parse/
 SRCSDIR_RAY = ./srcs/cub_ray/
+SRCSDIR_ETC = ./srcs/etc_bonus/
 INCLUDES = -I./includes -I./debug -I./x11_key -I./parse
 
 FILE_BMP =		bmp_maker
 
+FILE_ETC =	bgm_bonus \
+			hud_bonus
+
 FILE_RAY =		raycasting_2 \
 				init \
 				cub3d_utils \
-				custom_event_handler_1 \
-				custom_event_handler_2 \
 				engine \
 				draw_texture \
 				draw_untexture \
 				draw_sprite \
 				error \
 				texture \
-				main \
 
 FILE_RAY_BASE = raycasting_1 \
+				custom_event_handler_1 \
+				custom_event_handler_2 \
 				raycasting_sprite \
-				init_sprite
+				init_sprite \
+				main
 
 FILE_RAY_BONUS =	raycasting_1_bonus \
+					custom_event_handler_1_bonus \
+					custom_event_handler_2_bonus \
 					raycasting_sprite_bonus \
-					init_sprite_bonus
+					init_sprite_bonus \
+					main_bonus
 
 FILE_PARSE =	valid \
 				parse_main \
@@ -59,6 +66,8 @@ SRCS_RAY = $(addsuffix .c, $(addprefix $(SRCSDIR_RAY), $(FILE_RAY)))
 OBJS_RAY = $(SRCS_RAY:.c=.o)
 SRCS_RAY_BONUS = $(addsuffix .c, $(addprefix $(SRCSDIR_RAY), $(FILE_RAY_BONUS)))
 OBJS_RAY_BONUS = $(SRCS_RAY_BONUS:.c=.o)
+SRCS_ETC = $(addsuffix .c, $(addprefix $(SRCSDIR_ETC), $(FILE_ETC)))
+OBJS_ETC = $(SRCS_ETC:.c=.o)
 
 SRCS_PARSE = $(addsuffix .c, $(addprefix $(SRCSDIR_PARSE), $(FILE_PARSE)))
 OBJS_PARSE = $(SRCS_PARSE:.c=.o)
@@ -80,7 +89,7 @@ $(BONUS) : $(OBJS_BMP) $(OBJS_RAY) $(OBJS_PARSE) $(OBJS_RAY_BONUS)
 	$(MAKE) all -C ./gnl
 	$(MAKE) all -C ./mlx_linux
 	cp ./mlx_linux/libmlx_Linux.a .
-	$(CC) $(CFLAGS) $(SRCS_BMP) $(SRCS_PARSE) $(SRCS_RAY) $(SRCS_RAY_BONUS) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
+	$(CC) $(CFLAGS) $(SRCS_BMP) $(SRCS_ETC) $(SRCS_PARSE) $(SRCS_RAY) $(SRCS_RAY_BONUS) -o $(NAME) $(LINUXLINKFLAG) $(GNL_LIBFLAG) $(LIBFT_LIBFLAG)
 
 #LINUX COMPILATION & MAC COMPILATION
 %.o: %.c
@@ -91,7 +100,7 @@ all : $(NAME)
 bonus: $(BONUS)
 
 clean :
-	rm -rf $(OBJS_BMP) $(OBJS_PARSE) $(OBJS_RAY) $(OBJS_RAY_BONUS) $(OBJS_RAY_BASE)
+	rm -rf $(OBJS_BMP) $(OBJS_PARSE) $(OBJS_RAY) $(OBJS_RAY_BONUS) $(OBJS_RAY_BASE) $(OBJS_ETC)
 
 fclean :
 	rm -rf $(NAME)
