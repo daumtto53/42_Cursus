@@ -112,6 +112,4 @@ all_clean: clean fclean
 	$(MAKE) clean -C ./mlx_linux
 	rm libmlx_Linux.a
 
-re :
-	fclean
-	all
+re : clean fclean all
