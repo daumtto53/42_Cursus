@@ -102,7 +102,7 @@ clean :
 	rm -rf $(OBJS_BMP) $(OBJS_PARSE) $(OBJS_RAY) $(OBJS_RAY_BONUS) $(OBJS_RAY_BASE) $(OBJS_ETC)
 
 fclean :
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(BONUS)
 
 all_clean: clean fclean
 	$(MAKE) fclean -C ./libft
