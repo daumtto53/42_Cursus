@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 23:51:35 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/25 12:23:07 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/30 14:52:55 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int						is_valid_map(t_conf *conf);
 int						validation_check_dfs(t_conf *conf);
 
 void					parse_error_cleaner(t_conf *conf);
+void					free_tex_path(t_conf *conf);
 
 int						is_valid_map_element(t_conf *conf);
 

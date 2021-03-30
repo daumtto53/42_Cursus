@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:51:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/25 23:43:03 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/30 14:53:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ void		load_texture(t_cub *cub, t_conf *conf)
 	load_img_2_texture(cub, TEXTURE_SP_1, conf->tex_path_s);
 	load_img_2_texture(cub, TEXTURE_SP_2, "./imgsrcs/sprite_2.xpm");
 	load_img_2_texture(cub, TEXTURE_SP_3, "./imgsrcs/sprite_3.xpm");
+	free_tex_path(conf);
 }

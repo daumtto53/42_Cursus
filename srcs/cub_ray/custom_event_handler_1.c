@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:23:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/26 14:39:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/30 15:13:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int			event_keypress(int keycode, void *param)
 	keypress_wasd(keycode, cub);
 	if (keycode == L_KEYSYM_ESC)
 	{
-		mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
-		mlx_destroy_window(cub->mlx_ptr, cub->win);
-		free(cub->mlx_ptr);
+		free_cub_struct(cub);
 		exit(0);
 	}
 	return (0);

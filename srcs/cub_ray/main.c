@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:38:26 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/26 14:02:27 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/30 15:01:23 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		main(int argc, char **argv)
 	if (argc == 3)
 	{
 		bmp_maker(&cub);
-		parse_error_cleaner(&conf);
 		free_cub_struct(&cub);
 	}
 	else

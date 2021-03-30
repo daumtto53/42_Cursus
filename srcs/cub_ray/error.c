@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:36:33 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/26 12:58:12 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/30 14:43:28 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	free_cub_struct(t_cub *cub)
 	while (++i < TEXTURE_NUM)
 		free(cub->tex_arr[i]);
 	free(cub->tex_arr);
+	i = -1;
+	while (++i < cub->map.map_h)
+		free(cub->map.map[i]);
+	free(cub->map.map);
 	free(cub->perp_buff);
 	free(cub->sprite_arr);
 	free(cub->sprite_dist);

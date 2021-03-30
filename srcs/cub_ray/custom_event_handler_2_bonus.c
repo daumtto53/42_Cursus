@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 00:23:18 by mchun             #+#    #+#             */
-/*   Updated: 2021/03/26 15:19:47 by mchun            ###   ########.fr       */
+/*   Updated: 2021/03/30 15:14:00 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ int			event_destroy(void *param)
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-	mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
-	mlx_destroy_window(cub->mlx_ptr, cub->win);
-	free(cub->mlx_ptr);
+	free_cub_struct(cub);
 	kill_background_music();
 	exit(0);
 }
@@ -61,7 +59,7 @@ int			event_xicon(void *param)
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-	free(cub->mlx_ptr);
+	free_cub_struct(cub);
 	kill_background_music();
 	exit(0);
 }
