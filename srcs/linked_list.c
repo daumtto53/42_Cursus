@@ -6,37 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/26 15:14:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/26 21:00:59 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/linked_list.h"
-#include "../includes/push_swap.h"
-
-int		init_linked_list(t_ll ***ab_arr)
-{
-	t_ll	**ab_array;
-
-	ab_array = (t_ll **)malloc(sizeof(t_ll *) * 2);
-	if (!ab_array)
-		return (print_error());
-	ab_array[STACK_A] = (t_ll *)malloc(sizeof(t_ll));
-	if (!ab_array[STACK_A])
-	{
-		free(ab_array);
-		return (print_error());
-	}
-	ab_array[STACK_B] = (t_ll *)malloc(sizeof(t_ll));
-	if (!ab_array[STACK_B])
-	{
-		free(ab_array[STACK_A]);
-		free(ab_array);
-		return (print_error());
-	}
-	init_linked_list_data(ab_array);
-	*ab_arr = ab_array;
-	return (0);
-}
 
 static void	init_linked_list_data(t_ll **ab_arr)
 {
@@ -49,18 +23,105 @@ static void	init_linked_list_data(t_ll **ab_arr)
 	return ;
 }
 
-void	linked_list_push(t_ll **ab_arr, int	num_stack)
+int		init_linked_list(t_ll ***ab_arr)
 {
+	t_ll	**ab_array;
 
+	ab_array = (t_ll **)malloc(sizeof(t_ll *) * 2);
+	if (!ab_array)
+		return (ft_print_error());
+	ab_array[STACK_A] = (t_ll *)malloc(sizeof(t_ll));
+	if (!ab_array[STACK_A])
+	{
+		free(ab_array);
+		return (ft_print_error());
+	}
+	ab_array[STACK_B] = (t_ll *)malloc(sizeof(t_ll));
+	if (!ab_array[STACK_B])
+	{
+		free(ab_array[STACK_A]);
+		free(ab_array);
+		return (ft_print_error());
+	}
+	init_linked_list_data(ab_array);
+	*ab_arr = ab_array;
+	return (1);
 }
 
-void	linked_list_pop(t_ll **ab_arr, int num_stack)
+int		linked_list_push(t_ll **ab_arr, int	num_stack, int data)
 {
+	t_node	*new_node;
+	t_ll	*l_list;
 
+	l_list = ab_arr[num_stack];
+	new_node = (t_node *)malloc(sizeof(t_node));
+	if (!new_node)
+		return (ft_print_error());
+		//malloc 에러 시 t_ll, 안의 모든 노드들 삭제하고 프로그램 종료.
+	new_node->data = data;
+	if (l_list->size == 0)
+	{
+		l_list->head = new_node;
+		l_list->tail = new_node;
+	}
+	else
+	{
+		l_list->tail->next = new_node;
+		l_list->head->prev = new_node;
+		l_list->tail = new_node;
+	}
+	new_node->next = l_list->head;
+	new_node->prev = l_list->tail;
+	l_list->size++;
+	return (1);
 }
 
-void	delete_linked_list(t_ll **ab_arr, int num_stack)
+int		linked_list_pop(t_ll **ab_arr, int num_stack, int *data)
 {
+	t_node	*aux_node;
+	t_ll 	*l_list;
 
+	l_list = ab_arr[num_stack];
+	if (l_list->size == 0)
+		return (ft_print_error());
+		//ft_putstr_fd("element Zero Pop Error\t", 1);
+	else if (l_list->size == 1)
+	{
+		*data = l_list->tail->data;
+		free(l_list->tail);
+		l_list->head = NULL;
+		l_list->tail = NULL;
+	}
+	else
+	{
+		printf("popped\n");
+		*data = l_list->tail->data;
+		aux_node = l_list->tail;
+		l_list->tail->prev->next = l_list->head;
+		l_list->head->prev = l_list->tail->prev;
+		l_list->tail = aux_node->prev;
+		free(aux_node);
+	}
+	l_list->size--;
+	return (1);
+}
+
+void	elim_linked_list(t_ll **ab_arr, int num_stack)
+{
+	t_node	*aux_node;
+	t_node	*node;
+	t_ll	*l_list;
+
+	l_list = ab_arr[num_stack];
+	if (!l_list->head)
+		return ;
+	node = l_list->head;
+	while (l_list->tail != node)
+	{
+		aux_node = node;
+		node = node->next;
+		free(aux_node);
+	}
+	free(node);
 }
 

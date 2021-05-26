@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 23:53:38 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/26 14:46:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/26 15:29:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ int					ft_digitlen_base(long long num, int base);
 int					ft_digitlen_ubase(unsigned long long num, int base);
 
 
-int					print_error(void);
+int					ft_print_error(void);
 #endif
