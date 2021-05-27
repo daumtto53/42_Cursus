@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 14:46:58 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/27 16:49:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ void	swap_all(t_ll **ab_array);
 // rough.c
 
 //utils.c
-void	traverse_list(t_ll **ab_array);
+int		*init_sorted_arg(t_ll **ab_array, int argc);
+void	quick_sort(int *arr, int left, int right);
+void	print_err_n_exit(void);
+
+//custom.c
+void	traverse_list(t_ll **ab_array, int num_stack);
+void	traverse_array(int *arr, int size);

@@ -6,48 +6,68 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:12:31 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 13:30:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/27 16:49:29 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-// exit() 사용하면 되므로 사용할 이유가 없어졌음.
-void	free_ab_array(t_ll **ab_array)
+int		*init_sorted_arg(t_ll **ab_array, int argc)
 {
-	elim_linked_list(ab_array, STACK_A);
-	elim_linked_list(ab_array, STACK_B);
-	free(ab_array[STACK_A]);
-	free(ab_array[STACK_B]);
-	free(ab_array);
-}
+	int		*ret;
+	t_node	*node;
 
-//for testing
-void	traverse_list(t_ll **ab_array)
-{
-	t_ll	*list =  ab_array[STACK_A];
-	t_node	*node = list->head;
-
-	while (node->next != list->head)
+	node = ab_array[STACK_A]->head;
+	ret = (int *)malloc(sizeof(int) * (argc - 1));
+	if (!ret)
+		return (ret);
+	argc--;
+	while (--argc >= 0)
 	{
-		printf("%d\t", node->data);
+		ret[argc] = node->data;
 		node = node->next;
 	}
-	printf("%d\n", node->data);
+	return (ret);
 }
 
-int		count_linked_list_num(t_ll **ab_array)
+static int		partition(int *arr, int left, int right)
 {
-	t_ll	*list = ab_array[STACK_A];
-	t_node	*node = list->head;
-	int		count;
+	int		i;
+	int		j;
+	int		piv;
+	int		aux;
 
-	count = 0;
-	while (node->next != list->head)
+	i = left;
+	j = right;
+	piv = arr[left];
+	while (i < j)
 	{
-		count++;
-		node = node->next;
+		while (arr[j] < piv)
+			j--;
+		while (i < j && piv <= arr[i])
+			i++;
+		aux = arr[i];
+		arr[i] = arr[j];
+		arr[j] = aux;
 	}
-	count++;
-	return (count);
+	arr[left] = arr[i];
+	arr[i] = piv;
+	return (i);
+}
+
+void	quick_sort(int *arr, int left, int right)
+{
+	int		piv_index;
+
+	if (left >= right)
+		return ;
+	piv_index = partition(arr, left, right);
+	quick_sort(arr, left, piv_index - 1);
+	quick_sort(arr, piv_index + 1, right);
+}
+
+void	print_err_n_exit(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(0);
 }

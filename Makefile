@@ -9,7 +9,8 @@ SRCS_NAME	=	arg_input \
 				main \
 				utils \
 				inst \
-				inst_2
+				inst_2 \
+				custom
 
 LIBFT_LIBFLAG = -L./libft -lft
 

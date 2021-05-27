@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:24:24 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 13:30:55 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/27 15:06:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	elim_linked_list(t_ll **ab_arr, int num_stack);
 
 //utils.c
 void	free_ab_array(t_ll **ab_array);
-int		count_linked_list_num(t_ll **ab_array);
+int		count_linked_list_num(t_ll **ab_array, int num_stack);
 
 #endif

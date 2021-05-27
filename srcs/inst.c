@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:08:39 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 14:48:52 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/27 15:14:59 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	swap_ab(t_ll **ab_array, int num_stack)
 	aux[2] = stacks->tail;
 	if (stacks->size == 2)
 	{
-		stacks->head = aux[1];
-		stacks->tail = aux[0];
+		stacks->head = aux[2];
+		stacks->tail = aux[1];
 	}
 	else
 	{
