@@ -6,8 +6,10 @@ INCLUDES = -I./includes
 
 SRCS_NAME	=	arg_input \
 				linked_list \
-				rough \
+				main \
 				utils \
+				inst \
+				inst_2
 
 LIBFT_LIBFLAG = -L./libft -lft
 
