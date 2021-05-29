@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:18:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 16:50:09 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/29 12:13:16 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int		main(int argc, char **argv)
 	sorted_arg = init_sorted_arg(ab_array, argc);
 	if (!sorted_arg)
 		print_err_n_exit();
-	traverse_array(sorted_arg, argc - 1);
-	quick_sort(sorted_arg, 0, argc - 2);
-	traverse_array(sorted_arg, argc - 1);
+	init_piv_array(sorted_arg, argc - 1);
 	return(0);
 }

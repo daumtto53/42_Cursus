@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:12:31 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 16:49:29 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/29 10:42:57 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int		*init_sorted_arg(t_ll **ab_array, int argc)
 {
 	int		*ret;
 	t_node	*node;
+	int		ret_size;
 
+	ret_size = argc - 1;
 	node = ab_array[STACK_A]->head;
 	ret = (int *)malloc(sizeof(int) * (argc - 1));
 	if (!ret)
@@ -27,6 +29,9 @@ int		*init_sorted_arg(t_ll **ab_array, int argc)
 		ret[argc] = node->data;
 		node = node->next;
 	}
+	traverse_array(ret, ret_size);
+	quick_sort(ret, 0, ret_size - 1);
+	traverse_array(ret, ret_size);
 	return (ret);
 }
 
@@ -42,9 +47,9 @@ static int		partition(int *arr, int left, int right)
 	piv = arr[left];
 	while (i < j)
 	{
-		while (arr[j] < piv)
+		while (arr[j] > piv)
 			j--;
-		while (i < j && piv <= arr[i])
+		while (i < j && piv >= arr[i])
 			i++;
 		aux = arr[i];
 		arr[i] = arr[j];

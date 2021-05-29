@@ -51,9 +51,10 @@ int		count_linked_list_num(t_ll **ab_array, int num_stack)
 
 void	traverse_array(int *arr, int size)
 {
-	while (--size >= 0)
-	{
-		printf("%d\t", arr[size]);
-	}
+	int		i;
+
+	i = 0;
+	while (i < size)
+		printf("%d\t", arr[i++]);
 	printf("\n");
 }

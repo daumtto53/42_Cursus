@@ -10,7 +10,8 @@ SRCS_NAME	=	arg_input \
 				utils \
 				inst \
 				inst_2 \
-				custom
+				custom \
+				pivot_array
 
 LIBFT_LIBFLAG = -L./libft -lft
 

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 16:49:34 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/29 12:01:47 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,7 @@ void	print_err_n_exit(void);
 //custom.c
 void	traverse_list(t_ll **ab_array, int num_stack);
 void	traverse_array(int *arr, int size);
+
+//pivot_array.c
+int		**init_piv_array(int *arr, int arr_size);
+
