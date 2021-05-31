@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 09:54:10 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/30 13:20:13 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 13:21:47 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	init_freq(t_freq *freq)
+void	init_freq(t_freq *freq)
 {
 	freq->push_opp = 0;
 	freq->rotate_opp = 0;

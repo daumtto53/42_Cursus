@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/30 13:16:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 13:22:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	rrev_all(t_ll **ab_array);
 void	rev_all(t_ll **ab_array);
 void	swap_all(t_ll **ab_array);
 
-// rough.c
-
 //utils.c
 int		*init_sorted_arg(t_ll **ab_array, int argc);
 void	quick_sort(int *arr, int left, int right);
@@ -50,10 +48,27 @@ void	traverse_array(int *arr, int size);
 //pivot_array.c
 int		**init_piv_array(int *arr, int arr_size);
 
-//sort_less_n_equal_4.c
+//sort_a.c
+int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num);
+
+//sort_a_less_n_equal_4.c
 void	sort_a_132(t_ll **ab_array);
 void	sort_a_321(t_ll **ab_array);
 void	sort_a_312(t_ll **ab_array);
 void	sort_a_213(t_ll **ab_array);
 void	sort_a_231(t_ll **ab_array);
 
+//sort_b.c
+int		**sort_b(t_ll **ab_array, int **piv_arr, int sort_num);
+
+//sort_b_less_n_equal_4.c
+void	sort_b_321(t_ll **ab_array);
+void	sort_b_312(t_ll **ab_array);
+void	sort_b_231(t_ll **ab_array);
+void	sort_b_213(t_ll **ab_array);
+void	sort_b_132(t_ll **ab_array);
+void	sort_b_123(t_ll **ab_array);
+
+// sort_utils.c
+void	init_freq(t_freq *freq);
+void	restore_position(t_ll **ab_array, int stack_num, t_freq *freq);

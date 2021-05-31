@@ -6,11 +6,49 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:00:07 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/30 14:13:23 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 13:54:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+static void	sort_b_less_n_equal_3(t_ll **ab_array, int sort_num)
+{
+	int		comp[3];
+
+	comp[0] = ab_array[STACK_B]->tail->data;
+	comp[1] = ab_array[STACK_B]->tail->prev->data;
+	comp[2] = ab_array[STACK_B]->tail->prev->prev->data;
+	if (sort_num == 1)
+		push_ab(ab_array, STACK_A);
+	else if (sort_num == 2)
+	{
+		if (comp[0] < comp[1])
+			swap_ab(ab_array, STACK_B);
+		push_ab(ab_array, STACK_A);
+		push_ab(ab_array, STACK_A);
+	}
+	else if (sort_num == 3)
+	{
+		if (comp[0] < comp[1] && comp[1] < comp[2])
+			sort_b_123(ab_array);
+		else if (comp[1] > comp[2] && comp[2] > comp[0])
+			sort_b_132(ab_array);
+		else if (comp[2] > comp[0] && comp[0] > comp[1])
+			sort_b_213(ab_array);
+		else if (comp[1] > comp[0] && comp[0] > comp[2])
+			sort_b_231(ab_array);
+		else if (comp[0] > comp[2] && comp[2] > comp[1])
+			sort_b_312(ab_array);
+		else if (comp[0] > comp[1] && comp[1] > comp[2])
+			sort_b_321(ab_array);
+	}
+	else
+		printf("SORT_B_LESS_THAN_EQUAL_3 : wrong sort_num in arg\n");
+	ab_array[STACK_A]->size += sort_num;
+	ab_array[STACK_B]->size -= sort_num;
+	return ;
+}
 
 int		**sort_b(t_ll **ab_array, int **piv_arr, int sort_num)
 {
@@ -27,7 +65,7 @@ int		**sort_b(t_ll **ab_array, int **piv_arr, int sort_num)
 	node = ab_array[STACK_B]->head;							//partition_A 함수로 나눌 수 있을 듯..?
 	while (sort_num-- > 0)
 	{
-		if ((*piv_arr)[0] <= node->data)
+		if ((*piv_arr)[0] >= node->data)
 		{
 			rev_ab(ab_array, STACK_B);
 			freq.rotate_this++;
@@ -36,9 +74,9 @@ int		**sort_b(t_ll **ab_array, int **piv_arr, int sort_num)
 		{
 			push_ab(ab_array, STACK_A);
 			freq.push_opp++;
-			if ((*piv_arr)[1] <= node->data)
+			if ((*piv_arr)[1] >= node->data)
 			{
-				rev_ab(ab_array, STACK_B);
+				rev_ab(ab_array, STACK_A);
 				freq.rotate_opp++;
 			}
 		}
@@ -47,8 +85,8 @@ int		**sort_b(t_ll **ab_array, int **piv_arr, int sort_num)
 	//
 	freq.non_rotated = freq.push_opp - freq.rotate_opp;
 	piv_arr_cpy = piv_arr;
-	ab_array[0]->size = freq.rotate_this;
-	ab_array[1]->size = freq.push_opp;
+	ab_array[STACK_A]->size = ab_array[STACK_A]->size + freq.push_opp;
+	ab_array[STACK_B]->size = ab_array[STACK_B]->size - freq.push_opp;
 	//
 	piv_arr_cpy = sort_a(ab_array, piv_arr_cpy + 1, freq.non_rotated);
 	restore_position(ab_array, STACK_B, &freq);

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 13:52:10 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 14:58:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int		linked_list_push(t_ll **ab_arr, int	num_stack, int data)
 		//malloc 에러 시 t_ll, 안의 모든 노드들 삭제하고 프로그램 종료.
 	new_node->data = data;
 	if (l_list->size == 0)
+	{
 		l_list->head = new_node;
+		l_list->tail = new_node;
+	}
 	else
 	{
 		l_list->tail->next = new_node;

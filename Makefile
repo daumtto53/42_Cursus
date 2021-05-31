@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc -g -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror
 
 SRCSDIR = ./srcs/
@@ -11,7 +11,12 @@ SRCS_NAME	=	arg_input \
 				inst \
 				inst_2 \
 				custom \
-				pivot_array
+				pivot_array \
+				sort_a_less_n_equal_3 \
+				sort_a \
+				sort_b_less_n_equal_3 \
+				sort_b \
+				sort_utils
 
 LIBFT_LIBFLAG = -L./libft -lft
 

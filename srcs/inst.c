@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:08:39 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 15:14:59 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 15:38:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	rev_ab(t_ll **ab_array, int num_stack)
 {
 	t_ll	*stacks = ab_array[num_stack];
 
+	printf("REV_AB\n");
 	stacks->head = stacks->tail;
 	stacks->tail = stacks->tail->prev;
 }
