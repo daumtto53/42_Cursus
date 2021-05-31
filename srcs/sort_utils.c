@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 09:54:10 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 13:21:47 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 18:56:40 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	restore_position(t_ll **ab_array, int stack_num, t_freq *freq)
 	int		min_inst;
 
 	stack = ab_array[stack_num];
+	min_inst = freq->rotate_opp;
+	printf("min_inst %d\t\t rotate_opp : %d\t\t rotate_this %d\n", min_inst, freq->rotate_opp, freq->rotate_this);
 	if (freq->rotate_opp - freq->rotate_this > 0)
 	{
 		min_inst = freq->rotate_this;
@@ -42,5 +44,5 @@ void	restore_position(t_ll **ab_array, int stack_num, t_freq *freq)
 			rrev_ab(ab_array, stack_num);
 	}
 	while (min_inst-- > 0)
-		rrev_ab(ab_array, stack_num);
+		rrev_all(ab_array);
 }

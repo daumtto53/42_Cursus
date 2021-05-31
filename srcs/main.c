@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:18:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 15:49:55 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 18:48:49 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ int		main(int argc, char **argv)
 	piv_array = init_piv_array(sorted_arg, argc - 1);
 	if (!piv_array)
 		print_err_n_exit();
+
+	printf("\n-----\n");
+	traverse_ab(ab_array);
+
 	sort_a(ab_array, piv_array, argc - 1);
 
-	printf("STACK A IN MAIN : \n");
-	traverse_list(ab_array, STACK_A);
-	printf("STACK B IN MAIN : \n");
-	traverse_list(ab_array, STACK_B);
+	printf("------FINAL_OUTPUT-----\n");
+	traverse_ab(ab_array);
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:03:21 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 13:23:20 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 17:34:12 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	sort_a_321(t_ll **ab_array)
 	push_ab(ab_array, STACK_A);
 	rrev_ab(ab_array, STACK_A);
 	rrev_ab(ab_array, STACK_A);
-
 }
 
 void	sort_a_312(t_ll **ab_array)

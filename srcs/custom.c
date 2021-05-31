@@ -15,7 +15,7 @@ void	free_ab_array(t_ll **ab_array)
 void	traverse_list(t_ll **ab_array, int num_stack)
 {
 	t_ll	*list =  ab_array[num_stack];
-	t_node	*node = list->head;
+	t_node	*node = list->tail;
 	int		list_size;
 
 	list_size = list->size;
@@ -27,9 +27,17 @@ void	traverse_list(t_ll **ab_array, int num_stack)
 	while (list_size-- > 0)
 	{
 		printf("%d\t", node->data);
-		node = node->next;
+		node = node->prev;
 	}
 	printf("\n");
+}
+
+void	traverse_ab(t_ll **ab_array)
+{
+	printf("STACK_A :\t\t");
+	traverse_list(ab_array, STACK_A);
+	printf("STACK_B :\t\t");
+	traverse_list(ab_array, STACK_B);
 }
 
 int		count_linked_list_num(t_ll **ab_array, int num_stack)

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:08:39 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 15:38:54 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 19:37:03 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ void	swap_ab(t_ll **ab_array, int num_stack)
 	else
 	{
 		aux[0]->next = aux[2];
-		aux[0]->prev = aux[1];
+		//aux[0]->prev = aux[1];
 		aux[1]->next = stacks->head;
-		aux[1]->prev = aux[2];
 		aux[2]->next = aux[1];
+		aux[1]->prev = aux[2];
 		aux[2]->prev = aux[0];
+		stacks->head->prev = aux[1];
 		stacks->tail = aux[1];
 	}
 }
@@ -67,6 +68,7 @@ void	rrev_ab(t_ll **ab_array, int num_stack)
 {
 	t_ll	*stacks = ab_array[num_stack];
 
+	printf("RREV_AB\n");
 	stacks->tail = stacks->head;
 	stacks->head = stacks->head->next;
 }

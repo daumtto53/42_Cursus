@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:19:25 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 15:48:18 by mchun            ###   ########.fr       */
+/*   Updated: 2021/05/31 18:07:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,19 @@ static void	sort_a_less_n_equal_3(t_ll **ab_array, int sort_num)
 	comp[1] = ab_array[STACK_A]->tail->prev->data;
 	comp[2] = ab_array[STACK_A]->tail->prev->prev->data;
 	if (sort_num == 1)
+	{
+		printf("sort_num == 1\n");
 		return ;
+	}
 	else if (sort_num == 2)
 	{
+		printf("sort_num == 2\n");
 		if (comp[0] > comp[1])
 			swap_ab(ab_array, STACK_A);
 	}
 	else if (sort_num == 3)
 	{
+		printf("sort_num == 3\n");
 		if (comp[1] > comp[2] && comp[2] > comp[0])
 			sort_a_132(ab_array);
 		else if (comp[0] > comp[1] && comp[1] > comp[2])
@@ -42,6 +47,7 @@ static void	sort_a_less_n_equal_3(t_ll **ab_array, int sort_num)
 	}
 	else
 		printf("SORT_A_LESS_THAN_EQUAL_3 : wrong sort_num in arg\n");
+	traverse_ab(ab_array);
 	return ;
 }
 
@@ -79,19 +85,15 @@ int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 				freq.rotate_opp++;
 			}
 		}
-		printf("STACK A : \t\t");
-		traverse_list(ab_array, STACK_A);
-		printf("STACK B : \t\t");
-		traverse_list(ab_array, STACK_B);
+		traverse_ab(ab_array);
 		node = ab_array[STACK_A]->tail;
 	}
 	restore_position(ab_array, STACK_A, &freq);
+
+	traverse_ab(ab_array);
+
 	freq.non_rotated = freq.push_opp - freq.rotate_opp;
 	piv_arr_cpy = piv_arr;
-	//
-	ab_array[STACK_A]->size = ab_array[STACK_A]->size - freq.push_opp;
-	ab_array[STACK_B]->size = ab_array[STACK_B]->size + freq.push_opp;
-	//
 	piv_arr_cpy = sort_a(ab_array, piv_arr_cpy + 1, freq.rotate_this);
 	piv_arr_cpy = sort_b(ab_array, piv_arr_cpy + 1, freq.rotate_opp);
 	piv_arr_cpy = sort_b(ab_array, piv_arr_cpy + 1, freq.non_rotated);
