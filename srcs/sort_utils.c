@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 09:54:10 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 18:56:40 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 19:34:55 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,34 @@ void	restore_position(t_ll **ab_array, int stack_num, t_freq *freq)
 	while (min_inst-- > 0)
 		rrev_all(ab_array);
 }
+
+// void	sort_less_than_3(t_ll **ab_array)
+// {
+// 	t_node	*node;
+// 	int		data[3];
+
+// 	node = ab_array[STACK_A]->tail;
+// 	data[0] = node->data;
+// 	data[1] = node->prev->data;
+// 	data[2] = node->prev->prev->data;
+// 	if (ab_array[STACK_A]->size == 2)
+// 		if (node->data > node->prev->data)
+// 			swap_ab(ab_array, STACK_A);
+// 	else if (ab_array[STACK_A]->size == 3)
+// 		if (data[1] > data[2] && data[2] > data[0])
+// 		{
+// 			rrev_ab(ab_array, STACK_A);
+// 			swap_ab(ab_array, STACK_A);
+// 		}
+// 		else if (data[2] > data[0] && data[0] > data[1])
+// 			swap_ab(ab_array, STACK_A);
+// 		else if (data[1] > data[0] && data[0] > data[2])
+// 			rrev_ab(ab_array, STACK_A);
+// 		else if (data[0] > data[1] && data[1] > data[2])
+// 		{
+// 			swap_ab(ab_array, STACK_A);
+// 			rrev_ab(ab_array, STACK_A);
+// 		}
+// 		else if (data[0] > data[2] && data[2] > data[1])
+// 			rev_ab(ab_array, STACK_A);
+// }

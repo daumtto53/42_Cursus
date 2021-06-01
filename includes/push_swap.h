@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/01 18:17:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 19:32:28 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ void	sort_b_123(t_ll **ab_array);
 // sort_utils.c
 void	init_freq(t_freq *freq);
 void	restore_position(t_ll **ab_array, int stack_num, t_freq *freq);
+void	sort_less_than_3(t_ll **ab_array);
 
 extern int inst_count;
