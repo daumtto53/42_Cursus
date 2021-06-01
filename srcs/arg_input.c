@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:14:17 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/01 16:24:40 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 17:39:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 static int	is_arg_digit(char *ch)
 {
+	if (*ch == '-' && *(ch + 1) == '\0')
+		return (0);
+	if (*ch == '-')
+		ch++;
 	while (*ch)
 	{
 		if (!ft_isdigit(*ch))
@@ -56,21 +60,12 @@ int			input_args(t_ll **ab_array, int arg_num, char **argv)
 	while (--arg_num > 0)
 	{
 		if (!is_arg_digit(argv[arg_num]))
-		{
-			printf("is_digit\n");
 			return (-1);
-		}
 		input_num = ft_atol(argv[arg_num]);
 		if (!is_arg_int_range(input_num))
-		{
-			printf("is_int_range\n");
 			return (-1);
-		}
 		if (is_arg_overlap(ab_array, input_num))
-		{
-			printf("is_overlap\n");
 			return (-1);
-		}
 		linked_list_push(ab_array, STACK_A, input_num);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:08:39 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 19:37:03 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 17:20:42 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	push_ab(t_ll **ab_array, int num_stack)
 		return ;
 	linked_list_pop(ab_array, stack_num_pop, &popped_data);
 	linked_list_push(ab_array, stack_num_push, popped_data);
+	inst_count++;
+	printf("##### PUSH_AB ######\n");
 }
 
 void	swap_ab(t_ll **ab_array, int num_stack)
@@ -53,22 +55,26 @@ void	swap_ab(t_ll **ab_array, int num_stack)
 		stacks->head->prev = aux[1];
 		stacks->tail = aux[1];
 	}
+	inst_count++;
+	printf("###### SWAP_AB ######\n");
 }
 
 void	rev_ab(t_ll **ab_array, int num_stack)
 {
 	t_ll	*stacks = ab_array[num_stack];
 
-	printf("REV_AB\n");
 	stacks->head = stacks->tail;
 	stacks->tail = stacks->tail->prev;
+	inst_count++;
+	printf("###### REV_AB ######\n");
 }
 
 void	rrev_ab(t_ll **ab_array, int num_stack)
 {
 	t_ll	*stacks = ab_array[num_stack];
 
-	printf("RREV_AB\n");
 	stacks->tail = stacks->head;
 	stacks->head = stacks->head->next;
+	inst_count++;
+	printf("##### RREV_AB ###### \n");
 }

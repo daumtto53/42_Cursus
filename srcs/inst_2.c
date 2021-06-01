@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:41:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/27 14:50:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 17:20:05 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,32 @@ void	swap_all(t_ll **ab_array)
 
 void	rev_all(t_ll **ab_array)
 {
-	rev_ab(ab_array, STACK_A);
-	rev_ab(ab_array, STACK_B);
+	t_ll	*stack_a;
+	t_ll	*stack_b;
+
+	stack_a = ab_array[STACK_A];
+	stack_b = ab_array[STACK_B];
+
+	stack_a->head = stack_a->tail;
+	stack_a->tail = stack_a->tail->prev;
+	stack_b->head = stack_b->tail;
+	stack_b->tail = stack_b->tail->prev;
+	inst_count++;
+	printf("###### REV_ALL ######\n");
 }
 
 void	rrev_all(t_ll **ab_array)
 {
-	rrev_ab(ab_array, STACK_A);
-	rrev_ab(ab_array, STACK_B);
+	t_ll	*stack_a;
+	t_ll	*stack_b;
+
+	stack_a = ab_array[STACK_A];
+	stack_b = ab_array[STACK_B];
+
+	stack_a->tail = stack_a->head;
+	stack_a->head = stack_a->head->next;
+	stack_b->tail = stack_b->head;
+	stack_b->head = stack_b->head->next;
+	inst_count++;
+	printf("##### RREV_ALL ##### \n");
 }

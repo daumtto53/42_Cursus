@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:12:31 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/29 10:42:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 18:39:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,23 @@ void	print_err_n_exit(void)
 {
 	ft_putstr_fd("Error\n", 2);
 	exit(0);
+}
+
+int		is_already_sorted(t_ll **ab_array)
+{
+	int		list_size;
+	t_node	*node;
+
+	list_size = ab_array[STACK_A]->size;
+	if (list_size == 1)
+		return (0);
+	node = ab_array[STACK_A]->tail;
+	while (list_size-- > 1)
+	{
+		if (node->data > node->prev->data)
+			return (0);
+		node = node->prev;
+	}
+	printf("is_already_sorted\n");
+	return (1);
 }
