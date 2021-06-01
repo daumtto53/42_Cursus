@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 20:47:37 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 12:14:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	traverse_ab(t_ll **ab_array);
 int		**init_piv_array(int *arr, int arr_size);
 int		get_pivot_array_size_a(int *arr, int left, int right, int count);
 int		get_pivot_array_size_b(int *arr, int left, int right, int count);
+int		**assign_piv_array_a(int **piv_arr, int *arr, int left, int right);
+int		**assign_piv_array_b(int **piv_arr, int *arr, int left, int right);
 
 //sort_a.c
 int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num);

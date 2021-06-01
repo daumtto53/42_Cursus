@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:19:25 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 18:07:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 13:45:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 		sort_a_less_n_equal_3(ab_array, sort_num); // 정렬해야 할 원소 개수가 3개 이하일 때.
 		return (piv_arr - 1);
 	}
+	printf("piv_array : piv1 : %d\t\t, piv2 : %d\n", (*piv_arr)[0], (*piv_arr)[1]);
 	init_freq(&freq);
 	node = ab_array[STACK_A]->tail;							//partition_A 함수로 나눌 수 있을 듯..?
 	while (sort_num-- > 0)

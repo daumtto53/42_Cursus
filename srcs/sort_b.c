@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 14:00:07 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 19:10:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/01 14:40:30 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	sort_b_less_n_equal_3(t_ll **ab_array, int sort_num)
 			sort_b_312(ab_array);
 		else if (comp[0] > comp[1] && comp[1] > comp[2])
 			sort_b_321(ab_array);
+		printf("SORT_B sort_num == 1 TEST\n");
 	}
 	else
 		printf("SORT_B_LESS_THAN_EQUAL_3 : wrong sort_num in arg\n");
@@ -66,6 +67,7 @@ int		**sort_b(t_ll **ab_array, int **piv_arr, int sort_num)
 		sort_b_less_n_equal_3(ab_array, sort_num); // 정렬해야 할 원소 개수가 3개 이하일 때.
 		return (piv_arr - 1);
 	}
+	printf("piv_array : piv1 : %d\t\t, piv2 : %d\n", (*piv_arr)[0], (*piv_arr)[1]);
 	init_freq(&freq);
 	node = ab_array[STACK_B]->tail;							//partition_A 함수로 나눌 수 있을 듯..?
 	while (sort_num-- > 0)
