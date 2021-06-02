@@ -83,7 +83,7 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 bonus : $(OBJS) $(BONUSOBJS)
-	ar rc $(NAME) $^
+	ar rc $@ $^
 
 clean :
 	rm -f $(OBJS) $(BONUSOBJS)
