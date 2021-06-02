@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/01 19:32:28 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 14:25:27 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		**assign_piv_array_b(int **piv_arr, int *arr, int left, int right);
 
 //sort_a.c
 int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num);
+void	begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num);
 
 //sort_a_less_n_equal_4.c
 void	sort_a_132(t_ll **ab_array);

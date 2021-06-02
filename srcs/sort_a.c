@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:19:25 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/01 18:01:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 18:04:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,55 @@ static void	sort_a_less_n_equal_3(t_ll **ab_array, int sort_num)
 			sort_a_231(ab_array);
 	}
 	else
+	{
 		printf("SORT_A_LESS_THAN_EQUAL_3 : wrong sort_num in arg\n");
+		printf("SORT_NUM : %d\n", sort_num);
+		printf("SORT_A_LESS_THAN_EQUAL_3 : %d %d %d\n", comp[0], comp[1], comp[2]);
+	}
 	traverse_ab(ab_array);
 	return ;
+}
+
+void	begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
+{
+	t_freq	freq;
+	t_node	*node;
+	int		**piv_arr_cpy;
+	int		node_data;
+
+	printf("BEGIN_SORT_A\n");
+	init_freq(&freq);
+	node = ab_array[STACK_A]->tail;
+	printf("piv_arr[0] : %d, piv_arr[1] : %d\n", (*piv_arr)[0], (*piv_arr)[1]);
+	while (sort_num-- > 0)
+	{
+		node_data = node->data;
+		if ((*piv_arr)[1] < node_data)
+		{
+			rev_ab(ab_array, STACK_A);
+			freq.rotate_this++;
+		}
+		else
+		{
+			push_ab(ab_array, STACK_B);
+			freq.push_opp++;
+			if ((*piv_arr)[0] >= node_data)
+			{
+				rev_ab(ab_array, STACK_B);
+				freq.rotate_opp++;
+			}
+		}
+		node = ab_array[STACK_A]->tail;
+		traverse_ab(ab_array);
+	}
+	printf("ra 연산 : %d\t rb 연산 : %d\t pb 연산 : %d\n", freq.rotate_this, freq.rotate_opp, freq.push_opp);
+	printf("BEGIN_SORT_A : inst_count : %d\n", inst_count);
+	traverse_ab(ab_array);
+	freq.non_rotated = freq.push_opp - freq.rotate_opp; // [2]
+	piv_arr_cpy = piv_arr;
+	piv_arr_cpy = sort_a(ab_array, piv_arr_cpy + 1, freq.rotate_this);
+	piv_arr_cpy = sort_b(ab_array, piv_arr_cpy + 1, freq.non_rotated);
+	piv_arr_cpy = sort_b(ab_array, piv_arr_cpy + 1, freq.rotate_opp);
 }
 
 int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
@@ -90,7 +136,8 @@ int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 		node = ab_array[STACK_A]->tail;
 	}
 	restore_position(ab_array, STACK_A, &freq);
-
+	printf("ra 연산 : %d\t rb 연산 : %d\t pb 연산 : %d\n", freq.rotate_this, freq.rotate_opp, freq.push_opp);
+	printf("SORT_A : inst_count : %d\n", inst_count);
 	traverse_ab(ab_array);
 
 	freq.non_rotated = freq.push_opp - freq.rotate_opp;
