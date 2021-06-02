@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:12:31 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 18:58:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:40:36 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		*init_sorted_arg(t_ll **ab_array, int argc)
+int			*init_sorted_arg(t_ll **ab_array, int argc)
 {
 	int		*ret;
 	t_node	*node;
@@ -29,13 +29,11 @@ int		*init_sorted_arg(t_ll **ab_array, int argc)
 		ret[argc] = node->data;
 		node = node->next;
 	}
-	traverse_array(ret, ret_size);
 	quick_sort(ret, 0, ret_size - 1);
-	traverse_array(ret, ret_size);
 	return (ret);
 }
 
-static int		partition(int *arr, int left, int right)
+static int	partition(int *arr, int left, int right)
 {
 	int		i;
 	int		j;
@@ -60,7 +58,7 @@ static int		partition(int *arr, int left, int right)
 	return (i);
 }
 
-void	quick_sort(int *arr, int left, int right)
+void		quick_sort(int *arr, int left, int right)
 {
 	int		piv_index;
 
@@ -71,13 +69,13 @@ void	quick_sort(int *arr, int left, int right)
 	quick_sort(arr, piv_index + 1, right);
 }
 
-void	print_err_n_exit(void)
+void		print_err_n_exit(void)
 {
 	ft_putstr_fd("Error\n", 2);
 	exit(0);
 }
 
-int		is_already_sorted(t_ll **ab_array)
+int			is_already_sorted(t_ll **ab_array)
 {
 	int		list_size;
 	t_node	*node;

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 23:36:56 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/01 14:46:34 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:41:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ void	sort_b_312(t_ll **ab_array)
 {
 	push_ab(ab_array, STACK_A);
 	swap_ab(ab_array, STACK_B);
-	push_ab(ab_array, STACK_A);
-	push_ab(ab_array, STACK_A);
-}
-
-void	sort_b_321(t_ll **ab_array)
-{
-	push_ab(ab_array, STACK_A);
 	push_ab(ab_array, STACK_A);
 	push_ab(ab_array, STACK_A);
 }

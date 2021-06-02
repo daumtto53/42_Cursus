@@ -6,13 +6,26 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:18:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 19:00:16 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:37:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int inst_count = 0;
+int		**init_piv_array(int *arr, int arr_size)
+{
+	int		**piv_array;
+	int		**piv_array_cpy;
+	int		size;
+
+	piv_array = create_pivot_array(arr, arr_size);
+	if (!piv_array)
+		return (NULL);
+	piv_array_cpy = piv_array;
+	assign_piv_array_a(piv_array_cpy, arr, 0, arr_size - 1);
+	size = get_pivot_array_size_a(arr, 0, arr_size - 1, 0);
+	return (piv_array);
+}
 
 int		main(int argc, char **argv)
 {
@@ -31,9 +44,6 @@ int		main(int argc, char **argv)
 	if (ab_array[STACK_A]->size <= 3)
 	{
 		sort_less_than_3(ab_array);
-		printf("------FINAL_OUTPUT-----\n");
-		traverse_ab(ab_array);
-		printf("\n-----inst_count : %d----\n", inst_count);
 		return (0);
 	}
 	sorted_arg = init_sorted_arg(ab_array, argc);
@@ -42,15 +52,6 @@ int		main(int argc, char **argv)
 	piv_array = init_piv_array(sorted_arg, argc - 1);
 	if (!piv_array)
 		print_err_n_exit();
-
-	printf("\n-----\n");
-	traverse_ab(ab_array);
-
 	begin_sort_a(ab_array, piv_array, argc - 1);
-
-	printf("------FINAL_OUTPUT-----\n");
-	traverse_ab(ab_array);
-
-	printf("\n-----inst_count : %d----\n", inst_count);
-	return(0);
+	return (0);
 }

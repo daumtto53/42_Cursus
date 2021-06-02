@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:14:17 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/01 17:39:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:32:18 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	is_arg_overlap(t_ll **ab_array, int num)
 	return (0);
 }
 
-//input_args == -1 일 때 에러처리 해주고 malloc한것들 모두 free 필요.
 int			input_args(t_ll **ab_array, int arg_num, char **argv)
 {
 	long	input_num;

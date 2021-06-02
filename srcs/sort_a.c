@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:19:25 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 18:04:15 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:40:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,16 @@ static void	sort_a_less_n_equal_3(t_ll **ab_array, int sort_num)
 {
 	int		comp[3];
 
-	printf("SORT_A_LESS_N_EQUAL_3\n");
 	comp[0] = ab_array[STACK_A]->tail->data;
 	comp[1] = ab_array[STACK_A]->tail->prev->data;
 	comp[2] = ab_array[STACK_A]->tail->prev->prev->data;
-	if (sort_num == 1)
+	if (sort_num == 2)
 	{
-		printf("sort_num == 1\n");
-		return ;
-	}
-	else if (sort_num == 2)
-	{
-		printf("sort_num == 2\n");
 		if (comp[0] > comp[1])
 			swap_ab(ab_array, STACK_A);
 	}
-	else if (sort_num == 3)
+	if (sort_num == 3)
 	{
-		printf("sort_num == 3\n");
 		if (comp[1] > comp[2] && comp[2] > comp[0])
 			sort_a_132(ab_array);
 		else if (comp[0] > comp[1] && comp[1] > comp[2])
@@ -45,13 +37,6 @@ static void	sort_a_less_n_equal_3(t_ll **ab_array, int sort_num)
 		else if (comp[1] > comp[0] && comp[0] > comp[2])
 			sort_a_231(ab_array);
 	}
-	else
-	{
-		printf("SORT_A_LESS_THAN_EQUAL_3 : wrong sort_num in arg\n");
-		printf("SORT_NUM : %d\n", sort_num);
-		printf("SORT_A_LESS_THAN_EQUAL_3 : %d %d %d\n", comp[0], comp[1], comp[2]);
-	}
-	traverse_ab(ab_array);
 	return ;
 }
 
@@ -62,10 +47,8 @@ void	begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 	int		**piv_arr_cpy;
 	int		node_data;
 
-	printf("BEGIN_SORT_A\n");
 	init_freq(&freq);
 	node = ab_array[STACK_A]->tail;
-	printf("piv_arr[0] : %d, piv_arr[1] : %d\n", (*piv_arr)[0], (*piv_arr)[1]);
 	while (sort_num-- > 0)
 	{
 		node_data = node->data;
@@ -85,12 +68,8 @@ void	begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 			}
 		}
 		node = ab_array[STACK_A]->tail;
-		traverse_ab(ab_array);
 	}
-	printf("ra 연산 : %d\t rb 연산 : %d\t pb 연산 : %d\n", freq.rotate_this, freq.rotate_opp, freq.push_opp);
-	printf("BEGIN_SORT_A : inst_count : %d\n", inst_count);
-	traverse_ab(ab_array);
-	freq.non_rotated = freq.push_opp - freq.rotate_opp; // [2]
+	freq.non_rotated = freq.push_opp - freq.rotate_opp;
 	piv_arr_cpy = piv_arr;
 	piv_arr_cpy = sort_a(ab_array, piv_arr_cpy + 1, freq.rotate_this);
 	piv_arr_cpy = sort_b(ab_array, piv_arr_cpy + 1, freq.non_rotated);
@@ -104,16 +83,13 @@ int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 	int		**piv_arr_cpy;
 	int		node_data;
 
-	printf("SORT_A\n");
 	if (sort_num <= 3)
 	{
-		printf("SORT_NUM < = 3\n");
-		sort_a_less_n_equal_3(ab_array, sort_num); // 정렬해야 할 원소 개수가 3개 이하일 때.
+		sort_a_less_n_equal_3(ab_array, sort_num);
 		return (piv_arr - 1);
 	}
-	printf("piv_array : piv1 : %d\t\t, piv2 : %d\n", (*piv_arr)[0], (*piv_arr)[1]);
 	init_freq(&freq);
-	node = ab_array[STACK_A]->tail;							//partition_A 함수로 나눌 수 있을 듯..?
+	node = ab_array[STACK_A]->tail;
 	while (sort_num-- > 0)
 	{
 		node_data = node->data;
@@ -132,14 +108,9 @@ int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 				freq.rotate_opp++;
 			}
 		}
-		traverse_ab(ab_array);
 		node = ab_array[STACK_A]->tail;
 	}
 	restore_position(ab_array, STACK_A, &freq);
-	printf("ra 연산 : %d\t rb 연산 : %d\t pb 연산 : %d\n", freq.rotate_this, freq.rotate_opp, freq.push_opp);
-	printf("SORT_A : inst_count : %d\n", inst_count);
-	traverse_ab(ab_array);
-
 	freq.non_rotated = freq.push_opp - freq.rotate_opp;
 	piv_arr_cpy = piv_arr;
 	piv_arr_cpy = sort_a(ab_array, piv_arr_cpy + 1, freq.rotate_this);

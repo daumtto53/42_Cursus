@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 10:44:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 19:00:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:36:04 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		get_pivot_array_size_a(int *arr, int left, int right, int count)
+int			get_pivot_array_size_a(int *arr, int left, int right, int count)
 {
 	int		k;
 	int		piv_a;
@@ -29,7 +29,7 @@ int		get_pivot_array_size_a(int *arr, int left, int right, int count)
 	return (count + 1);
 }
 
-int		get_pivot_array_size_b(int *arr, int left, int right, int count)
+int			get_pivot_array_size_b(int *arr, int left, int right, int count)
 {
 	int		k;
 	int		piv_a;
@@ -46,7 +46,7 @@ int		get_pivot_array_size_b(int *arr, int left, int right, int count)
 	return (count + 1);
 }
 
-static int		**create_pivot_array(int *arr, int arr_size)
+static int	**create_pivot_array(int *arr, int arr_size)
 {
 	int		**new_piv_arr;
 	int		piv_array_size;
@@ -54,7 +54,6 @@ static int		**create_pivot_array(int *arr, int arr_size)
 	int		i;
 
 	piv_array_size = get_pivot_array_size_a(arr, 0, arr_size - 1, 0);
-	printf("piv_array_size : %d\n", piv_array_size);
 	new_piv_arr = (int **)malloc(sizeof(int *) * piv_array_size);
 	if (!new_piv_arr)
 		return (NULL);
@@ -69,7 +68,7 @@ static int		**create_pivot_array(int *arr, int arr_size)
 	return (new_piv_arr);
 }
 
-int		**assign_piv_array_a(int **piv_arr, int *arr, int left, int right)
+int			**assign_piv_array_a(int **piv_arr, int *arr, int left, int right)
 {
 	int		k;
 	int		piv_a;
@@ -88,7 +87,7 @@ int		**assign_piv_array_a(int **piv_arr, int *arr, int left, int right)
 	return (piv_arr);
 }
 
-int		**assign_piv_array_b(int **piv_arr, int *arr, int left, int right)
+int			**assign_piv_array_b(int **piv_arr, int *arr, int left, int right)
 {
 	int		k;
 	int		piv_a;
@@ -105,22 +104,4 @@ int		**assign_piv_array_b(int **piv_arr, int *arr, int left, int right)
 	piv_arr = assign_piv_array_a(piv_arr + 1, arr, piv_a + 1, piv_b);
 	piv_arr = assign_piv_array_b(piv_arr + 1, arr, left, piv_a);
 	return (piv_arr);
-}
-
-int		**init_piv_array(int *arr, int arr_size)
-{
-	int **piv_array;
-	int	**piv_array_cpy;
-
-	piv_array = create_pivot_array(arr, arr_size);
-	if (!piv_array)
-		return (NULL);
-	piv_array_cpy = piv_array;
-	assign_piv_array_a(piv_array_cpy, arr, 0, arr_size - 1);		//error?
-	int		size;
-	size = get_pivot_array_size_a(arr, 0, arr_size - 1, 0);
-	printf("size : %d\n", size);
-	for (int i = 0 ; i < size; i++)
-		printf("%d %d\t", piv_array[i][0], piv_array[i][1]);
-	return (piv_array);
 }

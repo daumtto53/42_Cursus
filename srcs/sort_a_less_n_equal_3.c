@@ -6,13 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:03:21 by mchun             #+#    #+#             */
-/*   Updated: 2021/05/31 17:34:12 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:39:29 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-//정렬할 때, 정렬하는 각각의 스택이 ra나 rra로 뭔가 바뀌지 않나 살펴보아야함.
 void	sort_a_132(t_ll **ab_array)
 {
 	rev_ab(ab_array, STACK_A);

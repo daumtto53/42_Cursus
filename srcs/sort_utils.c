@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 09:54:10 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 18:57:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:42:53 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	init_freq(t_freq *freq)
+void		init_freq(t_freq *freq)
 {
 	freq->push_opp = 0;
 	freq->rotate_opp = 0;
@@ -20,7 +20,7 @@ void	init_freq(t_freq *freq)
 	freq->rotate_this = 0;
 }
 
-void	restore_position(t_ll **ab_array, int stack_num, t_freq *freq)
+void		restore_position(t_ll **ab_array, int stack_num, t_freq *freq)
 {
 	int		surplus_inst;
 	t_ll	*stack;
@@ -67,7 +67,7 @@ static void	sort_3_elements(t_ll **ab_array, int d_0, int d_1, int d_2)
 	return ;
 }
 
-void	sort_less_than_3(t_ll **ab_array)
+void		sort_less_than_3(t_ll **ab_array)
 {
 	t_node	*node;
 	int		data[3];
