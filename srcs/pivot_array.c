@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 10:44:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 21:36:04 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 22:50:37 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			get_pivot_array_size_b(int *arr, int left, int right, int count)
 	return (count + 1);
 }
 
-static int	**create_pivot_array(int *arr, int arr_size)
+int			**create_pivot_array(int *arr, int arr_size)
 {
 	int		**new_piv_arr;
 	int		piv_array_size;

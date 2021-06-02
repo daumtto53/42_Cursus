@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 21:31:10 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 22:51:24 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include "linked_list.h"
 # include "../libft/libft.h"
+#include <stdio.h>
 
 typedef struct	s_freq
 {
@@ -51,6 +52,7 @@ int				get_pivot_array_size_a(int *a, int left, int right, int count);
 int				get_pivot_array_size_b(int *a, int left, int right, int count);
 int				**assign_piv_array_a(int **p_arr, int *ar, int left, int right);
 int				**assign_piv_array_b(int **p_arr, int *ar, int left, int right);
+int				**create_pivot_array(int *arr, int arr_size);
 
 int				**sort_a(t_ll **ab_array, int **piv_arr, int sort_num);
 void			begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num);
