@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:12:31 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/01 18:39:19 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 18:58:31 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,5 @@ int		is_already_sorted(t_ll **ab_array)
 			return (0);
 		node = node->prev;
 	}
-	printf("is_already_sorted\n");
 	return (1);
 }

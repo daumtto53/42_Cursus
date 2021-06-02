@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:18:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 17:53:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/02 19:00:16 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,10 @@ int		main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
-	//연결리스트 초기화
 	if (init_linked_list(&ab_array) == -1)
 		return (-1);
-	printf("LINKED_LIST_INITIALIZED.\n");
-	//연결리스트에 인자 검사 -> 연결리스트에 인자 push
 	if (input_args(ab_array, argc, argv) == -1)
 		print_err_n_exit();
-	// if sorted ?
 	if (is_already_sorted(ab_array))
 		return (0);
 	if (ab_array[STACK_A]->size <= 3)
