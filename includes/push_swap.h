@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 22:51:24 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/03 13:44:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <limits.h>
 # include "linked_list.h"
 # include "../libft/libft.h"
-#include <stdio.h>
 
 typedef struct	s_freq
 {

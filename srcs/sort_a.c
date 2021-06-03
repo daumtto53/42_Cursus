@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 13:19:25 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 21:40:08 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/03 13:33:20 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,67 @@ static void	sort_a_less_n_equal_3(t_ll **ab_array, int sort_num)
 	return ;
 }
 
-void	begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
+static void	partition_a(t_ll **ab, int **piv_arr, int sort_num, t_freq *f)
 {
-	t_freq	freq;
 	t_node	*node;
-	int		**piv_arr_cpy;
 	int		node_data;
 
-	init_freq(&freq);
-	node = ab_array[STACK_A]->tail;
 	while (sort_num-- > 0)
 	{
+		node = ab[STACK_A]->tail;
 		node_data = node->data;
-		if ((*piv_arr)[1] < node_data)
+		if ((*piv_arr)[1] < node->data)
 		{
-			rev_ab(ab_array, STACK_A);
-			freq.rotate_this++;
+			rev_ab(ab, STACK_A);
+			f->rotate_this++;
 		}
 		else
 		{
-			push_ab(ab_array, STACK_B);
-			freq.push_opp++;
-			if ((*piv_arr)[0] >= node_data)
+			push_ab(ab, STACK_B);
+			f->push_opp++;
+			if ((*piv_arr)[0] < node_data)
 			{
-				rev_ab(ab_array, STACK_B);
-				freq.rotate_opp++;
+				rev_ab(ab, STACK_B);
+				f->rotate_opp++;
 			}
 		}
-		node = ab_array[STACK_A]->tail;
 	}
+}
+
+static void	partition_begin(t_ll **ab, int **piv_arr, int sort_num, t_freq *f)
+{
+	t_node	*node;
+	int		node_data;
+
+	while (sort_num-- > 0)
+	{
+		node = ab[STACK_A]->tail;
+		node_data = node->data;
+		if ((*piv_arr)[1] < node_data)
+		{
+			rev_ab(ab, STACK_A);
+			f->rotate_this++;
+		}
+		else
+		{
+			push_ab(ab, STACK_B);
+			f->push_opp++;
+			if ((*piv_arr)[0] >= node_data)
+			{
+				rev_ab(ab, STACK_B);
+				f->rotate_opp++;
+			}
+		}
+	}
+}
+
+void		begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
+{
+	t_freq	freq;
+	int		**piv_arr_cpy;
+
+	init_freq(&freq);
+	partition_begin(ab_array, piv_arr, sort_num, &freq);
 	freq.non_rotated = freq.push_opp - freq.rotate_opp;
 	piv_arr_cpy = piv_arr;
 	piv_arr_cpy = sort_a(ab_array, piv_arr_cpy + 1, freq.rotate_this);
@@ -76,12 +108,10 @@ void	begin_sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 	piv_arr_cpy = sort_b(ab_array, piv_arr_cpy + 1, freq.rotate_opp);
 }
 
-int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
+int			**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 {
 	t_freq	freq;
-	t_node	*node;
 	int		**piv_arr_cpy;
-	int		node_data;
 
 	if (sort_num <= 3)
 	{
@@ -89,27 +119,7 @@ int		**sort_a(t_ll **ab_array, int **piv_arr, int sort_num)
 		return (piv_arr - 1);
 	}
 	init_freq(&freq);
-	node = ab_array[STACK_A]->tail;
-	while (sort_num-- > 0)
-	{
-		node_data = node->data;
-		if ((*piv_arr)[1] < node->data)
-		{
-			rev_ab(ab_array, STACK_A);
-			freq.rotate_this++;
-		}
-		else
-		{
-			push_ab(ab_array, STACK_B);
-			freq.push_opp++;
-			if ((*piv_arr)[0] < node_data)
-			{
-				rev_ab(ab_array, STACK_B);
-				freq.rotate_opp++;
-			}
-		}
-		node = ab_array[STACK_A]->tail;
-	}
+	partition_a(ab_array, piv_arr, sort_num, &freq);
 	restore_position(ab_array, STACK_A, &freq);
 	freq.non_rotated = freq.push_opp - freq.rotate_opp;
 	piv_arr_cpy = piv_arr;
