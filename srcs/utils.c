@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 18:12:31 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 21:40:36 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/03 18:34:09 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ void		print_err_n_exit(void)
 	exit(0);
 }
 
-int			is_already_sorted(t_ll **ab_array)
+int			is_already_sorted(t_ll **ab_array, int size)
 {
 	int		list_size;
 	t_node	*node;
 
 	list_size = ab_array[STACK_A]->size;
 	if (list_size == 1)
-		return (0);
+		return (1);
 	node = ab_array[STACK_A]->tail;
 	while (list_size-- > 1)
 	{
@@ -90,5 +90,7 @@ int			is_already_sorted(t_ll **ab_array)
 			return (0);
 		node = node->prev;
 	}
+	if (ab_array[STACK_A]->size != size)
+		return (0);
 	return (1);
 }

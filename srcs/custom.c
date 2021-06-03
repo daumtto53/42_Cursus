@@ -1,6 +1,6 @@
 
 #include "../includes/push_swap.h"
-
+#include <stdio.h>
 // exit() 사용하면 되므로 사용할 이유가 없어졌음.
 void	free_ab_array(t_ll **ab_array)
 {

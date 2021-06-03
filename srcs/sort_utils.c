@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 09:54:10 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/02 21:42:53 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/03 18:32:56 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void		sort_less_than_3(t_ll **ab_array)
 	data[0] = node->data;
 	data[1] = node->prev->data;
 	data[2] = node->prev->prev->data;
+	if (ab_array[STACK_A]->size == 1)
+		return ;
 	if (ab_array[STACK_A]->size == 2)
 	{
 		if (node->data > node->prev->data)

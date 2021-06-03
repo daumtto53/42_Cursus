@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 14:48:53 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/03 13:44:19 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/03 18:29:24 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			swap_all(t_ll **ab_array);
 int				*init_sorted_arg(t_ll **ab_array, int argc);
 void			quick_sort(int *arr, int left, int right);
 void			print_err_n_exit(void);
-int				is_already_sorted(t_ll **ab_array);
+int				is_already_sorted(t_ll **ab_array, int size);
 
 void			traverse_list(t_ll **ab_array, int num_stack);
 void			traverse_array(int *arr, int size);
