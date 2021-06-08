@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 19:48:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/08 10:14:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/08 14:45:36 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		main(int argc, char **argv)
 	if (!(argc == 5 && init_parsed(parsed) && \
 			parse_argument_vector(argv, parsed) && is_valid_path(parsed)) && \
 				is_valid_cmd(parsed))
-		return (0);
+		exit(0);
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -36,7 +36,7 @@ int		main(int argc, char **argv)
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		exit(0);
-	if (!(redirect_out() && connect_pipe()))
+	if (!(connect_pipe() && redirect_out()))
 		exit(1);
 	if (run_cmd(parsed, PARENT_INDEX) == -1)
 		exit(1);
