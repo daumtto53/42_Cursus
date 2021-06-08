@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 19:48:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/07 22:22:37 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/08 10:14:49 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		main(int argc, char **argv)
 	t_parsed	*parsed[2];
 	int			execv_error[2];
 	int			status;
-	char		*available_path[5];
 
 	if (!(argc == 5 && init_parsed(parsed) && \
 			parse_argument_vector(argv, parsed) && is_valid_path(parsed)) && \
@@ -37,7 +36,7 @@ int		main(int argc, char **argv)
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		exit(0);
-	if (!(redirect_in() && connect_pipe()))
+	if (!(redirect_out() && connect_pipe()))
 		exit(1);
 	if (run_cmd(parsed, PARENT_INDEX) == -1)
 		exit(1);

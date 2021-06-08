@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 20:44:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/07 22:24:32 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/08 10:12:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ int		parse_argument_vector(char **argv, t_parsed **parsed)
 	parsed[PARENT_INDEX]->cmd = splitted_in[0];
 	parsed[PARENT_INDEX]->argv = splitted_in + 1;
 	parsed[PARENT_INDEX]->envp = NULL;
+	parsed[PARENT_INDEX]->cmd_path = NULL;
 	parsed[CHILD_INDEX]->file = argv[3];
 	parsed[CHILD_INDEX]->cmd = splitted_in[0];
 	parsed[CHILD_INDEX]->argv = splitted_in + 1;
 	parsed[CHILD_INDEX]->envp = NULL;
+	parsed[CHILD_INDEX]->cmd_path = NULL;
 }
 
 int		is_valid_path(t_parsed **parsed)
@@ -69,6 +71,7 @@ int		is_valid_cmd(t_parsed **parsed)
 	char	*joined;
 	int		rep;
 	char	*path[5];
+	int		fd;
 	int		i;
 
 	path[0] = "/bin/";
@@ -76,9 +79,27 @@ int		is_valid_cmd(t_parsed **parsed)
 	path[2] = "/usr/local/bin";
 	path[3] = "/usr/sbin/";
 	path[4] = "/sbin/";
-
-	while (rep-- > 0)
+	rep = 5;
+	i = 2;
+	while (--i >= 0)
 	{
-		joined = ft_strjoin(parsed[])
+		while (--rep >= 0)
+		{
+			joined = ft_strjoin(path[rep], parsed[PARENT_INDEX]->cmd);
+			fd = open(joined, O_RDONLY);
+			if (fd >= 0)
+			{
+				close(fd);
+				parsed[PARENT_INDEX]->cmd_path;
+				free(joined);
+				break;
+			}
+			close(fd);
+			free(joined);
+		}
 	}
+	if (!parsed[PARENT_INDEX]->cmd_path || !parsed[CHILD_INDEX]->cmd_path)
+		return (0);
+	else
+		return (1);
 }
