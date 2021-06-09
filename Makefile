@@ -1,5 +1,6 @@
 CC = gcc
 CFLAG = -Werror -Wextra -Wall
+ASAN = -g -fsanitize=address
 INCLUDES = -I./includes/
 LIBFT_FLAG = -L./libft -lft
 

@@ -1,0 +1,15 @@
+total 160
+drwxr-xr-x  105 mchun  2020_seoul   3570 Jun  9 15:19 libft
+drwxr-xr-x   15 mchun  2020_seoul    510 Jun  9 20:28 .git
+drwxr-xr-x   14 mchun  2020_seoul    476 Jun  9 21:18 .
+drwxr-xr-x    9 mchun  2020_seoul    306 Jun  9 14:27 ..
+drwxr-xr-x    5 mchun  2020_seoul    170 Jun  9 13:47 srcs
+drwxr-xr-x    3 mchun  2020_seoul    102 Jun  9 21:13 pipex.dSYM
+drwxr-xr-x    3 mchun  2020_seoul    102 Jun  7 19:42 includes
+-rwxrwxrwx    1 mchun  2020_seoul    170 Jun  9 20:04 input_2
+-rwxrwxrwx    1 mchun  2020_seoul     44 Jun  9 19:09 input_1
+-rwxr-xr-x    1 mchun  2020_seoul  54704 Jun  9 21:18 pipex
+-rw-r--r--    1 mchun  2020_seoul    866 Jun  9 21:18 output
+-rw-r--r--    1 mchun  2020_seoul    628 Jun  9 21:18 Makefile
+-rw-r--r--    1 mchun  2020_seoul    430 Jun  7 19:40 .gitignore
+-rw-r--r--    1 mchun  2020_seoul      7 Jun  7 19:40 README.md

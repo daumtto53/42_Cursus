@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 20:44:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/09 20:28:07 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/09 21:05:37 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@ int			parse_argument_vector(char **argv, t_parsed **parsed)
 		exit(0);
 	parsed[PARENT_INDEX]->file = argv[4];
 	parsed[PARENT_INDEX]->cmd = splitted_out[0];
-	if (splitted_out[1] != NULL)
-		parsed[PARENT_INDEX]->argv = (const char **)splitted_out + 1;
+	parsed[PARENT_INDEX]->argv = (const char **)splitted_out;
 	parsed[PARENT_INDEX]->envp = NULL;
 	parsed[PARENT_INDEX]->cmd_path = NULL;
 	parsed[CHILD_INDEX]->file = argv[1];
 	parsed[CHILD_INDEX]->cmd = splitted_in[0];
-	if (splitted_in[1] != NULL)
-		parsed[CHILD_INDEX]->argv = (const char **)splitted_in + 1;
+	parsed[CHILD_INDEX]->argv = (const char **)splitted_in;
 	parsed[CHILD_INDEX]->envp = NULL;
 	parsed[CHILD_INDEX]->cmd_path = NULL;
 	return (1);
