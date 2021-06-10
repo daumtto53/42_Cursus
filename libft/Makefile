@@ -6,6 +6,7 @@ SRCSDIR = ./
 OBJSDIR = ./
 BONUSDIR = ./
 
+
 PART_1 =	ft_memmove.c \
 			ft_strnstr.c \
 			ft_strlen.c \
@@ -71,9 +72,15 @@ OBJS = $(addprefix $(OBJSDIR), $(SRCS:.c=.o))
 BONUSSRCS = $(addprefix $(BONUSDIR), $(BONUS))
 BONUSOBJS = $(BONUSSRCS:.c=.o)
 
+ifdef WITH_BONUS
+	REAL_OBJS = $(OBJS) $(BONUSOBJS)
+else
+	REAL_OBJS = $(OBJS)
+endif
+
 NAME = libft.a
 
-$(NAME) : $(OBJS)
+$(NAME) : $(REAL_OBJS)
 		ar rcs $@ $^
 
 %.o : %.c
@@ -81,8 +88,10 @@ $(NAME) : $(OBJS)
 
 all : $(NAME)
 
-bonus : $(OBJS) $(BONUSOBJS)
-	ar rc $(NAME) $^
+bonus :
+	@$(MAKE) WITH_BONUS=1 all
+# bonus : $(OBJS) $(BONUSOBJS)
+# 	ar rc $(NAME) $^
 
 clean :
 	rm -f $(OBJS) $(BONUSOBJS)

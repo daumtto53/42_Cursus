@@ -36,4 +36,4 @@ re : clean fclean all
 output_clean:
 	rm -rf output_*
 
-.PHONY = all clean fclean
+.PHONY = all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 20:44:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/09 21:05:37 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/10 15:08:59 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			is_valid_path(t_parsed **parsed)
 	child_fd = open(parsed[CHILD_INDEX]->file, O_RDONLY);
 	if (child_fd == -1)
 	{
+		perror(parsed[CHILD_INDEX]->file);
 		close(child_fd);
 		return (0);
 	}
