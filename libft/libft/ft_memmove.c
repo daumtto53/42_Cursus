@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2020/12/28 15:59:24 by mchun             #+#    #+#             */
+/*   Updated: 2020/12/31 13:55:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int		len;
+	size_t	not_ov;
+	size_t	ov;
+	size_t	i;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
+	if (!dst && !src)
+		return (0);
+	if (src <= dst && dst <= src + len - 1)
 	{
-		if (s[len] == c)
-			return ((char *)(s + len));
+		not_ov = dst - src;
+		ov = len - not_ov;
+		i = 0;
+		while (i < ov)
+		{
+			ft_memcpy(dst + len - 1 - i, src + len - 1 - i, 1);
+			i++;
+		}
+		ft_memcpy(dst, src, not_ov);
 	}
-	return (NULL);
+	else
+		ft_memcpy(dst, src, len);
+	return ((void *)dst);
 }

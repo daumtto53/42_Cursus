@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_digitlen_base.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2021/01/26 11:10:48 by mchun             #+#    #+#             */
+/*   Updated: 2021/02/06 22:18:48 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+int		ft_digitlen_base(long long num, int base)
 {
-	int		len;
+	int			count;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
+	count = 0;
+	if (num == 0)
+		return (1);
+	if (num < 0)
+		num *= -1;
+	while (num)
 	{
-		if (s[len] == c)
-			return ((char *)(s + len));
+		count++;
+		num /= base;
 	}
-	return (NULL);
+	return (count);
 }

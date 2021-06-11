@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_utox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2021/01/30 01:10:40 by mchun             #+#    #+#             */
+/*   Updated: 2021/01/30 01:25:16 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_utox(unsigned int num)
 {
-	int		len;
+	int				xdigit;
+	unsigned int	temp;
+	char			*xchar;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
+	xdigit = 0;
+	if (num == 0)
+		xdigit = 1;
+	temp = num;
+	while (temp)
 	{
-		if (s[len] == c)
-			return ((char *)(s + len));
+		xdigit++;
+		temp /= 16;
 	}
-	return (NULL);
+	if ((xchar = (char *)ft_calloc(xdigit + 1, 1)) == NULL)
+		return (NULL);
+	xchar[xdigit] = '\0';
+	while (xdigit > 0)
+	{
+		xchar[--xdigit] = "0123456789abcdef"[num % 16];
+		num /= 16;
+	}
+	return (xchar);
 }

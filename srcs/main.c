@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 19:48:16 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 14:40:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/11 13:32:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static void	begin_main(int argc, t_parsed **parsed, char **argv, int *pipefd)
+static void	begin_main(int argc, t_parsed **parsed, char **argv, int *pipefd, char **envp)
 {
 	if (argc != 5)
 		exit(0);
@@ -22,20 +22,20 @@ static void	begin_main(int argc, t_parsed **parsed, char **argv, int *pipefd)
 		exit(0);
 	if (is_valid_path(parsed) != 1)
 		exit(0);
-	if (is_valid_cmd(parsed) != 1)
+	if (is_valid_cmd(parsed, envp) != 1)
 		exit(0);
 	if (pipe(pipefd) == -1)
 		exit(0);
 }
 
-int			main(int argc, char **argv)
+int			main(int argc, char **argv, char **envp)
 {
 	pid_t		pid;
 	t_parsed	*parsed[2];
 	int			status;
 	int			pipefd[2];
 
-	begin_main(argc, parsed, argv, pipefd);
+	begin_main(argc, parsed, argv, pipefd, envp);
 	pid = fork();
 	if (pid == -1)
 		exit(1);

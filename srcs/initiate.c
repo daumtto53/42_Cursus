@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 20:44:47 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 15:08:59 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/11 13:26:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int			parse_argument_vector(char **argv, t_parsed **parsed)
 	parsed[PARENT_INDEX]->argv = (const char **)splitted_out;
 	parsed[PARENT_INDEX]->envp = NULL;
 	parsed[PARENT_INDEX]->cmd_path = NULL;
+
+
 	parsed[CHILD_INDEX]->file = argv[1];
 	parsed[CHILD_INDEX]->cmd = splitted_in[0];
 	parsed[CHILD_INDEX]->argv = (const char **)splitted_in;
@@ -64,30 +66,29 @@ int			is_valid_path(t_parsed **parsed)
 	return (1);
 }
 
-static void	init_path_arr(char **path)
+int			is_valid_cmd(t_parsed **parsed, char **envp)
 {
-	path[0] = "/bin/";
-	path[1] = "/usr/bin/";
-	path[2] = "/usr/local/bin/";
-	path[3] = "/usr/sbin/";
-	path[4] = "/sbin/";
-}
-
-int			is_valid_cmd(t_parsed **parsed)
-{
-	int		rep;
-	char	*path[5];
 	int		fd;
 	int		i;
+	int		j;
+	char	*env_path;
+	char	**env_path_arr;
+	char	*temp;
 
-	init_path_arr(path);
 	i = 2;
+	j = -1;
+	while (envp[++j])
+		if(ft_strncmp(envp[j], "PATH", 4) == 0)
+			env_path = envp[j];
+	env_path_arr = ft_split(env_path + 5, ':');
 	while (--i >= 0)
 	{
-		rep = 5;
-		while (--rep >= 0)
+		j = -1;
+		while (env_path_arr[++j])
 		{
-			parsed[i]->cmd_path = ft_strjoin(path[rep], parsed[i]->cmd);
+			temp = ft_strjoin(env_path_arr[j], "/");
+			parsed[i]->cmd_path = ft_strjoin(temp, parsed[i]->cmd);
+			free(temp);
 			fd = open(parsed[i]->cmd_path, O_RDONLY);
 			if (fd >= 0)
 			{

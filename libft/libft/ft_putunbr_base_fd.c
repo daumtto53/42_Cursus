@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putunbr_base_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2020/12/29 15:38:13 by mchun             #+#    #+#             */
+/*   Updated: 2021/02/07 11:58:33 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_putunbr_base_fd(unsigned long long n, int base, int fd, int mode)
 {
-	int		len;
+	unsigned long long	ln;
+	char				*str;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
+	str = (mode == BASE_DOWN) ? "0123456789abcdef" : "0123456789ABCDEF";
+	ln = n;
+	if (ln / base == 0)
 	{
-		if (s[len] == c)
-			return ((char *)(s + len));
+		ft_putchar_fd(str[ln], fd);
+		return ;
 	}
-	return (NULL);
+	ft_putunbr_base_fd(ln / base, base, fd, mode);
+	ft_putchar_fd(str[ln % base], fd);
 }

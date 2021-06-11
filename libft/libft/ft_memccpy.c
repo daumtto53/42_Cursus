@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2020/12/24 16:18:09 by mchun             #+#    #+#             */
+/*   Updated: 2020/12/31 17:33:07 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t len)
 {
-	int		len;
+	unsigned char *destcpy;
+	unsigned char *srccpy;
+	unsigned char cc;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
+	if (!dest && !src)
+		return (NULL);
+	cc = c;
+	destcpy = (unsigned char *)dest;
+	srccpy = (unsigned char *)src;
+	while (len--)
 	{
-		if (s[len] == c)
-			return ((char *)(s + len));
+		*destcpy = *srccpy;
+		if (cc == *destcpy)
+			return (destcpy + 1);
+		destcpy++;
+		srccpy++;
 	}
 	return (NULL);
 }

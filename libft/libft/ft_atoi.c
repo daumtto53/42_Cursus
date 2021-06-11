@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2020/12/27 20:02:26 by mchun             #+#    #+#             */
+/*   Updated: 2021/01/26 10:21:37 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+int					ft_atoi(const char *nptr)
 {
-	int		len;
+	long			num;
+	size_t			i;
+	long			sign;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
+	num = 0;
+	i = 0;
+	sign = 1;
+	while ((nptr[i]) && ft_isspace(nptr[i]))
+		i++;
+	if ((nptr[i]) && (nptr[i] == '+' || nptr[i] == '-'))
 	{
-		if (s[len] == c)
-			return ((char *)(s + len));
+		if (nptr[i++] == '-')
+			sign = -1;
 	}
-	return (NULL);
+	while (ft_isdigit(nptr[i]) && nptr[i])
+	{
+		num *= 10;
+		num += ((long)nptr[i] - '0');
+		i++;
+	}
+	return (num * sign);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2020/12/29 13:52:17 by mchun             #+#    #+#             */
+/*   Updated: 2020/12/29 22:58:35 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strtrim(const char *s, const char *set)
 {
-	int		len;
+	char	*trimstr;
+	size_t	trim_len;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
-	{
-		if (s[len] == c)
-			return ((char *)(s + len));
-	}
-	return (NULL);
+	trimstr = (char *)s;
+	while (*trimstr && ft_strchr(set, *trimstr))
+		trimstr++;
+	trim_len = ft_strlen(trimstr);
+	while (trim_len && ft_strchr(set, trimstr[trim_len]))
+		trim_len--;
+	trimstr = ft_substr(trimstr, 0, trim_len + 1);
+	return (trimstr);
 }

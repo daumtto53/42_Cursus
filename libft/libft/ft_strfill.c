@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strfill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 22:49:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:26:30 by mchun            ###   ########.fr       */
+/*   Created: 2021/01/26 21:47:50 by mchun             #+#    #+#             */
+/*   Updated: 2021/01/29 17:14:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+int		ft_strfill(char *a, int start, int end, char c)
 {
-	int		len;
+	int		i;
 
-	len = ft_strlen(s) + 1;
-	while (--len >= 0)
+	i = start;
+	while (i <= end)
 	{
-		if (s[len] == c)
-			return ((char *)(s + len));
+		a[i] = c;
+		i++;
 	}
-	return (NULL);
+	return (i);
 }
