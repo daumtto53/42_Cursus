@@ -27,13 +27,14 @@ int		main()
 	pthread_t	tid[5];
 	int			thread_count;
 	int			i;
+	pthread_attr_t attr;
+
 
 	i = 0;
 	thread_count = 0;
-
 	while (thread_count < 5)
 	{
-		pthread_create(tid + thread_count, NULL, (void *)thread_entry, (void *)&thread_count);
+		pthread_create(tid + thread_count, NULL,(void *)thread_entry, (void *)&thread_count);
 		thread_count++;
 	}
 	while (i < 10)
@@ -41,16 +42,21 @@ int		main()
 		printf("main_thread's tid : %lx\t\t, incremented : %d\n", (unsigned long)pthread_self(), i);
 		i++;
 	}
-	i = 0;
 	thread_count = 0;
+	// while (thread_count < 5)
+	// {
+	// 	pthread_join(tid[thread_count], NULL);
+	// 	thread_count++;
+	// }
 	while (thread_count < 5)
 	{
-		pthread_join(tid[thread_count], NULL);
+		pthread_detach(tid[thread_count]);
 		thread_count++;
 	}
+	i = 0;
 	while (i < 5)
 	{
-		printf("MAIN_THREAD : subthread id : %lx\t", (unsigned long)tid[i] - 0x700000000000);
+		printf("MAIN_THREAD : subthread id : %lx\t", (unsigned long)tid[i]);
 		i++;
 	}
 	printf("\n");
