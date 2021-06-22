@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/22 20:37:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/22 21:02:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/time.h>
 # include <stdio.h>
 # include <limits.h>
+# include <stdlib.h>
 
 # define LEFT			0
 # define RIGHT			1
@@ -35,17 +36,20 @@ typedef struct		s_philo
 
 typedef struct		s_attr
 {
-	int						phil_num;
-	int						iteration;
-	unsigned long long		phil_die;
-	unsigned long long		phil_eat;
-	unsigned long long		phil_sleep;
-	t_philo					*phil_arr;
+	int				phil_num;
+	int				iteration;
+	long long		phil_die;
+	long long		phil_eat;
+	long long		phil_sleep;
+	t_philo			*phil_arr;
+	pthread_mutex_t	*chopstick;
 }					t_attr;
 
-long long atoll(char *src);
+long long			ft_atoll(char *src);
 
-int		init_attr(t_attr *attr, char **argv, int argc);
+int					init_attr(t_attr *attr, char **argv, int argc);
+
+pthread_t			*init_tid_arr(t_attr *attr);
 
 pthread_t	*init_tid_arr(t_attr *attr);
 
