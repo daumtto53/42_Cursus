@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/22 20:52:56 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/22 21:06:37 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 void		*philo_thread(void *arg)
 {
+	t_attr *attr;
+
+	attr = (t_attr *)arg;
 
 }
 
@@ -25,12 +28,14 @@ int			main(int argc, char **argv)
 	int			i;
 
 	if (!(argc == 5 || argc == 6))
-	{
-		return (0);
-	}
+		return (PHILO_FALSE);
 	init_attr(&attr, argv, argc);
 	tid_arr = init_tid_arr(&attr);
 	if (!tid_arr)
+	{
+		free_attr(&attr);
+		return (PHILO_ERR);
+	}
 	i = 0;
 	while (i < attr.phil_num)
 	{
@@ -44,5 +49,4 @@ int			main(int argc, char **argv)
 		pthread_join(tid_arr[i], NULL);
 	}
 	terminate_data(&attr, tid_arr);
-
 }
