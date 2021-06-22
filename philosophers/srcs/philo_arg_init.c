@@ -6,23 +6,23 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/22 20:39:39 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/22 20:51:10 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
 
-static void	*init_arg(t_attr *attr, char **argv, int argc)
+static void	init_arg(t_attr *attr, char **argv, int argc)
 {
 	if (argc == 6)
-		attr->iteration = atoll(argv[5]);
+		attr->iteration = ft_atoll(argv[5]);
 	else
 		attr->iteration = INT_MAX;
-	attr->phil_num = atoll(argv[1]);
-	attr->phil_die = atoll(argv[2]);
-	attr->phil_eat = atoll(argv[3]);
-	attr->phil_sleep = atoll(argv[4]);
+	attr->phil_num = ft_atoll(argv[1]);
+	attr->phil_die = ft_atoll(argv[2]);
+	attr->phil_eat = ft_atoll(argv[3]);
+	attr->phil_sleep = ft_atoll(argv[4]);
 }
 
 static int		valid_attr(t_attr *attr)
@@ -58,7 +58,7 @@ int		init_attr(t_attr *attr, char **argv, int argc)
 	init_arg(attr, argv, argc);
 	if (!valid_attr(attr))
 		return (PHILO_ERR);
-	if (init_philosopher(attr->phil_arr) == PHILO_ERR)
+	if (init_philosopher(attr) == PHILO_ERR)
 		return (PHILO_ERR);
 	return (PHILO_SUCC);
 }

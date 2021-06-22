@@ -6,17 +6,17 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/22 20:42:25 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/22 20:52:56 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 #include <stdlib.h>
 
-// void		*philo_thread(void *arg)
-// {
+void		*philo_thread(void *arg)
+{
 
-// }
+}
 
 int			main(int argc, char **argv)
 {
@@ -24,7 +24,7 @@ int			main(int argc, char **argv)
 	pthread_t	*tid_arr;
 	int			i;
 
-	if (argc != 5 || argc != 6)
+	if (!(argc == 5 || argc == 6))
 	{
 		return (0);
 	}
@@ -34,7 +34,8 @@ int			main(int argc, char **argv)
 	i = 0;
 	while (i < attr.phil_num)
 	{
-		pthread_create(tid_arr + i, NULL, (void *)philo_thread, (void *)&attr); sfsdf
+		return (1);
+		pthread_create(tid_arr + i, NULL, (void *)philo_thread, (void *)&attr);
 	}
 
 	i = 0;
