@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/22 21:03:58 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/23 14:42:46 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int		init_philosopher(t_attr *attr)
 	{
 		attr->phil_arr[i].hand = i % 2;
 		attr->phil_arr[i].philo_index = i;
+		attr->phil_arr[i].attr = attr;			//referencing each other
 	}
 	return (PHILO_SUCC);
 }
@@ -58,14 +59,12 @@ static int	init_chopsticks(t_attr *attr)
 	m_arr = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * attr->phil_num);
 	if (!m_arr)
 		return (PHILO_ERR);
-	attr->chopstick = m_arr;
+	attr->chopsticks = m_arr;
 	return (PHILO_SUCC);
 }
 
 int		init_attr(t_attr *attr, char **argv, int argc)
 {
-	int			i;
-
 	init_arg(attr, argv, argc);
 	if (!valid_attr(attr))
 		return (PHILO_ERR);
