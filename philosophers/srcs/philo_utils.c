@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:52:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/22 20:49:13 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/23 21:34:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-long long ft_atoll(char *src)
+long long	ft_atoll(char *src)
 {
 	long long	num;
 	int			i;
@@ -36,3 +36,32 @@ long long ft_atoll(char *src)
 		num = (num * 10) + (src[i++] - '0');
 	return (negative * num);
 }
+
+void		free_attr(t_attr *attr)
+{
+	int		i;
+
+	// free mutex
+	i = -1;
+	while (++i < attr->phil_num)
+		pthread_mutex_destroy(&(attr->chopsticks[i]));
+	// free philosophers
+	free(attr->phil_arr);
+}
+
+void		terminate_data(t_attr *attr, pthread_t *tid_arr)
+{
+	free(tid_arr);
+	free_attr(attr);
+	return ;
+}
+
+int		is_5th_arg(t_attr *attr)
+{
+	return !(attr->iteration == INT_MAX);
+}
+
+// int		get_timestamp(t_attr *attr, t_philo)
+// {
+
+// }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 20:33:54 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/22 21:02:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/23 19:16:39 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ pthread_t	*init_tid_arr(t_attr *attr)
 		return (NULL);
 	return (tid_arr);
 }
-
