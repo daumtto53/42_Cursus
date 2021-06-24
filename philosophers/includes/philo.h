@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/23 21:16:19 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/24 19:53:18 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,22 @@ typedef struct		s_philo
 {
 	int		hand;
 	int		philo_index;
-	int		last_eat;
+	long	last_eat;					//
 	t_attr	*attr;
 }					t_philo;
 
 typedef struct		s_attr
 {
+	long			start_time_ms;
 	int				phil_num;
 	int				iteration;
 	long long		phil_die;
 	long long		phil_eat;
 	long long		phil_sleep;
+	int				is_dead;			//
+	int				num_finish_eat;
 	t_philo			*phil_arr;
+	pthread_mutex_t	die_mutex;
 	pthread_mutex_t	*chopsticks;
 }					t_attr;
 
@@ -70,6 +74,12 @@ void	act_taken_fork(t_attr *attr, t_philo *p);
 void	act_eat(t_attr *attr, t_philo *p);
 void	act_sleep(t_attr *attr, t_philo *p);
 void	act_think(t_attr *attr, t_philo *p);
-int		act_die(t_attr *attr, t_philo *p);
+void	act_die(t_attr *attr, t_philo *p);
+
+//philo_time.c
+long	get_time_in_ms(struct timeval *tv);
+int		init_start_time_ms(t_attr *attr);
+long	get_timestamp(t_attr *attr);
+int		is_phil_dead(t_attr *attr, t_philo *p, long *dead_time);
 
 #endif

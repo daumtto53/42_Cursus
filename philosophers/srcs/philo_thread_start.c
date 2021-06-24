@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/23 21:34:00 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/24 20:29:37 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ static int		left_philosopher_start(t_attr *attr, t_philo *p)
 	left_chopstick = (p->philo_index - 1 + attr->phil_num) % attr->phil_num;
 	right_chopstick = (p->philo_index) % attr->phil_num;
 	pthread_mutex_lock(&chopstick[left_chopstick]);
+	act_taken_fork(attr, p);
 	pthread_mutex_lock(&chopstick[right_chopstick]);
-	printf("thread %d eating.... locked : %d\t%d\n", p->philo_index, left_chopstick, right_chopstick);
+	// act_die(attr, p);
+	act_taken_fork(attr, p);								// fork * 2
+	act_eat(attr, p);										// eat
+	act_sleep(attr, p);										// sleep
+	act_die(attr, p);
+	act_think(attr, p);
 	pthread_mutex_unlock(&chopstick[left_chopstick]);
 	pthread_mutex_unlock(&chopstick[right_chopstick]);
 	return (PHILO_SUCC);
@@ -41,6 +47,7 @@ static int		right_philosopher_start(t_attr *attr, t_philo *p)
 	pthread_mutex_lock(&chopstick[right_chopstick]);
 	act_taken_fork(attr, p);
 	pthread_mutex_lock(&chopstick[left_chopstick]);
+	act_die(attr, p);
 	act_taken_fork(attr, p);								// fork * 2
 	act_eat(attr, p);										// eat
 	act_sleep(attr, p);										// sleep
@@ -60,25 +67,26 @@ int		philo_infinite(t_attr *attr, t_philo *p)
 			dead = left_philosopher_start(attr, p);
 		else
 			dead = right_philosopher_start(attr, p);
+		if (attr->is_dead == PHILO_TRUE)
+			break ;
 	}
 	return (dead);
 }
 
+//at least를 고정횟수로 생각했기 때문에, 고정횟수가아닌 최소횟수로 생각해야함.
 int		philo_iterate(t_attr *attr, t_philo *p)
 {
 	int		iter;
-	int		left_chopstick;
-	int		right_chopstick;
-	int		dead;
 
 	iter = -1;
-	while (++iter < attr->iteration)
+	while (++iter < attr->iteration)				//at least :
 	{
 		if (p->hand == LEFT)
 			left_philosopher_start(attr, p);
 		else
 			right_philosopher_start(attr, p);
-		usleep(1 * 1000 * 1000);
+		if (attr->is_dead == PHILO_TRUE)
+			break ;
 	}
-	return (dead);
+	return (PHILO_SUCC);
 }

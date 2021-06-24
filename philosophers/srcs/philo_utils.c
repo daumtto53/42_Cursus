@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:52:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/23 21:34:11 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/24 14:38:36 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,3 @@ int		is_5th_arg(t_attr *attr)
 {
 	return !(attr->iteration == INT_MAX);
 }
-
-// int		get_timestamp(t_attr *attr, t_philo)
-// {
-
-// }
