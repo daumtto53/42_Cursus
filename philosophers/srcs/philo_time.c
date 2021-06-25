@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/24 20:24:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 13:42:12 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ int		is_phil_dead(t_attr *attr, t_philo *p, long *dead_time)
 		return (PHILO_FALSE);
 	gettimeofday(&tv, NULL);
 	printf("interval : %ld\n", get_time_in_ms(&tv) - p->last_eat);
-	if (get_time_in_ms(&tv) - p->last_eat >= attr->phil_die)
-	{
-		*dead_time = get_time_in_ms(&tv);
-		printf("interval : %ld\n", get_time_in_ms(&tv) - p->last_eat);
-		attr->is_dead = PHILO_TRUE;
-		return (PHILO_TRUE);
-	}
-	else
-	{
-		return (PHILO_FALSE);
-	}
+	// if (get_time_in_ms(&tv) - p->last_eat >= attr->phil_die)
+	// {
+	// 	*dead_time = get_time_in_ms(&tv);
+	// 	printf("interval : %ld\n", get_time_in_ms(&tv) - p->last_eat);
+	// 	attr->is_dead = PHILO_TRUE;
+	// 	return (PHILO_TRUE);
+	// }
+	// else
+	// {
+	// 	return (PHILO_FALSE);
+	// }
 	return (PHILO_FALSE);
 }
 

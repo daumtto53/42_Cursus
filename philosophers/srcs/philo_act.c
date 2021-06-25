@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 13:20:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 13:31:27 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	act_taken_fork(t_attr *attr, t_philo *p)
 	printf("%ld ms: \t%d has taken a fork\n", get_timestamp(attr), p->philo_index);
 }
 
-void	act_eat(t_attr *attr, t_philo *p)
+void	act_eat(t_attr *attr, t_philo *p, int first, int second)
 {
 	struct timeval	tv;
 
@@ -28,6 +28,8 @@ void	act_eat(t_attr *attr, t_philo *p)
 	gettimeofday(&tv, NULL);
 	printf("%ld ms: \t%d is eating\n", get_timestamp(attr), p->philo_index);
 	p->last_eat = get_time_in_ms(&tv);
+	pthread_mutex_unlock(&(attr->chopsticks[first]));
+	pthread_mutex_unlock(&(attr->chopsticks[second]));
 	usleep(attr->phil_eat * MILI_TO_MICRO);
 }
 

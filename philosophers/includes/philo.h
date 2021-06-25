@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/24 19:53:18 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 13:21:52 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		philo_iterate(t_attr *attr, t_philo *p);
 int		philo_infinite(t_attr *attr, t_philo *p);
 
 void	act_taken_fork(t_attr *attr, t_philo *p);
-void	act_eat(t_attr *attr, t_philo *p);
+void	act_eat(t_attr *attr, t_philo *p, int left, int right);
 void	act_sleep(t_attr *attr, t_philo *p);
 void	act_think(t_attr *attr, t_philo *p);
 void	act_die(t_attr *attr, t_philo *p);

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 13:20:42 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 13:31:55 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ static int		left_philosopher_start(t_attr *attr, t_philo *p)
 	pthread_mutex_lock(&chopstick[left_chopstick]);
 	act_taken_fork(attr, p);
 	pthread_mutex_lock(&chopstick[right_chopstick]);
-	// act_die(attr, p);
-	act_taken_fork(attr, p);								// fork * 2
-	act_eat(attr, p);										// eat
-	act_sleep(attr, p);										// sleep
 	act_die(attr, p);
+	act_taken_fork(attr, p);								// fork * 2
+	act_eat(attr, p, left_chopstick, right_chopstick);										// eat
+	act_sleep(attr, p);										// sleep
 	act_think(attr, p);
-	pthread_mutex_unlock(&chopstick[left_chopstick]);
-	pthread_mutex_unlock(&chopstick[right_chopstick]);
+	// pthread_mutex_unlock(&chopstick[left_chopstick]);
+	// pthread_mutex_unlock(&chopstick[right_chopstick]);
 	return (PHILO_SUCC);
 }
 
@@ -49,11 +48,11 @@ static int		right_philosopher_start(t_attr *attr, t_philo *p)
 	pthread_mutex_lock(&chopstick[left_chopstick]);
 	act_die(attr, p);
 	act_taken_fork(attr, p);								// fork * 2
-	act_eat(attr, p);										// eat
+	act_eat(attr, p, right_chopstick, left_chopstick);										// eat
 	act_sleep(attr, p);										// sleep
 	act_think(attr, p);
-	pthread_mutex_unlock(&chopstick[right_chopstick]);
-	pthread_mutex_unlock(&chopstick[left_chopstick]);
+	// pthread_mutex_unlock(&chopstick[right_chopstick]);
+	// pthread_mutex_unlock(&chopstick[left_chopstick]);
 	return (PHILO_SUCC);
 }
 
