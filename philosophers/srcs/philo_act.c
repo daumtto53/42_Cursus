@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 13:31:27 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 20:32:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ void	act_eat(t_attr *attr, t_philo *p, int first, int second)
 {
 	struct timeval	tv;
 
-	if (attr->is_dead == PHILO_TRUE)
-		return ;
 	gettimeofday(&tv, NULL);
 	printf("%ld ms: \t%d is eating\n", get_timestamp(attr), p->philo_index);
-	p->last_eat = get_time_in_ms(&tv);
+	if (attr->is_dead == PHILO_FALSE)
+		p->last_eat = get_time_in_ms(&tv);
 	pthread_mutex_unlock(&(attr->chopsticks[first]));
 	pthread_mutex_unlock(&(attr->chopsticks[second]));
 	usleep(attr->phil_eat * MILI_TO_MICRO);
@@ -46,15 +45,4 @@ void	act_think(t_attr *attr, t_philo *p)
 	if (attr->is_dead == PHILO_TRUE)
 		return ;
 	printf("%ld ms: \t%d is thinking\n", get_timestamp(attr), p->philo_index);
-}
-
-void	act_die(t_attr *attr, t_philo *p)
-{
-	long	dead_time;
-
-	if (attr->is_dead == PHILO_TRUE)
-		return ;
-	if (is_phil_dead(attr, p, &dead_time) == PHILO_TRUE)
-		printf("%ld ms: \t%d died\n", get_timestamp(attr), p->philo_index);
-	return ;
 }

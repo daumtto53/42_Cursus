@@ -14,12 +14,12 @@ SRCS =		philo_act.c \
 			philo.c
 
 FILES = 	$(addprefix $(SRCSDIR), $(SRCS))
+OBJS =		$(FILES:.c=.o)
 
 NAME = philo
 
-$(NAME) : $(FILES)
-	$(CC) -o $@ $? -lpthread $(INCLUDES)
-
+$(NAME) : $(OBJS)
+	$(CC) $(INCLUDES) -o $@ $^ -lpthread
 
 all : $(NAME)
 

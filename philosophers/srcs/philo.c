@@ -6,14 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/24 20:22:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 20:07:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-#include <stdlib.h>
-
-pthread_mutex_t	mutex;
 
 void		*philo_thread(void *arg)
 {
@@ -32,7 +29,6 @@ void		*philo_thread(void *arg)
 
 int			main(int argc, char **argv)
 {
-	pthread_mutex_init(&mutex, NULL);
 	t_attr		attr;
 	pthread_t	*tid_arr;
 	int			i;

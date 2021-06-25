@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 13:42:12 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 19:41:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,19 @@ long	get_timestamp(t_attr *attr)
 
 }
 
-int		is_phil_dead(t_attr *attr, t_philo *p, long *dead_time)
-{
-	struct timeval tv;
-
-	if (p->last_eat == -1)
-		return (PHILO_FALSE);
-	gettimeofday(&tv, NULL);
-	printf("interval : %ld\n", get_time_in_ms(&tv) - p->last_eat);
-	// if (get_time_in_ms(&tv) - p->last_eat >= attr->phil_die)
-	// {
-	// 	*dead_time = get_time_in_ms(&tv);
-	// 	printf("interval : %ld\n", get_time_in_ms(&tv) - p->last_eat);
-	// 	attr->is_dead = PHILO_TRUE;
-	// 	return (PHILO_TRUE);
-	// }
-	// else
-	// {
-	// 	return (PHILO_FALSE);
-	// }
-	return (PHILO_FALSE);
-}
-
 int		init_start_time_ms(t_attr *attr)
 {
 	struct timeval tv;
+	int				i;
 
 	if (gettimeofday(&tv, NULL) == PHILO_ERR)
 		return (PHILO_ERR);
 	attr->start_time_ms = get_time_in_ms(&tv);
+	i = 0;
+	while (i < attr->phil_num)
+	{
+		attr->phil_arr[i].last_eat = attr->start_time_ms;
+		i++;
+	}
 	return PHILO_SUCC;
 }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/24 19:57:58 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/25 19:28:10 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_arg(t_attr *attr, char **argv, int argc)
 	attr->phil_die = ft_atoll(argv[2]);
 	attr->phil_eat = ft_atoll(argv[3]);
 	attr->phil_sleep = ft_atoll(argv[4]);
-	attr->is_dead = 0;
+	attr->is_dead = PHILO_FALSE;
 	attr->num_finish_eat = 0;
 	pthread_mutex_init(&attr->die_mutex, NULL);
 }
