@@ -6,7 +6,11 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/06/27 18:59:05 by mchun            ###   ########.fr       */
+=======
+/*   Updated: 2021/06/27 15:40:02 by mchun            ###   ########.fr       */
+>>>>>>> cba47e1152e65dbc0fa8f175821ced33098e2bf2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +27,18 @@ void	act_eat(t_attr *attr, t_philo *p, int first, int second)
 {
 	struct timeval	tv;
 
+<<<<<<< HEAD
 	if (attr->is_dead || attr->num_finish_eat >= attr->phil_num)
 	{
 		pthread_mutex_unlock(&(attr->chopsticks[first]));
 		pthread_mutex_unlock(&(attr->chopsticks[second]));
 		return ;
+=======
+	if (attr->is_dead)
+	{
+		pthread_mutex_unlock(&(attr->chopsticks[first]));
+		pthread_mutex_unlock(&(attr->chopsticks[second]));
+>>>>>>> cba47e1152e65dbc0fa8f175821ced33098e2bf2
 	}
 	gettimeofday(&tv, NULL);
 	if (attr->is_dead == PHILO_FALSE)
