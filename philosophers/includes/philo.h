@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 20:09:43 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 21:57:51 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int		init_start_time_ms(t_philo *phil_arr, t_attr *attr);
 long	get_timestamp(t_attr *attr);
 
 void		*philo_thread(void *arg);
+void	*monitor(void *arg);
 
 #endif

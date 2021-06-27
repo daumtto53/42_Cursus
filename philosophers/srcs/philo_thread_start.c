@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 21:27:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 22:28:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int		left_philosopher_start(t_attr *attr, t_philo *p)
 	act_eat(attr, p);										// eat
 	if (p->num_eat == attr->iteration)
 	{
-		printf("philosopher has finished eating.\n");
 		pthread_mutex_lock(&attr->eat_mutex);
 		attr->num_finish_eat++;
 		pthread_mutex_unlock(&attr->eat_mutex);
@@ -60,27 +59,27 @@ void	*check_death(void *arg)
 
 int		philo_infinite(t_attr *attr, t_philo *p)
 {
-	pthread_t	tid;
+	// pthread_t	tid;
 
-	pthread_create(&tid, NULL, check_death, (void *)p);
+	// pthread_create(&tid, NULL, check_death, (void *)p);
 	while (attr->is_dead == PHILO_FALSE)
 	{
 		left_philosopher_start(attr, p);
 	}
-	pthread_detach(tid);
+	// pthread_detach(tid);
 	return (1);
 }
 
 //at least를 고정횟수로 생각했기 때문에, 고정횟수가아닌 최소횟수로 생각해야함.
 int		philo_iterate(t_attr *attr, t_philo *p)
 {
-	pthread_t	tid;
+	// pthread_t	tid;
 
-	pthread_create(&tid, NULL, check_death, (void *)p);
+	// pthread_create(&tid, NULL, check_death, (void *)p);
 	while (attr->is_dead == PHILO_FALSE && attr->num_finish_eat < attr->iteration)				//at least :
 	{
 		left_philosopher_start(attr, p);
 	}
-	pthread_detach(tid);
+	// pthread_detach(tid);
 	return (PHILO_SUCC);
 }

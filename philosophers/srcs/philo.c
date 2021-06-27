@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 21:09:59 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 22:15:33 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,45 @@ void		*philo_thread(void *arg)
 	return (NULL);
 }
 
+void	*monitor(void *arg)
+{
+	t_attr	*attr;
+	t_philo	*phil_arr;
+	struct timeval	tv;
+	long			current_time;
+	int		i;
+
+	phil_arr = (t_philo *)arg;
+	attr = phil_arr[0].attr;
+	while (1)
+	{
+		gettimeofday(&tv, NULL);
+		current_time = get_time_in_ms(&tv);
+		if (attr->phil_num == attr->num_finish_eat)
+			break;
+		pthread_mutex_lock(&attr->die_mutex);
+		i = -1;
+		while (++i < attr->phil_num)
+		{
+			if (attr->is_dead == PHILO_FALSE && (current_time - phil_arr[i].last_eat) >= attr->phil_die)
+			{
+				attr->is_dead = PHILO_TRUE;
+				pthread_mutex_unlock(&attr->die_mutex);
+				printf("%d is_dead, interval : %ld, current_time : %ld, last_eat : %ld\n", phil_arr[i].philo_index, current_time - phil_arr[i].last_eat, current_time, phil_arr[i].last_eat);
+				return (NULL);
+			}
+		}
+		pthread_mutex_unlock(&attr->die_mutex);
+	}
+	return (NULL);
+}
+
 int			main(int argc, char **argv)
 {
 	t_attr		*attr;
 	t_philo		*phil_arr;
 	pthread_t	*tid_arr;
+	pthread_t	tid_monitor;
 	int			i;
 
 	i = -1;
@@ -49,12 +83,16 @@ int			main(int argc, char **argv)
 	}
 	init_start_time_ms(phil_arr, attr);
 	i = -1;
-	while (++i * 2 < attr->phil_num)
-		pthread_create(tid_arr + i * 2, NULL, (void *)philo_thread, (void *)(phil_arr + i * 2));
+	while (++i < attr->phil_num)
+		pthread_create(tid_arr + i, NULL, (void *)philo_thread, (void *)(phil_arr + i));
+	// while (++i * 2 < attr->phil_num)
+	// 	pthread_create(tid_arr + i * 2, NULL, (void *)philo_thread, (void *)(phil_arr + i * 2));
+	// i = -1;
+	// while (++i * 2 + 1< attr->phil_num)
+	// 	pthread_create(tid_arr + i * 2 + 1, NULL, (void *)philo_thread, (void *)(phil_arr + i * 2 + 1));
 	i = -1;
-	while (++i * 2 + 1< attr->phil_num)
-		pthread_create(tid_arr + i * 2 + 1, NULL, (void *)philo_thread, (void *)(phil_arr + i * 2 + 1));
-	i = -1;
+	pthread_create(&tid_monitor, NULL, (void *)monitor, (void *)phil_arr);
+	pthread_detach(tid_monitor);
 	while (++i < attr->phil_num)
 		pthread_join(tid_arr[i], NULL);
 	printf("num_finish_eat : %d, attr->iteration : %d\n", attr->num_finish_eat, attr->iteration);
