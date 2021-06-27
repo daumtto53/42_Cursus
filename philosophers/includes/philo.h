@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 15:52:22 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 16:02:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_philo
 	int		hand;
 	int		philo_index;
 	long	last_eat;
+	int		num_eat;
 	t_attr	*attr;
 }					t_philo;
 
@@ -50,6 +51,7 @@ typedef struct		s_attr
 	long long		phil_sleep;
 	int				is_dead;
 	int				num_finish_eat;
+	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	die_mutex;
 	pthread_mutex_t	*chopsticks;
 }					t_attr;

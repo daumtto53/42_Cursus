@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 15:14:11 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 19:05:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ long	get_timestamp(t_attr *attr)
 		return (PHILO_ERR);
 	start_ms = attr->start_time_ms;
 	return (get_time_in_ms(&tv) - start_ms);
-
 }
 
 int		init_start_time_ms(t_philo *phil_arr, t_attr *attr)

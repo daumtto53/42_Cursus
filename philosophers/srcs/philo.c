@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 15:45:17 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 16:48:52 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,17 @@ int			main(int argc, char **argv)
 	}
 	i = -1;
 	init_start_time_ms(phil_arr, attr);
-	while (++i < attr->phil_num)
-		pthread_create(tid_arr + i, NULL, (void *)philo_thread, (void *)(phil_arr + i));
+	while (++i * 2 < attr->phil_num)
+		pthread_create(tid_arr + i * 2, NULL, (void *)philo_thread, (void *)(phil_arr + i * 2));
+	i = -1;
+	while (++i * 2 + 1< attr->phil_num)
+		pthread_create(tid_arr + i * 2 + 1, NULL, (void *)philo_thread, (void *)(phil_arr + i * 2 + 1));
 	i = -1;
 	while (++i < attr->phil_num)
 		pthread_join(tid_arr[i], NULL);
+	printf("num_finish_eat : %d, attr->iteration : %d\n", attr->num_finish_eat, attr->iteration);
+	if (attr->iteration != INT_MAX && attr->num_finish_eat == attr->phil_num)
+		printf("finished_eating\n");
 	// terminate_data(&attr, tid_arr);
 	return (0);
 }

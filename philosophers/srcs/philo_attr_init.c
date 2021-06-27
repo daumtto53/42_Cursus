@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 15:15:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 16:03:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_arg(t_attr *attr, char **argv, int argc)
 	attr->is_dead = PHILO_FALSE;
 	attr->num_finish_eat = 0;
 	pthread_mutex_init(&attr->die_mutex, NULL);
+	pthread_mutex_init(&attr->eat_mutex, NULL);
 }
 
 static int		valid_attr(t_attr *attr)
@@ -50,6 +51,7 @@ int		init_philosopher(t_philo **phil_arr, t_attr *attr)
 		(*phil_arr)[i].philo_index = i;
 		(*phil_arr)[i].attr = attr;			//referencing each other
 		(*phil_arr)[i].last_eat = -1;
+		(*phil_arr)[i].num_eat = 0;
 	}
 	return (PHILO_SUCC);
 }
