@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 19:28:10 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 12:00:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ static int		valid_attr(t_attr *attr)
 static int		init_philosopher(t_attr *attr)
 {
 	int		i;
-	int		j;
 
 	i = -1;
-	j = -1;
 	attr->phil_arr = (t_philo *)malloc(sizeof(t_philo) * attr->phil_num);
 	if (!(attr->phil_arr))
 		return (PHILO_ERR);
