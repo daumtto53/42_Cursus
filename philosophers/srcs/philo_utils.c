@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:52:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/24 14:38:36 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 15:56:50 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		free_attr(t_attr *attr)
 	while (++i < attr->phil_num)
 		pthread_mutex_destroy(&(attr->chopsticks[i]));
 	// free philosophers
-	free(attr->phil_arr);
+	free(attr);
 }
 
 void		terminate_data(t_attr *attr, pthread_t *tid_arr)
