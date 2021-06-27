@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 12:00:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 15:15:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ static int		valid_attr(t_attr *attr)
 	return (PHILO_TRUE);
 }
 
-static int		init_philosopher(t_attr *attr)
+int		init_philosopher(t_philo **phil_arr, t_attr *attr)
 {
 	int		i;
 
 	i = -1;
-	attr->phil_arr = (t_philo *)malloc(sizeof(t_philo) * attr->phil_num);
-	if (!(attr->phil_arr))
+	*phil_arr = (t_philo *)malloc(sizeof(t_philo) * attr->phil_num);
+	if (!*phil_arr)
 		return (PHILO_ERR);
 	while (++i < attr->phil_num)
 	{
-		attr->phil_arr[i].hand = i % 2;
-		attr->phil_arr[i].philo_index = i;
-		attr->phil_arr[i].attr = attr;			//referencing each other
-		attr->phil_arr[i].last_eat = -1;
+		(*phil_arr)[i].hand = i % 2;
+		(*phil_arr)[i].philo_index = i;
+		(*phil_arr)[i].attr = attr;			//referencing each other
+		(*phil_arr)[i].last_eat = -1;
 	}
 	return (PHILO_SUCC);
 }
@@ -80,21 +80,15 @@ static int	init_chopsticks(t_attr *attr)
 	return (PHILO_SUCC);
 }
 
-int		init_attr(t_attr *attr, char **argv, int argc)
+int		init_attr(t_attr **attr, char **argv, int argc)
 {
-	int		i;
-
-	init_arg(attr, argv, argc);
-	if (!valid_attr(attr))
+	*attr = (t_attr *)malloc(sizeof(t_attr));
+	if (!*attr)
 		return (PHILO_ERR);
-	if (init_philosopher(attr) == PHILO_ERR)
+	init_arg(*attr, argv, argc);
+	if (!valid_attr(*attr))
 		return (PHILO_ERR);
-	if (init_chopsticks(attr) == PHILO_ERR)			//clean philo_t malloced.
-	{
-		i = -1;
-		while (++i < attr->phil_num)
-			free(attr->phil_arr + i);
+	if (init_chopsticks(*attr) == PHILO_ERR)			//clean philo_t malloced.
 		return (PHILO_ERR);
-	}
 	return (PHILO_SUCC);
 }

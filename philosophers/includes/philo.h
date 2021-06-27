@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 20:06:35 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 15:52:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct		s_philo
 {
 	int		hand;
 	int		philo_index;
-	long	last_eat;					//
+	long	last_eat;
 	t_attr	*attr;
 }					t_philo;
 
@@ -50,7 +50,6 @@ typedef struct		s_attr
 	long long		phil_sleep;
 	int				is_dead;
 	int				num_finish_eat;
-	t_philo			*phil_arr;
 	pthread_mutex_t	die_mutex;
 	pthread_mutex_t	*chopsticks;
 }					t_attr;
@@ -60,7 +59,8 @@ long long	ft_atoll(char *src);
 void		free_attr(t_attr *attr);
 void		terminate_data(t_attr *attr, pthread_t *tid_arr);
 //philo_attr_init.c
-int					init_attr(t_attr *attr, char **argv, int argc);
+int					init_attr(t_attr **attr, char **argv, int argc);
+int					init_philosopher(t_philo **phil_arr, t_attr *attr);
 //philo_thread_init.c
 pthread_t			*init_tid_arr(t_attr *attr);
 //philo_act.c
@@ -76,7 +76,7 @@ void	act_think(t_attr *attr, t_philo *p);
 
 //philo_time.c
 long	get_time_in_ms(struct timeval *tv);
-int		init_start_time_ms(t_attr *attr);
+int		init_start_time_ms(t_philo *phil_arr, t_attr *attr);
 long	get_timestamp(t_attr *attr);
 
 void		*philo_thread(void *arg);

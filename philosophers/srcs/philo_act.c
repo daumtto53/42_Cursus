@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 20:32:43 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 15:40:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	act_eat(t_attr *attr, t_philo *p, int first, int second)
 {
 	struct timeval	tv;
 
+	if (attr->is_dead)
+	{
+		pthread_mutex_unlock(&(attr->chopsticks[first]));
+		pthread_mutex_unlock(&(attr->chopsticks[second]));
+	}
 	gettimeofday(&tv, NULL);
 	printf("%ld ms: \t%d is eating\n", get_timestamp(attr), p->philo_index);
 	if (attr->is_dead == PHILO_FALSE)

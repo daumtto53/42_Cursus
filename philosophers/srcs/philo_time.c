@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 19:41:08 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 15:14:11 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ long	get_timestamp(t_attr *attr)
 
 }
 
-int		init_start_time_ms(t_attr *attr)
+int		init_start_time_ms(t_philo *phil_arr, t_attr *attr)
 {
 	struct timeval tv;
 	int				i;
@@ -45,7 +45,7 @@ int		init_start_time_ms(t_attr *attr)
 	i = 0;
 	while (i < attr->phil_num)
 	{
-		attr->phil_arr[i].last_eat = attr->start_time_ms;
+		phil_arr[i].last_eat = attr->start_time_ms;
 		i++;
 	}
 	return PHILO_SUCC;
