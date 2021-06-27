@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 19:11:57 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 20:09:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct		s_philo
 	int		philo_index;
 	long	last_eat;
 	int		num_eat;
+	int		first_chop;
+	int		second_chop;
 	t_attr	*attr;
 }					t_philo;
 
@@ -72,7 +74,7 @@ int		philo_iterate(t_attr *attr, t_philo *p);
 int		philo_infinite(t_attr *attr, t_philo *p);
 
 void	act_taken_fork(t_attr *attr, t_philo *p);
-void	act_eat(t_attr *attr, t_philo *p, int left, int right);
+void	act_eat(t_attr *attr, t_philo *p);
 void	act_sleep(t_attr *attr, t_philo *p);
 void	act_think(t_attr *attr, t_philo *p);
 

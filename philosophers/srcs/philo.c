@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 19:12:17 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 21:09:59 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void		*philo_thread(void *arg)
 
 	p = (t_philo *)arg;
 	attr = p->attr;
+	// printf("thread : f %d\ts %d\t num_eat:%d\t index:\t%d\n", p->first_chop, p->second_chop, p->num_eat, p->philo_index);
 	if (!is_5th_arg(attr))
 		philo_infinite(attr, p);
 	else
@@ -33,6 +34,7 @@ int			main(int argc, char **argv)
 	pthread_t	*tid_arr;
 	int			i;
 
+	i = -1;
 	if (!(argc == 5 || argc == 6))
 		return (PHILO_FALSE);
 	if (init_attr(&attr, argv, argc) == PHILO_ERR)
@@ -45,8 +47,8 @@ int			main(int argc, char **argv)
 		free_attr(attr);
 		return (PHILO_ERR);
 	}
-	i = -1;
 	init_start_time_ms(phil_arr, attr);
+	i = -1;
 	while (++i * 2 < attr->phil_num)
 		pthread_create(tid_arr + i * 2, NULL, (void *)philo_thread, (void *)(phil_arr + i * 2));
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 19:12:13 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 21:11:53 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,34 @@ static int		valid_attr(t_attr *attr)
 	return (PHILO_TRUE);
 }
 
+static int	init_chopsticks(t_attr *attr)
+{
+	pthread_mutex_t	*m_arr;
+	int				i;
+
+	m_arr = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * (attr->phil_num));
+	if (!m_arr)
+		return (PHILO_ERR);
+	i = -1;
+	while (++i < attr->phil_num)
+		pthread_mutex_init(&(m_arr[i]), NULL);
+	attr->chopsticks = m_arr;
+	return (PHILO_SUCC);
+}
+
+int		init_attr(t_attr **attr, char **argv, int argc)
+{
+	*attr = (t_attr *)malloc(sizeof(t_attr));
+	if (!*attr)
+		return (PHILO_ERR);
+	init_arg(*attr, argv, argc);
+	if (!valid_attr(*attr))
+		return (PHILO_ERR);
+	if (init_chopsticks(*attr) == PHILO_ERR)			//clean philo_t malloced.
+		return (PHILO_ERR);
+	return (PHILO_SUCC);
+}
+
 int		init_philosopher(t_philo **phil_arr, t_attr *attr)
 {
 	int		i;
@@ -52,45 +80,16 @@ int		init_philosopher(t_philo **phil_arr, t_attr *attr)
 		(*phil_arr)[i].attr = attr;			//referencing each other
 		(*phil_arr)[i].last_eat = -1;
 		(*phil_arr)[i].num_eat = 0;
-	}
-	return (PHILO_SUCC);
-}
-
-static int	init_chopsticks(t_attr *attr)
-{
-	pthread_mutex_t	*m_arr;
-	int				i;
-	int				state;
-	int				j;
-
-	m_arr = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * (attr->phil_num));
-	if (!m_arr)
-		return (PHILO_ERR);
-	i = -1;
-	while (++i < attr->phil_num)
-	{
-		state = pthread_mutex_init(&(m_arr[i]), NULL);
-		if (state)
+		if (i % 2 == LEFT)
 		{
-			j = -1;
-			while (++j < i -1)		//destory mutex till normal mut_init
-				pthread_mutex_destroy(&(m_arr[j]));
-			return (PHILO_ERR);
+			(*phil_arr)[i].first_chop = (i - 1 + attr->phil_num) % attr->phil_num;
+			(*phil_arr)[i].second_chop = i % attr->phil_num;
+		}
+		else
+		{
+			(*phil_arr)[i].first_chop = i % attr->phil_num;
+			(*phil_arr)[i].second_chop = (i- 1 + attr->phil_num) % attr->phil_num;
 		}
 	}
-	attr->chopsticks = m_arr;
-	return (PHILO_SUCC);
-}
-
-int		init_attr(t_attr **attr, char **argv, int argc)
-{
-	*attr = (t_attr *)malloc(sizeof(t_attr));
-	if (!*attr)
-		return (PHILO_ERR);
-	init_arg(*attr, argv, argc);
-	if (!valid_attr(*attr))
-		return (PHILO_ERR);
-	if (init_chopsticks(*attr) == PHILO_ERR)			//clean philo_t malloced.
-		return (PHILO_ERR);
 	return (PHILO_SUCC);
 }
