@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/25 20:07:25 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/27 15:45:17 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void		*philo_thread(void *arg)
 
 	p = (t_philo *)arg;
 	attr = p->attr;
-
 	if (!is_5th_arg(attr))
 		philo_infinite(attr, p);
 	else
@@ -29,7 +28,8 @@ void		*philo_thread(void *arg)
 
 int			main(int argc, char **argv)
 {
-	t_attr		attr;
+	t_attr		*attr;
+	t_philo		*phil_arr;
 	pthread_t	*tid_arr;
 	int			i;
 
@@ -37,19 +37,21 @@ int			main(int argc, char **argv)
 		return (PHILO_FALSE);
 	if (init_attr(&attr, argv, argc) == PHILO_ERR)
 		return (PHILO_ERR);
-	tid_arr = init_tid_arr(&attr);
+	if (init_philosopher(&phil_arr, attr) == PHILO_ERR)
+		return (PHILO_ERR);
+	tid_arr = init_tid_arr(attr);
 	if (!tid_arr)
 	{
-		free_attr(&attr);
+		free_attr(attr);
 		return (PHILO_ERR);
 	}
 	i = -1;
-	init_start_time_ms(&attr);
-	while (++i < attr.phil_num)
-		pthread_create(tid_arr + i, NULL, (void *)philo_thread, (void *)&attr.phil_arr[i]);
+	init_start_time_ms(phil_arr, attr);
+	while (++i < attr->phil_num)
+		pthread_create(tid_arr + i, NULL, (void *)philo_thread, (void *)(phil_arr + i));
 	i = -1;
-	while (++i < attr.phil_num)
+	while (++i < attr->phil_num)
 		pthread_join(tid_arr[i], NULL);
-	terminate_data(&attr, tid_arr);
+	// terminate_data(&attr, tid_arr);
 	return (0);
 }
