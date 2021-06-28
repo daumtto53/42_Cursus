@@ -5,8 +5,8 @@
 int		main(int	argc, char **argv)
 {
 	struct timeval	tv;
-	long			time;
-	long			time_past;
+	uint			time;
+	uint64_t			time_past;
 
 	gettimeofday(&tv, NULL);
 	printf("sec : %ld\tusec : %d\n", tv.tv_sec, tv.tv_usec);

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 21:57:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/28 21:39:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,22 @@ typedef struct		s_philo
 {
 	int		hand;
 	int		philo_index;
-	long	last_eat;
+	uint64_t	last_eat;
 	int		num_eat;
 	int		first_chop;
 	int		second_chop;
+	uint64_t	revision_time;
 	t_attr	*attr;
 }					t_philo;
 
 typedef struct		s_attr
 {
-	long			start_time_ms;
+	uint64_t			start_time_ms;
 	int				phil_num;
 	int				iteration;
-	long long		phil_die;
-	long long		phil_eat;
-	long long		phil_sleep;
+	uint64_t		phil_die;
+	uint64_t		phil_eat;
+	uint64_t		phil_sleep;
 	int				is_dead;
 	int				num_finish_eat;
 	pthread_mutex_t	eat_mutex;
@@ -79,11 +80,13 @@ void	act_sleep(t_attr *attr, t_philo *p);
 void	act_think(t_attr *attr, t_philo *p);
 
 //philo_time.c
-long	get_time_in_ms(struct timeval *tv);
+uint64_t	get_time_in_ms(struct timeval *tv);
 int		init_start_time_ms(t_philo *phil_arr, t_attr *attr);
-long	get_timestamp(t_attr *attr);
+uint64_t	get_timestamp(t_attr *attr);
+
+uint64_t	relative_time(t_attr *attr);
 
 void		*philo_thread(void *arg);
-void	*monitor(void *arg);
+void		monitor(t_attr *attr, t_philo *philo);
 
 #endif
