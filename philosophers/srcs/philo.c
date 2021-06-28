@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 23:46:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/28 18:05:58 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@ void	*monitor(void *arg)
 		if (attr->phil_num == attr->num_finish_eat)
 			break;
 		gettimeofday(&tv, NULL);
+		current_time = get_time_in_ms(&tv);
 		i = -1;
 		pthread_mutex_lock(&attr->die_mutex);
 		while (++i < attr->phil_num)
 		{
-			current_time = get_time_in_ms(&tv);
-			if (attr->is_dead == PHILO_FALSE && (current_time - phil_arr[i].last_eat) >= attr->phil_die)
+			if (attr->is_dead == PHILO_FALSE && (current_time - phil_arr[i].last_eat) > attr->phil_die)
 			{
 				attr->is_dead = PHILO_TRUE;
-				pthread_mutex_unlock(&attr->die_mutex);
 				printf("%d is_dead, interval : %ld, current_time : %ld, last_eat : %ld\n", phil_arr[i].philo_index, current_time - phil_arr[i].last_eat, current_time, phil_arr[i].last_eat);
 				return (NULL);
 			}
 		}
 		pthread_mutex_unlock(&attr->die_mutex);
+		usleep(100);
 	}
 	return (NULL);
 }

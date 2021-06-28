@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 23:47:33 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/28 18:16:13 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	act_eat(t_attr *attr, t_philo *p)
 	if (attr->is_dead == PHILO_FALSE)
 		p->last_eat = get_time_in_ms(&tv);
 	if (attr->is_dead || attr->num_finish_eat >= attr->phil_num)
+	{
+		pthread_mutex_unlock(&(attr->chopsticks[p->first_chop]));
+		pthread_mutex_unlock(&(attr->chopsticks[p->second_chop]));
 		return ;
+	}
 	printf("%ld ms: \t%d is eating\n", get_timestamp(attr), p->philo_index);
 	p->num_eat++;
 	usleep(attr->phil_eat * MILI_TO_MICRO);
