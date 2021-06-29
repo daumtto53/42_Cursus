@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/28 21:39:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/29 17:59:56 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	act_think(t_attr *attr, t_philo *p);
 uint64_t	get_time_in_ms(struct timeval *tv);
 int		init_start_time_ms(t_philo *phil_arr, t_attr *attr);
 uint64_t	get_timestamp(t_attr *attr);
+void	smart_sleep(t_attr *attr, uint64_t usec);
 
 uint64_t	relative_time(t_attr *attr);
 

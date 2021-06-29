@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/29 17:50:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/29 18:03:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ void	act_eat(t_attr *attr, t_philo *p)
 	gettimeofday(&tv, NULL);
 	if (attr->is_dead == PHILO_FALSE)
 		p->last_eat = get_time_in_ms(&tv);
-	usleep(attr->phil_eat * MILI_TO_MICRO);
+	smart_sleep(attr, attr->phil_eat);
 	pthread_mutex_unlock(&(attr->chopsticks[p->first_chop]));
 	pthread_mutex_unlock(&(attr->chopsticks[p->second_chop]));
-	gettimeofday(&tv, NULL);
 }
 
 void	act_sleep(t_attr *attr, t_philo *p)
@@ -45,7 +44,7 @@ void	act_sleep(t_attr *attr, t_philo *p)
 	if (attr->is_dead == PHILO_TRUE || attr->num_finish_eat >= attr->phil_num)
 		return ;
 	printf("%llu ms: \t%d is sleeping\n", get_timestamp(attr), p->philo_index);
-	usleep(attr->phil_sleep * MILI_TO_MICRO);
+	smart_sleep(attr, attr->phil_sleep);
 }
 
 void	act_think(t_attr *attr, t_philo *p)

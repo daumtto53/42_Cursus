@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/29 17:53:07 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/29 18:02:24 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int		left_philosopher_start(t_attr *attr, t_philo *p)
 {
-	struct timeval	tv;
-
 	pthread_mutex_lock(&attr->chopsticks[p->first_chop]);
 	act_taken_fork(attr, p);
 	pthread_mutex_lock(&attr->chopsticks[p->second_chop]);
@@ -34,8 +32,6 @@ static int		left_philosopher_start(t_attr *attr, t_philo *p)
 
 int		philo_infinite(t_attr *attr, t_philo *p)
 {
-	if (p->hand == RIGHT)
-		usleep(15000);
 	while (attr->is_dead == PHILO_FALSE)
 		left_philosopher_start(attr, p);
 	return (1);
@@ -44,8 +40,6 @@ int		philo_infinite(t_attr *attr, t_philo *p)
 //at least를 고정횟수로 생각했기 때문에, 고정횟수가아닌 최소횟수로 생각해야함.
 int		philo_iterate(t_attr *attr, t_philo *p)
 {
-	if (p->hand == LEFT)
-		usleep(15000);
 	while (attr->is_dead == PHILO_FALSE && attr->num_finish_eat < attr->iteration)				//at least :
 		left_philosopher_start(attr, p);
 	return (PHILO_SUCC);

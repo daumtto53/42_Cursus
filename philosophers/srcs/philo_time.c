@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/28 21:41:59 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/29 17:59:43 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,20 @@ int		init_start_time_ms(t_philo *phil_arr, t_attr *attr)
 		i++;
 	}
 	return PHILO_SUCC;
+}
+
+void	smart_sleep(t_attr *attr, uint64_t usec)
+{
+	struct timeval tv;
+	uint64_t	start_time;
+
+	gettimeofday(&tv, NULL);
+	start_time = get_time_in_ms(&tv);
+	while (!attr->is_dead)
+	{
+		gettimeofday(&tv, NULL);
+		if (get_time_in_ms(&tv) - start_time >= usec)
+			break ;
+		usleep(50);
+	}
 }
