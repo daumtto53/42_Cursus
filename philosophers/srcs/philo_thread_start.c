@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/28 22:13:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/29 17:53:07 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@ static int		left_philosopher_start(t_attr *attr, t_philo *p)
 
 	pthread_mutex_lock(&attr->chopsticks[p->first_chop]);
 	act_taken_fork(attr, p);
-	gettimeofday(&tv, NULL);
-	if (p->revision_time != 0)
-		p->revision_time = relative_time(attr) - attr->phil_eat - attr->phil_sleep;
 	pthread_mutex_lock(&attr->chopsticks[p->second_chop]);
-	gettimeofday(&tv, NULL);
-	if (p->revision_time != 0)
-		p->revision_time = relative_time(attr) - attr->phil_eat - attr->phil_sleep;
 	act_taken_fork(attr, p);								// fork * 2
 	act_eat(attr, p);										// eat
 	if (p->num_eat == attr->iteration)
@@ -35,8 +29,6 @@ static int		left_philosopher_start(t_attr *attr, t_philo *p)
 	}
 	act_sleep(attr, p);										// sleep
 	act_think(attr, p);
-	gettimeofday(&tv, NULL);
-	p->revision_time = relative_time(attr) - attr->phil_eat - attr->phil_sleep;
 	return (PHILO_SUCC);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/28 22:42:05 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/29 17:51:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ void	monitor(t_attr *attr, t_philo *phil_arr)
 		pthread_mutex_lock(&attr->die_mutex);
 		while (++i < attr->phil_num)
 		{
-			if (attr->is_dead == PHILO_FALSE && current_time - attr->start_time_ms > attr->phil_die + phil_arr[i].revision_time)
+			if (attr->is_dead == PHILO_FALSE && current_time - phil_arr[i].last_eat > attr->phil_die)
 			{
-				printf("current_time : %llu\t, revisiontime : %llu\t, phil_die : %llu\n", current_time, phil_arr[i].revision_time, attr->phil_die);
 				attr->is_dead = PHILO_TRUE;
 				printf("%d is_dead, interval : %llu, current_time : %llu, last_eat : %llu", phil_arr[i].philo_index, current_time - phil_arr[i].last_eat, current_time, phil_arr[i].last_eat);
 				pthread_mutex_unlock(&attr->die_mutex);
