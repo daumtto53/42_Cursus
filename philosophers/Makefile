@@ -24,7 +24,7 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 clean :
-	rm -f $(NAME)
+	rm -f $(OBJS)
 
 fclean :
 	rm -f $(NAME)

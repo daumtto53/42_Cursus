@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/30 19:14:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/30 19:39:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ static void	*philo_thread(void *arg)
 static void	philosopher_died(t_attr *attr, t_philo *phil_arr, int i)
 {
 	attr->is_dead = PHILO_TRUE;
-	usleep(50);
-	printf("%llu ms:\t%d died\n", get_timestamp(attr), \
+	usleep(1);
+	usleep(1);
+	usleep(7);
+	printf("%llu ms:\t\t%d died\n", get_timestamp(attr), \
 		phil_arr[i].philo_index + 1);
 	pthread_mutex_unlock(&attr->die_mutex);
 	return ;
