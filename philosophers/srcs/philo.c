@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/30 19:39:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/30 21:21:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static void	*philo_thread(void *arg)
 static void	philosopher_died(t_attr *attr, t_philo *phil_arr, int i)
 {
 	attr->is_dead = PHILO_TRUE;
-	usleep(1);
-	usleep(1);
-	usleep(7);
+	usleep(50);
 	printf("%llu ms:\t\t%d died\n", get_timestamp(attr), \
 		phil_arr[i].philo_index + 1);
 	pthread_mutex_unlock(&attr->die_mutex);
@@ -46,7 +44,7 @@ static void	monitor(t_attr *attr, t_philo *phil_arr)
 
 	while (1)
 	{
-		if (attr->phil_num == attr->num_finish_eat)
+		if (attr->phil_num >= attr->num_finish_eat)
 			break ;
 		gettimeofday(&tv, NULL);
 		current_time = get_time_in_ms(&tv);
@@ -57,6 +55,7 @@ static void	monitor(t_attr *attr, t_philo *phil_arr)
 				current_time - phil_arr[i].last_eat >= attr->phil_die)
 			{
 				philosopher_died(attr, phil_arr, i);
+				printf("attr->num_finish_eat : %d %d\n", attr->phil_num, attr->num_finish_eat);
 				return ;
 			}
 		if (!attr->is_dead)
@@ -87,8 +86,11 @@ int			main(int argc, char **argv)
 	monitor(attr, phil_arr);
 	while (++i < attr->phil_num)
 		pthread_join(tid_arr[i], NULL);
-	if (attr->iteration != INT_MAX && attr->num_finish_eat == attr->phil_num)
+	if (attr->iteration != INT_MAX && attr->num_finish_eat >= attr->phil_num)
+	{
+		printf("attr->num_finish_eat : %d %d\n", attr->phil_num, attr->num_finish_eat);
 		printf("finished_eating\n");
-	terminate_data(attr, phil_arr, tid_arr);
+	}
+	// terminate_data(attr, phil_arr, tid_arr);
 	return (0);
 }

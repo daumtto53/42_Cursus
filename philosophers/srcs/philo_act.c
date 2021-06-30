@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/30 19:26:03 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/30 21:01:23 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	act_eat(t_attr *attr, t_philo *p)
 		pthread_mutex_unlock(&(attr->chopsticks[p->second_chop]));
 		return ;
 	}
+	pthread_mutex_lock(&attr->die_mutex);
 	printf("%llu ms: \t%d is eating\n", \
 		get_timestamp(attr), p->philo_index + 1);
 	p->num_eat++;
+	pthread_mutex_unlock(&attr->die_mutex);
 	gettimeofday(&tv, NULL);
 	if (attr->is_dead == PHILO_FALSE)
 		p->last_eat = get_time_in_ms(&tv);
