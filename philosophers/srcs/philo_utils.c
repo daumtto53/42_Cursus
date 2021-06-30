@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:52:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/27 15:56:50 by mchun            ###   ########.fr       */
+/*   Updated: 2021/06/30 17:59:10 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ long long	ft_atoll(char *src)
 	i = 0;
 	while (src[i] == '\f' || src[i] == '\r' || src[i] == '\t' \
 		|| src[i] == '\v' || src[i] == ' ' || src[i] == '\n')
-	i++;
-
+		i++;
 	if (src[i] == '-')
 	{
 		negative = -1;
@@ -37,26 +36,22 @@ long long	ft_atoll(char *src)
 	return (negative * num);
 }
 
-void		free_attr(t_attr *attr)
+void		terminate_data(t_attr *attr, t_philo *philo, pthread_t *tid_arr)
 {
 	int		i;
 
-	// free mutex
 	i = -1;
-	while (++i < attr->phil_num)
-		pthread_mutex_destroy(&(attr->chopsticks[i]));
-	// free philosophers
-	free(attr);
-}
-
-void		terminate_data(t_attr *attr, pthread_t *tid_arr)
-{
+	while (++i)
+		pthread_mutex_destroy(&attr->chopsticks[i]);
+	pthread_mutex_destroy(&attr->die_mutex);
+	pthread_mutex_destroy(&attr->eat_mutex);
 	free(tid_arr);
-	free_attr(attr);
+	free(philo);
+	free(attr);
 	return ;
 }
 
-int		is_5th_arg(t_attr *attr)
+int			is_5th_arg(t_attr *attr)
 {
-	return !(attr->iteration == INT_MAX);
+	return (!(attr->iteration == INT_MAX));
 }
