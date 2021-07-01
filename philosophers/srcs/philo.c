@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/30 21:21:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/01 16:17:08 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	monitor(t_attr *attr, t_philo *phil_arr)
 
 	while (1)
 	{
-		if (attr->phil_num >= attr->num_finish_eat)
+		if (attr->phil_num == attr->num_finish_eat)
 			break ;
 		gettimeofday(&tv, NULL);
 		current_time = get_time_in_ms(&tv);
@@ -52,7 +52,7 @@ static void	monitor(t_attr *attr, t_philo *phil_arr)
 		pthread_mutex_lock(&attr->die_mutex);
 		while (++i < attr->phil_num)
 			if (attr->is_dead == PHILO_FALSE && \
-				current_time - phil_arr[i].last_eat >= attr->phil_die)
+				current_time - phil_arr[i].last_eat > attr->phil_die)
 			{
 				philosopher_died(attr, phil_arr, i);
 				printf("attr->num_finish_eat : %d %d\n", attr->phil_num, attr->num_finish_eat);
