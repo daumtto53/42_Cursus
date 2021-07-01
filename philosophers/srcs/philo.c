@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 17:59:09 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/01 16:17:08 by mchun            ###   ########.fr       */
+/*   Created: 2021/07/01 21:25:44 by mchun             #+#    #+#             */
+/*   Updated: 2021/07/01 21:25:46 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	*philo_thread(void *arg)
 static void	philosopher_died(t_attr *attr, t_philo *phil_arr, int i)
 {
 	attr->is_dead = PHILO_TRUE;
-	usleep(50);
+	usleep(500);
 	printf("%llu ms:\t\t%d died\n", get_timestamp(attr), \
 		phil_arr[i].philo_index + 1);
 	pthread_mutex_unlock(&attr->die_mutex);
@@ -52,10 +52,9 @@ static void	monitor(t_attr *attr, t_philo *phil_arr)
 		pthread_mutex_lock(&attr->die_mutex);
 		while (++i < attr->phil_num)
 			if (attr->is_dead == PHILO_FALSE && \
-				current_time - phil_arr[i].last_eat > attr->phil_die)
+				current_time - phil_arr[i].last_eat >= attr->phil_die)
 			{
 				philosopher_died(attr, phil_arr, i);
-				printf("attr->num_finish_eat : %d %d\n", attr->phil_num, attr->num_finish_eat);
 				return ;
 			}
 		if (!attr->is_dead)
@@ -86,11 +85,8 @@ int			main(int argc, char **argv)
 	monitor(attr, phil_arr);
 	while (++i < attr->phil_num)
 		pthread_join(tid_arr[i], NULL);
-	if (attr->iteration != INT_MAX && attr->num_finish_eat >= attr->phil_num)
-	{
-		printf("attr->num_finish_eat : %d %d\n", attr->phil_num, attr->num_finish_eat);
+	if (attr->iteration != INT_MAX && attr->num_finish_eat == attr->phil_num)
 		printf("finished_eating\n");
-	}
-	// terminate_data(attr, phil_arr, tid_arr);
+	terminate_data(attr, phil_arr, tid_arr);
 	return (0);
 }

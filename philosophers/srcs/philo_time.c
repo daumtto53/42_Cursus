@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/06/30 20:32:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/01 20:59:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int			init_start_time_ms(t_philo *phil_arr, t_attr *attr)
 	while (i < attr->phil_num)
 	{
 		phil_arr[i].last_eat = attr->start_time_ms;
-		phil_arr[i].revision_time = 0;
 		i++;
 	}
 	return (PHILO_SUCC);
