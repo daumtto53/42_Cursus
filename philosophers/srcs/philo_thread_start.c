@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/01 16:16:05 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/01 16:54:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	philosopher_start(t_attr *attr, t_philo *p)
 
 int			philo_infinite(t_attr *attr, t_philo *p)
 {
+	if (p->hand == LEFT)
+		smart_sleep(attr, 100);
 	while (attr->is_dead == PHILO_FALSE)
 		philosopher_start(attr, p);
 	return (1);
@@ -42,6 +44,8 @@ int			philo_infinite(t_attr *attr, t_philo *p)
 
 int			philo_iterate(t_attr *attr, t_philo *p)
 {
+	if (p->hand == LEFT)
+		smart_sleep(attr, 100);
 	while (attr->is_dead == PHILO_FALSE && \
 		attr->num_finish_eat < attr->phil_num)
 		philosopher_start(attr, p);
