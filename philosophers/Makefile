@@ -6,7 +6,7 @@
 #    By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 21:29:07 by mchun             #+#    #+#              #
-#    Updated: 2021/07/01 21:29:08 by mchun            ###   ########.fr        #
+#    Updated: 2021/07/02 13:46:43 by mchun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJS =		$(FILES:.c=.o)
 NAME = philo
 
 $(NAME) : $(OBJS)
-	$(CC) $(INCLUDES) -o $@ $^ -lpthread
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^ -lpthread
 
 all : $(NAME)
 
