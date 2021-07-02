@@ -28,7 +28,7 @@
 # define PHILO_FALSE	0
 # define MILI_TO_MICRO	1000
 
-typedef struct			s_attr
+typedef struct s_attr
 {
 	uint64_t			start_time_ms;
 	int					phil_num;
@@ -43,7 +43,7 @@ typedef struct			s_attr
 	pthread_mutex_t		*chopsticks;
 }						t_attr;
 
-typedef struct			s_philo
+typedef struct s_philo
 {
 	int					hand;
 	int					philo_index;

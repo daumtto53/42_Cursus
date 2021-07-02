@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/01 20:59:02 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/02 13:35:39 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void		smart_sleep(t_attr *attr, uint64_t usec)
 		gettimeofday(&tv, NULL);
 		if (get_time_in_ms(&tv) - start_time >= usec)
 			break ;
-		usleep(300);
+		usleep(150);
 	}
 }

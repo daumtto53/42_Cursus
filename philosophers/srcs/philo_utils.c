@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:52:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/01 21:41:56 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/02 13:46:06 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,15 @@ void		terminate_data(t_attr *attr, t_philo *philo, pthread_t *tid_arr)
 	int		i;
 
 	i = -1;
-	printf("%d %d %p\n", attr->is_dead, philo->hand, tid_arr[i]);
-	pthread_mutex_destroy(&attr->chopsticks[i]);
+	if (philo != NULL && tid_arr != NULL)
+		while (++i < attr->phil_num)
+			pthread_mutex_destroy(&attr->chopsticks[i]);
+	free(attr->chopsticks);
 	pthread_mutex_destroy(&attr->die_mutex);
 	pthread_mutex_destroy(&attr->eat_mutex);
 	free(tid_arr);
 	free(philo);
+	free(attr);
 	return ;
 }
 
