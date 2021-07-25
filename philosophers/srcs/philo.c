@@ -6,87 +6,66 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 21:25:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/02 13:09:01 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 00:27:44 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void	*philo_thread(void *arg)
+static void	*monitor_eat(void *philo)
 {
-	t_philo		*p;
-	t_attr		*attr;
+	t_philo	*p;
+	t_attr	*attr;
 
-	p = (t_philo *)arg;
+	p = (t_philo *)philo;
 	attr = p->attr;
-	if (!is_5th_arg(attr))
-		philo_infinite(attr, p);
-	else
-		philo_iterate(attr, p);
+	while (attr->status != DEAD && attr->status != FINISH_EAT)
+	{
+		if (attr->finished_philo == attr->phil_num)
+		{
+			printf("Finished meals\n");
+			pthread_mutex_lock(&attr->die_mutex);
+			attr->status = FINISH_EAT;
+			pthread_mutex_unlock(&attr->die_mutex);
+		}
+		usleep(150);
+	}
 	return (NULL);
 }
 
-static void	philosopher_died(t_attr *attr, t_philo *phil_arr, int i)
+static int	thread_start(t_attr *attr, t_philo *phil_arr)
 {
-	attr->is_dead = PHILO_TRUE;
-	usleep(500);
-	printf("%llu ms:\t\t%d died\n", get_timestamp(attr), \
-		phil_arr[i].philo_index + 1);
-	pthread_mutex_unlock(&attr->die_mutex);
-	return ;
-}
+	pthread_t	monitor_tid;
+	pthread_t	*phil_tid;
+	int			i;
 
-static void	monitor(t_attr *attr, t_philo *phil_arr)
-{
-	struct timeval	tv;
-	uint64_t		current_time;
-	int				i;
-
-	while (1)
+	phil_tid  = attr->phil_tid;
+	attr->start_time_ms = get_time_ms();
+	i = -1;
+	while (++i < attr->phil_num)
 	{
-		if (attr->phil_num == attr->num_finish_eat)
-			break ;
-		gettimeofday(&tv, NULL);
-		current_time = get_time_in_ms(&tv);
-		i = -1;
-		pthread_mutex_lock(&attr->die_mutex);
-		while (++i < attr->phil_num)
-			if (attr->is_dead == PHILO_FALSE && \
-				current_time - phil_arr[i].last_eat >= attr->phil_die)
-			{
-				philosopher_died(attr, phil_arr, i);
-				return ;
-			}
-		if (!attr->is_dead)
-			pthread_mutex_unlock(&attr->die_mutex);
-		usleep(100);
+		phil_arr[i].last_eat = attr->start_time_ms;
+		if (pthread_create(phil_tid + i, NULL, (void *)philosopher, (phil_arr + i)) < 0)
+			return (PHILO_ERR);
+		usleep(30);
 	}
-	return ;
+	if (pthread_create(&monitor_tid, NULL, &monitor_eat, phil_arr) < 0)
+		return (PHILO_ERR);
+	pthread_detach(monitor_tid);
+	i = -1;
+	while (++i < attr->phil_num)
+		pthread_join(phil_tid[i], NULL);
+	return (PHILO_SUCC);
 }
 
 int			main(int argc, char **argv)
 {
 	t_attr		*attr;
 	t_philo		*phil_arr;
-	pthread_t	*tid_arr;
-	int			i;
 
 	if (init_structure(&attr, &phil_arr, argv, argc) == PHILO_ERR)
 		return (PHILO_ERR);
-	tid_arr = init_tid_arr(attr);
-	if (!tid_arr)
-		return (PHILO_ERR);
-	init_start_time_ms(phil_arr, attr);
-	i = -1;
-	while (++i < attr->phil_num)
-		pthread_create(tid_arr + i, NULL, \
-			(void *)philo_thread, (void *)(phil_arr + i));
-	i = -1;
-	monitor(attr, phil_arr);
-	while (++i < attr->phil_num)
-		pthread_join(tid_arr[i], NULL);
-	if (attr->iteration != INT_MAX && attr->num_finish_eat == attr->phil_num)
-		printf("finished_eating\n");
-	terminate_data(attr, phil_arr, tid_arr);
+	thread_start(attr, phil_arr);
+	terminate_data(attr, phil_arr);
 	return (0);
 }

@@ -6,11 +6,23 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:38:40 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/02 13:35:39 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 00:25:22 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+uint64_t	get_time_ms(void)
+{
+	uint64_t		sec;
+	uint64_t		usec;
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	sec = tv.tv_sec;
+	usec = tv.tv_usec;
+	return ((sec * (uint64_t)1000) + (usec / (uint64_t)1000));
+}
 
 uint64_t	get_time_in_ms(struct timeval *tv)
 {
@@ -20,14 +32,6 @@ uint64_t	get_time_in_ms(struct timeval *tv)
 	sec = tv->tv_sec;
 	usec = tv->tv_usec;
 	return ((sec * (uint64_t)1000) + (usec / (uint64_t)1000));
-}
-
-uint64_t	relative_time(t_attr *attr)
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return (get_time_in_ms(&tv) - attr->start_time_ms);
 }
 
 uint64_t	get_timestamp(t_attr *attr)
@@ -56,17 +60,17 @@ int			init_start_time_ms(t_philo *phil_arr, t_attr *attr)
 	return (PHILO_SUCC);
 }
 
-void		smart_sleep(t_attr *attr, uint64_t usec)
+void		smart_sleep(t_attr *attr, uint64_t ms)
 {
 	struct timeval	tv;
 	uint64_t		start_time;
 
 	gettimeofday(&tv, NULL);
 	start_time = get_time_in_ms(&tv);
-	while (!attr->is_dead)
+	while (attr->status != DEAD)
 	{
 		gettimeofday(&tv, NULL);
-		if (get_time_in_ms(&tv) - start_time >= usec)
+		if (get_time_in_ms(&tv) - start_time >= ms)
 			break ;
 		usleep(150);
 	}

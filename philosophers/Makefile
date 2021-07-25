@@ -6,7 +6,7 @@
 #    By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/01 21:29:07 by mchun             #+#    #+#              #
-#    Updated: 2021/07/02 13:46:43 by mchun            ###   ########.fr        #
+#    Updated: 2021/07/25 23:37:17 by mchun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ SRCSDIR = ./srcs/
 
 SRCS =		philo_act.c \
 			philo_attr_init.c \
-			philo_thread_init.c \
-			philo_thread_start.c \
+			philo_philosopher.c \
 			philo_utils.c \
 			philo_time.c \
 			philo.c

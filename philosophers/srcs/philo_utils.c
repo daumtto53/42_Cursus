@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:52:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/02 13:46:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/25 23:40:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,18 @@ long long	ft_atoll(char *src)
 	return (negative * num);
 }
 
-void		terminate_data(t_attr *attr, t_philo *philo, pthread_t *tid_arr)
+void		terminate_data(t_attr *attr, t_philo *philo)
 {
 	int		i;
 
 	i = -1;
-	if (philo != NULL && tid_arr != NULL)
+	if (philo != NULL)
 		while (++i < attr->phil_num)
 			pthread_mutex_destroy(&attr->chopsticks[i]);
 	free(attr->chopsticks);
 	pthread_mutex_destroy(&attr->die_mutex);
 	pthread_mutex_destroy(&attr->eat_mutex);
-	free(tid_arr);
 	free(philo);
 	free(attr);
 	return ;
-}
-
-int			is_5th_arg(t_attr *attr)
-{
-	return (!(attr->iteration == INT_MAX));
 }

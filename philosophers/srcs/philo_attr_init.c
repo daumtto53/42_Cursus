@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/02 13:47:23 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 00:29:03 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void	init_arg(t_attr *attr, char **argv, int argc)
 	if (argc == 6)
 		attr->iteration = ft_atoll(argv[5]);
 	else
-		attr->iteration = INT_MAX;
+		attr->iteration = -1;
 	attr->phil_num = ft_atoll(argv[1]);
 	attr->phil_die = ft_atoll(argv[2]);
 	attr->phil_eat = ft_atoll(argv[3]);
 	attr->phil_sleep = ft_atoll(argv[4]);
-	attr->is_dead = PHILO_FALSE;
-	attr->num_finish_eat = 0;
+	attr->status = 0;
+	attr->finished_philo = 0;
 	attr->chopsticks = NULL;
 	pthread_mutex_init(&attr->die_mutex, NULL);
 	pthread_mutex_init(&attr->eat_mutex, NULL);
@@ -31,7 +31,10 @@ static void	init_arg(t_attr *attr, char **argv, int argc)
 
 static int	valid_attr(t_attr *attr)
 {
-	if (attr->iteration <= 0 || attr->phil_sleep <= 0 || \
+	attr->phil_tid = (pthread_t *)malloc(sizeof(pthread_t) * attr->phil_num);
+	if (!attr->phil_tid)
+		return (PHILO_FALSE);
+	if (attr->iteration <= -2 || attr->phil_sleep <= 0 || \
 		attr->phil_die <= 0 || attr->phil_eat <= 0 || attr->phil_num <= 0)
 		return (PHILO_FALSE);
 	return (PHILO_TRUE);
@@ -92,17 +95,17 @@ int			init_structure(t_attr **attr, t_philo **p_arr, char **argv, int ac)
 	if ((*attr)->phil_num == 1)
 	{
 		act_only_one_philosopher(*attr);
-		terminate_data(*attr, NULL, NULL);
+		terminate_data(*attr, NULL);
 		return (PHILO_ERR);
 	}
 	if (!valid_attr(*attr))
 	{
-		terminate_data(*attr, NULL, NULL);
+		terminate_data(*attr, NULL);
 		return (PHILO_ERR);
 	}
 	if (init_chopsticks(*attr) == PHILO_ERR)
 	{
-		terminate_data(*attr, NULL, NULL);
+		terminate_data(*attr, NULL);
 		return (PHILO_ERR);
 	}
 	if (init_philosopher(p_arr, *attr) == PHILO_ERR)
