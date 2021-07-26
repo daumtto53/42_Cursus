@@ -6,13 +6,13 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 11:56:55 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 16:57:14 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void		monitor_dead(void *philo)
+static void		*monitor_dead(void *philo)
 {
 	t_philo	*p;
 	t_attr	*attr;
@@ -23,7 +23,7 @@ static void		monitor_dead(void *philo)
 	while (attr->status != DEAD && attr->status != FINISH_EAT)
 	{
 		time = get_time_ms();
-		if (time - p->last_eat > attr->phil_die)
+		if (time - p->last_eat > attr->phil_die && attr->status != DEAD)
 		{
 			printf("%lu ms: \t%d is dead\n", get_timestamp(attr), p->philo_index + 1);
 			printf("time_ms : %lu, last_eat : %lu, dead time : %lu, die_time : %lu\n", time, p->last_eat, time - p->last_eat, attr->phil_die);
@@ -32,31 +32,35 @@ static void		monitor_dead(void *philo)
 			pthread_mutex_unlock(&attr->eat_mutex);
 			break;
 		}
-		usleep(150);
+		usleep(100);
 	}
+	return (NULL);
 }
 
 static void		routine(t_attr *attr, t_philo *p)
 {
-	if (attr->status == DEAD || attr->status == FINISH_EAT)
+	if (attr->status == DEAD)
 		return ;
 	act_taken_fork(attr, p);
 	if (attr->status == DEAD || attr->status == FINISH_EAT)
 	{
-		pthread_mutex_unlock(&attr->chopsticks[p->first_chop]);
 		pthread_mutex_unlock(&attr->chopsticks[p->second_chop]);
+		pthread_mutex_unlock(&attr->chopsticks[p->first_chop]);
 		return ;
 	}
 	act_eat(attr, p);
-	if (attr->status == DEAD || attr->status == FINISH_EAT)
+	if (attr->status == DEAD)
 		return ;
 	act_sleep(attr, p);
-	if (attr->status == DEAD || attr->status == FINISH_EAT)
+	if (attr->status == DEAD)
 		return ;
 	act_think(attr, p);
+	if (attr->status == DEAD)
+		return ;
+	usleep(50);
 }
 
-int				philosopher(void *phil)
+void			*philosopher(void *phil)
 {
 	t_philo		*p;
 	t_attr		*attr;
@@ -65,11 +69,11 @@ int				philosopher(void *phil)
 	p = (t_philo *)phil;
 	attr = p->attr;
 	if (pthread_create(&monitor_dead_tid, NULL, (void *)monitor_dead, p) < 0)
-		return (PHILO_ERR);
-	if (p->hand == LEFT)
-		smart_sleep(attr, attr->phil_eat);
-	p->last_eat = get_time_ms();
+		return (NULL);
+	pthread_detach(monitor_dead_tid);
+	if (p->hand == RIGHT)
+		smart_sleep(attr, attr->phil_eat / 2);
 	while (attr->status != DEAD && attr->status != FINISH_EAT)
 		routine(attr, phil);
-	return (PHILO_SUCC);
+	return (NULL);
 }

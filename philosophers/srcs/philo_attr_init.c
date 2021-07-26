@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 00:29:03 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 15:49:23 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,21 @@ int			init_philosopher(t_philo **phil_arr, t_attr *at)
 		(*phil_arr)[i].hand = i % 2;
 		(*phil_arr)[i].philo_index = i;
 		(*phil_arr)[i].attr = at;
-		(*phil_arr)[i].last_eat = -1;
+		(*phil_arr)[i].last_eat = 0;
 		(*phil_arr)[i].num_eat = 0;
-		if (i % 2 == LEFT)
-		{
-			(*phil_arr)[i].first_chop = (i - 1 + at->phil_num) % at->phil_num;
-			(*phil_arr)[i].second_chop = i % at->phil_num;
-		}
-		else
-		{
-			(*phil_arr)[i].first_chop = i % at->phil_num;
-			(*phil_arr)[i].second_chop = (i - 1 + at->phil_num) % at->phil_num;
-		}
+		(*phil_arr)[i].first_chop = i % at->phil_num;
+		(*phil_arr)[i].second_chop = (i - 1 + at->phil_num) % at->phil_num;
+
+		// if (i % 2 == LEFT)
+		// {
+		// 	(*phil_arr)[i].first_chop = i % at->phil_num;
+		// 	(*phil_arr)[i].second_chop = (i - 1 + at->phil_num) % at->phil_num;
+		// }
+	// 	else
+	// 	{
+	// 		(*phil_arr)[i].first_chop = (i - 1 + at->phil_num) % at->phil_num;
+	// 		(*phil_arr)[i].second_chop = i % at->phil_num;
+	// 	}
 	}
 	return (PHILO_SUCC);
 }

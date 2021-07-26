@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 21:25:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 11:57:25 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 16:41:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	*monitor_eat(void *philo)
 			attr->status = FINISH_EAT;
 			pthread_mutex_unlock(&attr->eat_mutex);
 		}
-		usleep(150);
+		usleep(100);
 	}
 	return (NULL);
 }

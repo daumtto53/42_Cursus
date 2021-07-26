@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 17:59:12 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/25 23:40:40 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 12:34:32 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void					terminate_data(t_attr *attr, t_philo *philo);
 int						init_structure(t_attr **attr, t_philo **p, \
 							char **argv, int argc);
 
-int						philosopher(void *phil);
+void					*philosopher(void *phil);
 
 void					act_taken_fork(t_attr *attr, t_philo *p);
 void					act_eat(t_attr *attr, t_philo *p);
