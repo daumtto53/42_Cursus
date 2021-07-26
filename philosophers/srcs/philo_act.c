@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 00:22:38 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 12:06:09 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	act_taken_fork(t_attr *attr, t_philo *p)
 	if (attr->status == DEAD || attr->status == FINISH_EAT)
 		return ;
 	pthread_mutex_lock(&attr->chopsticks[p->first_chop]);
-	printf("%lu ms: \t%d has taken a fork\n", \
-		get_timestamp(attr), p->philo_index + 1);
+	printf("%lu ms: \t%d has taken a fork, time : %lu\n", \
+		get_timestamp(attr), p->philo_index + 1, get_time_ms());
 	if (attr->status == DEAD || attr->status == FINISH_EAT)
 		return ;
 	pthread_mutex_lock(&attr->chopsticks[p->second_chop]);
-	printf("%lu ms: \t%d has taken a fork\n", \
-		get_timestamp(attr), p->philo_index + 1);
+	printf("%lu ms: \t%d has taken a fork, time : %lu\n", \
+		get_timestamp(attr), p->philo_index + 1, get_time_ms());
 }
 
 void	act_eat(t_attr *attr, t_philo *p)
 {
-	printf("%lu ms: \t%d is eating\n", \
-		get_timestamp(attr), p->philo_index + 1);
+	printf("%lu ms: \t%d is eating, time : %lu\n", \
+		get_timestamp(attr), p->philo_index + 1, get_time_ms());
 	p->num_eat++;
 	if (p->num_eat == attr->iteration)
 	{
@@ -45,8 +45,8 @@ void	act_eat(t_attr *attr, t_philo *p)
 
 void	act_sleep(t_attr *attr, t_philo *p)
 {
-	printf("%lu ms: \t%d is sleeping\n", \
-		get_timestamp(attr), p->philo_index + 1);
+	printf("%lu ms: \t%d is sleeping, time : %lu\n", \
+		get_timestamp(attr), p->philo_index + 1, get_time_ms());
 	smart_sleep(attr, attr->phil_sleep);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 21:25:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 00:27:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 11:57:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	*monitor_eat(void *philo)
 		if (attr->finished_philo == attr->phil_num)
 		{
 			printf("Finished meals\n");
-			pthread_mutex_lock(&attr->die_mutex);
+			pthread_mutex_lock(&attr->eat_mutex);
 			attr->status = FINISH_EAT;
-			pthread_mutex_unlock(&attr->die_mutex);
+			pthread_mutex_unlock(&attr->eat_mutex);
 		}
 		usleep(150);
 	}
