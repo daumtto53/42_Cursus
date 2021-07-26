@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:52:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/25 23:40:25 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 21:04:36 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ long long	ft_atoll(char *src)
 	return (negative * num);
 }
 
-void		terminate_data(t_attr *attr, t_philo *philo)
+void	terminate_data(t_attr *attr, t_philo *philo)
 {
 	int		i;
 

@@ -6,38 +6,40 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 19:23:49 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 21:03:33 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void		*monitor_dead(void *philo)
+static void	*monitor_dead(void *philo)
 {
-	t_philo	*p;
-	t_attr	*attr;
-	uint64_t time;
+	t_philo		*p;
+	t_attr		*attr;
+	uint64_t	time;
 
 	p = (t_philo *)philo;
 	attr = p->attr;
 	while (attr->status != DEAD && attr->status != FINISH_EAT)
 	{
 		time = get_time_ms();
-		if (time > p->last_eat + attr->phil_die && attr->status != DEAD)
+		pthread_mutex_lock(&attr->eat_mutex);
+		if (time > p->last_eat + attr->phil_die && attr->status != DEAD && \
+				attr->status != FINISH_EAT)
 		{
-			pthread_mutex_lock(&attr->eat_mutex);
 			attr->status = DEAD;
 			pthread_mutex_unlock(&attr->eat_mutex);
-			printf("%lu ms: \t%d is dead\n", get_timestamp(attr), p->philo_index + 1);
-			printf("time_ms : %lu, last_eat : %lu, dead time : %lu, die_time : %lu\n", time, p->last_eat, time - p->last_eat, attr->phil_die);
-			break;
+			printf("%lu ms: \t%d is dead\n", \
+						get_timestamp(attr), p->philo_index + 1);
+			break ;
 		}
+		pthread_mutex_unlock(&attr->eat_mutex);
 		usleep(100);
 	}
 	return (NULL);
 }
 
-static void		routine(t_attr *attr, t_philo *p)
+static void	routine(t_attr *attr, t_philo *p)
 {
 	if (attr->status == DEAD || attr->status == FINISH_EAT)
 		return ;
@@ -60,7 +62,7 @@ static void		routine(t_attr *attr, t_philo *p)
 	usleep(50);
 }
 
-void			*philosopher(void *phil)
+void	*philosopher(void *phil)
 {
 	t_philo		*p;
 	t_attr		*attr;

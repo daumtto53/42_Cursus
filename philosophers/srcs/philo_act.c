@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:24:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 19:06:44 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 21:01:40 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	act_think(t_attr *attr, t_philo *p)
 		get_timestamp(attr), p->philo_index + 1);
 }
 
-int		act_only_one_philosopher(t_attr *attr)
+int	act_only_one_philosopher(t_attr *attr)
 {
 	printf("0 ms:\t1 has taken a fork\n");
 	smart_sleep(attr, attr->phil_die);

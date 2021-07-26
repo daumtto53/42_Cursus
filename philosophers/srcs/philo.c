@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 21:25:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 16:41:15 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 21:00:38 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ static int	thread_start(t_attr *attr, t_philo *phil_arr)
 	pthread_t	*phil_tid;
 	int			i;
 
-	phil_tid  = attr->phil_tid;
+	phil_tid = attr->phil_tid;
 	attr->start_time_ms = get_time_ms();
 	i = -1;
 	while (++i < attr->phil_num)
 	{
 		phil_arr[i].last_eat = attr->start_time_ms;
-		if (pthread_create(phil_tid + i, NULL, (void *)philosopher, (phil_arr + i)) < 0)
+		if (pthread_create(phil_tid + i, NULL, \
+				(void *)philosopher, (phil_arr + i)) < 0)
 			return (PHILO_ERR);
 		usleep(30);
 	}
@@ -58,7 +59,7 @@ static int	thread_start(t_attr *attr, t_philo *phil_arr)
 	return (PHILO_SUCC);
 }
 
-int			main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_attr		*attr;
 	t_philo		*phil_arr;

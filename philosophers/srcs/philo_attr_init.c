@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 19:20:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/26 15:49:23 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/26 21:05:19 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	init_chopsticks(t_attr *attr)
 	return (PHILO_SUCC);
 }
 
-int			init_philosopher(t_philo **phil_arr, t_attr *at)
+int	init_philosopher(t_philo **phil_arr, t_attr *at)
 {
 	int		i;
 
@@ -72,22 +72,11 @@ int			init_philosopher(t_philo **phil_arr, t_attr *at)
 		(*phil_arr)[i].num_eat = 0;
 		(*phil_arr)[i].first_chop = i % at->phil_num;
 		(*phil_arr)[i].second_chop = (i - 1 + at->phil_num) % at->phil_num;
-
-		// if (i % 2 == LEFT)
-		// {
-		// 	(*phil_arr)[i].first_chop = i % at->phil_num;
-		// 	(*phil_arr)[i].second_chop = (i - 1 + at->phil_num) % at->phil_num;
-		// }
-	// 	else
-	// 	{
-	// 		(*phil_arr)[i].first_chop = (i - 1 + at->phil_num) % at->phil_num;
-	// 		(*phil_arr)[i].second_chop = i % at->phil_num;
-	// 	}
 	}
 	return (PHILO_SUCC);
 }
 
-int			init_structure(t_attr **attr, t_philo **p_arr, char **argv, int ac)
+int	init_structure(t_attr **attr, t_philo **p_arr, char **argv, int ac)
 {
 	if (!(ac == 5 || ac == 6))
 		return (PHILO_ERR);
