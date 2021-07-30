@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:42:44 by mchun             #+#    #+#             */
-/*   Updated: 2021/07/30 17:37:07 by mchun            ###   ########.fr       */
+/*   Updated: 2021/07/30 17:34:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	*monitor_dead(void *philo)
 		{
 			attr->status = DEAD;
 			pthread_mutex_unlock(&attr->eat_mutex);
-			printf("%llu ms: \t%d is dead\n", \
+			printf("%lu ms: \t%d is dead\n", \
 						get_timestamp(attr), p->philo_index + 1);
 			break ;
 		}
