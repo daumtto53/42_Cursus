@@ -6,57 +6,49 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 13:00:06 by mchun             #+#    #+#             */
-/*   Updated: 2021/08/29 16:13:17 by mchun            ###   ########.fr       */
+/*   Updated: 2021/08/30 01:20:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+//동적 배열로 만들어놓고.. keep track of size
 #include "./env.h"
 
-int				init_env(t_env **env_struct, char **envp)
+t_darr		*init_darr(char **envp)
 {
 	int		i;
-	t_env	*env ;
+	t_darr	*env;
 
-	env = *env_struct;
-	i = 0;
-	while (envp[i])
-		i++;
-	env->global_size = i;
-	env->global_env = (char **)malloc(sizeof(char *) * (i + 1));
-	if (!env->global_env)
+	env = (t_darr *)malloc(sizeof(t_darr));
+	i = -1;
+	while (envp[++i])
+		env->size = i;
+	env->capacity = i;
+	printf("%d\n", i);
+	env->arr = (char **)malloc(sizeof(char *) * i);
+	if (!env->arr)
 		return (ERR);
-	while (*envp)
-		*env->global_env++ = ft_strdup(*envp++);				//global_env 도 일일히 strdup해줘야함.
-	*(env->global_env) = NULL;
-	env->local_size = 0;
-	env->local_env = (char **)malloc(sizeof(char *) * (0 + 1));
-	if (!env->local_env)
-		return (ERR);
-	*(env->local_env) = NULL;
-	return (SUCC);
+	i = -1;
+	while (++i < env->size)
+		env->arr[i] = ft_strdup(envp[i]);
+	return (env);
 }
 
-int				env_add(t_env *env, char *env_toadd)
+int				env_add(t_darr *env, char *env_toadd)
 {
 	int		keyptr;
 
-	//이미 존재하는 환경변수/쉘 지역변수는 변수에 더하지 않는다.
-	if (keyval_in_env(env->local_env, env_toadd, env->local_size) || keyval_in_env(env->global_env, env_toadd, env->global_size))
+	//이미 존재하는 환경변수는
+	if (keyval_in_env(env->arr, env_toadd, env->size))
 		return (SUCC);
-	keyptr = key_in_env(env->global_env, env_toadd, env->local_size);
+	keyptr = keyequal_in_env(env->arr, env_toadd, env->size);
 	if (keyptr > 0)
 	{
-		change_env_val(env->global_env, env_toadd, keyptr);
-		return (SUCC);
-	}
-	keyptr = key_in_env(env->local_env, env_toadd, env->local_size);
-	if (keyptr > 0)
-	{
-		change_env_val(env->local_env, env_toadd, keyptr);
+		change_env_val(env->arr, env_toadd, keyptr);
 		return (SUCC);
 	}
 	else
-		add_env(env, env_toadd, env->local_size);
+		add_env(env, env_toadd);
 	return (SUCC);
 }
 
@@ -66,35 +58,53 @@ int				keyval_in_env(char **arr , char *src, int size)
 
 	i = -1;
 	while (++i < size)
-	{
 		if (strcmp(arr[i], src) == 0)		//strcmp를 libft에 만들어야함.
 			return (TRUE);
-	}
 	return (FALSE);
+}
+
+// leaks : def lost
+int				keyequal_in_env(char **arr, char *src, int size)
+{
+	int		i;
+	int		j;
+	int		keyval_index;
+
+	keyval_index = -1;
+	i = -1;
+	while (++i < size)
+	{
+		j = 0;
+		while (src[j] == arr[i][j] && src[j] != '=' && arr[i][j] != '=')
+			j++;
+		if (src[j] == '=' && arr[i][j] == '=')
+		{
+			keyval_index = i;
+			break;
+		}
+	}
+	return (keyval_index) ;
 }
 
 int				key_in_env(char **arr, char *src, int size)
 {
 	int		i;
-	char	**arr_keyval;
-	char	**src_keyval;
+	int		j;
 	int		keyval_index;
 
 	keyval_index = -1;
-	src_keyval = ft_split(src, '=');
 	i = -1;
 	while (++i < size)
 	{
-		arr_keyval = ft_split(arr[i], '=');
-		if (strcmp(arr_keyval[0], src_keyval[0]) == 0)
+		j = 0;
+		while (src[j] == arr[i][j] && src[j] != '\0' && arr[i][j] != '=')
+			j++;
+		if (src[j] == '\0' && arr[i][j] == '=')
+		{
 			keyval_index = i;
-		free(arr_keyval[0]);
-		free(arr_keyval[1]);
-		free(arr_keyval);
+			break;
+		}
 	}
-	free(src_keyval[0]);
-	free(src_keyval[1]);
-	free(src_keyval);
 	return (keyval_index) ;
 }
 
@@ -110,21 +120,57 @@ int				change_env_val(char **arr, char *src, int index)
 	return (SUCC);
 }
 
-int				add_env(t_env *env, char *src, int size)
+int				add_env(t_darr *env, char *src)
 {
-	char	**new_local_env;
+	if (env->capacity <= env->size)
+		resize_arr(env);
+	env->arr[env->size++] = ft_strdup(src);
+	return (SUCC);
+}
+
+int				resize_arr(t_darr *darr)
+{
+	int		i;
+	char	**new_arr;
+
+	new_arr = malloc(sizeof(char *) * (darr->capacity * 2));
+	if (!new_arr)
+		return (ERR);
+	i = -1;
+	while (++i < darr->size)
+		new_arr[i] = darr->arr[i];
+	free(darr->arr);
+	darr->arr = new_arr;
+	return (SUCC);
+}
+
+void			print_darr(t_darr *env)
+{
 	int		i;
 
-	new_local_env = (char **)malloc(sizeof(char *) * (env->local_size + 1 + 1));
-	if (!new_local_env)
-		return (ERR);
-	i = 0;
-	while (env->local_env[i] && ++i)
-		new_local_env[i] = env->local_env[i];
-	new_local_env[i] = ft_strdup(src);
-	new_local_env[i + 1] = NULL;
-	free(env->local_env);
-	env->local_env = new_local_env;
-	env->local_size++;
-	return (SUCC);
+	i = -1;
+	while (++i < env->size)
+		printf("%s\n", env->arr[i]);
+}
+
+void			delete_env(t_darr *env, char *key)
+{
+	int		keyptr;
+	int		i;
+
+	keyptr = key_in_env(env->arr, key, env->size);
+	printf("keyptr : %d\n", keyptr);
+	printf("-----------------------------------------\n");
+	printf("-----------------------------------------\n");
+	printf("-----------------------------------------\n");
+	if (keyptr > 0)
+	{
+		printf("-------%s-----------\n", env->arr[keyptr]);
+		free(env->arr[keyptr]);
+		i = keyptr - 1;
+		while (++i < env->size - 1)
+			env->arr[i] = env->arr[i + 1];
+		env->size--;
+	}
+	return ;
 }
