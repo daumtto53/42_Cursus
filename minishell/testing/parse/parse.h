@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 22:20:49 by mchun             #+#    #+#             */
-/*   Updated: 2021/08/31 15:54:04 by mchun            ###   ########.fr       */
+/*   Updated: 2021/08/31 18:13:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_cmdtype
 	COMMAND,
 	REDIR_IN,
 	REDIR_OUT,
+	REDIR_ERR,
 	HEREDOC,
 	PIPE,
 	BUILT_IN,
