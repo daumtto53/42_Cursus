@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:33:35 by mchun             #+#    #+#             */
-/*   Updated: 2021/08/31 11:40:58 by mchun            ###   ########.fr       */
+/*   Updated: 2021/08/31 17:46:12 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,84 +14,242 @@
 #include <stdlib.h>
 #include <string.h>
 #include <readline/readline.h>
-
-// int		count_args(char *str)
-// {
-// 	int		i;
-// 	int		arg_num;
-
-// 	arg_num = 0;
-
-// 	i = -1;
-// 	while (str[++i] != '\0')
-// 	{
+#include "parse.h"
 
 
+/* from this */
+int		parse_redirect(char *input, t_llist *list, int begin)
+{
+	int		cur;
+	t_cmdtype	type;
 
-// 	}
+	if (input[begin] == '<')
+		type = REDIR_IN;
+	else
+		type = REDIR_OUT;
+	cur = begin + 1;
+	while (input[cur] != '>' && input[cur] != '<' && input[cur] != '|' && input[cur] != '\0')
+	{
+		if (input[cur] == '\"' || input[cur] == '\'')
+		{
+			if (input[cur] == '\"')
+				while (input[cur] == '\"')
+					cur++;
+			else
+				while (input[cur] == '\'')
+					cur++;
+		}
+		else
+			cur++;
+	}
+	printf("%s\n", strndup(input + begin, cur - begin));	//split_args
+	list_push_test(list, strndup(input + begin, cur - begin), REDIR_OUT);
+	return (cur);
+}
 
-// }
+int		parse_pipe(char *input, t_llist *list, int begin)
+{
+	int		cur;
+	t_cmdtype	type;
 
-// char	**arg_split(char *str)
-// {
-// 	//쪼갤 문자열의 개수
-// 	//쪼갠 문자열을 넣을 char **배열 동적할당
-// 	//문자열을 넣어주고
+	printf("%s\n", strndup(input + begin, 1));
+	list_push_test(list , strndup(input + begin, 1), PIPE);
+	begin = begin + 1;
+	return (begin + 1);
+}
 
-// }
+int		parse_command(char *input, t_llist *list, int begin)
+{
+	int		cur;
 
-void	**arg_split(char *input)
+	cur = begin;
+	while (input[cur] != '>' && input[cur] != '<' && input[cur] != '|' && input[cur] != '\0')
+	{
+		if (input[cur] == '\"' || input[cur] == '\'')
+		{
+			if (input[cur] == '\"')
+				while (input[cur] == '\"')
+					cur++;
+			else
+				while (input[cur] == '\'')
+					cur++;
+		}
+		else
+			cur++;
+	}
+	printf("%s\n", strndup(input + begin, cur - begin));
+	list_push_test(list, strndup(input + begin, cur - begin), COMMAND);
+	begin = cur;
+	return (begin);
+}
+
+/* to this */
+void	arg_split_4(char *input, t_llist *list)
 {
 	int		begin;
 	int		cur;
-	int		in_quote;
 
-	begin = 0;
-	cur = 0;
-	in_quote = 0;
-	int		i = 0;
-	while (1)
+	begin = cur = 0;
+	while (input[begin] != '\0')
 	{
-		if (input[cur] == '\"' || input[cur] == '\'')
-			in_quote++;
-		if (input[cur] == '|' && in_quote % 2 == 0)
+		while (input[begin] == ' ')
+			begin++;
+		if (input[begin] == '>' || input[begin] == '<')
 		{
-			printf("%s\n", strndup(input + begin, cur - begin + 1 - 1));
-			printf("%s\n", strndup(input + cur, 1));
-			begin = cur + 1;
+			begin = parse_redirect(input, list , begin);
 		}
-		else if ((input[cur] == '>' || input[cur] == '<') && in_quote % 2 == 0)
+		else if (input[begin] == '|')
 		{
-			printf("%s\n", strndup(input + begin,  cur - begin + 1 - 1));
-			i = 1;
-			while (((input + cur)[i] != '>' && (input + cur)[i] != '|' & (input + cur)[i] != '<' && (input + cur)[i] != '\0') || in_quote % 2 == 1)
+			begin = parse_pipe(input, list ,begin);
+		}
+		else
+		{
+			begin = parse_command(input, list, begin);
+		}
+	}
+}
+
+int		argv_split(t_llist *list)
+{
+	t_node	*node;
+	char	**temp_argv;
+
+	node = list->head->next;
+	while (!node)
+	{
+		temp_argv = ft_split_equal(node->arg_str, ' ');
+		if (!temp_argv)
+			return (0);
+	}
+}
+
+void	arg_split_3(char *input)
+{
+	int		begin;
+	int		cur;
+
+	begin = cur = 0;
+	while (input[begin] != '\0')
+	{
+		while (input[begin] == ' ')
+			begin++;
+		if (input[begin] == '>' || input[begin] == '<')
+		{
+			cur = begin + 1;
+			while ((input[cur] != '>' && input[cur] != '<' && input[cur] != '|')  && input[cur] != '\0')
 			{
-				if ((input + cur)[i] == '\"' || (input + cur)[i] == '\'')
-					in_quote++;
-				i++;
+				if (input[cur] == '\"' || input[cur] == '\'')
+				{
+					if (input[cur] == '\"')
+						while (input[cur] == '\"')
+							cur++;
+					else
+						while (input[cur] == '\'')
+							cur++;
+				}
+				else
+					cur++;
 			}
-			printf("%s\n", strndup(input + cur, i));
-			begin = cur + i;
-			cur = cur + i - 1;
+			printf("%s\n", strndup(input + begin, cur - begin));
+			begin = cur;
 		}
-		else if (input[cur] == '\0')
+		else if (input[begin] == '|')
 		{
-			printf("%s", strndup(input + begin, cur - begin + 1 - 1));
-			break;
+			printf("%s\n", strndup(input + begin, 1));
+			begin = begin + 1;
 		}
-		cur++;
+		else
+		{
+			cur = begin;
+			while ((input[cur] != '>' && input[cur] != '<' && input[cur] != '|')  && input[cur] != '\0')
+			{
+				if (input[cur] == '\"' || input[cur] == '\'')
+				{
+					if (input[cur] == '\"')
+						while (input[cur] == '\"')
+							cur++;
+					else
+						while (input[cur] == '\'')
+							cur++;
+				}
+				else
+					cur++;
+			}
+			printf("%s\n", strndup(input + begin, cur - begin));
+			begin = cur;
+		}
+	}
+}
+
+void	arg_split_2(char *input)
+{
+	int		begin;
+	int		cur;
+	int		single_q = 0;
+	int		double_q = 0;
+
+	begin = cur = single_q = double_q = 0;
+	while (input[begin] != '\0')
+	{
+		while (input[begin] == ' ')
+			begin++;
+		if ((input[begin] == '>' || input[begin] == '<') && (double_q % 2 == 0 && single_q % 2 == 0))
+		{
+			cur = begin + 1;
+			while (((input[cur] != '>' && input[cur] != '<' && input[cur] != '|') || (single_q % 2 == 1 || double_q % 2 == 1)) && input[cur] != '\0')
+			{
+				if (input[cur] == '\"' || input[cur] == '\'')
+				{
+					if (input[cur] == '\"')
+						double_q++;
+					else
+						single_q++;
+				}
+				cur++;
+			}
+			printf("%s\n", strndup(input + begin, cur - begin));
+			begin = cur;
+		}
+		else if (input[begin] == '|')
+		{
+			printf("%s\n", strndup(input + begin, 1));
+			begin = begin + 1;
+		}
+		else
+		{
+			cur = begin;
+			while (((input[cur] != '>' && input[cur] != '<' && input[cur] != '|') || (single_q % 2 == 1 || double_q % 2 == 1)) && input[cur] != '\0')
+			{
+				if (input[cur] == '\"' || input[cur] == '\'')
+				{
+					if (input[cur] == '\"')
+						double_q++;
+					else
+						single_q++;
+				}
+				cur++;
+			}
+			printf("%s\n", strndup(input + begin, cur - begin));
+			begin = cur;
+		}
 	}
 }
 
 /* arg split에서 linked_list에 type을 구분해서 char **를 넣어준 다음, 모든 parsing이 끝났다고 간주한다. */
 /* parsing이 끝난 이후에 node의 arg에서 variable expansion을 진행한다.*/
 
+
 int		main(int argc, char **argv)
 {
 	char	**splited_arg;
 	char	*line_read;
+	t_llist	*list;
+
+	list = init_list();
 
 	line_read = readline("$");
-	arg_split(line_read);
+	// arg_split(line_read);
+	arg_split_4(line_read, list);
+	argv_split(list);
 	return (0);
 }
