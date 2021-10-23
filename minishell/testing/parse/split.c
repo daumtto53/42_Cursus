@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 21:33:35 by mchun             #+#    #+#             */
-/*   Updated: 2021/08/31 17:46:12 by mchun            ###   ########.fr       */
+/*   Updated: 2021/08/31 19:58:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,19 +109,19 @@ void	arg_split_4(char *input, t_llist *list)
 	}
 }
 
-int		argv_split(t_llist *list)
-{
-	t_node	*node;
-	char	**temp_argv;
+// int		argv_split(t_llist *list)
+// {
+// 	t_node	*node;
+// 	char	**temp_argv;
 
-	node = list->head->next;
-	while (!node)
-	{
-		temp_argv = ft_split_equal(node->arg_str, ' ');
-		if (!temp_argv)
-			return (0);
-	}
-}
+// 	node = list->head->next;
+// 	while (!node)
+// 	{
+// 		temp_argv = ft_split_equal(node->arg_str, ' ');
+// 		if (!temp_argv)
+// 			return (0);
+// 	}
+// }
 
 void	arg_split_3(char *input)
 {
@@ -248,8 +248,7 @@ int		main(int argc, char **argv)
 	list = init_list();
 
 	line_read = readline("$");
-	// arg_split(line_read);
 	arg_split_4(line_read, list);
-	argv_split(list);
+	// argv_split(list);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 16:47:20 by mchun             #+#    #+#             */
-/*   Updated: 2021/08/31 18:43:58 by mchun            ###   ########.fr       */
+/*   Updated: 2021/08/31 22:54:25 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int		main(int argc, char **argv, char **envp)
 	argv_split(list);
 	/*
 		1. list 안의 arg_string 에 대해서 variable expansion을 진행한다. 단, single quote 안의 $는 해석하지 않는다.
-			1-1 variable expansion을 진행할 때, 가장 바깥의 quote를 기준으로 expansion을 진행해주며, node->arg_string의 문자열을 교체한다.
+			1-1 variable expansion을 진행할 때, 가장
+			바깥의 quote를 기준으로 expansion을 진행해주며, node->arg_string의 문자열을 교체한다.
 			1-2 variable expansion을 진행할 때, 최종적으로 expansion 작업이 끝난 문자열은 가장 바깥의 quote를 없앤 상태의 문자열로 교체해준다.
 		2. list 안의 arg_string을 quote를 신경써서 char **arg로 나눈다.
 		3. list의 enum 변수 type이 COMMAND 인 것을 찾은 뒤 (연결리스트 traverse)

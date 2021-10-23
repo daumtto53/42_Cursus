@@ -41,18 +41,18 @@ BONUS = checker
 
 $(NAME) : $(OBJS) ./srcs/main.o
 			$(MAKE) all -C ./libft
-			$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) ./srcs/main.c $(SRCS) $(LIBFT_LIBFLAG)
+			$(CC) $(INCLUDES) -o $(NAME) ./srcs/main.c $(SRCS) $(LIBFT_LIBFLAG)
 
 $(BONUS) : $(OBJS_BONUS) $(OBJS)
 			$(MAKE) all -C ./libft
 			$(MAKE) all -C ./gnl
 			$(MAKE) $(NAME) -C ./
 			ar -rcs libpush_swap.a $(OBJS)
-			$(CC) $(CFLAGS) $(INCLUDES) -o $(BONUS) $(SRCS_BONUS) $(LIBFT_LIBFLAG) $(GNL_LIBFLAG) $(PUSH_SWAP_LIBFLAG)
+			$(CC)  $(INCLUDES) -o $(BONUS) $(SRCS_BONUS) $(LIBFT_LIBFLAG) $(GNL_LIBFLAG) $(PUSH_SWAP_LIBFLAG)
 
 
 %.o : %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
+	$(CC) $(INCLUDES) -c $^ -o $@
 
 all : $(NAME)
 
