@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 21:26:34 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/24 00:42:14 by mchun            ###   ########.fr       */
+/*   Updated: 2021/10/24 01:11:27 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	PhoneBook::search(void)
 	std::cout << "INPUT Index Num To Search" << std::endl;
 	std::cin >> user_input_num;
 	std::cin.get();
+	if (user_input_num)
 	if (user_input_num >= contact_num || user_input_num < 0)
 	{
 		std::cout << "!!!!!!!!!!!! Invalid Index " << std::endl << std::endl;
