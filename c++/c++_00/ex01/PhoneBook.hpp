@@ -6,11 +6,12 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 21:26:13 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/24 00:32:10 by mchun            ###   ########.fr       */
+/*   Updated: 2021/10/24 14:00:09 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iomanip>
+#include <limits>
 #include "Contact.hpp"
 
 #ifndef __PHONEBOOK_H__
@@ -26,6 +27,9 @@ class PhoneBook
 
 	private :
 		bool	is_contact_list_full(void);
+		bool	is_invalid_search_input(int user_input_num);
+		std::string	format_overview_fields(std::string str);
+		void	print_overview(void);
 
 	public :
 		PhoneBook();
@@ -33,8 +37,6 @@ class PhoneBook
 		void	prompt(void);
 		void	add(void);
 
-		void	print_overview(void);
-		std::string	format_overview_fields(std::string str);
 		void	search(void);
 
 		void	exit(void);

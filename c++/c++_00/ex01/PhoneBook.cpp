@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 21:26:34 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/24 01:11:27 by mchun            ###   ########.fr       */
+/*   Updated: 2021/10/24 13:59:15 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,19 @@ std::string	PhoneBook::format_overview_fields(std::string str)
 		return (str.substr(0, 9).append("."));
 }
 
+bool	PhoneBook::is_invalid_search_input(int user_input_num)
+{
+	if (std::cin.fail() || user_input_num >= contact_num || user_input_num < 0)
+	{
+		if (std::cin.fail())
+			std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "!!!!!!!!!!!! Invalid Index " << std::endl << std::endl;
+		return (true);
+	}
+	return (false);
+}
+
 void	PhoneBook::search(void)
 {
 	int		user_input_num;
@@ -124,13 +137,9 @@ void	PhoneBook::search(void)
 	print_overview();
 	std::cout << "INPUT Index Num To Search" << std::endl;
 	std::cin >> user_input_num;
-	std::cin.get();
-	if (user_input_num)
-	if (user_input_num >= contact_num || user_input_num < 0)
-	{
-		std::cout << "!!!!!!!!!!!! Invalid Index " << std::endl << std::endl;
-		return ;
-	}
+	if (is_invalid_search_input(user_input_num))
+		return;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cout << "------------show selected database-------------" << std::endl;
 	std::cout << "First Name : " << list[user_input_num].getFirst_name() << std::endl;
 	std::cout << "Last Name : " << list[user_input_num].getLast_name() << std::endl;
@@ -160,6 +169,8 @@ void	PhoneBook::reset_console(void)
 	for(int i = 0; i < 20; i++)
 		std::cout << std::endl;
 }
+
+
 
 Contact	*PhoneBook::getContact_list()
 {
