@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 21:22:56 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/26 22:48:13 by mchun            ###   ########.fr       */
+/*   Updated: 2021/10/27 13:25:50 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ Zombie::Zombie( std::string name )
 
 Zombie::~Zombie()
 {
-	std::cout << "debugging message : " << _name << " " << "DESTROYED" << std::endl;
+	std::cout << "debugging message : " << "<" << _name << "<" << " " << "DESTROYED" << std::endl;
 }
 
 void	Zombie::announce(void)
 {
-	std::cout << _name << " " << "BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << "<" << _name << ">" << " " << "BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
 void	Zombie::setName( std::string name )

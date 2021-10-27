@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 21:23:11 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/27 13:55:31 by mchun            ###   ########.fr       */
+/*   Created: 2021/10/27 13:28:54 by mchun             #+#    #+#             */
+/*   Updated: 2021/10/27 13:58:30 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __ZOMBIE_HPP
-#define __ZOMBIE_HPP
-
-#include <string>
+#include "Weapon.hpp"
+#include "HumanB.hpp"
 #include <iostream>
 
-class	Zombie
+HumanB::HumanB(std::string name)
 {
-	private:
-		std::string	_name;
+	_name = name;
+}
 
-	public:
-		Zombie();
-		Zombie( std::string name );
-		~Zombie();
-		void	announce(void);
-		void	setName(std::string name);
-};
+void	HumanB::attack( void )
+{
+	std::cout << _name << " " << "attacks with his" << " " << getWeapon().getType() << std::endl;
+}
 
-Zombie*	zombieHorde( int N, std::string name );
+Weapon &	HumanB::getWeapon( void )
+{
+	return *(_weapon);
+}
 
-#endif
+void		HumanB::setWeapon( Weapon & weapon )
+{
+	_weapon = &weapon;
+}
