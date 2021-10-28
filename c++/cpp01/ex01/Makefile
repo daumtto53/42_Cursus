@@ -6,7 +6,7 @@
 #    By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 21:34:24 by mchun             #+#    #+#              #
-#    Updated: 2021/10/26 22:34:27 by mchun            ###   ########.fr        #
+#    Updated: 2021/10/27 20:26:55 by mchun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,10 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(COMPILER) $(CPPFLAGS) -o $(NAME) $(SRCS)
 
-clean : rm -rf $(NAME)
+clean :
+	rm -rf $(NAME)
 
-fclean : rm -rf $(NAME)
+fclean :
+	rm -rf $(NAME)
 
 re : clean fclean all
