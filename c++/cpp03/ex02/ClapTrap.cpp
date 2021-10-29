@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 01:30:04 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/29 12:49:18 by mchun            ###   ########.fr       */
+/*   Updated: 2021/10/29 12:49:02 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,14 @@ ClapTrap &	ClapTrap::operator=(ClapTrap const & operand)
 		_name = operand._name;
 		return (*this);
 	}
+}
+
+void		ClapTrap::showInfo(void)
+{
+	std::cout << "SHOW_INFO" << std::endl;
+	std::cout << "name : " << _name << std::endl;
+	std::cout << "hitPoint : " << _hitPoints << std::endl;
+	std::cout << "energyPoint : " << _energyPoints << std::endl;
+	std::cout << "attackDamage : " << _attackDamage << std::endl;
+	std::cout << std::endl;
 }
