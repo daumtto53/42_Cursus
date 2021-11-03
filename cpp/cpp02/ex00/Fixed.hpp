@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:46:52 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/28 16:38:12 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/03 20:26:32 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class Fixed
 {
 private:
 	int					_value;
-	static const int	_word;
+	static const int	_word = 8;
 public:
 	Fixed();
 	~Fixed();

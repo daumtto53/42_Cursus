@@ -6,16 +6,16 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:46:50 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/28 16:40:35 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/03 20:28:47 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
 Fixed::Fixed()
+	: _value(0)
 {
 	std::cout << "Default constructor called" << std::endl;
-	_value = 0;
 }
 
 Fixed::~Fixed()
@@ -33,7 +33,9 @@ Fixed&			Fixed::operator=(const Fixed& fixed)
 {
 	std::cout << "Assignation operator called" << std::endl;
 	if (&fixed != this)
+	{
 		this->_value = fixed.getRawBits();
+	}
 	return (*this);
 }
 
