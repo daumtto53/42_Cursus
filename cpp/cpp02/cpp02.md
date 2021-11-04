@@ -156,6 +156,12 @@ A retObject()
 
 
 
+**포인트는 데이터를 받은 뒤, 그것을 고정소수점"형식" 으로 바꾸는 데에 있다.**
+
+
+
+
+
 int형 데이터를 받아서 fixed point representation으로 바꾸는 작업. floating point를 위한 비트공간 (word 8) 만큼 right shift 필요.
 
 ```c++
@@ -203,4 +209,30 @@ int		Fixed::toInt( void ) const
 ```
 
 
+
+
+
+## operator overloading
+
+증감연산자 중
+
+후위연산자는 객체 자체를, 리턴하며 매개변수로 int형을 준다.
+
+전위연산자는 참조를 리턴하며 매개변수는 void형.
+
+```c++
+int main()
+{
+    int num = 0;
+ 
+    ++(++num);	// 1
+    (num++)++;	// 2
+ 
+    return 0;
+}
+```
+
+1은 lvalue값을 리턴해서 컴파일되지만
+
+2가 rvalue값을 리턴하기 때문에 컴파일 되지 않는다.
 
