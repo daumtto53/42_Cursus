@@ -152,3 +152,55 @@ A retObject()
 
 ----
 
+## 고정소수점과 부정소수점
+
+
+
+int형 데이터를 받아서 fixed point representation으로 바꾸는 작업. floating point를 위한 비트공간 (word 8) 만큼 right shift 필요.
+
+```c++
+Fixed::Fixed(const int input)
+	: _value(input << Fixed::_fractionalBit)
+{
+	std::cout << "Int constructor called" << std::endl;
+}
+
+```
+
+
+
+float형 데이터를 받아서 fixed point representation으로 바꿔야하는데..
+
+input 비트를 직접적으로 비트연산할 수 없기에 8만큼 rightshift 해준뒤, 그 값을 input에 곱해준다.
+
+그리고, 소수부는 8bit만큼만 남겨야 하기 때문에, 남은 값은 roundf로 처리한다.
+
+```c++
+Fixed::Fixed(const float input)
+	: _value(static_cast<int>(roundf(input * (1 << Fixed::_fractionalBit))))
+{
+	std::cout << "Float constructor called" << std::endl;
+}
+
+```
+
+
+
+변환한 고정소수점형을 float형으로 바꾸기 위해,  전 단계에서  했던 방법을 역으로 진행한다.
+
+값의 원상복구를 진행하는것 .
+
+```c++
+float	Fixed::toFloat( void ) const
+{
+	return (static_cast<float>(_value) / (1 << Fixed::_fractionalBit));
+}
+
+int		Fixed::toInt( void ) const
+{
+	return (_value >> Fixed::_fractionalBit);
+}
+```
+
+
+
