@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 14:35:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/29 15:10:46 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/10 21:54:47 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ DiamondTrap::DiamondTrap()
 }
 
 DiamondTrap::DiamondTrap(std::string name)
+	: ClapTrap(name + "_clap_name")
 {
-	ClapTrap::_name = (name + "_clap_name");
-	_name = name;
+	DiamondTrap::_name = name;
 	_hitPoints = FragTrap::_hitPoints;
 	_energyPoints = ScavTrap::_energyPoints;
 	_attackDamage = FragTrap::_attackDamage;
@@ -53,7 +53,7 @@ DiamondTrap & DiamondTrap::operator=(DiamondTrap const & operand)
 
 void	DiamondTrap::whoAmI()
 {
-	std::cout << "I am" << " " << ClapTrap::_name << " " << "and also" << " "  << ClapTrap::_name << std::endl;
+	std::cout << "I am" << " " << _name << " " << "and also ClapTrap" << " "  << ClapTrap::_name << std::endl;
 }
 
 

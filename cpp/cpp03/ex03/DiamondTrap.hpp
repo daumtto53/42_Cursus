@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 14:26:24 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/29 15:08:18 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/10 21:39:26 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 class DiamondTrap : public ScavTrap, public FragTrap
 {
 private:
+	std::string		_name;
+	DiamondTrap();
 
 public:
-	DiamondTrap();
 	DiamondTrap(std::string name);
 	DiamondTrap(DiamondTrap const & obj);
 	virtual ~DiamondTrap();
