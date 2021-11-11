@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 14:35:46 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/10 21:54:47 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/10 22:37:54 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ DiamondTrap::DiamondTrap()
 DiamondTrap::DiamondTrap(std::string name)
 	: ClapTrap(name + "_clap_name")
 {
-	DiamondTrap::_name = name;
-	_hitPoints = FragTrap::_hitPoints;
-	_energyPoints = ScavTrap::_energyPoints;
-	_attackDamage = FragTrap::_attackDamage;
+	_name = name;
+	_hitPoints = 100;
+	_energyPoints = 50;
+	_attackDamage = 30;
 	std::cout << "CREATING DiamondTrap" << " " << _name << std::endl;
 }
 
@@ -42,7 +42,7 @@ DiamondTrap & DiamondTrap::operator=(DiamondTrap const & operand)
 		return (*this);
 	else
 	{
-		_hitPoints = operand._attackDamage;
+		_hitPoints = operand._hitPoints;
 		_attackDamage= operand._attackDamage;
 		_energyPoints= operand._energyPoints;
 		_name = operand._name;
@@ -70,4 +70,14 @@ void	DiamondTrap::takeDamage(unsigned int amount)
 void	DiamondTrap::beRepaired(unsigned int amount)
 {
 	FragTrap::beRepaired(amount);
+}
+
+void		DiamondTrap::showInfo(void)
+{
+	std::cout << "SHOW_INFO" << std::endl;
+	std::cout << "name : " << _name << std::endl;
+	std::cout << "hitPoint : " << _hitPoints << std::endl;
+	std::cout << "energyPoint : " << _energyPoints << std::endl;
+	std::cout << "attackDamage : " << _attackDamage << std::endl;
+	std::cout << std::endl;
 }

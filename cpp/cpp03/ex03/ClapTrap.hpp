@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 00:48:08 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/10 21:32:26 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/10 22:30:46 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ public:
 	virtual	void	attack(std::string const & target);
 	virtual	void		takeDamage(unsigned int amount);
 	virtual	void		beRepaired(unsigned int amount);
-	void		showInfo();
+	virtual void		showInfo();
+	int					getHitPoints(void);
+	int					getEnergyPoints(void);
+	int					getAttackDamage(void);
 };
 
 #endif

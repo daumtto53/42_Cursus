@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 01:30:04 by mchun             #+#    #+#             */
-/*   Updated: 2021/10/29 14:24:06 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/10 22:31:31 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,18 @@ void		ClapTrap::showInfo(void)
 	std::cout << "energyPoint : " << _energyPoints << std::endl;
 	std::cout << "attackDamage : " << _attackDamage << std::endl;
 	std::cout << std::endl;
+}
+
+int			ClapTrap::getHitPoints(void)
+{
+	return (_hitPoints);
+}
+
+int					ClapTrap::getEnergyPoints(void)
+{
+	return (_energyPoints);
+}
+int					ClapTrap::getAttackDamage(void)
+{
+	return (_attackDamage);
 }

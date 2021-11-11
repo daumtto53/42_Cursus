@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 14:26:24 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/10 21:39:26 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/10 22:26:32 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "FragTrap.hpp"
 # include "ScavTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap
+class DiamondTrap : public FragTrap, public ScavTrap
 {
 private:
 	std::string		_name;
@@ -32,6 +32,7 @@ public:
 	virtual void		attack( std::string const & target );
 	virtual	void		takeDamage(unsigned int amount);
 	virtual	void		beRepaired(unsigned int amount);
+	virtual void		showInfo(void);
 };
 
 
