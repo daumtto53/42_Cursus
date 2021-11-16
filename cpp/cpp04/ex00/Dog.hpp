@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __Dog_HPP__
-# define __Dog_HPP__
+#ifndef __DOG_HPP__
+# define __DOG_HPP__
 
 #include "Animal.hpp"
 

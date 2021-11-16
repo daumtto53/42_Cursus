@@ -25,6 +25,7 @@ WrongAnimal::~WrongAnimal()
 
 WrongAnimal::WrongAnimal(WrongAnimal const & obj)
 {
+	std::cout << "Copy Constructor WrongAnimal Called" << std::endl;
 	this->type = obj.type;
 }
 

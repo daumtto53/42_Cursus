@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 10:22:31 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/11 11:39:55 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/13 13:10:34 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,13 @@ int main()
 	wrongCat->makeSound();
 	delete wrong;
 	delete wrongCat;
+
+	std::cout << "-------------------" << std::endl;
+	std::cout << "COPY/ASSIGN TEST" << std::endl << std::endl;
+	Animal src;
+	Animal assignDst;
+	Animal copyDst(src);
+
+	assignDst = src;
+	std::cout << std::endl;
 }

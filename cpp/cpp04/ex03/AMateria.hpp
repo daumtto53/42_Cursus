@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 10:22:27 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/11 11:58:25 by mchun            ###   ########.fr       */
+/*   Created: 2021/11/16 11:44:06 by mchun             #+#    #+#             */
+/*   Updated: 2021/11/16 12:02:09 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __ANIMAL_HPP__
-# define __ANIMAL_HPP__
+#ifndef __AMATERIA_HPP__
+# define __AMATERIA_HPP__
 
-#include <iostream>
 #include <string>
+#include <iostream>
+#include "ICharacter.hpp"
 
-class Animal
+class AMateria
 {
-private:
-
 protected:
-	std::string type;
+	std::string		_type;
 
 public:
-	Animal();
-	Animal(Animal const & obj);
-	virtual			~Animal();
-	Animal &		operator=(Animal const & obj);
-	virtual void	makeSound() const;
+	AMateria();
+	AMateria(std::string const & type);
+	AMateria(AMateria const & obj);
+	virtual ~AMateria();
 
-	virtual std::string		getType()	const;
+	std::string const & getType() const;
+	virtual AMateria* clone() const = 0;
+	virtual void use(ICharacter& target);
+
+	AMateria &	operator=(AMateria const & obj);
+
 };
 
 #endif

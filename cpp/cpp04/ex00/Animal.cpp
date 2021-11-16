@@ -6,7 +6,7 @@
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 10:22:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/11 11:11:31 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/13 13:11:12 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ Animal::~Animal()
 
 Animal::Animal(Animal const & obj)
 {
+	std::cout << "Copy Constructor Animal Called" << std::endl;
 	this->type = obj.type;
 }
 
 Animal & Animal::operator=(Animal const & obj)
 {
+	std::cout << "Assignment Constructor Animal Called" << std::endl;
 	if (&obj == this)
 		return *this;
 	this->type = obj.type;

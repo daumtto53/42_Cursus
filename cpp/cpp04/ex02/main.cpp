@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 10:22:27 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/11 11:58:25 by mchun            ###   ########.fr       */
+/*   Created: 2021/11/11 10:22:31 by mchun             #+#    #+#             */
+/*   Updated: 2021/11/13 13:43:45 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __ANIMAL_HPP__
-# define __ANIMAL_HPP__
+#include "Cat.hpp"
+#include "Dog.hpp"
 
-#include <iostream>
-#include <string>
-
-class Animal
+int main()
 {
-private:
+	Animal	*animal_array[10];
 
-protected:
-	std::string type;
+	for (int i = 0; i < 5; i++)
+	{
+		std::cout << std::endl;
+		animal_array[i] = new Cat();
+	}
+	for (int i = 5; i < 10; i++)
+	{
+		std::cout << std::endl;
+		animal_array[i] = new Dog();
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << std::endl;
+		delete animal_array[i];
+	}
 
-public:
-	Animal();
-	Animal(Animal const & obj);
-	virtual			~Animal();
-	Animal &		operator=(Animal const & obj);
-	virtual void	makeSound() const;
-
-	virtual std::string		getType()	const;
-};
-
-#endif
+	Animal	*anim = new Animal();
+}

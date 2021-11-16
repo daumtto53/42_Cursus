@@ -1,49 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchun <mchun@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 10:22:29 by mchun             #+#    #+#             */
-/*   Updated: 2021/11/13 13:11:51 by mchun            ###   ########.fr       */
+/*   Updated: 2021/11/13 12:49:30 by mchun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "Animal.hpp"
 
-Dog::Dog()
-	: type("Dog")
+Animal::Animal()
+	: type("Animal")
 {
-	std::cout << "Default Constructor Dog Called" << std::endl;
+	std::cout << "Default Constructor Animal Called" << std::endl;
 }
 
-Dog::~Dog()
+Animal::~Animal()
 {
-	std::cout << "Default Destructor Dog Called" << std::endl;
+	std::cout << "Default Destructor Animal Called" << std::endl;
 }
 
-Dog::Dog(Dog const & obj)
+Animal::Animal(Animal const & obj)
 {
-	std::cout << "Copy Constructor Dog Called" << std::endl;
+	std::cout << "Copy Constructor Animal Called" << std::endl;
 	this->type = obj.type;
 }
 
-Dog & Dog::operator=(Dog const & obj)
+Animal & Animal::operator=(Animal const & obj)
 {
-	std::cout << "Assignment Constructor Dog Called" << std::endl;
 	if (&obj == this)
 		return *this;
 	this->type = obj.type;
 	return (*this);
 }
 
-void	Dog::makeSound(void) const
+void	Animal::makeSound(void) const
 {
-	std::cout << "DOG BARKING" << std::endl;
+	std::cout << "ERROR : NO SPECIFIC TYPE" << std::endl;
 }
 
-std::string	Dog::getType(void)	const
+std::string		Animal::getType()	const
 {
 	return (this->type);
 }

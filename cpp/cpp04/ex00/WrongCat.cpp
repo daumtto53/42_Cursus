@@ -25,6 +25,7 @@ WrongCat::~WrongCat()
 
 WrongCat::WrongCat(WrongCat const & obj)
 {
+	std::cout << "Copy Constructor WrongCat Called" << std::endl;
 	this->type = obj.type;
 }
 
